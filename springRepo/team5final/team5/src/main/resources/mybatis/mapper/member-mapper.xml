@@ -3,5 +3,32 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="MemberMapper">
+  	
+  	<insert id = "join">
+  		INSERT INTO MEMBER
+  		(
+  			NO
+  			, ID
+  			, PWD
+  			, NICK
+  			, NAME
+  			, PHONE_NUMBER
+  			, BIRTHDAY
+  			, EMAIL
+  		)
+  		VALUES
+  		(
+  			SEQ_MEMBER_NO.NEXTVAL
+  			, #{id}
+  			, #{pwd}
+  			, #{nick}
+  			, #{name}
+  			, #{phoneNumber}
+  			, #{birthday}
+  			, #{email}
+  		)
+  	</insert>
+  	
+  	
   
 </mapper>
