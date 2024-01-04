@@ -7,7 +7,7 @@
   	<insert id = "join">
   		INSERT INTO MEMBER
   		(
-  			NO
+  			MEMBER_NO
   			, ID
   			, PWD
   			, NICK
@@ -28,6 +28,39 @@
   			, #{email}
   		)
   	</insert>
+  	
+  	<update id="quit">
+  		UPDATE MEMBER
+  		SET
+  			DEL_YN = 'Y'
+  			WHERE NO = #{no}
+  	</update>
+  	<select id = "login" resultType="MemberVo">
+  		SELECT
+  			NO
+  			, ID
+  			, PWD
+  			, NICK
+  			, ENROLL_DATE
+  			, DEL_YN
+  		FROM MEMBER
+  		WHERE ID = #{id}
+  		AND PWD = #{pwd}
+  	</select>
+  	<update id="edit">
+  		UPDATE MEMBER
+  			SET
+  			<trim prefixOverrides=",">
+  			<if test="pwd != null and pwd != ''">
+  				PWD = #{pwd}
+  			</if>
+  			<if test="nick != null and nick != ''">
+  				, NICK = #{nick}
+  			</if>
+  			</trim>
+  			WHERE NO = #{no}
+  			AND DEL_YN = 'N'
+  	</update>
   	
   	
   
