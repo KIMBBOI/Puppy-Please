@@ -139,3 +139,6 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/java,maven,windows,eclipse
+reactRepo/node_modules/
+reactRepo/package-lock.json
+reactRepo/package.json
