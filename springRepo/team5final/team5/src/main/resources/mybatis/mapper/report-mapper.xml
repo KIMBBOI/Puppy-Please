@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ReportMapper">
+
+	<insert id="insert">
+		INSERT INTO REPORT_BULLETIN_BOARD
+		(
+			REPORT_N
+			,MEMBER_NO 
+			,IMAGE_NO
+			,TITLE
+			,CONTENT
+		) 
+		VALUES
+		(
+			SEQ_REPORT_BULLETIN_BOARD_NO.NEXTVAL, 
+			#{MEMBER_NO} 
+			,#{IMAGE_NO} 
+			,#{TITLE} 
+			,#{CONTENT}
+		)
+	</insert>
+	
+	<select id="list" resultType="com.kh.app.report.vo.ReportVo">
+		SELECT
+			REPORT_NO
+			,MEMBER_NO
+			,IMAGE_NO
+			,TITLE
+			,CONTENT
+			,ENROLL_DATE
+			,MODIFY_DATE
+			,DEN_YN
+		FROM REPORT_BULLETIN_BOARD
+		WHERE DEL_YN = 'N'
+		ORDER BY NO DESC
+	</select>
+	
+</mapper>
