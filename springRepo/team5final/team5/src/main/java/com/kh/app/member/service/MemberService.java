@@ -26,7 +26,8 @@ public class MemberService {
 		String nick = vo.getNick();
 		String phoneNumber = vo.getPhoneNumber();
 		String email = vo.getEmail();
-				
+			
+		System.out.println(vo);
 		
 		// 아이디 검사
 

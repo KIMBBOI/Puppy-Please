@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import projectName from './img/projectName.png'
 import projectlogo from './img/projectlogo.png'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 const StyledHeaderDiv = styled.div`
     width: 100%;
     height: 100%;
@@ -31,14 +31,18 @@ const StyledHeaderDiv = styled.div`
 `;
 
 const Header = () => {
+    const navigate = useNavigate();
+    const handleClickJoin = () => {
+       navigate("/member/join");
+    };
     return (
         <StyledHeaderDiv>
-        <div className='logo'></div>
-        <div className='logoArea'></div>
+        <div className='logo' onClick={ () => {navigate("/")} }></div>
+        <div className='logoArea' onClick={ () => {navigate("/")} }></div>
         <div className='loginArea'>
-            <div><Link to="/member/login">로그인</Link></div>
+            <div><Link to='/member/login'>로그인</Link></div>
             <div>|</div>
-            <div><Link to="/member/join">회원가입</Link></div>
+            <div onClick={ handleClickJoin }>회원가입</div>
         </div>
         </StyledHeaderDiv>
     );

@@ -3,5 +3,19 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="AdminMapper">
+  <insert id="add">
+  	INSERT INTO ADMIN
+  	(
+  		ADMIN_NO
+  		, ID
+  		, PWD
+  	)
+  	VALUES
+  	(
+  		SEQ_ADMIN_NO.NEXTVAL
+  		, #{id}
+  		, #{pwd}
+  	)
+  </insert>
   
 </mapper>

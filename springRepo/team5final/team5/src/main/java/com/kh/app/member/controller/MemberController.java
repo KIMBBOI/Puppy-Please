@@ -1,11 +1,17 @@
 package com.kh.app.member.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.app.member.service.MemberService;
 import com.kh.app.member.vo.MemberVo;
@@ -13,8 +19,10 @@ import com.kh.app.member.vo.MemberVo;
 import lombok.RequiredArgsConstructor;
 
 @Controller
+@ResponseBody
 @RequestMapping("member")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class MemberController {
 	
 	private final MemberService service;
@@ -25,12 +33,16 @@ public class MemberController {
 	}
 	//회원가입 후
 	@PostMapping("join")
-	public String join(MemberVo vo) throws Exception{
+	public Map<String, String> join(@RequestBody MemberVo vo) throws Exception{
 		int result = service.join(vo);
-		if(result != 1) {
-			throw new Exception();
+		
+		Map<String, String> map = new HashMap<String, String>();
+		if(result == 1) {
+			map.put("msg", "good");
+		}else {
+			map.put("msg", "fail");
 		}
-		return "redirect:/home";
+		return map;
 	}
 	
 	//로그인

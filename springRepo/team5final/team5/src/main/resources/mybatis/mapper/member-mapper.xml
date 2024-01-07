@@ -13,21 +13,21 @@
   			, NICK
   			, NAME
   			, PHONE_NUMBER
-  			, BIRTHDAY
   			, EMAIL
-  		)
+  			, BIRTHDAY
+  		) 
   		VALUES
   		(
-  			SEQ_MEMBER_NO.NEXTVAL
-  			, #{id}
-  			, #{pwd}
-  			, #{nick}
-  			, #{name}
-  			, #{phoneNumber}
-  			, #{birthday}
-  			, #{email}
+	  		SEQ_MEMBER_NO.NEXTVAL
+	  		, #{id}
+	  		, #{pwd}
+	  		, #{nick}
+	  		, #{name}
+	  		, #{phoneNumber}
+	  		, #{email}
+	  		, #{birthday}
   		)
-  	</insert>
+	</insert>
   	
   	<update id="quit">
   		UPDATE MEMBER
@@ -48,20 +48,29 @@
   		AND PWD = #{pwd}
   	</select>
   	<update id="edit">
-  		UPDATE MEMBER
-  			SET
-  			<trim prefixOverrides=",">
-  			<if test="pwd != null and pwd != ''">
-  				PWD = #{pwd}
-  			</if>
-  			<if test="nick != null and nick != ''">
-  				, NICK = #{nick}
-  			</if>
-  			</trim>
-  			WHERE NO = #{no}
-  			AND DEL_YN = 'N'
+  	UPDATE MEMBER 
+  		SET 
+  		PWD = #{pwd}
+  		<trim prefixOverrides=",">
+		<if test="pwd != null and pwd !=''">
+  		, NICK = #{nick}
+		</if>
+		<if test="nick != null and nick !=''">
+  		, NAME = #{name}
+		</if>
+		<if test="name != null and name !=''">
+  		, PHONE_NUMBER = #{phoneNumber}
+		</if>
+		<if test="phoneNumber != null and phoneNumber !=''">
+  		, EMAIL = #{email}
+		</if>
+		<if test="email != null and email !=''">
+  		, BIRTHDAY = #{birthday}
+		</if>
+  		</trim>
+  		 WHERE NO = #{no} 
+  		 AND DEL_YN = 'N';
   	</update>
-  	
   	
   
 </mapper>
