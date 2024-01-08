@@ -16,10 +16,20 @@ public class ReportDao {
 		return sst.selectList("ReportMapper.list");
 	}
 
+	// 게시글 상세 조회
+	
 	
 	// 게시글 작성
 	public int insert(SqlSessionTemplate sst, ReportVo vo) {
 		return sst.insert("ReportMapper.insert", vo);
 	}
+		// 로그인 멤버의 프라이머리 키
+		// 이미지의 프라이머리 키
+	
+	
+	// 게시글 수정
+	
+	
+	// 게시글 삭제
 
 } // class
