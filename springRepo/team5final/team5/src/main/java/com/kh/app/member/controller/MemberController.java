@@ -7,8 +7,10 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -36,7 +38,7 @@ public class MemberController {
 	public Map<String, String> join(@RequestBody MemberVo vo) throws Exception{
 		int result = service.join(vo);
 		
-		Map<String, String> map = new HashMap<String, String>();
+		Map<String, String> map = new HashMap<>();
 		if(result == 1) {
 			map.put("msg", "good");
 		}else {
@@ -65,7 +67,7 @@ public class MemberController {
 		return "redirect:/home";
 	}
 	
-	@PostMapping("edit")
+	@PutMapping
 	public String edit(MemberVo vo) throws Exception{
 		int result = service.edit(vo);
 		if(result != 1) {
@@ -74,7 +76,7 @@ public class MemberController {
 		return "";
 	}
 	
-	@GetMapping("quit")
+	@DeleteMapping
 	public String quit(MemberVo vo, HttpSession session) throws Exception{
 		int result = service.quit(vo);
 		
