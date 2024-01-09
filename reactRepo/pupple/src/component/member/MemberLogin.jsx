@@ -75,7 +75,10 @@ const MemberLogin = () => {
     navigate('/member/join')
   }
   
-  return (
+  const handleSearchButton = () => {
+    navigate('/member/search');
+  }
+    return (
     <StyledMemberLogin>
       <div>
         <h1>로그인</h1>
@@ -91,7 +94,8 @@ const MemberLogin = () => {
             </tr>
             <tr>
               <td><button type="submit">로그인</button><button onClick={ handleJoinButton }>회원가입</button></td>
-            </tr>          
+            </tr>
+            <tr><button onClick={handleSearchButton}>아이디/비밀번호 찾기</button></tr>          
           </tbody>
         </table>
         
