@@ -21,7 +21,7 @@
 	</select>
 	
 	<!--게시글 상세 조회 -->
-	<select id=detail resultType="com.kh.app.report.vo.ReportVo">
+	<select id="detail" resultType="com.kh.app.report.vo.ReportVo">
 		SELECT
 			REPORT_NO
 			,MEMBER_NO
@@ -61,7 +61,7 @@
 	</update>
 	
 	<!--게시글 삭제 -->
-	<update id="delete"
+	<update id="delete">
 	</update>
 	
 </mapper>

@@ -49,15 +49,16 @@ public class MemberController {
 	
 	//로그인
 	@PostMapping("login")
-	public String login(MemberVo vo, HttpSession session)throws Exception {
-		MemberVo loginMember = service.login(vo);
-		
-		if(loginMember == null) {
+	public Map<String, Object> login(@RequestBody MemberVo vo, HttpSession session)throws Exception {
+		MemberVo loginMemberVo = service.login(vo);
+		Map<String, Object> map = new HashMap<>();
+		map.put("msg", "login success");
+		map.put("loginMemberVo", loginMemberVo);
+		if(loginMemberVo == null) {
 			throw new Exception("로그인 실패");
 		}
-		session.setAttribute("loginMember", loginMember);
-		session.setAttribute("alertMsg", "로그인 성공!");
-		return "redirect:/home";
+		
+		return map;
 	}
 	
 	//로그아웃

@@ -1,5 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import Notice from './Board/Notice';
+import Adoption from './Board/Adoption';
+import Visit from './Board/Visit';
+import Report from './Board/Report';
 
 const StyledNaviDiv = styled.div`
     width: 100%;
@@ -19,10 +23,10 @@ const StyledNaviDiv = styled.div`
 const Navi = () => {
     return (
         <StyledNaviDiv>
-               <div>공지사항</div>
-               <div>입양게시판</div>
-               <div>제보</div>
-               <div>방문예약</div>
+               <Notice />
+               <Adoption />
+               <Report />
+               <Visit />
         </StyledNaviDiv>
     );
 };
