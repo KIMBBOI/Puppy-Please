@@ -33,7 +33,6 @@
 			,DEL_YN
 		FROM REPORT_BULLETIN_BOARD
 		WHERE DEL_YN = 'N'
-		ORDER BY REPORT_NO DESC
 	</select>
 	
 	<!--게시글 작성 -->
@@ -49,19 +48,34 @@
 		VALUES
 		(
 			SEQ_REPORT_BULLETIN_BOARD_NO.NEXTVAL, 
-			#{MEMBER_NO}
-			,#{IMAGE_NO}
-			,#{TITLE}
-			,#{CONTENT}
+			#{memberNo}
+			,#{imageNo}
+			,#{title}
+			,#{content}
 		)
 	</insert>
 	
 	<!--게시글 수정 -->
 	<update id="edit">
+		UPDATE REPORT_BULLETIN_BOARD
+	    SET
+	        IMAGE_NO = #{imageNo}
+	        ,TITLE = #{title}
+	        ,CONTENT = #{content}
+	        ,MODIFY_DATE = #{modifyDate}
+	    WHERE
+	        REPORT_NO = #{reportNo}
+	        AND DEL_YN = 'N'
 	</update>
 	
 	<!--게시글 삭제 -->
 	<update id="delete">
+
+		UPDATE REPORT_BULLETIN_BOARD
+	    SET
+	        DEL_YN = 'Y'
+	    WHERE REPORT_NO = #{reportNo}
+
 	</update>
 	
 </mapper>
