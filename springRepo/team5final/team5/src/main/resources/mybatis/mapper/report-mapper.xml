@@ -21,7 +21,7 @@
 	</select>
 	
 	<!--게시글 상세 조회 -->
-	<select id=detail resultType="com.kh.app.report.vo.ReportVo">
+	<select id="detail" resultType="com.kh.app.report.vo.ReportVo">
 		SELECT
 			REPORT_NO
 			,MEMBER_NO
@@ -70,10 +70,12 @@
 	
 	<!--게시글 삭제 -->
 	<update id="delete">
+
 		UPDATE REPORT_BULLETIN_BOARD
 	    SET
 	        DEL_YN = 'Y'
 	    WHERE REPORT_NO = #{reportNo}
+
 	</update>
 	
 </mapper>

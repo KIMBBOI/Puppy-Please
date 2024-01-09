@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+
 function KakaoLogin() {
   const [user, setUser] = useState(null);
   const [isLogin, setIsLogin] = useState(false);
   const { Kakao } = window;
+
   const initKakao = async () => {
     const jsKey = "0058f1284f51e34c54874233ddd6cb1e";
     if (Kakao && !Kakao.isInitialized()) {
@@ -49,16 +51,18 @@ function KakaoLogin() {
       localStorage.removeItem("profileImg");
       localStorage.removeItem("nickname");
       setUser(null);
+      setIsLogin(false);
     });
   };
 
   useEffect(() => {
     initKakao();
     Kakao.Auth.getAccessToken() ? setIsLogin(true) : setIsLogin(false);
-  }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
 
   useEffect(() => {
-    console.log(isLogin);
+    console.log("로그인상태 : ", isLogin);
     if (isLogin) {
       setUser({
         email: localStorage.getItem("email"),
@@ -70,7 +74,6 @@ function KakaoLogin() {
 
   return (
     <div className="App">
-      <h2>카카오 로그인 구현</h2>
       {user ? (
         <div>
           <button onClick={kakaoLogout}>로그아웃</button>
