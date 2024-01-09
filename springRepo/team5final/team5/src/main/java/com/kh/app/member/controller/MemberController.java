@@ -39,9 +39,8 @@ public class MemberController {
 		int result = service.join(vo);
 		
 		Map<String, String> map = new HashMap<>();
-		if(result == 1) {
-			map.put("msg", "good");
-		}else {
+		map.put("msg", "good");
+		if(result != 1) {
 			map.put("msg", "fail");
 		}
 		return map;
@@ -67,7 +66,7 @@ public class MemberController {
 		session.invalidate();
 		return "redirect:/home";
 	}
-	
+	//회원 정보 수정
 	@PutMapping
 	public String edit(MemberVo vo) throws Exception{
 		int result = service.edit(vo);
@@ -76,7 +75,7 @@ public class MemberController {
 		}
 		return "";
 	}
-	
+	//회원 탈퇴
 	@DeleteMapping
 	public String quit(MemberVo vo, HttpSession session) throws Exception{
 		int result = service.quit(vo);
@@ -88,6 +87,18 @@ public class MemberController {
 		session.setAttribute("alertMsg", "회원탈퇴 완료");
 		
 		return "redirect:/home";
+	}
+	//아이디 찾기
+	@PostMapping("searchId")
+	public Map<String, Object> searchId(@RequestBody MemberVo vo) throws Exception{
+		Map<String, Object> map = new HashMap<>();
+		MemberVo resultVo = service.searchId(vo);
+		if(resultVo != null) {
+			map.put("msg", resultVo.getId());
+		}else {
+			map.put("msg", null);
+		}
+		return map;
 	}
 	
 }

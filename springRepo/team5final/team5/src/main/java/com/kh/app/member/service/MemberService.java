@@ -127,5 +127,9 @@ public class MemberService {
 	public int quit(MemberVo vo) {
 		return dao.quit(sst,vo);
 	}
+	//아이디찾기
+	public MemberVo searchId(MemberVo vo) {
+		return dao.searchId(sst, vo);
+	}
 
 }
