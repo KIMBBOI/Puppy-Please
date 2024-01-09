@@ -17,7 +17,9 @@ public class ReportDao {
 	}
 
 	// 게시글 상세 조회
-	
+	public ReportVo detail(SqlSessionTemplate sst, ReportVo vo) {
+		return sst.selectOne("ReportMapper.detail", vo);
+	} 
 	
 	// 게시글 작성
 	public int insert(SqlSessionTemplate sst, ReportVo vo) {
@@ -26,10 +28,15 @@ public class ReportDao {
 		// 로그인 멤버의 프라이머리 키
 		// 이미지의 프라이머리 키
 	
-	
 	// 게시글 수정
-	
+	public int edit(SqlSessionTemplate sst, ReportVo vo) {
+		return sst.update("ReportMapper.edit", vo);
+	}
 	
 	// 게시글 삭제
+	public int delete(SqlSessionTemplate sst, ReportVo vo) {
+		return sst.delete("ReportMapper.delete", vo);
+	}
+
 
 } // class
