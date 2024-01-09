@@ -15,7 +15,7 @@ public class AdoptionService {
 	private final AdoptionDao dao;
 	private final SqlSessionTemplate sst;
 
-	//ÀÔ¾ç °Ô½Ã±Û ÀÛ¼º
+	// ìž…ì–‘ ê²Œì‹œê¸€ ìž‘ì„±
 	public int insert(AdoptionVo vo) {
 		return dao.insert(sst, vo);
 	}

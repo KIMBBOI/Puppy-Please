@@ -5,10 +5,22 @@
 <mapper namespace="AdoptionMapper">
 
 	<insert id="insert">
-		INSERT INTO ADOPTION_BOARD
-		(
-			ADOPTION_NO
-			, 
+		INSERT INTO Adoption (
+		    ADOPTION_NO,
+		    IMAGE_NO,
+		    RESCUE_DOG_NO,
+		    ADMIN_NO,
+		    ENROLL_DATE,
+		    MODIFY_DATE,
+		    DEL_YN
+		) VALUES (
+		    #{adoptionNo},
+		    #{imageNo},
+		    #{rescueDogNo},
+		    #{adminNo},
+		    SYSDATE,
+		    SYSDATE,
+		    'N'
 		)
 	</insert>
   

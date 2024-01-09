@@ -16,7 +16,7 @@ public class AdoptionController {
 	
 	private final AdoptionService service;
 	
-	//ÀÔ¾ç °Ô½Ã±Û ÀÛ¼º
+	// ìž…ì–‘ ê²Œì‹œê¸€ ìž‘ì„±
 	@PostMapping("insert")
 	public String insert(AdoptionVo vo) throws Exception {
 		

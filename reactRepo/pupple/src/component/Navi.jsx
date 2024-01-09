@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import Notice from './Board/Notice';
-import Adoption from './Board/Adoption';
-import Visit from './Board/Visit';
+import NoticeList from './Board/Notice/NoticeList';
+import NewsAdoptionList from './Board/Notice/NewsAdoptionList';
+import AdoptionList from './Board/Adoption/AdoptionList';
 import Report from './Board/Report';
+import Visit from './Board/Visit';
 
 const StyledNaviDiv = styled.div`
     width: 100%;
@@ -19,14 +20,47 @@ const StyledNaviDiv = styled.div`
     font-size: 1.5rem;
 `;
 
+const StyledMenuItem = styled.div`
+    position: relative;
+    cursor: pointer;
+
+    &:hover {
+        color: #DBE76D;
+    }
+`;
+
+const StyledSubMenu = styled.div`
+    color: #C7C7C7;
+    display: ${props => props.isOpen ? 'block' : 'none'};
+    position: absolute;
+    top: 100%;
+    left: 0;
+`;
 
 const Navi = () => {
+    const [isNewsAdoptionOpen, setIsNewsAdoptionOpen] = useState(false);
+
+    const toggleNewsAdoption = () => {
+        setIsNewsAdoptionOpen(!isNewsAdoptionOpen);
+    };
+
     return (
         <StyledNaviDiv>
-               <Notice />
-               <Adoption />
-               <Report />
-               <Visit />
+            <StyledMenuItem onClick={toggleNewsAdoption}>
+                <NoticeList />
+                <StyledSubMenu isOpen={isNewsAdoptionOpen}>
+                    <NewsAdoptionList />
+                </StyledSubMenu>
+            </StyledMenuItem>
+            <StyledMenuItem>
+                <AdoptionList />
+            </StyledMenuItem>
+            <StyledMenuItem>
+                <Report />
+            </StyledMenuItem>
+            <StyledMenuItem>
+                <Visit />
+            </StyledMenuItem>
         </StyledNaviDiv>
     );
 };

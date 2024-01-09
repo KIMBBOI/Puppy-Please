@@ -8,7 +8,7 @@ import com.kh.app.adoption.vo.AdoptionVo;
 @Repository
 public class AdoptionDao {
 
-	//ÀÔ¾ç °Ô½Ã±Û ÀÛ¼º
+	// ìž…ì–‘ ê²Œì‹œê¸€ ìž‘ì„±
 	public int insert(SqlSessionTemplate sst, AdoptionVo vo) {
 		return sst.insert("AdoptionMapper", vo);
 	}
