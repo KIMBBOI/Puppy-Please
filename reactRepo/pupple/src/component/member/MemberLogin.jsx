@@ -2,47 +2,100 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import KakaoLogin from './KakaoLogin';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const StyledMemberLogin = styled.div`
   // 여기에 스타일을 추가하세요
 `;
 
+
 const MemberLogin = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
   const navigate = useNavigate();
-
-  const handleLoginSubmit = (event) => {
+  
+  const jsonStr = sessionStorage.getItem("loginMemberVo");
+  const sessionLoginMemberVo = JSON.parse(jsonStr);
+  const [loginMemberVo, setLoginMemberVo] = useState(sessionLoginMemberVo);
+  
+  const [vo, setVo] = useState();
+  
+  useEffect(() => {
+    console.log("로그인 상태 업데이트: ", loginMemberVo);
+  }, [loginMemberVo]);
+  
+  
+  const handleInputChange = (e) => {
+    const {name, value} = e.target;
+    setVo({
+      ...vo,
+      [name]: value
+    });
+  }
+  
+  
+  const handleLoginClick = (event) => {
     event.preventDefault();
-    // 여기에 로그인 로직을 추가하세요
-    // 예: 서버에 로그인 요청을 보내고, 성공 시 다른 페이지로 이동
-    console.log("로그인 시도: ", username, password);
-    // navigate('/some-path'); // 로그인 성공 후 이동할 경로
-    navigate('/')
-  };
+    
+    fetch("http://127.0.0.1:8080/app/member/login", {
+      method: "post",
+      headers: {
+          "Content-Type" : "application/json"
+        },
+        body: JSON.stringify(vo)
+    })
+    .then( (resp) => {return resp.json()})
+    .then( (data) => {
+      if(data.msg === "login success"){
+        alert("로그인 성공!");
+        sessionStorage.setItem("loginMemberVo", JSON.stringify(data.loginMemberVo));
+        console.log("getItem 결과:" ,sessionStorage.getItem("loginMemberVo"));
+        setLoginMemberVo(data.loginMemberVo);
+        console.log(data);
+        console.log(loginMemberVo);
+        console.log("sessionLoginMemberVo : " + sessionLoginMemberVo)
+      }else{
+        alert("로그인 실패!");
+      }
+      
+    })
+    .catch( (e) => {console.log(e);})
 
+    .finally( () => {console.log("login fetch end~");})
+    ;
+    
+    
+    // 예: 서버에 로그인 요청을 보내고, 성공 시 다른 페이지로 이동
+    console.log("로그인 시도: ", loginMemberVo);
+    // navigate('/some-path'); // 로그인 성공 후 이동할 경로
+    navigate("/")
+  };
+  
+  
+  const handleJoinButton = (e) => {
+    
+    navigate('/member/join')
+  }
+  
   return (
     <StyledMemberLogin>
-      <form onSubmit={handleLoginSubmit}>
-        <div>
-          <label htmlFor="username">아이디:</label>
-          <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="password">비밀번호:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <button type="submit">로그인</button>
+      <div>
+        <h1>로그인</h1>
+      </div>
+      <form onSubmit={handleLoginClick}>
+        <table>
+          <tbody>
+            <tr>
+              <td><input type="text" name="id" onChange={handleInputChange} placeholder='아이디'/></td>
+            </tr>
+            <tr>
+              <td><input type="password" name="pwd" onChange={handleInputChange} placeholder='비밀번호' /></td>
+            </tr>
+            <tr>
+              <td><button type="submit">로그인</button><button onClick={ handleJoinButton }>회원가입</button></td>
+            </tr>          
+          </tbody>
+        </table>
+        
+        
       </form>
       <hr />
       <KakaoLogin />

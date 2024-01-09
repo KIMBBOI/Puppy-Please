@@ -33,19 +33,20 @@
   		UPDATE MEMBER
   		SET
   			DEL_YN = 'Y'
-  			WHERE NO = #{no}
+  			WHERE NO = #{memberNo}
   	</update>
   	<select id = "login" resultType="MemberVo">
   		SELECT
-  			NO
-  			, ID
-  			, PWD
+  			MEMBER_NO
+  			, NAME
   			, NICK
   			, ENROLL_DATE
-  			, DEL_YN
+  			, PASS_YN
+  			, SURVAY_RESULT
   		FROM MEMBER
   		WHERE ID = #{id}
   		AND PWD = #{pwd}
+  		AND DEL_YN = 'N'
   	</select>
   	<update id="edit">
   	UPDATE MEMBER 
@@ -68,7 +69,7 @@
   		, BIRTHDAY = #{birthday}
 		</if>
   		</trim>
-  		 WHERE NO = #{no} 
+  		 WHERE NO = #{memberNo} 
   		 AND DEL_YN = 'N';
   	</update>
   	
