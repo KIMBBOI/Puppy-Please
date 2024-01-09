@@ -23,10 +23,24 @@ public class ReportService {
 		return dao.list(sst); 
 	}
 
-
+	// 게시글 상세 조회
+	public ReportVo detail(ReportVo vo) {
+		return dao.detail(sst, vo);
+	}
+	
 	// 게시글 작성
 	public int insert(ReportVo vo) {
 		return dao.insert(sst, vo);
+	}
+	
+	// 게시글 수정
+	public int edit(ReportVo vo) {
+		return dao.edit(sst, vo);
+	}
+	
+	// 게시글 삭제
+	public int delete(ReportVo vo) {
+		return dao.delete(sst, vo);
 	}
 
 } // class

@@ -15,9 +15,12 @@
 			,ENROLL_DATE
 			,MODIFY_DATE
 			,DEL_YN
-		FROM REPORT_BULLETIN_BOARD
-		WHERE DEL_YN = 'N'
-		ORDER BY REPORT_NO DESC
+		FROM 
+			REPORT_BULLETIN_BOARD
+		WHERE 
+			DEL_YN = 'N'
+		ORDER BY 
+			REPORT_NO DESC
 	</select>
 	
 	<!--게시글 상세 조회 -->
@@ -31,8 +34,10 @@
 			,ENROLL_DATE
 			,MODIFY_DATE
 			,DEL_YN
-		FROM REPORT_BULLETIN_BOARD
-		WHERE DEL_YN = 'N'
+		FROM 
+			REPORT_BULLETIN_BOARD
+		WHERE 
+			DEL_YN = 'N'
 	</select>
 	
 	<!--게시글 작성 -->
@@ -57,7 +62,8 @@
 	
 	<!--게시글 수정 -->
 	<update id="edit">
-		UPDATE REPORT_BULLETIN_BOARD
+		UPDATE 
+			REPORT_BULLETIN_BOARD
 	    SET
 	        IMAGE_NO = #{imageNo}
 	        ,TITLE = #{title}
@@ -70,12 +76,12 @@
 	
 	<!--게시글 삭제 -->
 	<update id="delete">
-
-		UPDATE REPORT_BULLETIN_BOARD
+		UPDATE 
+			REPORT_BULLETIN_BOARD
 	    SET
 	        DEL_YN = 'Y'
-	    WHERE REPORT_NO = #{reportNo}
-
+	    WHERE 
+	    	REPORT_NO = #{reportNo}
 	</update>
 	
 </mapper>

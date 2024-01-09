@@ -28,5 +28,12 @@
 	<!-- 	@Transactional 어노테이션 활성화 -->
 	<tx:annotation-driven/>
 	
+	<!-- 크로스오리진 어노테이션 대체 -->
+	<cors>
+		<mapping 
+			path="/**"
+			allowed-origins="*" 
+		/>
+	</cors>
 	
 </beans:beans>

@@ -9,9 +9,12 @@
 		SELECT
 			VISIT_NO
 			,RESERVATION_DATE
-		FROM VISIT_RESERVATION
-		WHERE "지나지 않은 날"
-		ORDER BY "빠른 날짜 순서"
+		FROM 
+			VISIT_RESERVATION
+		WHERE 
+			RESERVATION_DATE >= SYSDATE
+		ORDER BY 
+			RESERVATION_DATE ASC;
 	</select>
 	
 	<!--방문예약 상세 조회 -->
@@ -21,8 +24,10 @@
 			,MEMBER_NO
 			,RESERVATION_DATE
 			,SUMMIT_DATE
-		FROM VISIT_RESERVATION
-		WHERE VISIT_NO = #{visitNo}
+		FROM 
+			VISIT_RESERVATION
+		WHERE 
+			VISIT_NO = #{visitNo}
 	</select>
 	
 	<!--방문예약 작성 -->
@@ -45,20 +50,23 @@
 	
 	<!--방문예약 수정 -->
 	<update id="edit">
-		UPDATE VISIT_RESERVATION
-		    SET
-		        RESERVATION_DATE = #{reservationDate}
-		        ,SUMMIT_DATE = #{summitDate}
-		    WHERE
-		        VISIT_NO = #{visitNo}
+		UPDATE 
+			VISIT_RESERVATION
+	    SET
+	        RESERVATION_DATE = #{reservationDate}
+	        ,SUMMIT_DATE = #{summitDate}
+	    WHERE
+	        VISIT_NO = #{visitNo}
 	</update>
 	
-	<!--방문예약 삭제 -->
+	<!--방문예약 취소/삭제 -->
 	<update id="delete">
-		UPDATE VISIT_RESERVATION
+		UPDATE 
+			VISIT_RESERVATION
 	    SET
-	        DEL_YN = 'Y'
-	    WHERE REPORT_NO = #{reportNo}
+	        QUIT_YN = 'Y'
+	    WHERE 
+	    	REPORT_NO = #{reportNo}
 	</update>
 	
 </mapper>
