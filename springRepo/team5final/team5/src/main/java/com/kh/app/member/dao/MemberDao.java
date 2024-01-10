@@ -24,5 +24,10 @@ public class MemberDao {
 	public int edit(SqlSessionTemplate sst, MemberVo vo) {
 		return sst.update("MemberMapper.edit", vo);
 	}
+	
+	//아이디 찾기
+	public MemberVo searchId(SqlSessionTemplate sst, MemberVo vo) {
+		return sst.selectOne("MemberMapper.searchId", vo);
+	}
 
 }

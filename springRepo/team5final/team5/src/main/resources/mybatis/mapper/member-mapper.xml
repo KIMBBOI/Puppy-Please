@@ -73,5 +73,10 @@
   		 AND DEL_YN = 'N';
   	</update>
   	
-  
+  	<select id="searchId" resultType="MemberVo">
+  		SELECT ID
+  		FROM MEMBER
+  		WHERE NAME=#{name}
+  		AND EMAIL=#{email}
+  	</select>
 </mapper>
