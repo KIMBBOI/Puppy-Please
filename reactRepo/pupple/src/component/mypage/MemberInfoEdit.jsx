@@ -18,27 +18,32 @@ const StyledMemberEditDiv = styled.div`
     }
 `;
 
-const MemberEdit = () => {
-    const navigate = useNavigate();
+const MemberInfoEdit = () => {
 
-    let isFetching = false;
+    const navigate = useNavigate();
 
     const [vo, setVo] = useState();
     const handleInputChange = (event) => {
         const {name, value} = event.target;
-
         setVo({
             ...vo,
             [name] : value
         });
-
+        
     };
+    
+
+
+    let isFetching = false;
+
     const handleEditSubmit = (event) => {
+
         if(isFetching){
             return;
         }
-
+        
         isFetching(true);
+
         event.preventDefault();
 
         fetch("http://127.0.0.1:8080/app/member/edit", {
@@ -115,4 +120,4 @@ const MemberEdit = () => {
     );
 };
 
-export default MemberEdit;
+export default MemberInfoEdit;
