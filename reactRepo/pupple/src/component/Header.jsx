@@ -52,6 +52,9 @@ const Header = () => {
     const handleClickJoin = () => {
         navigate("/member/join");
      };
+    const handleClickLogin =() => {
+        navigate("/member/login");
+    };
     return (
         <StyledHeaderDiv>
             <div className='logo' onClick={ () => {navigate("/")} }></div>
@@ -65,7 +68,7 @@ const Header = () => {
                 :
                 <StyledMemberDiv>
                 <div className='loginArea'>
-                <div><Link to='/member/login'>로그인</Link></div>
+                <div onClick={ handleClickLogin }> 로그인</div>
                 <div onClick={ handleClickJoin }>회원가입</div>
                 </div>
                 </StyledMemberDiv>
