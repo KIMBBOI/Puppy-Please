@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { Route, Routes } from 'react-router-dom'
 import MemberMain from './member/MemberMain';
 import Aside from './Aside';
+import ReportMain from './Board/report/ReportMain';
+import VisitMain from './Board/visit/VisitMain';
 const StyledMainDiv = styled.div`
     width: 100%;
     height: 100%;
@@ -18,6 +20,8 @@ const Main = () => {
             <Aside />
             <Routes>
                 <Route path='/member/*' element={ <MemberMain />}></Route>
+                <Route path='/Board/report/*' element={ <ReportMain />}></Route>
+                <Route path='/Board/visit/*' element={ <VisitMain />}></Route>
             </Routes>
             <Aside />
         </StyledMainDiv>

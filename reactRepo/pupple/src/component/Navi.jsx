@@ -3,8 +3,7 @@ import styled from 'styled-components';
 import NoticeList from './Board/Notice/NoticeList';
 import NewsAdoptionList from './Board/Notice/NewsAdoptionList';
 import AdoptionList from './Board/Adoption/AdoptionList';
-import Report from './Board/Report';
-import Visit from './Board/Visit';
+import { Link } from 'react-router-dom';
 
 const StyledNaviDiv = styled.div`
     width: 100%;
@@ -56,11 +55,11 @@ const Navi = () => {
                 <AdoptionList />
             </StyledMenuItem>
             <StyledMenuItem>
-                <Report />
+                <div><Link to="/Board/report/list">제보</Link></div>
             </StyledMenuItem>
             <StyledMenuItem>
-                <Visit />
-            </StyledMenuItem>
+                <div><Link to="/Board/visit/write">방문예약</Link></div>
+            </StyledMenuItem>   
         </StyledNaviDiv>
     );
 };
