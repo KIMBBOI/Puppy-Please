@@ -45,6 +45,8 @@ const MemberSearch = () => {
     };
     const handleSearchPwd = (event) => {
         event.preventDefault();
+            
+        
     }
     const handleSearchIdChange = (e) => {
         const {name, value} = e.target;
