@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="AdoptionNewsMapper">
+
+	<insert id="write">
+		INSERT INTO NEWS_AFTER_ADOPTION
+		(
+		    NEWS_AFTER_ADOPTION_NO
+		    ,MEMBER_NO
+		    ,IMAGE_NO
+		    ,TITLE
+		    ,CONTENT
+		    ,ENROLL_DATE
+		    ,MODIFY_DATE
+		    ,DEL_YN
+		)
+		VALUES
+		(
+		    SEQ_NEWS_AFTER_ADOPTION_NO.NEXTVAL
+		    , #{memberNo}
+		    , #{imageNo}
+		    , #{title}
+		    , #{content}
+		    , #{enrollDate}
+		    , #{modifyDate}
+		    , #{delYn}
+		)
+	</insert>
+	
+	<select id="list" resultType="com.kh.app.adoptionnews.vo.AdoptionNewsVo">
+		SELECT 
+		    NEWS_AFTER_ADOPTION_NO
+		    ,MEMBER_NO
+		    ,IMAGE_NO
+		    ,TITLE
+		    ,CONTENT
+		    ,ENROLL_DATE
+		    ,MODIFY_DATE
+		    ,DEL_YN
+		FROM NEWS_AFTER_ADOPTION
+		WHERE DEL_YN = 'N'
+		ORDER BY NEWS_AFTER_ADOPTION_NO DESC	
+	</select>
+	
+	<select id="detail" resultType="com.kh.app.adoptionnews.vo.AdoptionNewsVo">
+		SELECT 
+		    NEWS_AFTER_ADOPTION_NO
+		    ,MEMBER_NO
+		    ,IMAGE_NO
+		    ,TITLE
+		    ,CONTENT
+		    ,ENROLL_DATE
+		    ,MODIFY_DATE
+		    ,DEL_YN
+		FROM NEWS_AFTER_ADOPTION
+		WHERE NEWS_AFTER_ADOPTION_NO = #{newsAfterAdoptionNo}
+	</select>
+	
+	<update id="edit">
+		UPDATE NEWS_AFTER_ADOPTION
+	    SET 
+	        TITLE = #{title}
+	    WHERE NEWS_AFTER_ADOPTION_NO = #{newsAfterAdoptionNo}
+	    AND DEL_YN = 'N'
+	</update>
+	
+	<update id="delete">
+		UPDATE NEWS_AFTER_ADOPTION
+	    SET
+	        DEL_YN = 'Y'
+	    WHERE NEWS_AFTER_ADOPTION_NO = #{newsAfterAdoptionNo}
+	</update>
+  
+</mapper>
