@@ -1,5 +1,7 @@
 package com.kh.app.adoption.service;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Service;
 
@@ -19,5 +21,26 @@ public class AdoptionService {
 	public int insert(AdoptionVo vo) {
 		return dao.insert(sst, vo);
 	}
+	
+	// 입양 게시글 목록
+	public List<AdoptionVo> list() {
+		return dao.list(sst);
+	}
+
+	// 입양 게시글 상세 조회
+	public AdoptionVo detail(AdoptionVo vo) {
+		return dao.detail(sst , vo);
+	}
+
+	// 입양 게시글 수정
+	public int edit(AdoptionVo vo) {
+		return dao.edit(sst, vo);
+	}
+
+	// 입양 게시글 삭제
+	public int delete(AdoptionVo vo) {
+		return dao.delete(sst, vo);
+	}
+
 
 }
