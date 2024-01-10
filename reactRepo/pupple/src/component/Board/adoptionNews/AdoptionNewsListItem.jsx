@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const styledItemDiv = styled.div`
+const StyledItemDiv = styled.div`
     width: 100%;
     height: 100%;
     display: flex;
@@ -12,7 +12,7 @@ const styledItemDiv = styled.div`
 
 const AdoptionNewsListItem = ( {a, b, c} ) => {
     return (
-        <styledItemDiv>
+        <StyledItemDiv>
             <img 
                 src={c}
                 alt='사진'
@@ -21,7 +21,7 @@ const AdoptionNewsListItem = ( {a, b, c} ) => {
             />
             <span>{a}</span>
             <span>{b}</span>
-        </styledItemDiv>
+        </StyledItemDiv>
     );
 };
 
