@@ -12,7 +12,7 @@
 		FROM 
 			VISIT_RESERVATION
 		WHERE 
-			RESERVATION_DATE >= SYSDATE
+			RESERVATION_STATUS_NO = 1
 		ORDER BY 
 			RESERVATION_DATE ASC;
 	</select>
@@ -22,8 +22,11 @@
 		SELECT
 			VISIT_NO
 			,MEMBER_NO
+			,RESERVATION_STATUS_NO
 			,RESERVATION_DATE
 			,SUMMIT_DATE
+			,MODIFY_DATE
+			,DEL_YN
 		FROM 
 			VISIT_RESERVATION
 		WHERE 
@@ -37,14 +40,12 @@
 			VISIT_NO
 			,MEMBER_NO
 			,RESERVATION_DATE
-			,SUMMIT_DATE
 		) 
 		VALUES
 		(
 			SEQ_VISIT_RESERVATION_NO.NEXTVAL 
 			,#{memberNo}
 			,#{reservationDate}
-			,#{summitDate}
 		)
 	</insert>
 	
@@ -54,17 +55,29 @@
 			VISIT_RESERVATION
 	    SET
 	        RESERVATION_DATE = #{reservationDate}
-	        ,SUMMIT_DATE = #{summitDate}
+	        ,MODIFY_DATA = SYSDATE
 	    WHERE
 	        VISIT_NO = #{visitNo}
 	</update>
 	
 	<!--방문예약 취소/삭제 -->
-	<update id="delete">
+	<update id="quit">
 		UPDATE 
 			VISIT_RESERVATION
 	    SET
-	        QUIT_YN = 'Y'
+	        DEL_YN = 'Y'
+	        ,RESERVATION_STAYUS_NO = 3
+	    WHERE 
+	    	REPORT_NO = #{reportNo}
+	</update>
+
+	<!--방문예약 완료/삭제 -->
+	<update id="complete">
+		UPDATE 
+			VISIT_RESERVATION
+	    SET
+	        DEL_YN = 'Y'
+	        ,RESERVATION_STAYUS_NO = 2
 	    WHERE 
 	    	REPORT_NO = #{reportNo}
 	</update>
