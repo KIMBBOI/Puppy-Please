@@ -30,7 +30,7 @@ public class AdoptionNewsService {
 		List<AdoptionNewsVo> newsList = dao.list(sst);
 		// imagePath 설정
 		for (AdoptionNewsVo news : newsList) {
-			String imagePath = news.getImagePath().replace("D:\\dev\\springRepo\\springPrj99\\src\\main\\webapp", "http://127.0.0.1:8888/app");
+			String imagePath = news.getImagePath().replace("D:\\pupple\\springRepo\\team5final\\team5\\src\\main\\webapp", "http://127.0.0.1:8080/app");
 			news.setImagePath(imagePath);
 		}
 		return newsList;

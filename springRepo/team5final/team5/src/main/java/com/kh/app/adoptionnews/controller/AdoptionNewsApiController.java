@@ -22,7 +22,7 @@ public class AdoptionNewsApiController {
 	private final AdoptionNewsService service;
 	
 	@PostMapping
-	public Map<String, String> write(@RequestBody AdoptionNewsVo vo, @RequestParam MultipartFile file) throws Exception {
+	public Map<String, String> write(AdoptionNewsVo vo, @RequestParam MultipartFile file) throws Exception {
 		System.out.println("vo: " + vo);
 		System.out.println("file: " + file.getOriginalFilename());
 		
@@ -40,7 +40,7 @@ public class AdoptionNewsApiController {
 	}
 	
 	private String saveFile(MultipartFile file) throws Exception {
-		String path = "D:\\puppyPlease\\reactRepo\\pupple\\src\\component\\img\\";
+		String path = "D:\\pupple\\springRepo\\team5final\\team5\\src\\main\\webapp\\resources\\upload\\img\\";
 		String originName = file.getOriginalFilename();
 		
 		File target = new File(path + originName);

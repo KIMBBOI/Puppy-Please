@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import projectName from './img/projectName.png'
 import projectlogo from './img/projectlogo.png'
-import {  useNavigate } from 'react-router-dom';
+
+import { useNavigate } from 'react-router-dom';
+
 import { useState, useEffect } from 'react';
 const StyledHeaderDiv = styled.div`
     width: 100%;
