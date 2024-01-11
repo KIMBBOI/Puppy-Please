@@ -7,6 +7,7 @@ import AdoptionMain from './board/adoption/AdoptionMain';
 import AdoptionNewsMain from './board/adoptionNews/AdoptionNewsMain';
 import ReportMain from './board/report/ReportMain';
 import VisitMain from './board/visit/VisitMain';
+import LawMain from './board/law/LawMain';
 const StyledMainDiv = styled.div`
     width: 100%;
     height: 100%;
@@ -23,6 +24,7 @@ const Main = () => {
             <Routes>
                 <Route path='/member/*' element={ <MemberMain />}></Route>
                 <Route path='/board/adoptionNews/*' element={ <AdoptionNewsMain />} ></Route>
+                <Route path='/board/law/*' element={ <LawMain />} ></Route>
                 <Route path='/board/adoption/*' element={ <AdoptionMain />}></Route>
                 <Route path='/board/report/*' element={ <ReportMain />}></Route>
                 <Route path='/board/visit/*' element={ <VisitMain />}></Route>

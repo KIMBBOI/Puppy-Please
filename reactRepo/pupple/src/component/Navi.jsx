@@ -21,22 +21,28 @@ const StyledNaviDiv = styled.div`
 const StyledMenuItem = styled.div`
     position: relative;
     cursor: pointer;
-
     &:hover {
         color: #DBE76D;
+    }
+    & > div:nth-child(2){
+        font-size: 15px;
+    }
+    & > div:nth-child(2) :hover {
+        color: #292929;
+        border-bottom: 1px solid #292929;
     }
 `;
 
 const StyledSubMenu = styled.div`
     color: #C7C7C7;
-    display: ${props => props.isOpen ? 'block' : 'none'};
+    display: ${props => props.isopen ? 'block' : 'none'};
     position: absolute;
     top: 100%;
     left: 0;
 `;
 
 const Navi = () => {
-    const [isNewsAdoptionOpen, setIsNewsAdoptionOpen] = useState(false);
+    const [isNewsAdoptionOpen, setIsNewsAdoptionOpen] = useState(undefined);
 
     const toggleNewsAdoption = () => {
         setIsNewsAdoptionOpen(!isNewsAdoptionOpen);
@@ -46,15 +52,14 @@ const Navi = () => {
         <StyledNaviDiv>
             <StyledMenuItem onClick={toggleNewsAdoption}>
                 <NoticeList />
-                <StyledSubMenu isOpen={isNewsAdoptionOpen}>
+                <StyledSubMenu isopen={isNewsAdoptionOpen}>
                     <div><Link to="/board/adoptionNews/list">입양 후 소식</Link></div>
-                    <div>관련법규</div>
+                    <div><Link to="/board/law/list">관련법규</Link></div>
                 </StyledSubMenu>
             </StyledMenuItem>
             <StyledMenuItem onClick={toggleNewsAdoption}>
                 <AdoptionList />
             </StyledMenuItem>
-
             <StyledMenuItem>
                 <div><Link to="/board/report/list">제보</Link></div>
             </StyledMenuItem>
