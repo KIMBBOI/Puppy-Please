@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import projectName from './img/projectName.png'
 import projectlogo from './img/projectlogo.png'
-import { Link, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 const StyledHeaderDiv = styled.div`
     width: 100%;
@@ -36,18 +36,11 @@ const StyledHeaderDiv = styled.div`
 
 const Header = () => {
     const navigate = useNavigate();
-    const[loginMemberVo, setLoginMemberVo] = useState(null);
+    const [loginMemberVo, setLoginMemberVo] = useState();
     
     useEffect(()=> {
-        try{
-            const loginMemberVoStr = sessionStorage.getItem("loginMemberVo");
-            if(loginMemberVoStr) {
-                setLoginMemberVo(JSON.parse(loginMemberVoStr));
-            }
-        }catch(error){
-            console.error("Failed to parse loginMemberVo:", error);
-        }
-
+        const loginMemberVoStr = sessionStorage.getItem("loginMemberVo");
+        setLoginMemberVo(JSON.parse(loginMemberVoStr));
     }, []);
     const handleClickJoin = () => {
         navigate("/member/join");
@@ -55,7 +48,9 @@ const Header = () => {
     const handleClickLogin =() => {
         navigate("/member/login");
     };
+    console.log(loginMemberVo);
     return (
+        
         <StyledHeaderDiv>
             <div className='logo' onClick={ () => {navigate("/")} }></div>
             <div className='logoArea' onClick={ () => {navigate("/")} }></div>
@@ -64,6 +59,7 @@ const Header = () => {
                 ?
                 <div>
                     <h3>{loginMemberVo.nick}님 환영합니다.</h3>
+                    
                 </div>
                 :
                 <StyledMemberDiv>

@@ -18,11 +18,11 @@ const MemberLogin = () => {
   
   const [vo, setVo] = useState();
   
-  useEffect(() => {
+  useEffect( () => {
     console.log("로그인 상태 업데이트: ", loginMemberVo);
   }, [loginMemberVo]);
   
-  
+
   const handleInputChange = (e) => {
     const {name, value} = e.target;
     setVo({
@@ -30,7 +30,6 @@ const MemberLogin = () => {
       [name]: value
     });
   }
-  
   
   const handleLoginClick = (event) => {
     event.preventDefault();
@@ -49,7 +48,7 @@ const MemberLogin = () => {
         sessionStorage.setItem("loginMemberVo", JSON.stringify(data.loginMemberVo));
         console.log("getItem 결과:" ,sessionStorage.getItem("loginMemberVo"));
         setLoginMemberVo(data.loginMemberVo);
-        console.log(data);
+        console.log(data.loginMemberVo);
         console.log(loginMemberVo);
         console.log("sessionLoginMemberVo : " + sessionLoginMemberVo)
       }else{
