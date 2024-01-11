@@ -10,7 +10,7 @@ const MemberMain = () => {
             <Route path='/join' element = {<MemberJoin />}></Route>
             <Route path='/login' element = {<MemberLogin />}></Route>
             <Route path='/search' element={<MemberSearch/>}></Route>
-            <Route path='/mypage' element={<MyPageMain/>}></Route>
+            <Route path='/mypage/*' element={<MyPageMain/>}></Route>
         </Routes>
     );
 };
