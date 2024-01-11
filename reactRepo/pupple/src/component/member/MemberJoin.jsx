@@ -23,14 +23,18 @@ const MemberJoin = () => {
     const navigate = useNavigate();
 
     let [isFetching, setIsFetching] = useState(false);
+    const [passwordMatchError, setPasswordMatchError] = useState(false);
+
 
     const [vo, setVo] = useState({
-        id: '', pwd: '', nick: '', name: '', phoneNumber: '', email: '', birthday: ''
+        id: '', pwd: '', pwd2: '', nick: '', name: '', phoneNumber: '', email: '', birthday: ''
     });
     const handleInputChange = (event) => {
 
         const {name, value} = event.target;
-        
+        if (name === 'pwd2') {
+            setPasswordMatchError(value !== vo.pwd);
+          }
         setVo({
             ...vo,
             [name] : value
@@ -43,8 +47,12 @@ const MemberJoin = () => {
             return;
         }
 
-    setIsFetching(true);
-
+        setIsFetching(true);
+        if (vo.pwd !== vo.pwd2) {
+            setPasswordMatchError(true);
+            setIsFetching(false); // Reset isFetching state
+            return;
+          }
         fetch("http://127.0.0.1:8080/app/member/join", {
             method: "POST",
             headers: {
@@ -77,6 +85,10 @@ const MemberJoin = () => {
         ;
     };
 
+    const handleComparePwd = (event) => {
+        // Reset the password match error state when the user types in the confirmation field
+        setPasswordMatchError(false);
+      };
     return (
         <StyledJoinDiv>
             <form onSubmit={ handleJoinSubmit }>
@@ -90,6 +102,22 @@ const MemberJoin = () => {
                             <td>비밀번호</td>
                             <td><input type="password" name='pwd' onChange={ handleInputChange } /></td>
                         </tr>
+                        <tr>
+                        <td>비밀번호 확인</td>
+                        <td>
+                            <input
+                            type="password"
+                            name="pwd2"
+                            onChange={handleInputChange}
+                            onBlur={handleComparePwd} // Check password match on blur
+                            />
+                        </td>
+                        </tr>
+                        {passwordMatchError && (
+                            <span style={{ color: 'red', marginLeft: '5px' }}>
+                                비밀번호가 일치하지 않습니다.
+                            </span>
+                        )}
                         <tr>
                             <td>닉네임</td>
                             <td><input type="text" name='nick' onChange={ handleInputChange } /></td>

@@ -3,8 +3,8 @@ import projectName from './img/projectName.png'
 import projectlogo from './img/projectlogo.png'
 
 import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
-import { useState, useEffect } from 'react';
 const StyledHeaderDiv = styled.div`
     width: 100%;
     height: 100%;
@@ -37,19 +37,24 @@ const StyledHeaderDiv = styled.div`
     `;
 
 const Header = () => {
-    const navigate = useNavigate();
-    const [loginMemberVo, setLoginMemberVo] = useState();
     
-    useEffect(()=> {
-        const loginMemberVoStr = sessionStorage.getItem("loginMemberVo");
-        setLoginMemberVo(JSON.parse(loginMemberVoStr));
-    }, []);
+    
+    const [loginMemberVo, setLoginMemberVo] = useState(null);
+    useEffect(() => {
+        const loginMemberStr = sessionStorage.getItem("loginMemberVo")
+        setLoginMemberVo(JSON.parse(loginMemberStr));
+    },[])
+    console.log(loginMemberVo)
+    const navigate = useNavigate();
     const handleClickJoin = () => {
         navigate("/member/join");
      };
     const handleClickLogin =() => {
         navigate("/member/login");
     };
+    const handleClickMypage = () => {
+        navigate("/member/mypage");
+    }
     console.log(loginMemberVo);
     return (
         
@@ -61,7 +66,7 @@ const Header = () => {
                 ?
                 <div>
                     <h3>{loginMemberVo.nick}님 환영합니다.</h3>
-                    
+                    <div onClick={handleClickMypage}>마이페이지</div>
                 </div>
                 :
                 <StyledMemberDiv>

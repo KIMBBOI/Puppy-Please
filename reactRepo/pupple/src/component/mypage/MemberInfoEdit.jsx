@@ -82,10 +82,7 @@ const MemberInfoEdit = () => {
             <form onSubmit={ handleEditSubmit}>
                 <table>
                     <tbody>
-                        <tr>
-                            <td>아이디</td>
-                            <td><input type="text" name='id' onChange={ handleInputChange }></input></td>
-                        </tr>
+                        
                         <tr>
                             <td>비밀번호</td>
                             <td><input type="password" name='pwd' onChange={ handleInputChange } /></td>
@@ -94,10 +91,7 @@ const MemberInfoEdit = () => {
                             <td>닉네임</td>
                             <td><input type="text" name='nick' onChange={ handleInputChange } /></td>
                         </tr>
-                        <tr>
-                            <td>이름</td>
-                            <td><input type="text" name='name' onChange={ handleInputChange} /></td>
-                        </tr>
+                        
                         <tr>
                             <td>전화번호</td>
                             <td><input type="text" name='phoneNumber' onChange={ handleInputChange } /></td>

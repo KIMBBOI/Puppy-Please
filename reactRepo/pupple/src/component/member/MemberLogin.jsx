@@ -4,7 +4,7 @@ import KakaoLogin from './KakaoLogin';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 
-const StyledMemberLogin = styled.div`
+const StyledMemberLoginDiv = styled.div`
   // 여기에 스타일을 추가하세요
 `;
 
@@ -12,6 +12,7 @@ const StyledMemberLogin = styled.div`
 const MemberLogin = () => {
   const navigate = useNavigate();
   
+
   const jsonStr = sessionStorage.getItem("loginMemberVo");
   const sessionLoginMemberVo = JSON.parse(jsonStr);
   const [loginMemberVo, setLoginMemberVo] = useState(sessionLoginMemberVo);
@@ -33,7 +34,6 @@ const MemberLogin = () => {
   
   const handleLoginClick = (event) => {
     event.preventDefault();
-    
     fetch("http://127.0.0.1:8080/app/member/login", {
       method: "post",
       headers: {
@@ -45,19 +45,23 @@ const MemberLogin = () => {
     .then( (data) => {
       if(data.msg === "login success"){
         alert("로그인 성공!");
+
         sessionStorage.setItem("loginMemberVo", JSON.stringify(data.loginMemberVo));
+        
         console.log("getItem 결과:" ,sessionStorage.getItem("loginMemberVo"));
+        
         setLoginMemberVo(data.loginMemberVo);
+
         console.log(data.loginMemberVo);
         console.log(loginMemberVo);
-        console.log("sessionLoginMemberVo : " + sessionLoginMemberVo)
+        console.log("sessionLoginMemberVo : " + loginMemberVo)
       }else{
         alert("로그인 실패!");
       }
       
     })
     .catch( (e) => {console.log(e);})
-
+    
     .finally( () => {console.log("login fetch end~");})
     ;
     
@@ -78,7 +82,7 @@ const MemberLogin = () => {
     navigate('/member/search');
   }
     return (
-    <StyledMemberLogin>
+    <StyledMemberLoginDiv>
       <div>
         <h1>로그인</h1>
       </div>
@@ -92,9 +96,12 @@ const MemberLogin = () => {
               <td><input type="password" name="pwd" onChange={handleInputChange} placeholder='비밀번호' /></td>
             </tr>
             <tr>
-              <td><button type="submit">로그인</button><button onClick={ handleJoinButton }>회원가입</button></td>
+              <td><button type="submit">로그인</button></td>
+              <td><button onClick={ handleJoinButton }>회원가입</button></td>
             </tr>
-            <tr><button onClick={handleSearchButton}>아이디/비밀번호 찾기</button></tr>          
+            <tr>
+              <td><button onClick={handleSearchButton}>아이디/비밀번호 찾기</button></td>
+            </tr>          
           </tbody>
         </table>
         
@@ -102,8 +109,10 @@ const MemberLogin = () => {
       </form>
       <hr />
       <KakaoLogin />
-    </StyledMemberLogin>
+    </StyledMemberLoginDiv>
   );
+
+
 };
 
 export default MemberLogin;
