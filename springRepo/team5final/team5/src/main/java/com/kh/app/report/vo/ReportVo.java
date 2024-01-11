@@ -14,5 +14,6 @@ public class ReportVo {
 	private String modifyDate;
 	private String delYn;
 		private String writerNick;
+		private String imagePath;
 	
 }

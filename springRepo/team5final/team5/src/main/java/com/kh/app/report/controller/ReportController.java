@@ -28,8 +28,13 @@ public class ReportController {
 	
 	// 제보 목록 조회
 	@GetMapping("list")
-	public List<ReportVo> list() {
-		return service.list();
+	public Map<String, Object> list() {
+		System.out.println(service.list());
+		List<ReportVo> voList = service.list();
+		Map<String, Object> map = new HashMap<>();
+		map.put("msg", "good");
+		map.put("voList", voList);
+		return map;
 	}
 	
 	

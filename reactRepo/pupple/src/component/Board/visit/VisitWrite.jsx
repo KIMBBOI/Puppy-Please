@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 
 const StyledVisitWriteDiv = styled.div`
@@ -33,7 +32,7 @@ const StyledVisitWriteDiv = styled.div`
         vertical-align: 2px;
     }
 
-    input {
+    input, select {
         width: 100%;
         height: 34px;
         padding: 6px 12px;
@@ -80,8 +79,10 @@ const StyledVisitWriteDiv = styled.div`
     #datetime2 {
         margin-left: 4%;
     }
-
 `;
+
+
+
 
 const VisitWrite = () => {
     return (
@@ -100,7 +101,7 @@ const VisitWrite = () => {
                             연락처
                             <i></i>
                         </label>
-                        <input type="number" name='phoneNumber' id='phoneNumber'/>
+                        <input type="tel" name='phoneNumber' id='phoneNumber' maxlength="11"/>
                     </div>
                     <div>
                         <label for='reservationData'>
@@ -119,8 +120,20 @@ const VisitWrite = () => {
                                 />
                             </div>
                             <div className='datetime' id='datetime2'>
-                                <input type="time" time-placeholder='시/분' required aria-required='true'/>
+                                {/* <input type="time" time-placeholder='시/분' min='09:00' max='17:00' step='0' required aria-required='true' /> */}
+                                {/* <label for='test'>시간 테스트</label> */}
+                                <select name='time'>
+                                    <option value='10'>10:00</option>
+                                    <option value='11'>11:00</option>
+                                    <option value='12'>12:00</option>
+                                    <option value='13'>13:00</option>
+                                    <option value='14'>14:00</option>
+                                    <option value='15'>15:00</option>
+                                    <option value='16'>16:00</option>
+                                    <option value='17'>17:00</option>
+                                </select>
                             </div>
+
                         </div>
                     </div>
                 </form>
