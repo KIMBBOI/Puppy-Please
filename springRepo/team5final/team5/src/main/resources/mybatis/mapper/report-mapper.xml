@@ -7,20 +7,23 @@
 	<!--게시글 목록 조회 -->
 	<select id="list" resultType="com.kh.app.report.vo.ReportVo">
 		SELECT
-			REPORT_NO
-			,MEMBER_NO
-			,IMAGE_NO
-			,TITLE
-			,CONTENT
-			,ENROLL_DATE
-			,MODIFY_DATE
-			,DEL_YN
+		    P.REPORT_NO
+		    ,P.MEMBER_NO
+		    ,P.IMAGE_NO
+		    ,P.TITLE
+		    ,P.CONTENT
+		    ,P.ENROLL_DATE
+		    ,P.MODIFY_DATE
+		    ,P.DEL_YN
+		    ,I.IMAGE_PATH
 		FROM 
-			REPORT_BULLETIN_BOARD
+		    REPORT_BULLETIN_BOARD P
+		    JOIN IMAGE I
+		    ON I.IMAGE_NO = P.IMAGE_NO
 		WHERE 
-			DEL_YN = 'N'
+		    DEL_YN = 'N'
 		ORDER BY 
-			REPORT_NO DESC
+		    REPORT_NO DESC
 	</select>
 	
 	<!--게시글 상세 조회 -->

@@ -13,6 +13,7 @@ public class ReportDao {
 	
 	// 게시글 목록 조회
 	public List<ReportVo> list(SqlSessionTemplate sst) {
+		System.out.println("에러확인 dao : " + sst.selectList("ReportMapper.list"));
 		return sst.selectList("ReportMapper.list");
 	}
 
