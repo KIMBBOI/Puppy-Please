@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import KakaoLogin from './KakaoLogin';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { useAuth } from '../PuppleContext'
 
 const StyledMemberLoginDiv = styled.div`
   // 여기에 스타일을 추가하세요
@@ -12,6 +13,9 @@ const StyledMemberLoginDiv = styled.div`
 const MemberLogin = () => {
   const navigate = useNavigate();
   
+
+  const {login} = useAuth();
+
 
   const jsonStr = sessionStorage.getItem("loginMemberVo");
   const sessionLoginMemberVo = JSON.parse(jsonStr);
@@ -46,12 +50,12 @@ const MemberLogin = () => {
       if(data.msg === "login success"){
         alert("로그인 성공!");
 
-        sessionStorage.setItem("loginMemberVo", JSON.stringify(data.loginMemberVo));
+        sessionStorage.setItem("user", JSON.stringify(data.loginMemberVo));
         
-        console.log("getItem 결과:" ,sessionStorage.getItem("loginMemberVo"));
+        console.log("getItem 결과:" ,sessionStorage.getItem("user"));
         
         setLoginMemberVo(data.loginMemberVo);
-
+        login(data.loginMemberVo);
         console.log(data.loginMemberVo);
         console.log(loginMemberVo);
         console.log("sessionLoginMemberVo : " + loginMemberVo)
