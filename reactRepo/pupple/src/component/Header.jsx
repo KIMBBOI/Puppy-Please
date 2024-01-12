@@ -4,6 +4,7 @@ import projectlogo from './img/projectlogo.png'
 
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useAuth } from './PuppleContext';
 
 const StyledHeaderDiv = styled.div`
     width: 100%;
@@ -29,7 +30,7 @@ const StyledHeaderDiv = styled.div`
         display: flex;
         justify-content: center;
     }
-
+    
 `;
     const StyledMemberDiv = styled.div`
       width: 100%;
@@ -38,6 +39,7 @@ const StyledHeaderDiv = styled.div`
 
 const Header = () => {
     
+    const {user, logout} = useAuth();
     
     const [loginMemberVo, setLoginMemberVo] = useState(null);
     useEffect(() => {
@@ -55,6 +57,11 @@ const Header = () => {
     const handleClickMypage = () => {
         navigate("/member/mypage");
     }
+    const handleLogout = () => {
+        sessionStorage.removeItem("user");
+        logout();
+        navigate("/");
+    }
     console.log(loginMemberVo);
     return (
         
@@ -62,11 +69,12 @@ const Header = () => {
             <div className='logo' onClick={ () => {navigate("/")} }></div>
             <div className='logoArea' onClick={ () => {navigate("/")} }></div>
             {
-                    loginMemberVo
+                    user
                 ?
                 <div>
-                    <h3>{loginMemberVo.nick}님 환영합니다.</h3>
+                    <h3>{user.nick}님 환영합니다.</h3>
                     <div onClick={handleClickMypage}>마이페이지</div>
+                    <div onClick={handleLogout}>로그아웃</div>
                 </div>
                 :
                 <StyledMemberDiv>

@@ -1,25 +1,64 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+
 const StyledJoinDiv = styled.div`
-    width: 100%;
-    height: 100%;
-    & > form{
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        border: 1px dashed black;
-        & > table{
-            width: 100%;
-            height: 100%;
-            table-layout: fixed;
-        }
-    }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f1f1f1; // 배경색
+`;
+
+const Form = styled.form`
+  background: white;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+`;
+
+const Table = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+`;
+
+const InputRow = styled.tr`
+  & > td {
+    padding: 10px;
+  }
+`;
+
+const Input = styled.input`
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px; // 필드 하단 여백
+  border: 1px solid #ddd;
+  border-radius: 5px;
+`;
+
+const SubmitButton = styled.input`
+  width: 100%;
+  padding: 10px 0;
+  border: none;
+  border-radius: 5px;
+  background-color: #C8ADFF;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #A080FF;
+  }
+`;
+const ErrorMsg = styled.span`
+  color: red;
+  display: block; // or inline-block, depending on preference
+  margin-top: 5px;
 `;
 
 
 const MemberJoin = () => {
-
+  
     const navigate = useNavigate();
 
     let [isFetching, setIsFetching] = useState(false);
@@ -85,67 +124,62 @@ const MemberJoin = () => {
         ;
     };
 
-    const handleComparePwd = (event) => {
-        // Reset the password match error state when the user types in the confirmation field
-        setPasswordMatchError(false);
-      };
-    return (
-        <StyledJoinDiv>
-            <form onSubmit={ handleJoinSubmit }>
-                <table>
-                    <tbody>
-                        <tr>
-                            <td>아이디</td>
-                            <td><input type="text" name='id' onChange={ handleInputChange }/></td>
-                        </tr>
-                        <tr>
+    
+      return (
+   
+            <StyledJoinDiv>
+                <Form onSubmit={handleJoinSubmit}>
+                    <Table>
+                        <tbody>
+                            <InputRow>
+                                <td>아이디</td>
+                                <td><Input type="text" name='id' value={vo.id} onChange={handleInputChange} /></td>
+                        </InputRow>
+                        <InputRow>
                             <td>비밀번호</td>
-                            <td><input type="password" name='pwd' onChange={ handleInputChange } /></td>
-                        </tr>
-                        <tr>
-                        <td>비밀번호 확인</td>
-                        <td>
-                            <input
-                            type="password"
-                            name="pwd2"
-                            onChange={handleInputChange}
-                            onBlur={handleComparePwd} // Check password match on blur
-                            />
-                        </td>
-                        </tr>
-                        {passwordMatchError && (
-                            <span style={{ color: 'red', marginLeft: '5px' }}>
-                                비밀번호가 일치하지 않습니다.
-                            </span>
-                        )}
-                        <tr>
+                            <td><Input type="password" name='pwd' value={vo.pwd} onChange={handleInputChange} /></td>
+                        </InputRow>
+                        <InputRow>
+                            <td>비밀번호 확인</td>
+                            <td>
+                                <Input
+                                    type="password"
+                                    name="pwd2"
+                                    value={vo.pwd2}
+                                    onChange={handleInputChange}
+                                />
+                                {passwordMatchError && <ErrorMsg>비밀번호가 일치하지 않습니다.</ErrorMsg>}
+                            </td>
+                        </InputRow>
+                        <InputRow>
                             <td>닉네임</td>
-                            <td><input type="text" name='nick' onChange={ handleInputChange } /></td>
-                        </tr>
-                        <tr>
+                            <td><Input type="text" name='nick' value={vo.nick} onChange={handleInputChange} /></td>
+                        </InputRow>
+                        <InputRow>
                             <td>이름</td>
-                            <td><input type="text" name='name' onChange={ handleInputChange } /></td>
-                        </tr>
-                        <tr>
+                            <td><Input type="text" name='name' value={vo.name} onChange={handleInputChange} /></td>
+                        </InputRow>
+                        <InputRow>
                             <td>전화번호</td>
-                            <td><input type="text" name='phoneNumber' onChange={ handleInputChange } /></td>
-                        </tr>
-                        <tr>
+                            <td><Input type="text" name='phoneNumber' value={vo.phoneNumber} onChange={handleInputChange} /></td>
+                        </InputRow>
+                        <InputRow>
                             <td>이메일</td>
-                            <td><input type="email" name='email' onChange={ handleInputChange } /></td>
-                        </tr>
-                        <tr>
+                            <td><Input type="email" name='email' value={vo.email} onChange={handleInputChange} /></td>
+                        </InputRow>
+                        <InputRow>
                             <td>생년월일</td>
-                            <td><input type="text" name='birthday' onChange={ handleInputChange } /></td>
-                        </tr>
-                        <tr>
-                            <td><input type="submit" value='회원가입' /></td>
-                        </tr>
+                            <td><Input type="text" name='birthday' value={vo.birthday} onChange={handleInputChange} /></td>
+                        </InputRow>
+                        <InputRow>
+                            <td colSpan="2"><SubmitButton type="submit" value="회원가입" /></td>
+                        </InputRow>
                     </tbody>
-                </table>
-            </form>
+                </Table>
+            </Form>
         </StyledJoinDiv>
     );
-};
+    };
+    
 
 export default MemberJoin;
