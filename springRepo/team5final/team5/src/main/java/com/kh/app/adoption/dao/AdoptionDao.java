@@ -12,6 +12,7 @@ public class AdoptionDao {
 
 	// 입양 게시글 작성
 	public int insert(SqlSessionTemplate sst, AdoptionVo vo) {
+		System.out.println("에러확인 dao : " + sst.selectList("AdoptionMapper.list"));
 		return sst.insert("AdoptionMapper.insert", vo);
 	}
 

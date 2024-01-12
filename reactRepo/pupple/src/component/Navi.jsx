@@ -58,7 +58,11 @@ const Navi = () => {
                 </StyledSubMenu>
             </StyledMenuItem>
             <StyledMenuItem onClick={toggleNewsAdoption}>
-                <AdoptionList />
+                <div><Link to="board/adoption/list">입양하기</Link></div>
+                <StyledSubMenu isopen={isNewsAdoptionOpen}>
+                    <div><Link to="board/adoption/list">입양신청</Link></div>
+                    <div><Link to="board/adoptionOk/list">입양완료</Link></div>
+                </StyledSubMenu>
             </StyledMenuItem>
             <StyledMenuItem>
                 <div><Link to="/board/report/list">제보</Link></div>

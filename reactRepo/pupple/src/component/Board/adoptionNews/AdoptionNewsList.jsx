@@ -36,7 +36,7 @@ const AdoptionNewsList = () => {
                 } )
             }
             <button onClick={ () => {
-                navigate("/Board/adoptionNews/write");
+                navigate("/board/adoptionNews/write");
             } }>작성하기</button>
         </StyledAdoptionNewsListDiv>
     );
