@@ -1,10 +1,9 @@
-package com.kh.app.adoption.controller;
+package com.kh.app.adoptionOk.controller;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,38 +12,40 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kh.app.adoption.service.AdoptionService;
-import com.kh.app.adoption.vo.AdoptionVo;
+import com.kh.app.adoptionOk.AdoptionOkService;
+import com.kh.app.adoptionOk.vo.AdoptionOkVo;
+
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("api/adoption")
+@RequestMapping("adoptionOk")
 @RequiredArgsConstructor
-@CrossOrigin("*")
-public class AdoptionApiController {
-
-	private final AdoptionService service;
+public class AdoptionOkApiController {
 	
-	// 입양신청 목록 조회
+	private final AdoptionOkService service;
+	
+	// 입양완료 목록 조회
 	@GetMapping("list")
 	public Map<String, Object> list() {
 		System.out.println(service.list());
-		List<AdoptionVo> voList = service.list();
+		List<AdoptionOkVo> voList = service.list();
 		Map<String, Object> map = new HashMap<>();
 		map.put("msg", "good");
 		map.put("voList", voList);
 		return map;
 	}
 	
-	// 입양신청 상세 조회
+	
+	// 입양완료 상세 조회
 	@GetMapping
-	public AdoptionVo detail(@RequestBody AdoptionVo vo) {
+	public AdoptionOkVo detail(@RequestBody AdoptionOkVo vo) {
 		return service.detail(vo);
 	}
 	
-	// 입양신청 작성
+	
+	// 입양완료 작성
 	@PostMapping
-	public Map<String, String> write(@RequestBody AdoptionVo vo) {
+	public Map<String, String> write(@RequestBody AdoptionOkVo vo) {
 		
 		Map<String, String> map = new HashMap<String, String>();
 		int result = service.insert(vo);
@@ -60,9 +61,10 @@ public class AdoptionApiController {
 		return map;
 	}
 	
-	// 입양신청 수정
+	
+	// 입양완료 수정
 	@PutMapping
-	public Map<String, String> edit(@RequestBody AdoptionVo vo) {
+	public Map<String, String> edit(@RequestBody AdoptionOkVo vo) {
 		
 		Map<String, String> map = new HashMap<String, String>();
 		int result = service.edit(vo);
@@ -78,9 +80,10 @@ public class AdoptionApiController {
 		return map;
 	}
 	
-	// 입양신청 삭제
+	
+	// 입양완료 삭제
 	@DeleteMapping
-	public Map<String, String> delete(@RequestBody AdoptionVo vo) {
+	public Map<String, String> delete(@RequestBody AdoptionOkVo vo) {
 		
 		Map<String, String> map = new HashMap<String, String>();
 		int result = service.delete(vo);
@@ -95,5 +98,5 @@ public class AdoptionApiController {
 		
 		return map;
 	}
-	
+
 }
