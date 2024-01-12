@@ -57,22 +57,22 @@ const ReportList = () => {
 
     return (
         <StyledReportListDiv>
-                {
-                    arr.map( (vo) => {
-                        console.log('a : ' + vo.title);
-                        console.log('b : ' + vo.imagePath);
-                        return <ReportListItem key={vo.reportNo} a={vo.title} b={vo.imagePath} />;
-                        // 2. map 함수를 이용해서 각각의 객체로 새로운 배열(voList 가 아닌 컴포넌트로 구성됨)로 만들어줌
-                        // 3. 배열만큼 각각의 컴포넌트(GalleryListItem)를 만들면서 데이터를 전달
-                        //   => 4. GalleryListItem.jsx
+            {
+                arr.map( (vo) => {
+                    console.log('a : ' + vo.title);
+                    console.log('b : ' + vo.imagePath);
+                    return <ReportListItem key={vo.reportNo} a={vo.title} b={vo.imagePath} />;
+                    // 2. map 함수를 이용해서 각각의 객체로 새로운 배열(voList 가 아닌 컴포넌트로 구성됨)로 만들어줌
+                    // 3. 배열만큼 각각의 컴포넌트(GalleryListItem)를 만들면서 데이터를 전달
+                    //   => 4. GalleryListItem.jsx
 
-                        // 10. 브라우저 오류 해결 - GalleryList.jsx:32 Warning: Each child in a list should have a unique "key" prop. 
-                        //   ㄴ key 값을 전달하면서 넘겨주면 됨. 
-                    } )
-                }
-                <button onClick={ () => {
-                    navigate("/report/write");
-                } }>작성하기</button>
+                    // 10. 브라우저 오류 해결 - GalleryList.jsx:32 Warning: Each child in a list should have a unique "key" prop. 
+                    //   ㄴ key 값을 전달하면서 넘겨주면 됨. 
+                } )
+            }
+            <button onClick={ () => {
+                navigate("/report/write");
+            } }>작성하기</button>
         </StyledReportListDiv>
     );
 };
