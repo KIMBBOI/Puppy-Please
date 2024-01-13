@@ -59,8 +59,6 @@ const ReportList = () => {
         <StyledReportListDiv>
             {
                 arr.map( (vo) => {
-                    console.log('a : ' + vo.title);
-                    console.log('b : ' + vo.imagePath);
                     return <ReportListItem key={vo.reportNo} a={vo.title} b={vo.imagePath} />;
                     // 2. map 함수를 이용해서 각각의 객체로 새로운 배열(voList 가 아닌 컴포넌트로 구성됨)로 만들어줌
                     // 3. 배열만큼 각각의 컴포넌트(GalleryListItem)를 만들면서 데이터를 전달

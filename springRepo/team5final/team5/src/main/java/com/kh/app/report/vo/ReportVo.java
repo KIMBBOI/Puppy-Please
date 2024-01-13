@@ -13,7 +13,7 @@ public class ReportVo {
 	private String enrollDate;
 	private String modifyDate;
 	private String delYn;
-		private String writerNick;
-		private String imagePath;
+	private String writerNick;
+	private String imagePath;
 	
 }

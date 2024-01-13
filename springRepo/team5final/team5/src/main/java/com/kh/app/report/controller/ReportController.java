@@ -29,7 +29,7 @@ public class ReportController {
 	// 제보 목록 조회
 	@GetMapping("list")
 	public Map<String, Object> list() {
-		System.out.println(service.list());
+		System.out.println("제보 목록 조회 : " + service.list());
 		List<ReportVo> voList = service.list();
 		Map<String, Object> map = new HashMap<>();
 		map.put("msg", "good");
@@ -39,9 +39,24 @@ public class ReportController {
 	
 	
 	// 제보 상세 조회
-	@GetMapping
-	public ReportVo detail(@RequestBody ReportVo vo) {
-		return service.detail(vo);
+	@PostMapping("detail")
+	public Map<String, Object> detail(@RequestBody ReportVo vo) {
+		
+		System.out.println("제보 상세 조회 vo : " + vo);
+		
+		ReportVo dbVo = service.detail(vo);
+		
+		System.out.println("제보 상세 조회 dbvo : " + dbVo );
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("dbVo", dbVo);
+		if (dbVo == null) {
+			map.put("msg", "fail");
+		} else {
+			map.put("msg", "success");
+		}
+		return map;
 	}
 	
 	
