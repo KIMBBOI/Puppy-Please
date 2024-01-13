@@ -49,29 +49,29 @@
   		AND DEL_YN = 'N'
   	</select>
   	<update id="edit">
-  	UPDATE MEMBER 
-  		SET 
-  		PWD = #{pwd}
-  		<trim prefixOverrides=",">
-		<if test="pwd != null and pwd !=''">
-  		, NICK = #{nick}
-		</if>
-		<if test="nick != null and nick !=''">
-  		, NAME = #{name}
-		</if>
-		<if test="name != null and name !=''">
-  		, PHONE_NUMBER = #{phoneNumber}
-		</if>
-		<if test="phoneNumber != null and phoneNumber !=''">
-  		, EMAIL = #{email}
-		</if>
-		<if test="email != null and email !=''">
-  		, BIRTHDAY = #{birthday}
-		</if>
-  		</trim>
-  		 WHERE NO = #{memberNo} 
-  		 AND DEL_YN = 'N';
-  	</update>
+		  UPDATE MEMBER 
+		  SET 
+		  <if test="pwd != null">
+		    PWD = #{pwd},
+		  </if>
+		  <if test="nick != null">
+		    NICK = #{nick},
+		  </if>
+		  <if test="name != null">
+		    NAME = #{name},
+		  </if>
+		  <if test="phoneNumber != null">
+		    PHONE_NUMBER = #{phoneNumber},
+		  </if>
+		  <if test="email != null">
+		    EMAIL = #{email},
+		  </if>
+		  <if test="birthday != null">
+		    BIRTHDAY = #{birthday},
+		  </if>
+		  WHERE MEMBER_NO = #{memberNo} 
+		  AND DEL_YN = 'N'
+	</update>
   	
   	<select id="searchId" resultType="MemberVo">
   		SELECT ID
