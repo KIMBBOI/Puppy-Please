@@ -123,7 +123,14 @@ const MemberJoin = () => {
         })
         ;
     };
-
+    const handleComparePwd = () => {
+        if (vo.pwd !== vo.pwd2) {
+          setPasswordMatchError(true);
+        } else {
+          setPasswordMatchError(false);
+        }
+      };
+      
     
       return (
    
@@ -142,13 +149,14 @@ const MemberJoin = () => {
                         <InputRow>
                             <td>비밀번호 확인</td>
                             <td>
-                                <Input
-                                    type="password"
-                                    name="pwd2"
-                                    value={vo.pwd2}
-                                    onChange={handleInputChange}
-                                />
-                                {passwordMatchError && <ErrorMsg>비밀번호가 일치하지 않습니다.</ErrorMsg>}
+                            <Input
+                            type="password"
+                            name="pwd2"
+                            value={vo.pwd2}
+                            onChange={handleInputChange}
+                            onBlur={handleComparePwd} // 여기에 onBlur 이벤트 핸들러 추가
+                            />
+                            {passwordMatchError && <ErrorMsg>비밀번호가 일치하지 않습니다.</ErrorMsg>}
                             </td>
                         </InputRow>
                         <InputRow>

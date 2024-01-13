@@ -12,18 +12,18 @@ const AuthProvider = ({children}) => {
 
   // 로그인 시 세션 스토리지에 사용자 정보 저장
   const login = (userInfo) => {
-    sessionStorage.setItem('user', JSON.stringify(userInfo));
+    sessionStorage.setItem('loginMemberVo', JSON.stringify(userInfo));
     setUser(userInfo);
   };
 
   // 로그아웃 시 세션 스토리지에서 사용자 정보 제거
   const logout = () => {
-    sessionStorage.removeItem('user');
+    sessionStorage.removeItem('loginMemberVo');
     setUser(null);
   };
 
   return (
-    <AuthProvider.Provider value={{ user, login, logout }}>
+    <AuthProvider.Provider value={{ loginMemberVo, login, logout }}>
       {children}
     </AuthProvider.Provider>
   );

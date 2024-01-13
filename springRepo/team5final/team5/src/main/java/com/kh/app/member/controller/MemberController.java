@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -66,15 +65,7 @@ public class MemberController {
 		session.invalidate();
 		return "redirect:/home";
 	}
-	//회원 정보 수정
-	@PutMapping
-	public String edit(MemberVo vo) throws Exception{
-		int result = service.edit(vo);
-		if(result != 1) {
-			throw new Exception("회원정보 수정 실패");
-		}
-		return "";
-	}
+	
 	//회원 탈퇴
 	@DeleteMapping
 	public String quit(MemberVo vo, HttpSession session) throws Exception{

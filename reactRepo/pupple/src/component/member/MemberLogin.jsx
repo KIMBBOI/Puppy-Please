@@ -50,9 +50,9 @@ const MemberLogin = () => {
       if(data.msg === "login success"){
         alert("로그인 성공!");
 
-        sessionStorage.setItem("user", JSON.stringify(data.loginMemberVo));
+        sessionStorage.setItem("loginMemberVo", JSON.stringify(data.loginMemberVo));
         
-        console.log("getItem 결과:" ,sessionStorage.getItem("user"));
+        console.log("getItem 결과:" ,sessionStorage.getItem("loginMemberVo"));
         
         setLoginMemberVo(data.loginMemberVo);
         login(data.loginMemberVo);

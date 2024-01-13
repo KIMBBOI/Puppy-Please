@@ -4,19 +4,19 @@ const puppleContext = createContext();
 
 export const AuthProvider = ({children}) => {
     const initializeUser = () => {
-        const user = JSON.parse(sessionStorage.getItem("loginMemberVo"));
-        return user || null;
+        const loginMemberVo = JSON.parse(sessionStorage.getItem("loginMemberVo"));
+        return loginMemberVo || null;
     };
 
     const [user, setUser] = useState(initializeUser);
 
     const login = (userInfo) => {
-        sessionStorage.setItem("user", JSON.stringify(userInfo));
+        sessionStorage.setItem("loginMemberVo", JSON.stringify(userInfo));
         setUser(userInfo);
     };
 
     const logout = () => {
-        sessionStorage.removeItem("user");
+        sessionStorage.removeItem("loginMemberVo");
         setUser(null);
 
     };
