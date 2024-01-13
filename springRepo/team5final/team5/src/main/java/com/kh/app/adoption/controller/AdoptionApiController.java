@@ -1,5 +1,6 @@
 package com.kh.app.adoption.controller;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.app.adoption.service.AdoptionService;
 import com.kh.app.adoption.vo.AdoptionVo;
@@ -44,22 +46,45 @@ public class AdoptionApiController {
 	
 	// 입양신청 작성
 	@PostMapping
-	public Map<String, String> write(@RequestBody AdoptionVo vo) {
+	public Map<String, String> write(AdoptionVo vo, MultipartFile f) throws Exception {
+		
+//		System.out.println("vo : " + vo);
+		System.out.println("f : " + f.getOriginalFilename());
+		
+		String imagePath = saveFile(f);
+		vo.setImageNo(imagePath);
+		
+		int result = service.write(vo);
 		
 		Map<String, String> map = new HashMap<String, String>();
-		int result = service.insert(vo);
-		
-		if (result == 1) {
-			map.put("msg", "success");
-				System.out.println("게시글 작성 성공 !");
-		} else {
-			map.put("msg", "fail");
-				System.out.println("게시글 작성 실패 ...");
+		map.put("msg", "good");
+		System.out.println("게시글 작성 성공 !");
+		if (result != 1) {
+			map.put("msg", "bad");
+			System.out.println("게시글 작성 실패 ...");
 		}
-		
 		return map;
 	}
 	
+	/**
+	 * 파일을 서버에 저장하고, 파일 전체 경로를 리턴함
+	 * @param 파일객경로
+	 * @param 파일객체
+	 * @return 실제파일저장경로(파일경로 + 파일명)
+	 */
+	private String saveFile(MultipartFile f) throws Exception {
+		String path = "D:\\pupple\\springRepo\\team5final\\team5\\src\\main\\webapp\\resources\\upload\\img";
+		String originName = f.getOriginalFilename();
+		
+		// 원래는 "path + changeName(랜덤값) + 확장자"로 해야함
+		File target = new File(path + originName);	 // 최상단폴더 + /resources/upload/gallery/img
+		
+		//파일 바이트 코드 읽어서 타겟에 저장
+		f.transferTo(target);
+		
+		return path + originName;
+}
+
 	// 입양신청 수정
 	@PutMapping
 	public Map<String, String> edit(@RequestBody AdoptionVo vo) {

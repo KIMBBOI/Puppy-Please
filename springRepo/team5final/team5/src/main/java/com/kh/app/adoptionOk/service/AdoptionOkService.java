@@ -1,4 +1,4 @@
-package com.kh.app.adoptionOk;
+package com.kh.app.adoptionOk.service;
 
 import java.util.List;
 
