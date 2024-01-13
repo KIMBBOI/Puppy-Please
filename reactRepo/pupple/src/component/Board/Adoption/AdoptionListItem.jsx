@@ -10,17 +10,21 @@ const StyledItemDiv = styled.div`
     align-items: center;
 `;
 
-const AdoptionListItem = () => {
+const AdoptionListItem = ( {a, b, c, d, e, f, g} ) => {
     return (
         <StyledItemDiv>
             <img 
-                // src={c}
+                src={a}
                 alt='사진'
                 width='300px'
                 height='200px'
             />
-            {/* <span>{a}</span> */}
-            {/* <span>{b}</span> */}
+            <span>{b}</span>
+            <span>{c}</span>
+            <span>{d}</span>
+            <span>{e}</span>
+            <span>{f}</span>
+            <span>{g}</span>
         </StyledItemDiv>
     );
 };

@@ -15,7 +15,7 @@
         	, MODIFY_DATE
         	, DEL_YN
         FROM 
-        	ADOPTION_OK
+        	ADOPTION_BOARD
         WHERE 
         	DEL_YN = 'N'
         ORDER BY 
@@ -25,19 +25,37 @@
     <!-- 입양 신청 상세 조회 -->
     <select id="detail" resultType="com.kh.app.adoption.vo.AdoptionVo">
         SELECT ADOPTION_NO, IMAGE_NO, RESCUE_DOG_NO, ADMIN_NO, ENROLL_DATE, MODIFY_DATE, DEL_YN
-        FROM ADOPTION_OK
+        FROM ADOPTION_BOARD
         WHERE ADOPTION_NO = #{adoptionNo}
     </select>
 
     <!-- 입양 신청 등록 -->
-    <insert id="insert" parameterType="com.kh.app.adoption.vo.AdoptionVo">
-        INSERT INTO ADOPTION_OK (ADOPTION_NO, IMAGE_NO, RESCUE_DOG_NO, ADMIN_NO, ENROLL_DATE, MODIFY_DATE, DEL_YN)
-        VALUES (#{adoptionNo}, #{imageNo}, #{rescueDogNo}, #{adminNo}, #{enrollDate}, #{modifyDate}, #{delYn})
+    <insert id="write" parameterType="com.kh.app.adoption.vo.AdoptionVo">
+        INSERT INTO ADOPTION_BOARD 
+        (
+        	ADOPTION_NO
+        	, IMAGE_NO
+        	, RESCUE_DOG_NO
+        	, ADMIN_NO
+        	, ENROLL_DATE
+        	, MODIFY_DATE
+        	, DEL_YN
+        )
+        VALUES 
+        (
+        	SEQ_ADOPTION_NO.NEXTVAL
+        	, #{imageNo}
+        	, #{rescueDogNo}
+        	, #{adminNo}
+        	, #{enrollDate}
+        	, #{modifyDate}
+        	, #{delYn}
+        )
     </insert>
 
     <!-- 입양 신청 수정 -->
     <update id="edit" parameterType="com.kh.app.adoption.vo.AdoptionVo">
-        UPDATE ADOPTION_OK
+        UPDATE ADOPTION_BOARD
         SET IMAGE_NO = #{imageNo},
             RESCUE_DOG_NO = #{rescueDogNo},
             ADMIN_NO = #{adminNo},
@@ -49,7 +67,7 @@
 
     <!-- 입양 신청 삭제 -->
     <update id="delete">
-        UPDATE ADOPTION_OK
+        UPDATE ADOPTION_BOARD
         SET DEL_YN = 'Y'
         WHERE ADOPTION_NO = #{adoptionNo}
     </update>

@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class AdoptionVo {
 	
-	private String no;
+	private String adoptionNo;
 	private String imageNo;
 	private String rescueDogNo;
 	private String adminNo;
