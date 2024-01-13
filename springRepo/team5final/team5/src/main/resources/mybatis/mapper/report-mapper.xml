@@ -38,12 +38,16 @@
 		    ,P.MODIFY_DATE
 		    ,P.DEL_YN
 		    ,I.IMAGE_PATH
+		    ,M.NICK AS WRITER_NICK
 		FROM 
 		    REPORT_BULLETIN_BOARD P
 		    JOIN IMAGE I
-		    ON I.IMAGE_NO = P.IMAGE_NO
+		        ON I.IMAGE_NO = P.IMAGE_NO
+		    JOIN MEMBER M
+		        ON P.MEMBER_NO = M.MEMBER_NO
 		WHERE 
-			DEL_YN = 'N'
+		    P.DEL_YN = 'N'
+		    AND P.REPORT_NO = #{reportNo}
 	</select>
 	
 	<!--게시글 작성 -->
