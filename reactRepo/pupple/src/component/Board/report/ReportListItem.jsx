@@ -15,9 +15,13 @@ const StyledWrapDiv = styled.div`
         margin: 0 auto;
         /* display: block; */
     }
+
+    .hidden {
+        display: none;
+    }
 `;
 
-const ReportListItem = ( {a, b} ) => {
+const ReportListItem = ( {a, b, c} ) => {
         // 4. 전달한 데이터를 받아줌
         
     return (
@@ -30,6 +34,7 @@ const ReportListItem = ( {a, b} ) => {
                 //   ㄴ패치함수는 비동기적으로 작동하기 때문에.. => useState();
                 //   => 7. GalleryListItem.jsx
             />
+            <div className='hidden' name='reportNo' >{c}</div>
             <span>{a}</span>
         </StyledWrapDiv>
     );

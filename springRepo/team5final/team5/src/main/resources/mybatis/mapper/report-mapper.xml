@@ -6,24 +6,40 @@
 
 	<!--게시글 목록 조회 -->
 	<select id="list" resultType="com.kh.app.report.vo.ReportVo">
-		SELECT
-		    P.REPORT_NO
-		    ,P.MEMBER_NO
-		    ,P.IMAGE_NO
-		    ,P.TITLE
-		    ,P.CONTENT
-		    ,P.ENROLL_DATE
-		    ,P.MODIFY_DATE
-		    ,P.DEL_YN
-		    ,I.IMAGE_PATH
+		SELECT *
+		FROM (
+		    SELECT ROWNUM RNUM, T.*
+		    FROM (
+		        SELECT
+		            R.REPORT_NO
+		            ,R.MEMBER_NO
+		            ,R.IMAGE_NO
+		            ,R.TITLE
+		            ,R.CONTENT
+		            ,R.ENROLL_DATE
+		            ,R.MODIFY_DATE
+		            ,R.DEL_YN
+		            ,I.IMAGE_PATH
+		            ,M.NICK AS WRITER_NICK 
+		        FROM
+		            REPORT_BULLETIN_BOARD R
+		            JOIN IMAGE I ON I.IMAGE_NO = R.IMAGE_NO
+		            JOIN MEMBER M ON R.MEMBER_NO = M.MEMBER_NO
+		        WHERE
+		            R.DEL_YN = 'N'
+		        ORDER BY
+		            REPORT_NO DESC
+		    ) T
+		)
+		WHERE RNUM BETWEEN #{startRow} AND #{lastRow}
+	</select>
+	<select id='listCount' resultType="Integer">
+		SELECT 
+			COUNT(*) as cnt 
 		FROM 
-		    REPORT_BULLETIN_BOARD P
-		    JOIN IMAGE I
-		    ON I.IMAGE_NO = P.IMAGE_NO
+			REPORT_BULLETIN_BOARD 
 		WHERE 
-		    DEL_YN = 'N'
-		ORDER BY 
-		    REPORT_NO DESC
+			DEL_YN = 'N'
 	</select>
 	
 	<!--게시글 상세 조회 -->
