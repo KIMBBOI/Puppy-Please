@@ -14,10 +14,10 @@ const StyledAdoptionNewsListDiv = styled.div`
 
 const AdoptionNewsList = () => {
 
-    const [arr, setArr] = useState([]);
+    let [arr, setArr] = useState([]);
 
     useEffect( () => {
-        fetch("http://127.0.0.1:8080/app/api/adoptionNews/list")
+        fetch("http://127.0.0.1:8080/app/adoptionNews/list")
         .then( resp => resp.json() )
         .then( data => {
             console.log(data);

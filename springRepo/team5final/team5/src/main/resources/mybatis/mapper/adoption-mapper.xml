@@ -6,24 +6,36 @@
 
     <!-- 입양 신청 리스트 조회 -->
     <select id="list" resultType="com.kh.app.adoption.vo.AdoptionVo">
-        SELECT 
-		    A.ADOPTION_BOARD_NO
-		    , A.IMAGE_NO
-		    , A.RESCUE_DOG_NO
-		    , A.ADMIN_NO
-		    , A.ENROLL_DATE
-		    , A.MODIFY_DATE
-		    , A.DEL_YN
-		    , I.IMAGE_PATH
+        SELECT
+		    A.ADOPTION_BOARD_NO,
+		    A.IMAGE_NO,
+		    A.RESCUE_DOG_NO,
+		    A.ADMIN_NO,
+		    A.ENROLL_DATE,
+		    A.MODIFY_DATE,
+		    A.DEL_YN,
+		    I.IMAGE_PATH,
+		    R.BREED,
+		    R.ADMISSION_DATE,
+		    R.QUIT_DATE,
+		    R.DOG_NAME,
+		    R.AGE,
+		    R.GENDER_MF,
+		    R.INOCULATION_OX,
+		    R.NEUTERING_OX,
+		    R.WEIGHT
 		FROM 
 		    ADOPTION_BOARD A
 		JOIN
 		    IMAGE I 
-		    	ON I.IMAGE_NO = A.IMAGE_NO
+		    ON I.IMAGE_NO = A.IMAGE_NO
+		JOIN
+		    RESCUE_DOG R
+		    ON R.RESCUE_DOG_NO = A.RESCUE_DOG_NO
 		WHERE 
-		    DEL_YN = 'N'
+		    A.DEL_YN = 'N'
 		ORDER BY 
-		    ADOPTION_BOARD_NO DESC
+		    A.ADOPTION_BOARD_NO DESC;
     </select>
 
     <!-- 입양 신청 상세 조회 -->
@@ -44,26 +56,25 @@
 
     <!-- 입양 신청 등록 -->
     <insert id="insert">
-    	INSERT INTO ADOPTION_BOARD 
-        (
-        	ADOPTION_BOARD_NO
-        	, IMAGE_NO
-        	, RESCUE_DOG_NO
-        	, ADMIN_NO
-        	, ENROLL_DATE
-        	, MODIFY_DATE
-        	, DEL_YN
-        )
-        VALUES 
-        (
-        	SEQ_ADOPTION_BOARD_NO.NEXTVAL
-        	, #{imageNo}
-        	, #{rescueDogNo}
-        	, #{adminNo}
-        	, #{enrollDate}
-        	, #{modifyDate}
-        	, #{delYn}
-        )
+    	INSERT INTO ADOPTION_BOARD
+		(
+		    ADOPTION_BOARD_NO,
+		    IMAGE_NO,
+		    RESCUE_DOG_NO,
+		    ADMIN_NO
+		)
+		SELECT
+		    SEQ_ADOPTION_BOARD_NO.NEXTVAL,
+		    I.IMAGE_NO,  
+		    RD.RESCUE_DOG_NO,  
+		    1
+		FROM
+		    RESCUE_DOG RD,
+		    IMAGE I
+		WHERE
+		    RD.RESCUE_DOG_NO = #{rescueDogNo}
+		AND
+		    I.IMAGE_PATH = #{imagePath}
     </insert>
     <!-- <insert id="write" parameterType="com.kh.app.adoption.vo.AdoptionVo">
         INSERT INTO ADOPTION_BOARD 

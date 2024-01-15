@@ -22,7 +22,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("adoptionOk")
 @RequiredArgsConstructor
 @CrossOrigin("*")
-public class AdoptionOkApiController {
+public class AdoptionOkController {
 	
 	private final AdoptionOkService service;
 	

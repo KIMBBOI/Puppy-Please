@@ -11,6 +11,9 @@ import com.kh.app.adoptionnews.vo.AdoptionNewsVo;
 public class AdoptionNewsDao {
 	
 	public int insert(SqlSessionTemplate sst, AdoptionNewsVo vo) {
+
+		System.out.println("vo: " + vo);
+		
 		return sst.insert("AdoptionNewsMapper.insert", vo);
 	}
 
@@ -21,7 +24,7 @@ public class AdoptionNewsDao {
 
 	// 입양 후 소식 목록
 	public List<AdoptionNewsVo> list(SqlSessionTemplate sst) {
-		System.out.println("에러확인 dao : " + sst.selectList("AdoptionNewsMapper.list"));
+//		System.out.println("에러확인 dao : " + sst.selectList("AdoptionNewsMapper.list"));
 		return sst.selectList("AdoptionNewsMapper.list");
 	}
 

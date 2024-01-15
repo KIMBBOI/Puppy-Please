@@ -14,18 +14,18 @@ import com.kh.app.adoptionnews.vo.AdoptionNewsVo;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("api/adoptionNews")
+@RequestMapping("adoptionNews")
 @RequiredArgsConstructor
 @CrossOrigin("*")
-public class AdoptionNewsApiController {
+public class AdoptionNewsController {
 	
 	private final AdoptionNewsService service;
 	
 	// 작성
 	@PostMapping
 	public Map<String, String> insert(AdoptionNewsVo vo, @RequestParam MultipartFile file) throws Exception {
-//		System.out.println("vo: " + vo);
-//		System.out.println("file: " + file.getOriginalFilename());
+		System.out.println("vo: " + vo);
+		System.out.println("file: " + file.getOriginalFilename());
 //		
 //		String imagePath = saveFile(file);
 //		vo.setImagePath(imagePath);
