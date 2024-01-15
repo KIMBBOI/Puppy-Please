@@ -13,13 +13,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.app.member.service.MemberService;
 import com.kh.app.member.vo.MemberVo;
 
 import lombok.RequiredArgsConstructor;
 
-@Controller
+@RestController
 @ResponseBody
 @RequestMapping("member")
 @RequiredArgsConstructor
@@ -49,7 +50,7 @@ public class MemberController {
 	@PostMapping("login")
 	public Map<String, Object> login(@RequestBody MemberVo vo)throws Exception {
 		MemberVo loginMemberVo = service.login(vo);
-		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("msg", "login success");
 		map.put("loginMemberVo", loginMemberVo);
 		if(loginMemberVo == null) {

@@ -6,27 +6,23 @@
 
 	<insert id="insert">
 		INSERT INTO NEWS_AFTER_ADOPTION
-		(
-		    NEWS_AFTER_ADOPTION_NO
-		    ,MEMBER_NO
-		    ,IMAGE_NO
-		    ,TITLE
-		    ,CONTENT
-		    ,ENROLL_DATE
-		    ,MODIFY_DATE
-		    ,DEL_YN
-		)
-		VALUES
-		(
-		    SEQ_NEWS_AFTER_ADOPTION_NO.NEXTVAL
-		    , #{memberNo}
-		    , #{imageNo}
-		    , #{title}
-		    , #{content}
-		    , #{enrollDate}
-		    , #{modifyDate}
-		    , #{delYn}
-		)
+        (
+            NEWS_AFTER_ADOPTION_NO,
+            MEMBER_NO,
+            IMAGE_NO,
+            TITLE,
+            CONTENT
+        )
+        SELECT
+            SEQ_NEWS_AFTER_ADOPTION_NO.NEXTVAL,
+            #{memberNo},
+            I.IMAGE_NO,
+            #{title},
+            #{content}
+        FROM
+            IMAGE I
+        WHERE
+            I.IMAGE_PATH = #{imagePath}
 	</insert>
 
 	<!-- <insert id="write">

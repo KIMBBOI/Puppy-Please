@@ -38,14 +38,18 @@
   	<select id = "login" resultType="MemberVo">
   		SELECT
   			MEMBER_NO
+  			, ID
+  			, PWD
   			, NAME
   			, NICK
   			, ENROLL_DATE
+  			, BIRTHDAY
+  			, PHONE_NUMBER
+  			, EMAIL
   			, PASS_YN
   			, SURVAY_RESULT
   		FROM MEMBER
   		WHERE ID = #{id}
-  		AND PWD = #{pwd}
   		AND DEL_YN = 'N'
   	</select>
   	<update id="edit">

@@ -10,7 +10,7 @@ const StyledItemDiv = styled.div`
     align-items: center;
 `;
 
-const AdoptionListItem = ( {a, b, c, d, e, f, g , h} ) => {
+const AdoptionListItem = ( {a, b, c, d, e, f, g } ) => {
     return (
         <StyledItemDiv>
             <img 
@@ -25,7 +25,6 @@ const AdoptionListItem = ( {a, b, c, d, e, f, g , h} ) => {
             <span>{e}</span>
             <span>{f}</span>
             <span>{g}</span>
-            <span>{h}</span>
             {/* <span>{i}</span> */}
         </StyledItemDiv>
     );

@@ -5,7 +5,7 @@ import LawList from './LawList';
 const LawMain = () => {
     return (
         <Routes>
-            <Route path='list' element={<LawList />} />
+            <Route path='/list' element={<LawList />} />
         </Routes>
     );
 };
