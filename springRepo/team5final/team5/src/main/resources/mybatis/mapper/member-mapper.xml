@@ -33,7 +33,7 @@
   		UPDATE MEMBER
   		SET
   			DEL_YN = 'Y'
-  			WHERE NO = #{memberNo}
+  			WHERE ID = #{id} 
   	</update>
   	<select id = "login" resultType="MemberVo">
   		SELECT

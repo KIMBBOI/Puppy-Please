@@ -67,19 +67,19 @@ public class MemberController {
 		return "redirect:/home";
 	}
 	
-	//회원 탈퇴
-	@DeleteMapping
-	public String quit(MemberVo vo, HttpSession session) throws Exception{
-		int result = service.quit(vo);
-		
-		if(result != 1) {
-			throw new Exception("회원탈퇴 실패");
-		}
-		session.removeAttribute("loginMember");
-		session.setAttribute("alertMsg", "회원탈퇴 완료");
-		
-		return "redirect:/home";
-	}
+//	//회원 탈퇴
+//	@DeleteMapping
+//	public String quit(MemberVo vo, HttpSession session) throws Exception{
+//		int result = service.quit(vo);
+//		
+//		if(result != 1) {
+//			throw new Exception("회원탈퇴 실패");
+//		}
+//		session.removeAttribute("loginMember");
+//		session.setAttribute("alertMsg", "회원탈퇴 완료");
+//		
+//		return "redirect:/home";
+//	}
 	//아이디 찾기
 	@PostMapping("searchId")
 	public Map<String, Object> searchId(@RequestBody MemberVo vo) throws Exception{

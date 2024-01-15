@@ -74,7 +74,7 @@ const requestBody = {
   memberNo: vo.memberNo
 };
 
-fetch('http://127.0.0.1:8080/app/mypage/memberInfoEdit', {
+fetch('http://127.0.0.1:8080/app/member/mypage/memberInfoEdit', {
   method: 'PUT',
   headers: {
     'Content-Type': 'application/json',
