@@ -8,7 +8,7 @@ const StyledAdoptionNewsListDiv = styled.div`
     height: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 2fr 2fr 1fr;
+    grid-template-rows: 1.5fr 1.5fr 1fr;
     place-items: center center;
 `;
 
@@ -18,8 +18,8 @@ const AdoptionNewsList = () => {
 
     useEffect( () => {
         fetch("http://127.0.0.1:8080/app/api/adoptionNews/list")
-        .then( (resp) => {return resp.json()} )
-        .then( (data) => {
+        .then( resp => resp.json() )
+        .then( data => {
             console.log(data);
             setArr(data.voList);
         } )
@@ -32,7 +32,7 @@ const AdoptionNewsList = () => {
         <StyledAdoptionNewsListDiv>
             {
                 arr.map( (vo) => {
-                    return <AdoptionNewsListItem a={vo.title} b={vo.content}  c={vo.imageDath} />
+                    return <AdoptionNewsListItem key={vo.newsAfterAdoptionNo} a={vo.title} b={vo.content}  c={vo.imagePath} />
                 } )
             }
             <button onClick={ () => {

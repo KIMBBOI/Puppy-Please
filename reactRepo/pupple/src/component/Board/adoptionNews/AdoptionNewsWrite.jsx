@@ -45,7 +45,7 @@ const AdoptionNewsWrite = ( { memberNo , imageNo } ) => {
       .then((data) => {
         if (data.msg === 'good') {
           alert('입양 후 소식 등록 완료하였습니다.');
-          navigate('/adoption/list');
+          navigate('/board/adoptionNews/list');
         } else {
           alert('입양 후 소식 등록 실패하였습니다.');
         }
@@ -56,7 +56,6 @@ const AdoptionNewsWrite = ( { memberNo , imageNo } ) => {
       });
   };
   
-
   return (
     <StyledAdoptionNewsWriteDiv>
       <form onSubmit={handleSubmit}>
