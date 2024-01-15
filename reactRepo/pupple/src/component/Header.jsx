@@ -55,7 +55,7 @@ const Header = () => {
         navigate("/member/login");
     };
     const handleClickMypage = () => {
-        navigate("/member/mypage");
+        navigate("/member/mypage/memberInfoEdit");
     }
     const handleLogout = () => {
         sessionStorage.removeItem("user");

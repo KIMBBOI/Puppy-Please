@@ -1,31 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StyledWrapDiv = styled.div`
+const StyeldDitailDiv = styled.div`
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    place-items: center center;
 
-    & > img {
+    img {
         width: 100%;
         height: auto;
         margin: 0 auto;
-        /* display: block; */
-    }
-
-    .hidden {
-        display: none;
     }
 `;
 
-const ReportListItem = ( {a, b, c} ) => {
-        // 4. 전달한 데이터를 받아줌
-        
+const ReportDetailItem = ( {a,b,c} ) => {
     return (
-        <StyledWrapDiv>
+        <StyeldDitailDiv>
+            <div>{a}</div>
             <img 
                 src={b}
                 alt='엑박 시 문구ㅋㅋ'
@@ -34,10 +27,9 @@ const ReportListItem = ( {a, b, c} ) => {
                 //   ㄴ패치함수는 비동기적으로 작동하기 때문에.. => useState();
                 //   => 7. GalleryListItem.jsx
             />
-            <div className='hidden' name='reportNo' >{c}</div>
-            <span>{a}</span>
-        </StyledWrapDiv>
+            <div>{c}</div>
+        </StyeldDitailDiv>
     );
 };
 
-export default ReportListItem;
+export default ReportDetailItem;

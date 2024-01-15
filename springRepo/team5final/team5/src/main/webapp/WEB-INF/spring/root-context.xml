@@ -25,6 +25,7 @@
       <property name="password" value="1234"/>
    </bean>
 -->
+
    
    <!-- commons-dbcp2 > dbcp -->
    <bean id="dbcpSource" class="org.apache.commons.dbcp2.BasicDataSource">
@@ -43,6 +44,7 @@
    
    <!-- spring jdbc > jdbcTemplate -->
    <!--
+
 <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
       <property name="dataSource" ref="dataSource"/>
    </bean>

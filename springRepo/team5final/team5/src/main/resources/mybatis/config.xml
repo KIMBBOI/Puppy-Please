@@ -5,13 +5,14 @@
   
 <configuration>
 
-  <settings>
-  	<setting name="mapUnderscoreToCamelCase" value="true"/>
-  	<setting name="jdbcTypeForNull" value="NULL"/>
-  </settings>
+ <settings>
+ 	<setting name="mapUnderscoreToCamelCase" value="true"/>
+ 	<setting name="jdbcTypeForNull" value="NULL"/>
+ </settings>
   
   <typeAliases>
   	<typeAlias type="com.kh.app.member.vo.MemberVo" alias="MemberVo" />
+  	<typeAlias type="java.lang.Integer" alias="Integer" />
   </typeAliases>
   
 </configuration>

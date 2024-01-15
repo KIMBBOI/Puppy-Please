@@ -9,6 +9,7 @@ import ReportMain from './board/report/ReportMain';
 import VisitMain from './board/visit/VisitMain';
 import LawMain from './board/law/LawMain';
 import AdoptionOkMain from './board/adoptionOk/AdoptionOkMain';
+import MyPageMain from './mypage/MyPageMain';
 const StyledMainDiv = styled.div`
     width: 100%;
     height: 100%;
@@ -24,6 +25,7 @@ const Main = () => {
             <Aside />
             <Routes>
                 <Route path='/member/*' element={ <MemberMain />}></Route>
+                <Route path='/mypage/*' element={<MyPageMain />}></Route>
                 <Route path='/board/adoptionNews/*' element={ <AdoptionNewsMain />} ></Route>
                 <Route path='/board/law/*' element={ <LawMain />} ></Route>
                 <Route path='/board/adoption/*' element={ <AdoptionMain />}></Route>
