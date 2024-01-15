@@ -13,9 +13,25 @@ const StyledAdoptionListDiv = styled.div`
     place-items: center center;
 
     & > button {
-        grid-column: span 3;
-        width: 100%;
+        /* grid-column: span 3;
+        width: 30%; */
     }
+    .category {
+        /* width: auto;
+        height: 30%;
+        font-size: 16px;
+        display: flex;
+        flex-direction: row; */
+        background-color: $bg-white;
+        width: 100%;
+        padding: 4rem;
+        border-block: 1px solid $text-black;
+        height: auto;
+        position: relative;
+        z-index: 4;
+    }
+
+    
 `;
 
 const AdoptionList = () => {
@@ -60,23 +76,14 @@ const AdoptionList = () => {
                         console.log('e : ' + vo.inoculation);
                         console.log('f : ' + vo.age);
                         console.log('g : ' + vo.weight);
-                        return 
-                            <AdoptionListItem 
-                                key={vo.adoptionNo} 
-                                a={vo.imagePath} 
-                                b={vo.name} 
-                                c={vo.breed} 
-                                d={vo.gender} 
-                                e={vo.inoculation} 
-                                f={vo.age} 
-                                g={vo.weight} 
-                            />;
+                        return <AdoptionListItem key={vo.adoptionBoardNo} a={vo.imagePath} b={vo.name} c={vo.breed} d={vo.gender} e={vo.inoculation} f={vo.age} g={vo.weight} />;
                     } )
                 }
                 <button onClick={ () => {
                     navigate("/board/adoption/write");
                 } }>등록하기</button>
                 
+               
             </StyledAdoptionListDiv>    
         </>
     );

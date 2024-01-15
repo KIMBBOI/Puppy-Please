@@ -4,7 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="AdoptionNewsMapper">
 
-	<insert id="write">
+	<insert id="insert">
 		INSERT INTO NEWS_AFTER_ADOPTION
 		(
 		    NEWS_AFTER_ADOPTION_NO
@@ -28,9 +28,10 @@
 		    , #{delYn}
 		)
 	</insert>
-	
-	<select id="list" resultType="com.kh.app.adoptionnews.vo.AdoptionNewsVo">
-		SELECT 
+
+	<!-- <insert id="write">
+		INSERT INTO NEWS_AFTER_ADOPTION
+		(
 		    NEWS_AFTER_ADOPTION_NO
 		    ,MEMBER_NO
 		    ,IMAGE_NO
@@ -39,7 +40,33 @@
 		    ,ENROLL_DATE
 		    ,MODIFY_DATE
 		    ,DEL_YN
-		FROM NEWS_AFTER_ADOPTION
+		)
+		VALUES
+		(
+		    SEQ_NEWS_AFTER_ADOPTION_NO.NEXTVAL
+		    , #{memberNo}
+		    , #{imageNo}
+		    , #{title}
+		    , #{content}
+		    , #{enrollDate}
+		    , #{modifyDate}
+		    , #{delYn}
+		)
+	</insert> -->
+	
+	<select id="list" resultType="com.kh.app.adoptionnews.vo.AdoptionNewsVo">
+		SELECT 
+		    N.NEWS_AFTER_ADOPTION_NO
+		    , N.MEMBER_NO
+		    , N.IMAGE_NO
+		    , N.TITLE
+		    , N.CONTENT
+		    , N.ENROLL_DATE
+		    , N.MODIFY_DATE
+		    , N.DEL_YN
+		    , I.IMAGE_NO
+		FROM NEWS_AFTER_ADOPTION N
+		JOIN IMAGE I ON I.IMAGE_NO = N.IMAGE_NO
 		WHERE DEL_YN = 'N'
 		ORDER BY NEWS_AFTER_ADOPTION_NO DESC	
 	</select>

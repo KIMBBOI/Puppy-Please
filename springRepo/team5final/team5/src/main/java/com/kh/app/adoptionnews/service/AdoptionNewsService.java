@@ -16,24 +16,31 @@ public class AdoptionNewsService {
 	
 	private final AdoptionNewsDao dao;
 	private final SqlSessionTemplate sst;
+	
+	public int insert(AdoptionNewsVo vo) {
+		return dao.insert(sst, vo);
+	}
 
 	// 입양 후 소식 작성
-	public int write(AdoptionNewsVo vo) {
-		if (vo.getTitle().length() < 1) {
-			throw new IllegalStateException();
-		}
-		return dao.write(sst, vo);
-	}
+//	public int write(AdoptionNewsVo vo) {
+//		String str = vo.getImageNo().replace("D:\\pupple\\springRepo\\team5final\\team5\\src\\main\\webapp", "http://127.0.0.1:8080/app");
+//		vo.setImageNo(str);
+//		
+//		if (vo.getTitle().length() < 1) {
+//			throw new IllegalStateException();
+//		}
+//		return dao.write(sst, vo);
+//	}
 
 	// 입양 후 소식 목록
 	public List<AdoptionNewsVo> list() {
-		List<AdoptionNewsVo> newsList = dao.list(sst);
-		// imagePath 설정
-		for (AdoptionNewsVo news : newsList) {
-			String imagePath = news.getImagePath().replace("D:\\pupple\\springRepo\\team5final\\team5\\src\\main\\webapp", "http://127.0.0.1:8080/app");
-			news.setImagePath(imagePath);
-		}
-		return newsList;
+//		List<AdoptionNewsVo> newsList = dao.list(sst);
+//		// imagePath 설정
+//		for (AdoptionNewsVo news : newsList) {
+//			String imagePath = news.getImagePath().replace("D:\\pupple\\springRepo\\team5final\\team5\\src\\main\\webapp", "http://127.0.0.1:8080/app");
+//			news.setImagePath(imagePath);
+//		}
+		return dao.list(sst);
 	}
 
 	// 입양 후 소식 상세 조회
@@ -62,4 +69,6 @@ public class AdoptionNewsService {
 	public int delete(String no) {
 		return dao.delete(sst, no);
 	}
+
+	
 }

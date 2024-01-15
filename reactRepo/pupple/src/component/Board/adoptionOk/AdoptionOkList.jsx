@@ -19,7 +19,7 @@ const GalleryWrapper = styled.div`
 `;
 
 const GalleryItem = styled.div`
-  width: calc(33.33% - 20px);
+  /* width: calc(33.33% - 20px); */
   border: 1px solid #ddd;
   padding: 10px;
   cursor: pointer;

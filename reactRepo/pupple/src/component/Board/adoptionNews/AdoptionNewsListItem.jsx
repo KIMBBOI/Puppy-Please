@@ -8,6 +8,13 @@ const StyledItemDiv = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    & > img {
+        width: 100%;
+        height: auto;
+        margin: 0 auto;
+
+    }
 `;
 
 const AdoptionNewsListItem = ( {a, b, c} ) => {
@@ -16,8 +23,8 @@ const AdoptionNewsListItem = ( {a, b, c} ) => {
             <img 
                 src={c}
                 alt='사진'
-                width='300px'
-                height='200px'
+                // width='300px'
+                // height='200px'
             />
             <span>{a}</span>
             <span>{b}</span>

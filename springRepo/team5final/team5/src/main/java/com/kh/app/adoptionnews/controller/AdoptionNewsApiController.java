@@ -21,34 +21,54 @@ public class AdoptionNewsApiController {
 	
 	private final AdoptionNewsService service;
 	
+	// 작성
 	@PostMapping
-	public Map<String, String> write(AdoptionNewsVo vo, @RequestParam MultipartFile file) throws Exception {
-		System.out.println("vo: " + vo);
-		System.out.println("file: " + file.getOriginalFilename());
+	public Map<String, String> insert(AdoptionNewsVo vo, @RequestParam MultipartFile file) throws Exception {
+//		System.out.println("vo: " + vo);
+//		System.out.println("file: " + file.getOriginalFilename());
+//		
+//		String imagePath = saveFile(file);
+//		vo.setImagePath(imagePath);
+//		
+//		int result = service.write(vo);
+//		
+//		Map<String, String> map = new HashMap<>();
+//		map.put("msg", "good");
+//		if (result != 1) {
+//			map.put("msg", "bad");
+//		}
 		
-		String imagePath = saveFile(file);
-		vo.setImagePath(imagePath);
+		Map<String, String> map = new HashMap<String, String>();
+		int result = service.insert(vo);
 		
-		int result = service.write(vo);
-		
-		Map<String, String> map = new HashMap<>();
-		map.put("msg", "good");
-		if (result != 1) {
-			map.put("msg", "bad");
+		if (result == 1) {
+			map.put("msg", "success");
+				System.out.println("게시글 작성 성공 !");
+		} else {
+			map.put("msg", "fail");
+				System.out.println("게시글 작성 실패 ...");
 		}
+		
 		return map;
 	}
 	
-	private String saveFile(MultipartFile file) throws Exception {
-		String path = "D:\\pupple\\springRepo\\team5final\\team5\\src\\main\\webapp\\resources\\upload\\img\\";
-		String originName = file.getOriginalFilename();
-		
-		File target = new File(path + originName);
-		file.transferTo(target);
-		
-		return path + originName;
-	}
+	/**
+	 * 파일을 서버에 저장하고, 파일 전체 경로를 리턴함
+	 * @param 파일객경로
+	 * @param 파일객체
+	 * @return 실제파일저장경로(파일경로 + 파일명)
+	 */
+//	private String saveFile(MultipartFile file) throws Exception {
+//		String path = "D:\\pupple\\springRepo\\team5final\\team5\\src\\main\\webapp\\resources\\upload\\img\\";
+//		String originName = file.getOriginalFilename();
+//		
+//		File target = new File(path + originName);
+//		file.transferTo(target);
+//		
+//		return path + originName;
+//	}
 
+	// 목록조회
 	@GetMapping("list")
 	public Map<String, Object> list() {
 		List<AdoptionNewsVo> voList = service.list();
@@ -58,16 +78,19 @@ public class AdoptionNewsApiController {
 		return map;
 	}
 	
+	//상세조회
 	@GetMapping
 	public void detail() {
 		// TODO: 구현 필요
 	}
 	
+	//수정
 	@PutMapping
 	public void edit() {
 		// TODO: 구현 필요
 	}
 	
+	//삭제
 	@DeleteMapping
 	public void delete() {
 		// TODO: 구현 필요

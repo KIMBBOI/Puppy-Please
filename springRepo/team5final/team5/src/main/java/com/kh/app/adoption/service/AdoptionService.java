@@ -17,13 +17,17 @@ public class AdoptionService {
 	private final AdoptionDao dao;
 	private final SqlSessionTemplate sst;
 
-	// 입양 게시글 작성
-	public int write(AdoptionVo vo) {
-		String str = vo.getImageNo().replace("D:\\pupple\\springRepo\\team5final\\team5\\src\\main\\webapp", "http://127.0.0.1:8080/app");
-		vo.setImageNo(str);
-		
-		return dao.write(sst, vo);
+	public int insert(AdoptionVo vo) {
+		return dao.insert(sst, vo);
 	}
+	
+	// 입양 게시글 작성
+//	public int write(AdoptionVo vo) {
+//		String str = vo.getImageNo().replace("D:\\pupple\\springRepo\\team5final\\team5\\src\\main\\webapp", "http://127.0.0.1:8080/app");
+//		vo.setImageNo(str);
+//		
+//		return dao.write(sst, vo);
+//	}
 	
 	// 입양 게시글 목록
 	public List<AdoptionVo> list() {
@@ -44,6 +48,8 @@ public class AdoptionService {
 	public int delete(AdoptionVo vo) {
 		return dao.delete(sst, vo);
 	}
+
+	
 
 
 }
