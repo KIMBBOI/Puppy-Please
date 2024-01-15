@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { Route, Routes } from 'react-router-dom'
 import MemberMain from './member/MemberMain';
-import Aside from './Aside';
 import AdoptionMain from './board/adoption/AdoptionMain';
 import AdoptionNewsMain from './board/adoptionNews/AdoptionNewsMain';
 import ReportMain from './board/report/ReportMain';
@@ -22,7 +21,7 @@ const StyledMainDiv = styled.div`
 const Main = () => {
     return (
         <StyledMainDiv>
-            <Aside />
+            <div></div>
             <Routes>
                 <Route path='/member/*' element={ <MemberMain />}></Route>
                 <Route path='/mypage/*' element={<MyPageMain />}></Route>
@@ -33,7 +32,7 @@ const Main = () => {
                 <Route path='/board/report/*' element={ <ReportMain />}></Route>
                 <Route path='/board/visit/*' element={ <VisitMain />}></Route>
             </Routes>
-            <Aside />
+            <div></div>
         </StyledMainDiv>
     );
 };
