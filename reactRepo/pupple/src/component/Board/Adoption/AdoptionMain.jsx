@@ -7,9 +7,9 @@ import AdoptionDetail from './AdoptionDetail';
 const AdoptionMain = () => {
     return (
         <Routes>
-            <Route path='list' element={<AdoptionList />} />
-            <Route path='write' element={<AdoptionWrite />} />
-            <Route path='detail' element={<AdoptionDetail />} />
+            <Route path='/list' element={<AdoptionList />} />
+            <Route path='/write' element={<AdoptionWrite />} />
+            <Route path='/detail' element={<AdoptionDetail />} />
         </Routes>
     );
 };

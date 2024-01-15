@@ -20,10 +20,10 @@ import com.kh.app.adoption.vo.AdoptionVo;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("api/adoption")
+@RequestMapping("adoption")
 @RequiredArgsConstructor
 @CrossOrigin("*")
-public class AdoptionApiController {
+public class AdoptionController {
 
 	private final AdoptionService service;
 	
@@ -73,6 +73,7 @@ public class AdoptionApiController {
 		} else {
 			map.put("msg", "fail");
 				System.out.println("게시글 작성 실패 ...");
+				System.out.println(vo);
 		}
 		return map;
 	}

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import NoticeList from './board/notice/NoticeList';
-import AdoptionList from './board/adoption/AdoptionList';
 import { Link } from 'react-router-dom';
 
 const StyledNaviDiv = styled.div`
@@ -58,10 +57,10 @@ const Navi = () => {
                 </StyledSubMenu>
             </StyledMenuItem>
             <StyledMenuItem onClick={toggleNewsAdoption}>
-                <div><Link to="board/adoption/list">입양하기</Link></div>
+                <div>입양하기</div>
                 <StyledSubMenu isopen={isNewsAdoptionOpen}>
-                    <div><Link to="board/adoption/list">입양신청</Link></div>
-                    <div><Link to="board/adoptionOk/list">입양완료</Link></div>
+                    <div><Link to="/board/adoption/list">입양신청</Link></div>
+                    <div><Link to="/board/adoptionOk/list">입양완료</Link></div>
                 </StyledSubMenu>
             </StyledMenuItem>
             <StyledMenuItem>

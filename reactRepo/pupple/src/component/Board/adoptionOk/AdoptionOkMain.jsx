@@ -7,9 +7,9 @@ const AdoptionOkMain = () => {
 
     return (
         <Routes>
-            <Route path='list' element={<AdoptionOkList />}></Route>
-            <Route path='write' element={<AdoptionOkWrite />}></Route>
-            <Route path='detail' element={<AdoptionOkDetail />}></Route>
+            <Route path='/list' element={<AdoptionOkList />}></Route>
+            <Route path='/write' element={<AdoptionOkWrite />}></Route>
+            <Route path='/detail' element={<AdoptionOkDetail />}></Route>
         </Routes>
     );
 };

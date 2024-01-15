@@ -61,7 +61,7 @@ const AdoptionWrite = ( { adminNo , imageNo} ) => {
         formData.append('adminNo', adminNo);
         formData.append('imageNo', imageNo); // 이 부분도 사용되는 변수 이름으로 변경 필요
 
-        fetch('http://127.0.0.1:8080/app/api/adoption' , {
+        fetch('http://127.0.0.1:8080/app/adoption' , {
             method: 'POST' ,
             body: formData ,
         })
@@ -72,7 +72,7 @@ const AdoptionWrite = ( { adminNo , imageNo} ) => {
                 navigate("/board/adoption/list");
             }else{
                 alert('입양신청목록 등록 실패 ...');
-                console.log(data);
+                console.log("등록실패 : " + data);
             }
         } )
         .catch((error) => {

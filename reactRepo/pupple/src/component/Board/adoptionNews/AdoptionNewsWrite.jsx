@@ -37,7 +37,7 @@ const AdoptionNewsWrite = ( { memberNo , imageNo } ) => {
     formData.append('memberNo', memberNo); // 이 부분은 실제로 사용되는 변수 이름으로 변경해야 합니다.
     formData.append('imageNo', imageNo); // 이 부분도 사용되는 변수 이름으로 변경 필요
   
-    fetch('http://127.0.0.1:8080/app/api/adoptionNews', {
+    fetch('http://127.0.0.1:8080/app/adoptionNews', {
       method: 'POST',
       body: formData,
     })
