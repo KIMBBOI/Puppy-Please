@@ -50,28 +50,29 @@
   	</select>
   	<update id="edit">
 		  UPDATE MEMBER 
-		  SET 
-		  <if test="pwd != null">
-		    PWD = #{pwd},
-		  </if>
-		  <if test="nick != null">
-		    NICK = #{nick},
-		  </if>
-		  <if test="name != null">
-		    NAME = #{name},
-		  </if>
-		  <if test="phoneNumber != null">
-		    PHONE_NUMBER = #{phoneNumber},
-		  </if>
-		  <if test="email != null">
-		    EMAIL = #{email},
-		  </if>
-		  <if test="birthday != null">
-		    BIRTHDAY = #{birthday},
-		  </if>
+		  SET
+		    <if test="pwd != null">
+		      PWD = #{pwd}<if test="nick != null or name != null or phoneNumber != null or email != null or birthday != null">,</if>
+		    </if>
+		    <if test="nick != null">
+		      NICK = #{nick}<if test="name != null or phoneNumber != null or email != null or birthday != null">,</if>
+		    </if>
+		    <if test="name != null">
+		      NAME = #{name}<if test="phoneNumber != null or email != null or birthday != null">,</if>
+		    </if>
+		    <if test="phoneNumber != null">
+		      PHONE_NUMBER = #{phoneNumber}<if test="email != null or birthday != null">,</if>
+		    </if>
+		    <if test="email != null">
+		      EMAIL = #{email}<if test="birthday != null">,</if>
+		    </if>
+		    <if test="birthday != null">
+		      BIRTHDAY = #{birthday}
+		    </if>
 		  WHERE MEMBER_NO = #{memberNo} 
 		  AND DEL_YN = 'N'
 	</update>
+
   	
   	<select id="searchId" resultType="MemberVo">
   		SELECT ID
