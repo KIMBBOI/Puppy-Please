@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.kh.app.member.dao.MemberDao;
@@ -17,6 +18,8 @@ public class MemberService {
 
 	private final MemberDao dao;
 	private final SqlSessionTemplate sst;
+	private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
 	
 	//회원가입
 	public int join(MemberVo vo) throws Exception{
@@ -49,6 +52,8 @@ public class MemberService {
 		if(!passMatcher.find()) {
 			throw new Exception("비밀번호는 8~16자 및 대문자와 특수문자를 포함해야해요.");
 		}
+		String newPwd = encoder.encode(pwd);
+		vo.setPwd(newPwd);
 		
 		//닉네임 검사
 		// 닉네임에 "admin"이 포함되는지 대소문자 구별 없이 검사
@@ -59,7 +64,6 @@ public class MemberService {
 		if(nick.length() < 4 || nick.length() > 12) {
 		    throw new Exception("닉네임은 4자 이상 12자 이하이어야 해요.");
 		}
-		
 		// 핸드폰 번호 검사
 		Pattern phonePattern = Pattern.compile("^01[016789]-\\d{3,4}-\\d{4}$");
 		Matcher phoneMatcher = phonePattern.matcher(phoneNumber);
@@ -93,6 +97,9 @@ public class MemberService {
 			if(!passMatcher.find()) {
 				throw new Exception("비밀번호는 8~16자 및 대문자와 특수문자를 포함해야해요.");
 			}
+			String newPwd = encoder.encode(vo.getPwd());
+			vo.setPwd(newPwd);
+			
 			
 		}
 		if(nick != null) {
@@ -129,7 +136,14 @@ public class MemberService {
 	}
 	//로그인
 	public MemberVo login(MemberVo vo) {
-		return dao.login(sst,vo);
+		MemberVo dbVo = dao.login(sst, vo);
+		System.out.println(dbVo);
+		boolean isOk = encoder.matches(vo.getPwd(), dbVo.getPwd());
+		if(!isOk) {
+			return null;
+		}
+		return dbVo;
+		
 	}
 	//회원탈퇴
 	public int quit(MemberVo vo) {
