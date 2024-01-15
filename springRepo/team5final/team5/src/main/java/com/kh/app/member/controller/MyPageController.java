@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -24,7 +25,8 @@ public class MyPageController {
 	
 	//회원 정보 수정
 	@PutMapping("memberInfoEdit")
-	public Map<String, String> edit(MemberVo vo) throws Exception{
+	public Map<String, String> edit(@RequestBody MemberVo vo) throws Exception{
+		System.out.println(vo.toString());
 		int result = service.edit(vo);
 		Map<String, String> map = new HashMap<String, String>();
 		
