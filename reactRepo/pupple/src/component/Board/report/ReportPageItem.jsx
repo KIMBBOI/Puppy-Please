@@ -1,16 +1,16 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledReportPageItemDiv = styled.div`
-    grid-column: span 2;
+    width: 100%;
+    height: 100%;
     display: flex;
-    flex-direction: row;
+    justify-content: center;
+    place-items: center;
 `;
 
 const ReportPageItem = ( {pvo} ) => {
-
-    const n = useNavigate();
 
     return (
         <StyledReportPageItemDiv>
@@ -20,6 +20,7 @@ const ReportPageItem = ( {pvo} ) => {
                     <Link Link to={`/board/report/list?pno=${pvo.startPage - 1}`}>이전</Link>
                 )}
                 
+
                 {/* 여기는 페이징~~ */}
                 {Array.from({ length: pvo.endPage - pvo.startPage + 1 }, (_, index) => {
 
@@ -39,6 +40,7 @@ const ReportPageItem = ( {pvo} ) => {
 
                     );
                 })}
+
 
                 {/* 여기는 다음 버튼 !!! */}
                 {pvo.endPage !== pvo.maxPage && (

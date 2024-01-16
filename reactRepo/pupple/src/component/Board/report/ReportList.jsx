@@ -1,23 +1,47 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ReportListItem from './ReportListItem';
-import { Link, useNavigate } from 'react-router-dom';
+import { Form, useNavigate } from 'react-router-dom';
 import ReportPageItem from './ReportPageItem';
 
 const StyledReportListDiv = styled.div`
     width: 100%;
     height: 1000px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: 4.4fr 4.4fr 0.6fr 0.6fr;
-    grid-gap: 5px;
-    place-items: center center;
+    position: relative;
 
-    & > button {
-        /* grid-column: span 3; */
-        width: 100%;
+    button {
+        width: 80px;
+        height: 30px;
+    }
+    input[type=search] {
+        width: 200px;
+        height: 30px;
+        padding: 0;
+    }
+    input[type=submit] {
+        width: 50px;
+        height: 30px;
+        padding: 0;
     }
 
+    .wrap {
+        width: 100%;
+        height: 80%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+    .body {
+        width: 100%;
+        height: 10%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .footer {
+        width: 100%;
+        height: 10%;
+    }
 `;
 
 
@@ -38,10 +62,12 @@ const ReportList = () => {
     }
     console.log(pno);
 
+
         // let arr = [];
         let [arr, setArr] = useState([]);
         let [pvo, setPvo] = useState({});
         // 7. uesState 사용
+
 
     useEffect( () => {
         // 11. useEffect : 렌더링 한번만
@@ -71,26 +97,32 @@ const ReportList = () => {
 
     return (
         <StyledReportListDiv>
-            {
-                arr.map( (vo) => {
-                    return <ReportListItem key={vo.reportNo} a={vo.title} b={vo.imagePath} c={vo.reportNo} />;
-                    // 2. map 함수를 이용해서 각각의 객체로 새로운 배열(voList 가 아닌 컴포넌트로 구성됨)로 만들어줌
-                    // 3. 배열만큼 각각의 컴포넌트(ReportListItem)를 만들면서 데이터를 전달
-                    //   => 4. ReportListItem.jsx
+            <div className='wrap'>
+                {
+                    arr.map( (vo, index) => {
+                        return (
+                                <ReportListItem key={vo.reportNo} a={vo.title} b={vo.imagePath} c={vo.reportNo} />
+                        )
+                            // 2. map 함수를 이용해서 각각의 객체로 새로운 배열(voList 가 아닌 컴포넌트로 구성됨)로 만들어줌
+                            // 3. 배열만큼 각각의 컴포넌트(ReportListItem)를 만들면서 데이터를 전달
+                            //  => 4. ReportListItem.jsx
 
-                    // 10. 브라우저 오류 해결 - GalleryList.jsx:32 Warning: Each child in a list should have a unique "key" prop. 
-                    //   ㄴ key 값을 전달하면서 넘겨주면 됨. 
-                    //  => 11. ReportPageItem.jsx
-                } )
-            }
-            <div></div>
-            <div></div>
-            <div></div>
-            <button onClick={ () => {navigate("/board/report/write");} }>작성하기</button>
-            <div></div>
-
-            <ReportPageItem pvo={pvo} />
-
+                            // 10. 브라우저 오류 해결 - GalleryList.jsx:32 Warning: Each child in a list should have a unique "key" prop. 
+                            //    ㄴ key 값을 전달하면서 넘겨주면 됨. 
+                            //   => 11. ReportPageItem.jsx
+                    } )
+                }
+            </div>
+            <div className='body'>
+                <form>
+                    <input type="search" placeholder='제목 또는 내용'/>
+                    <input type='submit' value='검색'></input>
+                </form>-
+                <button onClick={ () => {navigate("/board/report/write");} }>작성하기</button>
+            </div>
+            <div className='footer'>
+                <ReportPageItem pvo={pvo} />
+            </div>
         </StyledReportListDiv>
     );
 };
