@@ -40,15 +40,14 @@ const AdoptionNewsWrite = ( { memberNo , imageNo } ) => {
     // 추가
     formData.append('memberNo', memberNo); // 이 부분은 실제로 사용되는 변수 이름으로 변경해야 합니다.
     formData.append('imageNo', imageNo); // 이 부분도 사용되는 변수 이름으로 변경 필요
-  
-    console.log("null확인 : " , formData);
 
-    fetch('http://127.0.0.1:8080/app/adoptionNews', {
+    fetch('http://127.0.0.1:8080/app/adoptionNews/write', {
       method: 'POST',
       body: formData,
     })
       .then((resp) => resp.json())
       .then((data) => {
+        console.log("에러 확인 : " , data);
         if (data.msg === 'good') {
           alert('입양 후 소식 등록 완료하였습니다.');
           navigate('/board/adoptionNews/list');

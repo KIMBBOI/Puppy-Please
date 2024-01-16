@@ -20,7 +20,7 @@ import com.kh.app.adoption.vo.AdoptionVo;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("adoption")
+@RequestMapping("board/adoption")
 @RequiredArgsConstructor
 @CrossOrigin("*")
 public class AdoptionController {
