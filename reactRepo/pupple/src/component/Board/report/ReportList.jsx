@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ReportListItem from './ReportListItem';
-import { Form, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import ReportPageItem from './ReportPageItem';
 
 const StyledReportListDiv = styled.div`
@@ -24,25 +24,28 @@ const StyledReportListDiv = styled.div`
         padding: 0;
     }
 
+
     .wrap {
         width: 100%;
-        height: 80%;
+        height: 90%;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-evenly;
+        padding-top: 50px;
     }
     .body {
         width: 100%;
-        height: 10%;
+        height: 5%;
         display: flex;
         justify-content: center;
         align-items: center;
     }
     .footer {
         width: 100%;
-        height: 10%;
+        height: 5%;
     }
 `;
+
 
 
 const ReportList = () => {
@@ -60,7 +63,6 @@ const ReportList = () => {
     if (pno === null) {
         pno = 1;
     }
-    console.log(pno);
 
 
         // let arr = [];
@@ -82,7 +84,6 @@ const ReportList = () => {
             // arr = data.voList;
                 // 1. arr 배열에 voList 를 할당
             setArr(data.voList);
-            console.log(data.pvo);
             setPvo(data.pvo);
                 // 8. useState 로 변경
             
@@ -94,14 +95,13 @@ const ReportList = () => {
     const navigate = useNavigate();
         // 13. 작성하기 누르면 페이지 전환
 
-
     return (
         <StyledReportListDiv>
             <div className='wrap'>
                 {
-                    arr.map( (vo, index) => {
+                    arr.map( (vo) => {
                         return (
-                                <ReportListItem key={vo.reportNo} a={vo.title} b={vo.imagePath} c={vo.reportNo} />
+                                <ReportListItem key={vo.reportNo} a={vo.title} b={vo.imagePath} c={vo.reportNo} vo={vo}/>
                         )
                             // 2. map 함수를 이용해서 각각의 객체로 새로운 배열(voList 가 아닌 컴포넌트로 구성됨)로 만들어줌
                             // 3. 배열만큼 각각의 컴포넌트(ReportListItem)를 만들면서 데이터를 전달
@@ -114,10 +114,6 @@ const ReportList = () => {
                 }
             </div>
             <div className='body'>
-                <form>
-                    <input type="search" placeholder='제목 또는 내용'/>
-                    <input type='submit' value='검색'></input>
-                </form>-
                 <button onClick={ () => {navigate("/board/report/write");} }>작성하기</button>
             </div>
             <div className='footer'>
