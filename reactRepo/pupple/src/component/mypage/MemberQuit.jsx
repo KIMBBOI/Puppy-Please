@@ -18,11 +18,10 @@ const MemberQuit = () => {
 
     
     const loginMemberVo = JSON.parse(sessionStorage.getItem("loginMemberVo"));
-    console.log(loginMemberVo);
+    console.log("MemberQuit의 console.log:::",loginMemberVo);
 
     const [vo, setVo] = useState({
         id:loginMemberVo.id, pwd:'', pwd2:''
-
     });
     
     const handleInputChange = (e) => {
@@ -59,10 +58,11 @@ const MemberQuit = () => {
         },
             body: JSON.stringify(vo)
         })
-        .then( resp => {resp.json()})
+        .then( resp => resp.json())
         .then((data) => {
             if(data.msg === "good"){
                 alert("회원 탈퇴 성공");
+                sessionStorage.removeItem("loginMemberVo");
                 navigate("/");
             }else{
                 alert("회원 탈퇴 실패")

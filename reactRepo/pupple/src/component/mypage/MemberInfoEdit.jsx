@@ -6,7 +6,15 @@ const MemberInfoEdit = () => {
 
   const [isFetching, setIsFetching] = useState(false);
   const [passwordMatchError, setPasswordMatchError] = useState(false);
-  const [vo, setVo] = useState({});
+  const [vo, setVo] = useState({
+    memberNo: undefined, // 초기에 비어있는 값
+    pwd: undefined,
+    pwd2: undefined,
+    nick: undefined,
+    phoneNumber: undefined,
+    email: undefined,
+    birthday: undefined,
+  });
 
   // 사용자의 이전 정보를 저장하는 상태
   const [originalInfo, setOriginalInfo] = useState({});

@@ -5,9 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.kh.app.member.service.MemberMailService;
 import com.kh.app.member.service.MemberService;
 import com.kh.app.member.vo.MemberVo;
 
@@ -28,6 +27,7 @@ import lombok.RequiredArgsConstructor;
 public class MemberController {
 	
 	private final MemberService service;
+	private final MemberMailService mailService;	
 	//회원가입
 	@GetMapping("join")
 	public String join() {
@@ -45,6 +45,29 @@ public class MemberController {
 		}
 		return map;
 	}
+	
+	@PostMapping("join/mailSend")
+	public Map<String, String> mailSend(@RequestBody MemberVo vo){
+		
+		Map<String, String> map = new HashMap<>();
+		try {
+			mailService.joinEmail(vo.getEmail());
+			map.put("msg", "good");
+		}catch(Exception e) {
+			e.printStackTrace();
+			map.put("msg", "fail");
+			
+		}
+		
+		return map;
+	}
+	public Map<String, String> mailCheck(@RequestBody MemberVo vo){
+		Map<String, String> map = new HashMap<>();
+		
+		
+		return map;
+	}
+	
 	
 	//로그인
 	@PostMapping("login")

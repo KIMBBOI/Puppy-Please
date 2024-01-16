@@ -16,5 +16,6 @@ public class MemberVo {
 	private String birthday;
 	private String passYn;
 	private	String survayResult;
+	private String emailCode;
 	
 }
