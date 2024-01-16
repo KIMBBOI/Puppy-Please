@@ -23,31 +23,32 @@ public class AdoptionNewsController {
 	
 	// 작성
 	@PostMapping
-	public Map<String, String> insert(AdoptionNewsVo vo, @RequestParam MultipartFile file) throws Exception {
+	public Map<String, String> insert(AdoptionNewsVo vo, MultipartFile file) throws Exception {
+		
 		System.out.println("vo: " + vo);
 		System.out.println("file: " + file.getOriginalFilename());
-//		
-//		String imagePath = saveFile(file);
-//		vo.setImagePath(imagePath);
-//		
-//		int result = service.write(vo);
-//		
-//		Map<String, String> map = new HashMap<>();
-//		map.put("msg", "good");
-//		if (result != 1) {
-//			map.put("msg", "bad");
-//		}
 		
-		Map<String, String> map = new HashMap<String, String>();
+		String imagePath = saveFile(file);
+		vo.setImagePath(imagePath);
+		
 		int result = service.insert(vo);
 		
-		if (result == 1) {
-			map.put("msg", "success");
-				System.out.println("게시글 작성 성공 !");
-		} else {
-			map.put("msg", "fail");
-				System.out.println("게시글 작성 실패 ...");
+		Map<String, String> map = new HashMap<>();
+		map.put("msg", "good");
+		if (result != 1) {
+			map.put("msg", "bad");
 		}
+		
+//		Map<String, String> map = new HashMap<String, String>();
+//		int result = service.insert(vo);
+//		
+//		if (result == 1) {
+//			map.put("msg", "success");
+//				System.out.println("게시글 작성 성공 !");
+//		} else {
+//			map.put("msg", "fail");
+//				System.out.println("게시글 작성 실패 ...");
+//		}
 		
 		return map;
 	}
@@ -58,15 +59,16 @@ public class AdoptionNewsController {
 	 * @param 파일객체
 	 * @return 실제파일저장경로(파일경로 + 파일명)
 	 */
-//	private String saveFile(MultipartFile file) throws Exception {
-//		String path = "D:\\pupple\\springRepo\\team5final\\team5\\src\\main\\webapp\\resources\\upload\\img\\";
-//		String originName = file.getOriginalFilename();
-//		
-//		File target = new File(path + originName);
-//		file.transferTo(target);
-//		
-//		return path + originName;
-//	}
+	private String saveFile(MultipartFile file) throws Exception {
+		String path = "D:\\pupple\\springRepo\\team5final\\team5\\src\\main\\webapp\\resources\\upload\\img\\";
+		String originName = file.getOriginalFilename();
+		
+		File target = new File(path + originName);
+		
+		file.transferTo(target);
+		
+		return path + originName;
+	}
 
 	// 목록조회
 	@GetMapping("list")
