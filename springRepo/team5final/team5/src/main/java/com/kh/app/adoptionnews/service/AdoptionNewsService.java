@@ -17,20 +17,21 @@ public class AdoptionNewsService {
 	private final AdoptionNewsDao dao;
 	private final SqlSessionTemplate sst;
 	
-	public int insert(AdoptionNewsVo vo) {
-		return dao.insert(sst, vo);
-	}
+//	public int insert(AdoptionNewsVo vo) {
+//		return dao.insert(sst, vo);
+//	}
 
 	// 입양 후 소식 작성
-//	public int write(AdoptionNewsVo vo) {
-//		String str = vo.getImageNo().replace("D:\\pupple\\springRepo\\team5final\\team5\\src\\main\\webapp", "http://127.0.0.1:8080/app");
-//		vo.setImageNo(str);
-//		
+	public int insert(AdoptionNewsVo vo) {
+		
+		String str = vo.getImageNo().replace("D:\\pupple\\springRepo\\team5final\\team5\\src\\main\\webapp", "http://127.0.0.1:8080/app");
+		vo.setImagePath(str);
+		
 //		if (vo.getTitle().length() < 1) {
 //			throw new IllegalStateException();
 //		}
-//		return dao.write(sst, vo);
-//	}
+		return dao.insert(sst, vo);
+	}
 
 	// 입양 후 소식 목록
 	public List<AdoptionNewsVo> list() {

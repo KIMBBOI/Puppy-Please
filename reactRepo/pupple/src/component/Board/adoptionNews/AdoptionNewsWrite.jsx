@@ -8,6 +8,7 @@ const StyledAdoptionNewsWriteDiv = styled.div`
 `;
 
 const AdoptionNewsWrite = ( { memberNo , imageNo } ) => {
+
   const [title, setTitle] = useState();
   const [content, setContent] = useState();
   const [fileObj, setFileObj] = useState();
@@ -21,6 +22,9 @@ const AdoptionNewsWrite = ( { memberNo , imageNo } ) => {
   };
 
   const handleChangeFile = (e) => {
+    console.log("e.target" , e.target);
+    console.log("e.target" , e.target.files);
+    console.log("e.target" , e.target.files[0]);
     setFileObj(e.target.files[0]);
   };
 
@@ -37,6 +41,8 @@ const AdoptionNewsWrite = ( { memberNo , imageNo } ) => {
     formData.append('memberNo', memberNo); // 이 부분은 실제로 사용되는 변수 이름으로 변경해야 합니다.
     formData.append('imageNo', imageNo); // 이 부분도 사용되는 변수 이름으로 변경 필요
   
+    console.log("null확인 : " , formData);
+
     fetch('http://127.0.0.1:8080/app/adoptionNews', {
       method: 'POST',
       body: formData,
