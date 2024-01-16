@@ -137,8 +137,9 @@ public class MemberService {
 	//로그인
 	public MemberVo login(MemberVo vo) {
 		MemberVo dbVo = dao.login(sst, vo);
-		System.out.println(dbVo);
+		System.out.println(dbVo+"\n"+vo);
 		boolean isOk = encoder.matches(vo.getPwd(), dbVo.getPwd());
+		System.out.println(isOk);
 		if(!isOk) {
 			return null;
 		}
@@ -152,6 +153,19 @@ public class MemberService {
 	//아이디찾기
 	public MemberVo searchId(MemberVo vo) {
 		return dao.searchId(sst, vo);
+	}
+
+	public int delete(MemberVo vo) {
+		MemberVo dbVo = dao.login(sst, vo);
+		System.out.println("dbVo:"+dbVo+"\n vo:"+vo);
+		boolean isOk = encoder.matches(vo.getPwd(), dbVo.getPwd());
+		System.out.println(isOk);
+		if(!isOk) {
+			return 0;
+		}else {
+			System.out.println(dao.quit(sst, vo));
+			return dao.quit(sst,vo);
+		}
 	}
 
 }

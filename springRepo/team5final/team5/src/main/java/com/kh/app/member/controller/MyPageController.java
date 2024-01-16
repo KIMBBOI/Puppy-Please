@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @ResponseBody
-@RequestMapping("mypage")
+@RequestMapping("member/mypage")
 @RequiredArgsConstructor
 @CrossOrigin("*")
 public class MyPageController {
@@ -39,4 +40,19 @@ public class MyPageController {
 		return map;
 	}
 		
+	
+	//회원 탈퇴
+	@DeleteMapping("memberQuit")
+	public Map<String, String> quit(@RequestBody MemberVo vo) throws Exception{
+		int result = service.delete(vo);
+		Map<String, String> map = new HashMap<String, String>();
+		
+		map.put("msg", "good");
+		if(result != 1) {
+			map.put("msg", "bad");
+		}
+		return map;
+	}
+	
+	
 }
