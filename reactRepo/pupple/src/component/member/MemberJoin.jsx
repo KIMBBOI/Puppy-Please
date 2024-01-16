@@ -66,7 +66,7 @@ const MemberJoin = () => {
 
 
     const [vo, setVo] = useState({
-        id: '', pwd: '', pwd2: '', nick: '', name: '', phoneNumber: '', email: '', birthday: ''
+        id: '', pwd: '', pwd2: '', nick: '', name: '', phoneNumber: '', email: '', emailCheck: '', birthday: ''
     });
     const handleInputChange = (event) => {
 
@@ -131,7 +131,45 @@ const MemberJoin = () => {
         }
       };
       
+      const handleMailSend = (event) => {
+        event.preventDefault();
+        
+        fetch('http://127.0.0.1:8080/app/member/join/mailSend', {
+          method: 'post',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({email: vo.email})
+        })
+          .then((resp) => resp.json())
+          .then((data) => {
+            if (data.msg === 'good') {
+              alert('인증번호를 전송했습니다.');
+            } else {
+              alert('인증번호 전송에 실패했습니다.');
+            }
+          });
+      };
     
+    const handleMailCheck = (event) => {
+        event.preventDefault();
+        fetch("http://127.0.0.1:8080/app/member/join/mailCheck",{
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({emailCheck: vo.emailCheck})
+        })
+        .then((resp) => resp.json())
+        .then((data) => {
+            if(data.msg === 'good'){
+                alert("이메일 인증이 완료됐습니다.");
+            }else{
+                alert("이메일 인증이 실패했습니다.");
+            }
+        });
+    };
+
       return (
    
             <StyledJoinDiv>
@@ -174,6 +212,11 @@ const MemberJoin = () => {
                         <InputRow>
                             <td>이메일</td>
                             <td><Input type="email" name='email' value={vo.email} onChange={handleInputChange} /></td>
+                            <td><button onClick={handleMailSend}>인증번호 전송</button></td>
+                        </InputRow>
+                        <InputRow>
+                            <td><input type="text" name="emailCheck"  value={vo.emailCheck} onChange={handleInputChange} placeholder='인증번호를 입력하세요' /></td>
+                            <td><button onClick={handleMailCheck}>인증하기</button></td>
                         </InputRow>
                         <InputRow>
                             <td>생년월일</td>
