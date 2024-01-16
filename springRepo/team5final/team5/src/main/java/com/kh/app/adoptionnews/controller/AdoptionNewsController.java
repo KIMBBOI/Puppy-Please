@@ -22,19 +22,23 @@ public class AdoptionNewsController {
 	private final AdoptionNewsService service;
 	
 	// 작성
-	@PostMapping
-	public Map<String, String> insert(AdoptionNewsVo vo, MultipartFile file) throws Exception {
+	@PostMapping("write")
+	public Map<String, String> write(AdoptionNewsVo vo, MultipartFile file) throws Exception {
 		
-		System.out.println("vo: " + vo);
 		System.out.println("file: " + file.getOriginalFilename());
 		
 		String imagePath = saveFile(file);
 		vo.setImagePath(imagePath);
 		
-		int result = service.insert(vo);
+		System.out.println("vo: " + vo);
 		
-		Map<String, String> map = new HashMap<>();
+		int result = service.newsWrite(vo);
+//		System.out.println(result);
+		int result2 = service.newsBoardWrite(vo);
+		
+		Map<String, String> map = new HashMap<String, String>();
 		map.put("msg", "good");
+		map.put("imagePath", imagePath);
 		if (result != 1) {
 			map.put("msg", "bad");
 		}

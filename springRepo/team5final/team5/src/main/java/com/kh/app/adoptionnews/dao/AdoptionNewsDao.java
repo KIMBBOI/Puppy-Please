@@ -10,17 +10,17 @@ import com.kh.app.adoptionnews.vo.AdoptionNewsVo;
 @Repository
 public class AdoptionNewsDao {
 	
-	public int insert(SqlSessionTemplate sst, AdoptionNewsVo vo) {
+	public int newsWrite(SqlSessionTemplate sst, AdoptionNewsVo vo) {
 
-		System.out.println("vo: " + vo);
+		System.out.println("DAO > vo: " + vo);
 		
-		return sst.insert("AdoptionNewsMapper.insert", vo);
+		return sst.insert("AdoptionNewsMapper.newsWrite", vo);
 	}
 
 	// 입양 후 소식 작성
-//	public int write(SqlSessionTemplate sst, AdoptionNewsVo vo) {
-//		return sst.insert("AdoptionNewsMapper.write", vo);
-//	}
+	public int write(SqlSessionTemplate sst, AdoptionNewsVo vo) {
+		return sst.insert("AdoptionNewsMapper.write", vo);
+	}
 
 	// 입양 후 소식 목록
 	public List<AdoptionNewsVo> list(SqlSessionTemplate sst) {
@@ -42,6 +42,8 @@ public class AdoptionNewsDao {
 	public int delete(SqlSessionTemplate sst, String no) {
 		return sst.update("AdoptionNewsMapper.delete", no);
 	}
+
+	
 
 	
 

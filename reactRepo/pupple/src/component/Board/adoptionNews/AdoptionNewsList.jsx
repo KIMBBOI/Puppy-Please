@@ -18,8 +18,8 @@ const AdoptionNewsList = () => {
 
     useEffect( () => {
         fetch("http://127.0.0.1:8080/app/adoptionNews/list")
-        .then( resp => resp.json() )
-        .then( data => {
+        .then( (resp) => {return resp.json()} )
+        .then( (data) => {
             console.log(data);
             setArr(data.voList);
         } )

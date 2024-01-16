@@ -4,8 +4,9 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="AdoptionNewsMapper">
 
-	<insert id="insert">
-		INSERT INTO NEWS_AFTER_ADOPTION
+ 	<insert id="newsWrite" >
+		INSERT INTO IMAGE(IMAGE_NO, IMAGE_PATH) VALUES(SEQ_IMAGE_NO.NEXTVAL, #{imagePath})
+		<!-- INSERT INTO NEWS_AFTER_ADOPTION
         (
             NEWS_AFTER_ADOPTION_NO,
             MEMBER_NO,
@@ -13,24 +14,44 @@
             TITLE,
             CONTENT
         )
-        SELECT
+        VALUES
+        (
             SEQ_NEWS_AFTER_ADOPTION_NO.NEXTVAL,
             #{memberNo},
-            I.IMAGE_NO,
+            #{imageNo},
             #{title},
             #{content}
-        FROM
-            IMAGE I
-        WHERE
-            I.IMAGE_PATH = #{imagePath}
+        ) -->
 	</insert>
-
+	<select id="getImageSeqCurrval"  resultType="com.kh.app.adoptionnews.vo.AdoptionNewsVo">
+		SELECT SEQ_IMAGE_NO.CURRVAL
+		FROM 
+		DUAL
+	</select>
+	<insert id="boardWrite">
+			INSERT INTO NEWS_AFTER_ADOPTION
+        (
+            NEWS_AFTER_ADOPTION_NO,
+            MEMBER_NO,
+            IMAGE_NO,
+            TITLE,
+            CONTENT
+        )
+        VALUES
+        (
+            SEQ_NEWS_AFTER_ADOPTION_NO.NEXTVAL,
+            #{memberNo},
+            #{imageNo},
+            #{title},
+            #{content}
+        )
+	</insert> 
 	<!-- <insert id="write">
 		INSERT INTO NEWS_AFTER_ADOPTION
 		(
 		    NEWS_AFTER_ADOPTION_NO
 		    ,MEMBER_NO
-		    ,IMAGE_NO
+		    ,IMAGE_PATH
 		    ,TITLE
 		    ,CONTENT
 		    ,ENROLL_DATE
@@ -41,14 +62,14 @@
 		(
 		    SEQ_NEWS_AFTER_ADOPTION_NO.NEXTVAL
 		    , #{memberNo}
-		    , #{imageNo}
+		    , #{imagePath}
 		    , #{title}
 		    , #{content}
 		    , #{enrollDate}
 		    , #{modifyDate}
 		    , #{delYn}
 		)
-	</insert> -->
+	</insert>  -->
 	
 	<select id="list" resultType="com.kh.app.adoptionnews.vo.AdoptionNewsVo">
 		SELECT 
@@ -60,13 +81,12 @@
 		    , N.ENROLL_DATE
 		    , N.MODIFY_DATE
 		    , N.DEL_YN
-		    , I.IMAGE_NO
+		    , I.IMAGE_NO 
 		FROM NEWS_AFTER_ADOPTION N
 		JOIN IMAGE I ON I.IMAGE_NO = N.IMAGE_NO
 		WHERE DEL_YN = 'N'
 		ORDER BY NEWS_AFTER_ADOPTION_NO DESC	
 	</select>
-	
 	<select id="detail" resultType="com.kh.app.adoptionnews.vo.AdoptionNewsVo">
 		SELECT 
 		    NEWS_AFTER_ADOPTION_NO
