@@ -29,5 +29,11 @@ public class MemberDao {
 	public MemberVo searchId(SqlSessionTemplate sst, MemberVo vo) {
 		return sst.selectOne("MemberMapper.searchId", vo);
 	}
+	public MemberVo updateProfile(SqlSessionTemplate sst, MemberVo vo) {
+		return sst.selectOne("MemberMapper.updateProfile", vo);
+	}
+	public int changeTempPwd(SqlSessionTemplate sst, MemberVo vo) {
+		return sst.update("MemberMapper.changeTempPwd", vo);
+	}
 
 }

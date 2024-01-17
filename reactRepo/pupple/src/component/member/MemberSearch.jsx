@@ -45,7 +45,21 @@ const MemberSearch = () => {
     };
     const handleSearchPwd = (event) => {
         event.preventDefault();
-            
+        fetch('http://127.0.0.1:8080/app/member/searchPwd',{
+            method: 'post',
+            headers: {
+                "Content-Type" : "application/json"
+            },
+            body: JSON.stringify(vo)
+        })
+        .then(resp => resp.json())
+        .then((data) => {
+            if(data.msg === "good"){
+                alert("이메일로 비밀번호를 전송했습니다.");
+            }else{
+                alert("해당 아이디가 없습니다.");
+            }
+        })            
         
     }
     const handleSearchIdChange = (e) => {
