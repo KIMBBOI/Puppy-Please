@@ -45,32 +45,31 @@
 			, #{content}
 		)
 	</insert> 
-	<!-- <insert id="write">
-		INSERT INTO NEWS_AFTER_ADOPTION
-		(
-		    NEWS_AFTER_ADOPTION_NO
-		    ,MEMBER_NO
-		    ,IMAGE_PATH
-		    ,TITLE
-		    ,CONTENT
-		    ,ENROLL_DATE
-		    ,MODIFY_DATE
-		    ,DEL_YN
-		)
-		VALUES
-		(
-		    SEQ_NEWS_AFTER_ADOPTION_NO.NEXTVAL
-		    , #{memberNo}
-		    , #{imagePath}
-		    , #{title}
-		    , #{content}
-		    , #{enrollDate}
-		    , #{modifyDate}
-		    , #{delYn}
-		)
-	</insert>  -->
-	
 	<select id="list" resultType="com.kh.app.adoptionnews.vo.AdoptionNewsVo">
+		SELECT *
+		FROM (
+			SELECT 
+			    N.NEWS_AFTER_ADOPTION_NO
+			    , N.MEMBER_NO
+			    , N.IMAGE_NO
+			    , N.TITLE
+			    , N.CONTENT
+			    , N.ENROLL_DATE
+			    , N.MODIFY_DATE
+			    , N.DEL_YN
+			    , I.IMAGE_PATH
+			    , M.NICK AS WRITER_NICK 
+			FROM 
+				NEWS_AFTER_ADOPTION N
+				JOIN IMAGE I ON I.IMAGE_NO = N.IMAGE_NO
+				JOIN MEMBER M ON M.MEMBER_NO = N.MEMBER_NO
+			WHERE 
+				N.DEL_YN = 'N'
+			ORDER BY 
+				NEWS_AFTER_ADOPTION_NO DESC	
+		)
+	</select>
+	<select id="detail" resultType="com.kh.app.adoptionnews.vo.AdoptionNewsVo">
 		SELECT 
 		    N.NEWS_AFTER_ADOPTION_NO
 		    , N.MEMBER_NO
@@ -80,24 +79,18 @@
 		    , N.ENROLL_DATE
 		    , N.MODIFY_DATE
 		    , N.DEL_YN
-		    , I.IMAGE_NO 
-		FROM NEWS_AFTER_ADOPTION N
-		JOIN IMAGE I ON I.IMAGE_NO = N.IMAGE_NO
-		WHERE DEL_YN = 'N'
-		ORDER BY NEWS_AFTER_ADOPTION_NO DESC	
-	</select>
-	<select id="detail" resultType="com.kh.app.adoptionnews.vo.AdoptionNewsVo">
-		SELECT 
-		    NEWS_AFTER_ADOPTION_NO
-		    ,MEMBER_NO
-		    ,IMAGE_NO
-		    ,TITLE
-		    ,CONTENT
-		    ,ENROLL_DATE
-		    ,MODIFY_DATE
-		    ,DEL_YN
-		FROM NEWS_AFTER_ADOPTION
-		WHERE NEWS_AFTER_ADOPTION_NO = #{newsAfterAdoptionNo}
+		    , I.IMAGE_PATH
+		    , M.NICK AS WRITER_NICK
+		FROM 
+			NEWS_AFTER_ADOPTION N
+			JOIN IMAGE I 
+				ON I.IMAGE_NO = N.IMAGE_NO
+			JOIN MEMBER M
+				ON M.MEMBER_NO = N.MEMBER_NO
+		WHERE 
+			N.DEL_YN = 'N'
+		AND
+			N.NEWS_AFTER_ADOPTION_NO = #{newsAfterAdoptionNo}
 	</select>
 	
 	<update id="edit">

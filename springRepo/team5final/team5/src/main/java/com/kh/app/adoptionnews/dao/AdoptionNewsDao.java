@@ -24,13 +24,13 @@ public class AdoptionNewsDao {
 
 	// 입양 후 소식 목록
 	public List<AdoptionNewsVo> list(SqlSessionTemplate sst) {
-//		System.out.println("에러확인 dao : " + sst.selectList("AdoptionNewsMapper.list"));
+		System.out.println("에러확인 dao : " + sst.selectList("AdoptionNewsMapper.list"));
 		return sst.selectList("AdoptionNewsMapper.list");
 	}
 
 	// 입양 후 소식 상세 조회
-	public AdoptionNewsVo detail(SqlSessionTemplate sst, String no) {
-		return sst.selectOne("AdoptionNewsMapper.detail", no);
+	public AdoptionNewsVo detail(SqlSessionTemplate sst, AdoptionNewsVo vo) {
+		return sst.selectOne("AdoptionNewsMapper.detail", vo);
 	}
 
 	// 입양 후 소식 수정
