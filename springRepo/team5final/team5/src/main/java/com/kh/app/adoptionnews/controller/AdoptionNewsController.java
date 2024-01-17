@@ -32,14 +32,14 @@ public class AdoptionNewsController {
 		
 		System.out.println("vo: " + vo);
 		
-		int result = service.newsWrite(vo);
+		int result = service.newsImageWrite(vo);
 //		System.out.println(result);
 		int result2 = service.newsBoardWrite(vo);
 		
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("msg", "good");
 		map.put("imagePath", imagePath);
-		if (result != 1) {
+		if (result != 1 && result2 != 1) {
 			map.put("msg", "bad");
 		}
 		
