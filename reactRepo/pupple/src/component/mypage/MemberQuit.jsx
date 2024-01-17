@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { useAuth } from '../PuppleContext';
 
 const StyledMemberQuitDiv = styled.div`
 
@@ -12,6 +13,8 @@ const ErrorMsg = styled.span`
 `;
 
 const MemberQuit = () => {
+    const {logout} = useAuth();
+
     const navigate = useNavigate();
     let [isFetching, setIsFetching] = useState(false);
     const [passwordMatchError, setPasswordMatchError] = useState(false);
@@ -62,7 +65,7 @@ const MemberQuit = () => {
         .then((data) => {
             if(data.msg === "good"){
                 alert("회원 탈퇴 성공");
-                sessionStorage.removeItem("loginMemberVo");
+                logout();
                 navigate("/");
             }else{
                 alert("회원 탈퇴 실패")

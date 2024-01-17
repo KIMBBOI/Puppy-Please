@@ -177,6 +177,9 @@ public class MemberService {
 	}
 
 	public int changeTempPwd(MemberVo vo) {
+		String tempPwd = "!Q2w3e4r!!";
+		String changedPwd = encoder.encode(tempPwd);
+		vo.setPwd(changedPwd);
 		return dao.changeTempPwd(sst, vo);
 	}
 
