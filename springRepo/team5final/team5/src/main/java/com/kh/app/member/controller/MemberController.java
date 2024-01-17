@@ -45,7 +45,7 @@ public class MemberController {
 		}
 		return map;
 	}
-	
+	//이메일 보내기
 	@PostMapping("join/mailSend")
 	public Map<String, String> mailSend(@RequestBody MemberVo vo){
 		
@@ -61,9 +61,17 @@ public class MemberController {
 		
 		return map;
 	}
+	//이메일 인증
+	@PostMapping("join/mailCheck")
 	public Map<String, String> mailCheck(@RequestBody MemberVo vo){
+		System.out.println(vo.getEmailCheck());
 		Map<String, String> map = new HashMap<>();
-		
+			int result = mailService.checkEmail(vo.getEmailCheck());
+			map.put("msg", "good");
+			if(result != 1) {
+				map.put("msg", "fail");
+			}
+			
 		
 		return map;
 	}

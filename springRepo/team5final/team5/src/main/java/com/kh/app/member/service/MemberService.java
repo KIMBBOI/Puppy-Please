@@ -19,7 +19,7 @@ public class MemberService {
 	private final MemberDao dao;
 	private final SqlSessionTemplate sst;
 	private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-
+	private final MemberMailService mailService;
 	
 	//회원가입
 	public int join(MemberVo vo) throws Exception{
@@ -29,7 +29,8 @@ public class MemberService {
 		String nick = vo.getNick();
 		String phoneNumber = vo.getPhoneNumber();
 		String email = vo.getEmail();
-			
+		String emailCheck = vo.getEmailCheck();
+		
 		System.out.println(vo);
 		
 		// 아이디 검사
@@ -76,6 +77,9 @@ public class MemberService {
 		Matcher emailMatcher = emailPattern.matcher(email);
 		if(!emailMatcher.find()) {
 		    throw new Exception("이메일 주소 형식이 올바르지 않습니다.");
+		}
+		if(mailService.checkEmail(emailCheck) != 1) {
+			throw new Exception("이메일 인증코드 다름");
 		}
 		
 		

@@ -60,6 +60,15 @@ public class MemberMailService {
 					e.printStackTrace();
 				}
 			}
+
+			public int checkEmail(String emailCheck) {
+				if(authNumber == Integer.parseInt(emailCheck)) {
+					return 1;
+				}else {
+					return 0;
+				}
+				
+			}
 			
 			//이메일 체크
 }
