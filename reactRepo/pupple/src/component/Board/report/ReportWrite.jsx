@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 const StyeldReportWriteDiv = styled.div`
     width: 100%;
@@ -30,6 +31,10 @@ const StyeldReportWriteDiv = styled.div`
 const ReportWrite = () => {
 
 
+    const navigate = useNavigate();
+
+
+
     const [title, setTitle] = useState();
     const [content, setContent] = useState();
     const [fileObj, setFileObj] = useState();
@@ -42,6 +47,10 @@ const ReportWrite = () => {
     const handleChangeFile = (e) => {
         setFileObj(e.target.files[0]);
     }
+    const str = sessionStorage.getItem("loginMemberVo");
+    const vo = JSON.parse(str);
+    const memberNo = vo.memberNo;
+    console.log(memberNo);
 
 
 
@@ -54,8 +63,35 @@ const ReportWrite = () => {
         fd.append("title" , title);
         fd.append("content" , content);
         fd.append("f" , fileObj);
-        // fd.append("writerNo" , writerNo);
-    }
+        fd.append("memberNo" , memberNo);
+
+
+
+        fetch("http://127.0.0.1:8080/app/report/write" , {
+            method: "POST" ,
+            body : fd ,
+        })
+        .then( resp => resp.json() )
+        .then( data => {
+            if(data.ReportMsg === "success"){
+                alert("게시글 작성 완료 !");
+                // navigate("/board/report/list?pno=1");
+                    // 게시글 작성하기 전 페이지(pno) 값 받아와야 함
+            }else{
+                alert("게시글 작성 실패 ...");
+                // navigate("/board/report/list?pno=1");
+            }
+            if (data.ImgMsg === "success") {
+                alert("이미지 업로드 완료 !");
+                // navigate("/board/report/list?pno=1");
+                    // 게시글 작성하기 전 페이지(pno) 값 받아와야 함
+            } else {
+                alert("이미지 업로드 실패 ...");
+                // navigate("/board/report/list?pno=1");
+            }
+        } )
+        ;
+    };
 
 
 

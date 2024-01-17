@@ -32,11 +32,13 @@ public class ReportDao {
 	
 	
 	// 게시글 작성
-	public int insert(SqlSessionTemplate sst, ReportVo vo) {
-		return sst.insert("ReportMapper.insert", vo);
+	public int write(SqlSessionTemplate sst, ReportVo vo) {
+		return sst.insert("ReportMapper.write", vo);
 	}
-		// 로그인 멤버의 프라이머리 키
-		// 이미지의 프라이머리 키
+	// 이미지 업로드
+	public int insertImg(SqlSessionTemplate sst, ReportVo imgVo) {
+		return sst.insert("ReportMapper.insert", imgVo);
+	}
 	
 	
 	
