@@ -67,7 +67,7 @@
 	</select>
 	
 	<!--게시글 작성 -->
-	<insert id="insert">
+	<insert id="write">
 		INSERT INTO REPORT_BULLETIN_BOARD
 		(
 			REPORT_NO
@@ -85,6 +85,20 @@
 			,#{content}
 		)
 	</insert>
+	<!--이미지 업로드 -->
+	<insert id="insert">
+		INSERT INTO IMAGE
+		(
+			IMAGE_NO
+			,IMAGE_PATH
+		)
+		VALUES
+		(
+			SEQ_IMAGE_NO.NEXTVAL
+			,#{imagePath}
+		)
+	</insert>
+	<!-- 이미지 넘버 가져오는 쿼리문  -->
 	
 	<!--게시글 수정 -->
 	<update id="edit">

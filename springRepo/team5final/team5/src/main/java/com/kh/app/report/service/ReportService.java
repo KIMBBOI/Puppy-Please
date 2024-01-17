@@ -37,8 +37,14 @@ public class ReportService {
 	
 	
 	// 게시글 작성
-	public int insert(ReportVo vo) {
-		return dao.insert(sst, vo);
+	public int write(ReportVo vo) {
+		return dao.write(sst, vo);
+	}
+	// 사진 업로드
+	public int insert(ReportVo imgVo) {
+		String str = imgVo.getImagePath().replace("C:\\dev\\team5Repo\\springRepo\\team5final\\team5\\src\\main\\webapp", "http://127.0.0.1:8080/app");
+		imgVo.setImagePath(str);
+		return dao.insertImg(sst, imgVo);
 	}
 	
 	
