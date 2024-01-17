@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyeldDitailDiv = styled.div`
@@ -24,6 +25,7 @@ const StyeldDitailDiv = styled.div`
     .controllArea {
         display: flex;
         justify-content: right;
+        margin: 10px 0 10px 0 ;
     }
 
     button {
@@ -37,6 +39,24 @@ const StyeldDitailDiv = styled.div`
 
 
 const ReportDetailItem = ( {vo} ) => {
+
+
+
+    // 게시글 작성자 판단 ( 수정/삭제 )
+    const str = sessionStorage.getItem("loginMemberVo");
+    const sessionVo = JSON.parse(str);
+    const loginMemberNo = sessionVo.memberNo;
+    const currentUser = vo.memberNo === loginMemberNo
+
+
+    const navigate = useNavigate();
+    const handleEdit = () => {
+        navigate("/board/report/write", {state: {vo}} );
+    }
+
+
+
+
     return (
         <StyeldDitailDiv>
             <div className='boardArea'>
@@ -44,17 +64,15 @@ const ReportDetailItem = ( {vo} ) => {
                 <img 
                     src={vo.imagePath}
                     alt={'imageNo' + vo.imageNo}
-                    // 5. 전달받은 데이터를 각각 입력 a=제목, b=경로
-                    // 6. 근데 화면 출력 안됨 ... 왜? **************
-                    //   ㄴ패치함수는 비동기적으로 작동하기 때문에.. => useState();
-                    //   => 7. GalleryListItem.jsx
                 />
                 <div><h3>{vo.content}</h3></div>
             </div>
-            <div className='controllArea'>
-                <button>수정</button>
-                <button>삭제</button>
-            </div>
+            {currentUser && (
+                <div className='controllArea'>
+                    <button onClick={ () => handleEdit(vo) }>수정</button>
+                    <button>삭제</button>
+                </div>
+            )}
         </StyeldDitailDiv>
     );
 };

@@ -58,8 +58,6 @@ const ReportList = () => {
     const queryParams = new URLSearchParams(url.search);
     // 특정 쿼리스트링 파라미터 값 가져오기
     let pno = queryParams.get('pno');
-    // 가져온 값 콘솔에 출력
-    console.log('pno:', pno);
     if (pno === null) {
         pno = 1;
     }
@@ -79,7 +77,6 @@ const ReportList = () => {
         fetch(`http://127.0.0.1:8080/app/report/list?pno=${pno}`)
         .then( resp => resp.json() )
         .then( data => {
-            console.log(data);
             // < ReportListItem 컴포넌트로 값을 넘겨주기 >
             // arr = data.voList;
                 // 1. arr 배열에 voList 를 할당

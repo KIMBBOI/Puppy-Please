@@ -42,12 +42,14 @@ public class ReportDao {
 	// 이미지 시퀀스넘버 조회
 	public String selectImageSeqNo(SqlSessionTemplate sst) {
 		return sst.selectOne("ReportMapper.imageSeqNo");
-	}
-	
-	
+	}	
 	// 게시글 수정
-	public int edit(SqlSessionTemplate sst, ReportVo vo) {
-		return sst.update("ReportMapper.edit", vo);
+	public int editBoard(SqlSessionTemplate sst, ReportVo vo) {
+		return sst.update("ReportMapper.editBoard", vo);
+	}
+	// 이미지 수정
+	public int editImage(SqlSessionTemplate sst, ReportVo imgVo) {
+		return sst.update("ReportMapper.editImage", imgVo);
 	}
 	
 	
@@ -56,7 +58,6 @@ public class ReportDao {
 	public int delete(SqlSessionTemplate sst, ReportVo vo) {
 		return sst.delete("ReportMapper.delete", vo);
 	}
-
 
 	
 } // class
