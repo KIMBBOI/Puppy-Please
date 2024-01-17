@@ -8,6 +8,7 @@ const StyledAdoptionNewsWriteDiv = styled.div`
 `;
 
 const AdoptionNewsWrite = ( { memberNo , imageNo } ) => {
+  console.log("imageNo : ", imageNo);
 
   const [title, setTitle] = useState();
   const [content, setContent] = useState();

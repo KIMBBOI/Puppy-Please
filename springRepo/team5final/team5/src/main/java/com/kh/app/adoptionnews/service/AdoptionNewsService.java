@@ -47,13 +47,8 @@ public class AdoptionNewsService {
 	}
 
 	// 입양 후 소식 상세 조회
-	// 단일조회 (+조회수증가)
-	public AdoptionNewsVo detail(String no) {
-		AdoptionNewsVo news = dao.detail(sst, no);
-		// imagePath 설정
-		String imagePath = news.getImagePath().replace("D:\\dev\\springRepo\\springPrj99\\src\\main\\webapp", "http://127.0.0.1:8888/app");
-		news.setImagePath(imagePath);
-		return news;
+	public AdoptionNewsVo detail(AdoptionNewsVo vo) {
+		return dao.detail(sst, vo);
 	}
 
 	// 입양 후 소식 수정
@@ -73,6 +68,8 @@ public class AdoptionNewsService {
 		return boardDao.newsBoardWrite(sst,vo);
 		
 	}
+
+	
 
 	
 }

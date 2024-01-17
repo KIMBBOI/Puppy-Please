@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.app.adoptionnews.service.AdoptionNewsService;
 import com.kh.app.adoptionnews.vo.AdoptionNewsVo;
+import com.kh.app.report.vo.ReportVo;
 
 import lombok.RequiredArgsConstructor;
 
@@ -78,6 +79,7 @@ public class AdoptionNewsController {
 	@GetMapping("list")
 	public Map<String, Object> list() {
 		List<AdoptionNewsVo> voList = service.list();
+		System.out.println("입양후소식 목록 조회 : " + voList);
 		Map<String, Object> map = new HashMap<>();
 		map.put("msg", "good");
 		map.put("voList", voList);
@@ -85,9 +87,24 @@ public class AdoptionNewsController {
 	}
 	
 	//상세조회
-	@GetMapping
-	public void detail() {
-		// TODO: 구현 필요
+	@PostMapping("detail")
+	public Map<String, Object> detail(@RequestBody AdoptionNewsVo vo) {
+		
+		System.out.println("입양후소식 상세 조회 vo : " + vo);
+		
+		AdoptionNewsVo dbVo = service.detail(vo);
+		
+		System.out.println("입양후소식 상세 조회 dbvo : " + dbVo );
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("dbVo", dbVo);
+		if (dbVo == null) {
+			map.put("msg", "good");
+		} else {
+			map.put("msg", "bad");
+		}
+		
+		return map;
 	}
 	
 	//수정
