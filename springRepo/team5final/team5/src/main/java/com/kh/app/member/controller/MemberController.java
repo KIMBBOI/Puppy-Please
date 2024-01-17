@@ -61,6 +61,21 @@ public class MemberController {
 		
 		return map;
 	}
+	//비밀번호 찾기 -> 비밀번호를 임시 비밀번호로 업데이트 한 뒤, 업데이트한 비밀번호를 메일로 보내주기 
+		@PostMapping("searchPwd")
+		public Map<String, Object> searchPwd(@RequestBody MemberVo vo) throws Exception{
+			System.out.println(vo);
+			Map<String, Object> map = new HashMap<String, Object>();
+			int result = service.changeTempPwd(vo);
+			if(result == 1) {
+				mailService.searchPwdEmail(vo.getEmail());
+				map.put("msg", "good");
+			}else {
+				map.put("msg", "fail");
+			}
+			return map;
+		}
+		
 	//이메일 인증
 	@PostMapping("join/mailCheck")
 	public Map<String, String> mailCheck(@RequestBody MemberVo vo){
@@ -123,5 +138,6 @@ public class MemberController {
 		}
 		return map;
 	}
+	
 	
 }

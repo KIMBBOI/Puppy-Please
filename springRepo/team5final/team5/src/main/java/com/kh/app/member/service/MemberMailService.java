@@ -69,6 +69,22 @@ public class MemberMailService {
 				}
 				
 			}
+
+			public void searchPwdEmail(String email) {
+				String setFrom = "msh31414@gmail.com"; // email-config에 설정한 자신의 이메일 주소를 입력 
+				String toMail = email;
+				String title = "퍼플 임시 비밀번호 이메일 입니다."; // 이메일 제목 
+				String tempPwd = "!Q2w3e4r!!";
+				String content = 
+						"홈페이지를 방문해주셔서 감사합니다." + 	//html 형식으로 작성 ! 
+		                "<br><br>" + 
+					    "임시 비밀번호는  " + tempPwd+ "입니다." + 
+					    "<br>" + 
+					    "해당 비밀번호로 로그인 후 회원정보 수정을 반드시 해주세요."; //이메일 내용 삽입
+				System.out.println(content);
+				mailSend(setFrom, toMail, title, content);
+				
+			}
 			
 			//이메일 체크
 }

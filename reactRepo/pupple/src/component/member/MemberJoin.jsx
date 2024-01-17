@@ -215,7 +215,7 @@ const MemberJoin = () => {
                             <td><button onClick={handleMailSend}>인증번호 전송</button></td>
                         </InputRow>
                         <InputRow>
-                            <td><input type="text" name="emailCheck"  value={vo.emailCheck} onChange={handleInputChange} placeholder='인증번호를 입력하세요' /></td>
+                            <td><input type="text" name="emailCheck"  value={vo.emailCheck} o nChange={handleInputChange} placeholder='인증번호를 입력하세요' /></td>
                             <td><button onClick={handleMailCheck}>인증하기</button></td>
                         </InputRow>
                         <InputRow>

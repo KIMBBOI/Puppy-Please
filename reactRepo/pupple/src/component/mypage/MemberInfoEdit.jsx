@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../PuppleContext';
 
 const MemberInfoEdit = () => {
   const navigate = useNavigate();
-
+  const jsonStr = sessionStorage.getItem("loginMemberVo");
+  const sessionLoginMemberVo = JSON.parse(jsonStr);
+  
   const [isFetching, setIsFetching] = useState(false);
   const [passwordMatchError, setPasswordMatchError] = useState(false);
   const [vo, setVo] = useState({
@@ -40,6 +43,8 @@ const MemberInfoEdit = () => {
       [name]: value,
     });
   };
+  const [loginMemberVo, setLoginMemberVo] = useState(sessionLoginMemberVo);
+  const {login} = useAuth();
 
   const handleEditSubmit = (event) => {
     event.preventDefault();
@@ -65,24 +70,44 @@ const MemberInfoEdit = () => {
     }
 
     if(vo.email !== originalInfo.email) {
-updatedFields.email = vo.email;
-}
-if (vo.birthday !== originalInfo.birthday) {
-  updatedFields.birthday = vo.birthday;
-}
+    updatedFields.email = vo.email;
+    }
+    if (vo.birthday !== originalInfo.birthday) {
+      updatedFields.birthday = vo.birthday;
+    }
 
-if (Object.keys(updatedFields).length === 0) {
-  setIsFetching(false);
-  return;
-}
+    if (Object.keys(updatedFields).length === 0) {
+      setIsFetching(false);
+      return;
+    }
 
-const requestBody = {
-  ...vo,
-  ...updatedFields,
-  memberNo: vo.memberNo
-};
+    const requestBody = {
+      ...vo,
+      ...updatedFields,
+      memberNo: vo.memberNo
+    };
+    const updateSessionInfo = (vo) => {
+      
+      fetch('http://127.0.0.1:8080/app/member/mypage/updateProfile', {
+        method: 'post',
+        headers: {
+          'Content-Type' : 'application/json',
+        },
+        body: JSON.stringify(vo),
+      })
+      .then( resp => {return resp.json()})
+      .then( (data) => {
+        if(data.msg === "update success"){
+          sessionStorage.setItem("loginMemberVo", JSON.stringify(data.loginMemberVo));
+          setLoginMemberVo(data.loginMemberVo);
+          login(data.loginMemberVo);
+        }
+      })
+    }
 
-fetch('http://127.0.0.1:8080/app/member/mypage/memberInfoEdit', {
+
+
+fetch('http://127.0.0.1:8080/app/member/mypage/memberInfoEdit/', {
   method: 'PUT',
   headers: {
     'Content-Type': 'application/json',
@@ -98,6 +123,7 @@ fetch('http://127.0.0.1:8080/app/member/mypage/memberInfoEdit', {
   .then((data) => {
     if (data.msg === 'good') {
       alert('회원정보수정 성공');
+      updateSessionInfo(vo);
       navigate('/mypage');
     } else {
       alert('회원정보수정 실패');

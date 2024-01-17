@@ -76,12 +76,28 @@
 		  WHERE MEMBER_NO = #{memberNo} 
 		  AND DEL_YN = 'N'
 	</update>
-
-  	
+	<select id="updateProfile" resultType="MemberVo">
+		SELECT 
+			MEMBER_NO
+			, ID
+			, NICK
+			, NAME
+			, PHONE_NUMBER
+		FROM MEMBER
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
   	<select id="searchId" resultType="MemberVo">
   		SELECT ID
   		FROM MEMBER
   		WHERE NAME=#{name}
   		AND EMAIL=#{email}
   	</select>
+  	<update id="changeTempPwd">
+  		UPDATE SET MEMBER 
+  			PWD = '!Q2w3e4r!!'
+  		WHERE ID = #{id}
+  		AND EMAIL = #{email}
+  		AND DEL_YN = 'N'
+  	</update>
+  	
 </mapper>

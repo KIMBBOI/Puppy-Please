@@ -172,4 +172,13 @@ public class MemberService {
 		}
 	}
 
+	public MemberVo updateProfile(MemberVo vo) {
+		return dao.updateProfile(sst, vo);
+	}
+
+	public int changeTempPwd(MemberVo vo) {
+		return dao.changeTempPwd(sst, vo);
+	}
+
+
 }

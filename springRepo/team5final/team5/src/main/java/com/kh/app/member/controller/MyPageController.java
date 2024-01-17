@@ -3,9 +3,13 @@ package com.kh.app.member.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,7 +44,24 @@ public class MyPageController {
 		return map;
 	}
 		
-	
+	//세션정보 업데이트
+	@RequestMapping("updateProfile")
+	public Map<String, Object> updateProfile(@RequestBody MemberVo vo, HttpSession session) {
+	    // 사용자 정보 업데이트 로직
+		System.out.println("세션정보 업데이트전 vo : "+vo);
+	    MemberVo updatedVo = service.updateProfile(vo);
+	    // 세션 정보 업데이트
+	    System.out.println("세션정보 업데이트 후 vo : " + updatedVo);
+	    Map<String, Object> map = new HashMap<String, Object>();
+	    map.put("msg", "update success");
+	    map.put("loginMemberVo", updatedVo);
+	    if(updatedVo == null) {
+	    	map.put("msg", "fail");
+	    }
+	    session.setAttribute("loginMemberVo", updatedVo);
+	    
+	    return map;
+	}
 	//회원 탈퇴
 	@DeleteMapping("memberQuit")
 	public Map<String, String> quit(@RequestBody MemberVo vo) throws Exception{
