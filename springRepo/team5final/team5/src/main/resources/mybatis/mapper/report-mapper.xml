@@ -98,7 +98,13 @@
 			,#{imagePath}
 		)
 	</insert>
-	<!-- 이미지 넘버 가져오는 쿼리문  -->
+	<!-- 이미지 시퀀스 가져오는 쿼리문  -->
+	<select id="imageSeqNo" resultType="java.lang.String">
+		SELECT
+			SEQ_IMAGE_NO.CURRVAL
+		FROM
+			DUAL
+	</select>
 	
 	<!--게시글 수정 -->
 	<update id="edit">

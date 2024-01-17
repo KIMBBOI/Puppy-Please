@@ -28,7 +28,15 @@ const StyeldReportWriteDiv = styled.div`
     }
 `;
 
+
+
+
 const ReportWrite = () => {
+
+
+
+    let isFetching = false;
+
 
 
     const navigate = useNavigate();
@@ -59,6 +67,17 @@ const ReportWrite = () => {
 
 
 
+        // < isFetching >
+        // 게시글 작성이 겹치면 이미지 시퀀스를 호출하는 과정에서 
+        // 다른 게시글의 이미지 넘버를 불러올 수 있음
+        //   ㄴSELECT SEQ_MEMBER_NO.CURRVAL FROM IMAGE
+        if (isFetching) {
+            return;
+        }
+        isFetching = true;
+
+
+
         const fd = new FormData();
         fd.append("title" , title);
         fd.append("content" , content);
@@ -73,21 +92,17 @@ const ReportWrite = () => {
         })
         .then( resp => resp.json() )
         .then( data => {
-            if(data.ReportMsg === "success"){
-                alert("게시글 작성 완료 !");
-                // navigate("/board/report/list?pno=1");
-                    // 게시글 작성하기 전 페이지(pno) 값 받아와야 함
-            }else{
-                alert("게시글 작성 실패 ...");
-                // navigate("/board/report/list?pno=1");
-            }
-            if (data.ImgMsg === "success") {
-                alert("이미지 업로드 완료 !");
-                // navigate("/board/report/list?pno=1");
-                    // 게시글 작성하기 전 페이지(pno) 값 받아와야 함
+            if (data.ImgMsg === "img insert success") {
+                    if(data.ReportMsg === "board write success"){
+                        alert("게시글 작성 완료 !");
+                        navigate("/board/report/list?pno=1");
+                    }else{
+                        alert("게시글 작성 실패 ...");
+                        navigate("/board/report/write");
+                    }
             } else {
                 alert("이미지 업로드 실패 ...");
-                // navigate("/board/report/list?pno=1");
+                navigate("/board/report/write");
             }
         } )
         ;
@@ -95,6 +110,7 @@ const ReportWrite = () => {
 
 
 
+    
     return (
         <StyeldReportWriteDiv>
             <div><h1>게시글 작성</h1></div>

@@ -46,6 +46,10 @@ public class ReportService {
 		imgVo.setImagePath(str);
 		return dao.insertImg(sst, imgVo);
 	}
+	// 이미지 시퀀스넘버 조회
+	public String selectImageSeqNo() {
+		return dao.selectImageSeqNo(sst);
+	}
 	
 	
 	// 게시글 수정
