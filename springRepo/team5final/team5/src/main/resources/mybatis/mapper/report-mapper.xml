@@ -105,19 +105,26 @@
 		FROM
 			DUAL
 	</select>
-	
 	<!--게시글 수정 -->
-	<update id="edit">
+	<update id="editBoard">
 		UPDATE 
 			REPORT_BULLETIN_BOARD
 	    SET
-	        IMAGE_NO = #{imageNo}
-	        ,TITLE = #{title}
+	        TITLE = #{title}
 	        ,CONTENT = #{content}
-	        ,MODIFY_DATE = #{modifyDate}
+	        ,MODIFY_DATE = SYSDATE
 	    WHERE
 	        REPORT_NO = #{reportNo}
 	        AND DEL_YN = 'N'
+	</update>
+	<!-- 이미지 수정 -->
+	<update id="editImage">
+		UPDATE
+			IMAGE
+	    SET
+			IMAGE_PATH = #{imagePath}
+	    WHERE
+	        IMAGE_NO = #{imageNo}
 	</update>
 	
 	<!--게시글 삭제 -->

@@ -91,6 +91,7 @@ public class ReportController {
 	}
 	
 	
+	
 	// 제보 작성
 	@PostMapping("write")
 	public Map<String, String> write(ReportVo vo, MultipartFile f) throws Exception {
@@ -108,25 +109,54 @@ public class ReportController {
 		Map<String, String> map = new HashMap<String, String>();
 		int resultReport = service.write(vo);
 		
-		// 이미지 작성 성공 여부
 		if (resultImg == 1 ) {
 			map.put("ImgMsg", "img insert success");
 			System.out.println("이미지 업로드 성공 !");
+			if (resultReport == 1 ) {
+				map.put("ReportMsg", "board write success");
+					System.out.println("게시글 작성 성공 !");
+			} else {
+				map.put("ReportMsg", "board write fail");
+					System.out.println("게시글 작성 실패 ...");
+			}
 		} else {
 			map.put("ImgMsg", "img insert fail");
 			System.out.println("이미지 업로드 실패 ...");
 		}
-		// 게시글 작성 성공 여부
-		if (resultReport == 1 ) {
-			map.put("ReportMsg", "board write success");
-				System.out.println("게시글 작성 성공 !");
+		
+		return map;
+	}
+	// 제보 수정
+	@PostMapping("edit")
+	public Map<String, String> edit(ReportVo vo, MultipartFile f) throws Exception {
+		
+		System.out.println("수정하기 ov : " + vo);
+		
+		// 이미지 업데이트
+		String imagePath = saveFile(f);
+		ReportVo imgVo = new ReportVo();
+		imgVo.setImagePath(imagePath);
+		imgVo.setImageNo(vo.getImageNo());
+		int resultImg = service.editImage(imgVo);
+		
+		// 게시글 업데이트
+		Map<String, String> map = new HashMap<String, String>();
+		int resultReport = service.editBoard(vo);
+		
+		if (resultImg == 1) {
+			map.put("ImgMsg", "img update success");
+			System.out.println("이미지 수정 성공 !");
+			if (resultReport == 1 ) {
+				map.put("ReportMsg", "board update success");
+					System.out.println("게시글 수정 성공 !");
+			} else {
+				map.put("ReportMsg", "board update fail");
+					System.out.println("게시글 수정 실패 ...");
+			}
 		} else {
-			map.put("ReportMsg", "board write fail");
-				System.out.println("게시글 작성 실패 ...");
+			map.put("ImgMsg", "img update fail");
+			System.out.println("이미지 수정 실패 ...");
 		}
-		
-		// 트랜잭션처리(isfatching)
-		
 		
 		return map;
 	}
@@ -150,26 +180,6 @@ public class ReportController {
 		f.transferTo(target);
 		
 		return path + originName;
-	}
-	
-	
-	
-	// 제보 수정
-	@PutMapping
-	public Map<String, String> edit(@RequestBody ReportVo vo) {
-		
-		Map<String, String> map = new HashMap<String, String>();
-		int result = service.edit(vo);
-		
-		if (result == 1) {
-			map.put("msg", "success");
-				System.out.println("게시글 수정 성공 !");
-		} else {
-			map.put("msg", "fail");
-				System.out.println("게시글 수정 실패 ...");
-		}
-		
-		return map;
 	}
 	
 	
