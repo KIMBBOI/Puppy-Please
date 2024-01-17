@@ -9,6 +9,7 @@ import com.kh.app.adoptionnews.vo.AdoptionNewsVo;
 public class AdoptionNewsBoardDao {
 
 	public int newsBoardWrite(SqlSessionTemplate sst, AdoptionNewsVo vo) {
+		System.out.println("DAO > vo (글) : " + vo);
 		return sst.insert("AdoptionNewsMapper.boardWrite");
 	}
 	

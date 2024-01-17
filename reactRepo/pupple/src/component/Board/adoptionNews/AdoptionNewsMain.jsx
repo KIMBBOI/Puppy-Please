@@ -4,58 +4,33 @@ import AdoptionNewsWrite from './AdoptionNewsWrite';
 import AdoptionNewsList from './AdoptionNewsList';
 
 const AdoptionNewsMain = () => {
-
     const jsonStr1 = sessionStorage.getItem("loginMemberVo");
     const sessionLoginMemberVo = JSON.parse(jsonStr1);
 
-    // const jsonStr2 = sessionStorage.getItem("imagePath");
-    // const sessionImagePath = JSON.parse(jsonStr2);
-    // const [imagePath, setImagePath] = useState(sessionImagePath);
-    
-
     // memberNo와 imageNo를 session storage에서 가져와서 React 상태로 설정합니다.
     const [memberNo, setMemberNo] = useState();
-    const [imageNo, setImageNo] = useState();
+    const [imageNo, setImageNo] = useState(); // imageNo 상태 추가
 
-    const handleChangeInput = (e) => {
-        setMemberNo(e.target.value)
-        setImageNo(e.target.value);
-      };
-      
+    // const handleClick = () => {
+    //     setMemberNo("새로운 값");
+    // };
+
     useEffect(() => {
-        // fetch('http://127.0.0.1:8080/app/adoptionNews',{
-        //     method: "post",
-        //     headers: {
-        //         'Content-Type': 'multipart/form-data'
-        //     }
-        // })
-        // .then( resp => resp.json() )
-        // .then( data => {
-        //     setMemberNo(data.memberNo)
-        //     setImageNo(data.imageNo);
-        // } )
-        // .catch( error => {
-        //     console.error('데이터 가져오는 중에 오류 발생 : ' , error);
-        // } );
-
-        // session storage에서 데이터를 가져옵니다.
-        // const memberNoFromStorage = sessionStorage.getItem("memberNo");
-        // const imageNoFromStorage = sessionStorage.getItem("imageNo");
-
-        // 가져온 데이터를 React 상태로 설정합니다.
         setMemberNo(sessionLoginMemberVo.memberNo);
-        // setImageNo(sessionImagePath.imageNo);
-    }, [sessionLoginMemberVo.memberNo]);
+        setImageNo(sessionLoginMemberVo.imageNo); // 이미지 번호를 설정합니다.
+    }, [sessionLoginMemberVo.memberNo, sessionLoginMemberVo.imageNo]);
 
     return (
-        <Routes>
-            <Route
-                path='/write'
-                element={<AdoptionNewsWrite memberNo={memberNo} imageNo={imageNo} onClick={handleChangeInput} />}
-               
+        <div>
+            {/* <button onClick={handleClick}>클릭하여 memberNo 변경</button> */}
+            <Routes>
+                <Route
+                    path='/write'
+                    element={<AdoptionNewsWrite memberNo={memberNo} imageNo={imageNo} />} // imageNo를 AdoptionNewsWrite 컴포넌트로 전달합니다.
                 />
-            <Route path='/list' element={<AdoptionNewsList />} />
-        </Routes>
+                <Route path='/list' element={<AdoptionNewsList />} />
+            </Routes>
+        </div>
     );
 };
 

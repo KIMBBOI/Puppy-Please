@@ -10,17 +10,17 @@ import com.kh.app.adoptionnews.vo.AdoptionNewsVo;
 @Repository
 public class AdoptionNewsDao {
 	
-	public int newsWrite(SqlSessionTemplate sst, AdoptionNewsVo vo) {
+	// 입양 후 소식 작성 (사진)
+	public int newsImageWrite(SqlSessionTemplate sst, AdoptionNewsVo vo) {
 
-		System.out.println("DAO > vo: " + vo);
+		System.out.println("DAO > vo (사진) : " + vo);
 		
-		return sst.insert("AdoptionNewsMapper.newsWrite", vo);
+		return sst.insert("AdoptionNewsMapper.newsImageWrite", vo);
 	}
 
-	// 입양 후 소식 작성
-	public int write(SqlSessionTemplate sst, AdoptionNewsVo vo) {
-		return sst.insert("AdoptionNewsMapper.write", vo);
-	}
+//	public int write(SqlSessionTemplate sst, AdoptionNewsVo vo) {
+//		return sst.insert("AdoptionNewsMapper.write", vo);
+//	}
 
 	// 입양 후 소식 목록
 	public List<AdoptionNewsVo> list(SqlSessionTemplate sst) {

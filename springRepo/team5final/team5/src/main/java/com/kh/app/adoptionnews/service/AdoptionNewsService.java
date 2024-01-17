@@ -24,15 +24,15 @@ public class AdoptionNewsService {
 //	}
 
 	// 입양 후 소식 작성
-	public int newsWrite(AdoptionNewsVo vo) {
+	public int newsImageWrite(AdoptionNewsVo vo) {
 		
-		String str = vo.getImageNo().replace("D:\\pupple\\springRepo\\team5final\\team5\\src\\main\\webapp", "http://127.0.0.1:8080/app");
+		String str = vo.getImagePath().replace("D:\\pupple\\springRepo\\team5final\\team5\\src\\main\\webapp", "http://127.0.0.1:8080/app");
 		vo.setImagePath(str);
 		
 //		if (vo.getTitle().length() < 1) {
 //			throw new IllegalStateException();
 //		}
-		return dao.newsWrite(sst, vo);
+		return dao.newsImageWrite(sst, vo);
 	}
 
 	// 입양 후 소식 목록
