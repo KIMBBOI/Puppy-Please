@@ -6,9 +6,61 @@ import { useEffect } from 'react';
 import { useAuth } from '../PuppleContext'
 
 const StyledMemberLoginDiv = styled.div`
-  // 여기에 스타일을 추가하세요
-`;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
 
+  & h1 {
+    font-size: 24px; /* 제목 글꼴 크기 설정 */
+    margin-bottom: 20px;
+  }
+
+  & form {
+    background: white;
+    width: 100%;
+    max-width: 400px; /* 폼 요소의 최대 너비 설정 */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+
+  & table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  & input[type="text"],
+  & input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+  }
+
+  & button[type="submit"],
+  & button {
+    width: 100%;
+    padding: 12px 0;
+    border: none;
+    border-radius: 5px;
+    background-color: #C8ADFF;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+  }
+
+  & button[type="submit"]:hover,
+  & button:hover {
+    background-color: #A080FF;
+  }
+`;
 
 const MemberLogin = () => {
   const navigate = useNavigate();
@@ -87,12 +139,12 @@ const MemberLogin = () => {
   }
     return (
     <StyledMemberLoginDiv>
-      <div>
-        <h1>로그인</h1>
-      </div>
       <form onSubmit={handleLoginClick}>
         <table>
           <tbody>
+            <div>
+              <h1>로그인</h1>
+            </div>
             <tr>
               <td><input type="text" name="id" onChange={handleInputChange} placeholder='아이디'/></td>
             </tr>
@@ -101,6 +153,8 @@ const MemberLogin = () => {
             </tr>
             <tr>
               <td><button type="submit">로그인</button></td>
+            </tr>
+            <tr>
               <td><button onClick={ handleJoinButton }>회원가입</button></td>
             </tr>
             <tr>

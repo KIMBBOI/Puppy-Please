@@ -11,7 +11,6 @@ const StyledJoinDiv = styled.div`
 
 const Form = styled.form`
   background: white;
-  padding: 40px;
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 `;
@@ -24,17 +23,18 @@ const Table = styled.table`
 const InputRow = styled.tr`
   & > td {
     padding: 10px;
+    text-align: center; /* 가운데 정렬을 위한 스타일 */
   }
 `;
 
 const Input = styled.input`
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px; // 필드 하단 여백
-  border: 1px solid #ddd;
+  width: 300px; /* 너비를 300px로 조정 */
+  padding: 12px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
   border-radius: 5px;
+  text-align: center;
 `;
-
 const SubmitButton = styled.input`
   width: 100%;
   padding: 10px 0;
@@ -52,8 +52,10 @@ const SubmitButton = styled.input`
 `;
 const ErrorMsg = styled.span`
   color: red;
-  display: block; // or inline-block, depending on preference
+  font-size: 12px; /* 폰트 크기를 원하는 크기로 조정하세요 */
+  font-weight: bold;
   margin-top: 5px;
+  display: block;
 `;
 
 
@@ -178,11 +180,11 @@ const MemberJoin = () => {
                         <tbody>
                             <InputRow>
                                 <td>아이디</td>
-                                <td><Input type="text" name='id' value={vo.id} onChange={handleInputChange} /></td>
+                                <td><Input type="text" name='id' value={vo.id} onChange={handleInputChange} placeholder='6자 이상 12자 이하로 작성'/></td>
                         </InputRow>
                         <InputRow>
                             <td>비밀번호</td>
-                            <td><Input type="password" name='pwd' value={vo.pwd} onChange={handleInputChange} /></td>
+                            <td><Input type="password" name='pwd' value={vo.pwd} onChange={handleInputChange} placeholder='8자 이상 16자 이하 대소문자, 특수문자 포함'/></td>
                         </InputRow>
                         <InputRow>
                             <td>비밀번호 확인</td>
@@ -193,13 +195,14 @@ const MemberJoin = () => {
                             value={vo.pwd2}
                             onChange={handleInputChange}
                             onBlur={handleComparePwd} // 여기에 onBlur 이벤트 핸들러 추가
+                            placeholder='비밀번호 확인'
                             />
                             {passwordMatchError && <ErrorMsg>비밀번호가 일치하지 않습니다.</ErrorMsg>}
                             </td>
                         </InputRow>
                         <InputRow>
                             <td>닉네임</td>
-                            <td><Input type="text" name='nick' value={vo.nick} onChange={handleInputChange} /></td>
+                            <td><Input type="text" name='nick' value={vo.nick} onChange={handleInputChange} placeholder='4자 이상 12자 이하로 작성'/></td>
                         </InputRow>
                         <InputRow>
                             <td>이름</td>
@@ -207,7 +210,7 @@ const MemberJoin = () => {
                         </InputRow>
                         <InputRow>
                             <td>전화번호</td>
-                            <td><Input type="text" name='phoneNumber' value={vo.phoneNumber} onChange={handleInputChange} /></td>
+                            <td><Input type="text" name='phoneNumber' value={vo.phoneNumber} onChange={handleInputChange} placeholder="' - ' 포함해서 작성"/></td>
                         </InputRow>
                         <InputRow>
                             <td>이메일</td>
@@ -215,12 +218,13 @@ const MemberJoin = () => {
                             <td><button onClick={handleMailSend}>인증번호 전송</button></td>
                         </InputRow>
                         <InputRow>
-                            <td><input type="text" name="emailCheck"  value={vo.emailCheck} o nChange={handleInputChange} placeholder='인증번호를 입력하세요' /></td>
+                            <td>인증번호 확인</td>
+                            <td><Input type="text" name="emailCheck"  value={vo.emailCheck} o nChange={handleInputChange} placeholder='인증번호를 입력하세요' /></td>
                             <td><button onClick={handleMailCheck}>인증하기</button></td>
                         </InputRow>
                         <InputRow>
                             <td>생년월일</td>
-                            <td><Input type="text" name='birthday' value={vo.birthday} onChange={handleInputChange} /></td>
+                            <td><Input type="text" name='birthday' value={vo.birthday} onChange={handleInputChange} placeholder='년도월일 8자로 작성(20000101)'/></td>
                         </InputRow>
                         <InputRow>
                             <td colSpan="2"><SubmitButton type="submit" value="회원가입" /></td>
