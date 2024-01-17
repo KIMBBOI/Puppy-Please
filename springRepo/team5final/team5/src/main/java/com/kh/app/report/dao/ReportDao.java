@@ -39,7 +39,10 @@ public class ReportDao {
 	public int insertImg(SqlSessionTemplate sst, ReportVo imgVo) {
 		return sst.insert("ReportMapper.insert", imgVo);
 	}
-	
+	// 이미지 시퀀스넘버 조회
+	public String selectImageSeqNo(SqlSessionTemplate sst) {
+		return sst.selectOne("ReportMapper.imageSeqNo");
+	}
 	
 	
 	// 게시글 수정

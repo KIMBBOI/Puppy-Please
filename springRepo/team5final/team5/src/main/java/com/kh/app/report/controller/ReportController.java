@@ -95,17 +95,28 @@ public class ReportController {
 	@PostMapping("write")
 	public Map<String, String> write(ReportVo vo, MultipartFile f) throws Exception {
 		
+		// 이미지 업로드
 		String imagePath = saveFile(f);
 		ReportVo imgVo = new ReportVo();
 		imgVo.setImagePath(imagePath);
-		
 		int resultImg = service.insert(imgVo);
 		
+		// 이미지 시퀀스넘버 조회
+		vo.setImageNo(service.selectImageSeqNo());
 
-		
+		// 게시글 작성
 		Map<String, String> map = new HashMap<String, String>();
 		int resultReport = service.write(vo);
 		
+		// 이미지 작성 성공 여부
+		if (resultImg == 1 ) {
+			map.put("ImgMsg", "img insert success");
+			System.out.println("이미지 업로드 성공 !");
+		} else {
+			map.put("ImgMsg", "img insert fail");
+			System.out.println("이미지 업로드 실패 ...");
+		}
+		// 게시글 작성 성공 여부
 		if (resultReport == 1 ) {
 			map.put("ReportMsg", "board write success");
 				System.out.println("게시글 작성 성공 !");
@@ -114,14 +125,8 @@ public class ReportController {
 				System.out.println("게시글 작성 실패 ...");
 		}
 		
+		// 트랜잭션처리(isfatching)
 		
-		if (resultImg == 1 ) {
-			map.put("ImgMsg", "img insert success");
-				System.out.println("이미지 업로드 성공 !");
-		} else {
-			map.put("ImgMsg", "img insert fail");
-				System.out.println("이미지 업로드 실패 ...");
-		}
 		
 		return map;
 	}
