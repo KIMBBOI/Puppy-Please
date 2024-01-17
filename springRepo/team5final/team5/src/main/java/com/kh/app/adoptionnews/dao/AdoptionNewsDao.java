@@ -10,6 +10,19 @@ import com.kh.app.adoptionnews.vo.AdoptionNewsVo;
 @Repository
 public class AdoptionNewsDao {
 	
+	// 이미지 업로드
+	public int insertImg(SqlSessionTemplate sst, AdoptionNewsVo imgVo) {
+		return sst.insert("AdoptionNewsMapper.insert", imgVo);
+	}
+	//이미지 시퀀스넘버 조회
+	public String selectImageSeqNo(SqlSessionTemplate sst) {
+		return sst.selectOne("AdoptionNewsMapper.imageSeqNo");
+	}
+	//게시글 작성
+	public int write(SqlSessionTemplate sst, AdoptionNewsVo vo) {
+		return sst.insert("AdoptionNewsMapper.write", vo);
+	}
+	
 	// 입양 후 소식 작성 (사진)
 	public int newsImageWrite(SqlSessionTemplate sst, AdoptionNewsVo vo) {
 
@@ -17,10 +30,6 @@ public class AdoptionNewsDao {
 		
 		return sst.insert("AdoptionNewsMapper.newsImageWrite", vo);
 	}
-
-//	public int write(SqlSessionTemplate sst, AdoptionNewsVo vo) {
-//		return sst.insert("AdoptionNewsMapper.write", vo);
-//	}
 
 	// 입양 후 소식 목록
 	public List<AdoptionNewsVo> list(SqlSessionTemplate sst) {
@@ -42,6 +51,7 @@ public class AdoptionNewsDao {
 	public int delete(SqlSessionTemplate sst, String no) {
 		return sst.update("AdoptionNewsMapper.delete", no);
 	}
+
 
 	
 

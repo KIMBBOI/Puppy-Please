@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import AdoptionNewsListItem from './AdoptionNewsListItem';
+import { useNavigate } from 'react-router-dom';
 
 const StyledAdoptionNewsListDiv = styled.div`
     width: 100%;
@@ -38,9 +39,7 @@ const AdoptionNewsList = () => {
                     } )
                 }
             <div>
-                <button onClick={ () => {
-                    navigate("/board/adoptionNews/write");
-                } }>작성하기</button>
+                <button onClick={ () => {navigate("/board/adoptionNews/write");} }>작성하기</button>
             </div>
             <div className='footer'>
 

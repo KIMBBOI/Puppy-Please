@@ -26,34 +26,37 @@ public class AdoptionNewsController {
 	@PostMapping("write")
 	public Map<String, String> write(AdoptionNewsVo vo, MultipartFile file) throws Exception {
 		
-		System.out.println("file: " + file.getOriginalFilename());
-		
+		//이미지 업로드
 		String imagePath = saveFile(file);
-		vo.setImagePath(imagePath);
+		AdoptionNewsVo imgVo = new AdoptionNewsVo();
+		imgVo.setImagePath(imagePath);;
+		int resultImg = service.insert(imgVo);
 		
-		System.out.println("vo: " + vo);
+		//이미지 시퀀스넘버 조회
+		vo.setImageNo(service.selectImageSeqNo());
 		
-		int result = service.newsImageWrite(vo);
-//		System.out.println(result);
-		int result2 = service.newsBoardWrite(vo);
-		
+		//게시글 작성
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("msg", "good");
-		map.put("imagePath", imagePath);
-		if (result != 1 && result2 != 1) {
-			map.put("msg", "bad");
-		}
+		int resultBoard = service.write(vo);
 		
-//		Map<String, String> map = new HashMap<String, String>();
-//		int result = service.insert(vo);
-//		
-//		if (result == 1) {
-//			map.put("msg", "success");
-//				System.out.println("게시글 작성 성공 !");
-//		} else {
-//			map.put("msg", "fail");
-//				System.out.println("게시글 작성 실패 ...");
-//		}
+		//이미지 작성 성공 여부
+		if (resultImg == 1) {
+			map.put("imgMsg", "img insert good");
+			System.out.println("이미지 업로드 성공");
+		} else {
+			map.put("imgMsg", "img insert bad");
+			System.out.println("이미지 업로드 실패");
+		}
+		// 게시글 작성 성공 여부
+		map.put("imagePath", imagePath);
+		if (resultBoard == 1) {
+			map.put("boardMsg", "board write good");
+			System.out.println("게시글 작성 성공");
+		} else {
+			map.put("boardMsg", "board write bad");
+			System.out.println("게시글 작성 실패");
+		}
+		// 트랜잭션처리(isfatching)
 		
 		return map;
 	}
@@ -68,8 +71,10 @@ public class AdoptionNewsController {
 		String path = "D:\\pupple\\springRepo\\team5final\\team5\\src\\main\\webapp\\resources\\upload\\img\\";
 		String originName = file.getOriginalFilename();
 		
+		// 원래는 "path + changeName(랜덤값) + 확장자" 로 해야함 
 		File target = new File(path + originName);
 		
+		// 파일 바이트코드 읽어서 타겟에 저장
 		file.transferTo(target);
 		
 		return path + originName;
@@ -79,7 +84,6 @@ public class AdoptionNewsController {
 	@GetMapping("list")
 	public Map<String, Object> list() {
 		List<AdoptionNewsVo> voList = service.list();
-		System.out.println("입양후소식 목록 조회 : " + voList);
 		Map<String, Object> map = new HashMap<>();
 		map.put("msg", "good");
 		map.put("voList", voList);
