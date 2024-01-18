@@ -12,6 +12,7 @@
   
   <typeAliases>
   	<typeAlias type="com.kh.app.member.vo.MemberVo" alias="MemberVo" />
+  	<typeAlias type="com.kh.app.admin.vo.AdminVo" alias="AdminVo" />
   	<typeAlias type="java.lang.Integer" alias="Integer" />
   </typeAliases>
   

@@ -68,6 +68,8 @@ const CenteredButtonContainer = styled.div`
 `;
 
 const MemberLogin = () => {
+
+
   const navigate = useNavigate();
   const { login } = useAuth();
   const jsonStr = sessionStorage.getItem("loginMemberVo");
@@ -134,7 +136,9 @@ const MemberLogin = () => {
   const handleSearchButton = () => {
     navigate("/member/search");
   };
-
+  const handleAdminLogin = () => {
+    navigate("/admin/login");
+  }
   return (
     <StyledMemberLoginDiv>
       <form onSubmit={handleLoginClick}>
@@ -144,6 +148,9 @@ const MemberLogin = () => {
               <td>
                 <h1>로그인</h1>
               </td>
+            </tr>
+            <tr>
+              <td><input type="button" onClick={handleAdminLogin} value={'관리자'} /></td>
             </tr>
             <tr>
               <td>
