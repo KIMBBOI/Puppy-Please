@@ -25,7 +25,6 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("report")
 @RequiredArgsConstructor
-@CrossOrigin
 public class ReportController {
 
 	private final ReportService service;
