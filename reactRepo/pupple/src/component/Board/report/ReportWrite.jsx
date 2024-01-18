@@ -98,14 +98,39 @@ const ReportWrite = () => {
 
 
 
+
+        // 작성하기로 전환 시 state 에 데이터가 있으면 수정하기로 변경
         const existingReport = location.state?.vo;
         if (existingReport) {
+            if (!title) {
+                alert('제목을 입력하세요');
+                return navigate("/board/report/write");
+            }
+            if (title.length < 4) {
+                alert('제목이 너무 짧습니다');
+                return navigate("/board/report/write");
+            }
+            if (content === undefined) {
+                alert('내용을 입력하세요');
+                return navigate("/board/report/write");
+            }
+            if (content.length < 4) {
+                alert('내용이 너무 짧습니다');
+                return navigate("/board/report/write");
+            }
+            if (fileObj === undefined) {
+                alert('사진을 등록하세요');
+                return navigate("/board/report/write");
+            }
             
-            console.log(existingReport.reportNo);
-            console.log(existingReport.imageNo);
-            console.log(location.state);
+
+
+            // 수정 시 WHERE 에 필요한 데이터 준비
             fd.append("reportNo" , existingReport.reportNo);
             fd.append("imageNo" , existingReport.imageNo);
+
+
+
             // 수정하기
             fetch("http://127.0.0.1:8080/app/report/edit" , {
                 method: "POST" ,
@@ -129,6 +154,29 @@ const ReportWrite = () => {
             ;
         } else {
             // 작성하기
+            if (!title) {
+                alert('제목을 입력하세요');
+                return navigate("/board/report/write");
+            }
+            if (title.length < 4) {
+                alert('제목이 너무 짧습니다');
+                return navigate("/board/report/write");
+            }
+            if (content === undefined) {
+                alert('내용을 입력하세요');
+                return navigate("/board/report/write");
+            }
+            if (content.length < 4) {
+                alert('내용이 너무 짧습니다');
+                return navigate("/board/report/write");
+            }
+            if (fileObj === undefined) {
+                alert('사진을 등록하세요');
+                return navigate("/board/report/write");
+            }
+
+
+
             fetch("http://127.0.0.1:8080/app/report/write" , {
                 method: "POST" ,
                 body : fd ,
