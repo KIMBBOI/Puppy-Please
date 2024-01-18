@@ -6,12 +6,54 @@ import { useAuth } from '../PuppleContext';
 const StyledMemberQuitDiv = styled.div`
 
 `;
-const ErrorMsg = styled.span`
-  color: red;
-  display: block; // or inline-block, depending on preference
-  margin-top: 5px;
+const Form = styled.form`
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 `;
 
+const Table = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+`;
+
+const InputRow = styled.tr`
+  & > td {
+    padding: 10px;
+    text-align: center; /* 가운데 정렬을 위한 스타일 */
+  }
+`;
+
+const Input = styled.input`
+  width: 300px; /* 너비를 300px로 조정 */
+  padding: 12px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+`;
+const SubmitButton = styled.input`
+  width: 100%;
+  padding: 10px 0;
+  border: none;
+  border-radius: 5px;
+  background-color: #C8ADFF;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #A080FF;
+  }
+`;
+const ErrorMsg = styled.span`
+  color: red;
+  font-size: 12px; /* 폰트 크기를 원하는 크기로 조정하세요 */
+  font-weight: bold;
+  margin-top: 5px;
+  display: block;
+`;
 const MemberQuit = () => {
     const {logout} = useAuth();
 
@@ -21,7 +63,6 @@ const MemberQuit = () => {
 
     
     const loginMemberVo = JSON.parse(sessionStorage.getItem("loginMemberVo"));
-    console.log("MemberQuit의 console.log:::",loginMemberVo);
 
     const [vo, setVo] = useState({
         id:loginMemberVo.id, pwd:'', pwd2:''
@@ -87,50 +128,50 @@ const MemberQuit = () => {
     
     return (
         <StyledMemberQuitDiv>
-            <form onSubmit={handleQuitSubmit}>
-                <table>
+            <Form onSubmit={handleQuitSubmit}>
+                <Table>
                     <tbody>
-                        <tr>
+                        <InputRow>
                             <td>회원 이름</td>
-                            <td><input type="text" name="name" placeholder={loginMemberVo.name} disabled/></td>
-                        </tr>
-                        <tr>
+                            <td><Input type="text" name="name" placeholder={loginMemberVo.name} disabled/></td>
+                        </InputRow>
+                        <InputRow>
                             <td>닉네임</td>
-                            <td><input type="text" name="nick" placeholder={loginMemberVo.nick} disabled/></td>
-                        </tr>
-                        <tr>
+                            <td><Input type="text" name="nick" placeholder={loginMemberVo.nick} disabled/></td>
+                        </InputRow>
+                        <InputRow>
                             <td>회원ID</td>
-                            <td><input type="text" name="id" placeholder={loginMemberVo.id} disabled/></td>
-                        </tr>
-                        <tr>
+                            <td><Input type="text" name="id" placeholder={loginMemberVo.id} disabled/></td>
+                        </InputRow>
+                        <InputRow>
                             <td>비밀번호</td>
-                            <td><input type="password" name="pwd" onChange={handleInputChange}/></td>
-                        </tr>
-                        <tr>
+                            <td><Input type="password" name="pwd" onChange={handleInputChange}/></td>
+                        </InputRow>
+                        <InputRow>
                             <td>비밀번호 확인</td>
-                            <td><input type="password" name="pwd2" onChange={handleInputChange} onBlur={handleComparePwd}/>
+                            <td><Input type="password" name="pwd2" onChange={handleInputChange} onBlur={handleComparePwd}/>
                             {passwordMatchError && <ErrorMsg>비밀번호가 일치하지 않습니다.</ErrorMsg>}</td>
-                        </tr>
-                        <tr>
+                        </InputRow>
+                        <InputRow>
                             <td>생년월일</td>
-                            <td><input type="text" name="birthday" placeholder={loginMemberVo.birthday} disabled/></td>
-                        </tr>
-                        <tr>
+                            <td><Input type="text" name="birthday" placeholder={loginMemberVo.birthday} disabled/></td>
+                        </InputRow>
+                        <InputRow>
                             <td>휴대폰 번호</td>
-                            <td><input type="text" name="phoneNumber" placeholder={loginMemberVo.phoneNumber} disabled/></td>
-                        </tr>
-                        <tr>
+                            <td><Input type="text" name="phoneNumber" placeholder={loginMemberVo.phoneNumber} disabled/></td>
+                        </InputRow>
+                        <InputRow>
                             <td>이메일</td>
-                            <td><input type="text" name="email" placeholder={loginMemberVo.email} disabled/></td>
-                        </tr>
-                        <tr>
-                            <td rowSpan={2}><input type="submit" value="회원탈퇴"/></td>
-                        </tr>
+                            <td><Input type="text" name="email" placeholder={loginMemberVo.email} disabled/></td>
+                        </InputRow>
+                        <InputRow>
+                            <td rowSpan={2}><SubmitButton type="submit" value="회원탈퇴"/></td>
+                        </InputRow>
                     </tbody>
 
-                </table>
+                </Table>
 
-            </form>
+            </Form>
         </StyledMemberQuitDiv>
     );
 };

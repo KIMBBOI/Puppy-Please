@@ -19,6 +19,35 @@ const StyledSearchDiv = styled.div`
     }
 `;
 
+const Form = styled.form`
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+`;
+
+const Input = styled.input`
+  width: 300px; /* 너비를 300px로 조정 */
+  padding: 12px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+`;
+const SubmitButton = styled.input`
+  width: 100%;
+  padding: 10px 0;
+  border: none;
+  border-radius: 5px;
+  background-color: #C8ADFF;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #A080FF;
+  }
+`;
 const MemberSearch = () => {
 
     const [vo, setVo] = useState(null);
@@ -80,26 +109,27 @@ const MemberSearch = () => {
         <StyledSearchDiv>
             <div>
                 <h1>아이디 찾기</h1>
-                <form onSubmit={handleSearchId}>
-                    <input type="text" name="name" placeholder='이름' onChange={handleSearchIdChange}/>
+                <Form onSubmit={handleSearchId}>
+                    <Input type="text" name="name" placeholder='이름' onChange={handleSearchIdChange}/>
                     <br />
-                    <input type="email" name="email" placeholder='이메일' onChange={handleSearchIdChange} />
+                    <Input type="email" name="email" placeholder='이메일' onChange={handleSearchIdChange} />
                     <br />
-                    <input type="submit" value='아이디 찾기' />
-                </form>
+                    <SubmitButton type="submit" value='아이디 찾기' />
+                </Form>
             </div>
+            <br />
             <hr />
             <div>
                 <h1>비밀번호 찾기</h1>
-                <form onSubmit={handleSearchPwd}>
-                    <input type="text" name="id" placeholder='아이디' onChange={handleSearchPwdChange}/>
+                <Form onSubmit={handleSearchPwd}>
+                    <Input type="text" name="id" placeholder='아이디' onChange={handleSearchPwdChange}/>
                     <br />
-                    <input type="text" name="name" placeholder='이름' onChange={handleSearchPwdChange}/>
+                    <Input type="text" name="name" placeholder='이름' onChange={handleSearchPwdChange}/>
                     <br />
-                    <input type="email" name="email" placeholder='이메일' onChange={handleSearchPwdChange}/>
+                    <Input type="email" name="email" placeholder='이메일' onChange={handleSearchPwdChange}/>
                     <br />
-                    <input type="submit" value='이메일 전송' />
-                </form>
+                    <SubmitButton type="submit" value='이메일 전송' />
+                </Form>
             </div>
         </StyledSearchDiv>
     );
