@@ -83,6 +83,8 @@
 			, NICK
 			, NAME
 			, PHONE_NUMBER
+			, BIRTHDAY
+			, EMAIL
 		FROM MEMBER
 		WHERE MEMBER_NO = #{memberNo}
 	</select>

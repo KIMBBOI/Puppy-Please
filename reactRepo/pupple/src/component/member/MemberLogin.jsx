@@ -61,6 +61,27 @@ const StyledMemberLoginDiv = styled.div`
   & button:hover {
     background-color: #A080FF;
   }
+  & input[type="button"] {
+    background-color: #C8ADFF; /* 버튼의 배경색 */
+    color: white; /* 버튼의 텍스트 색상 */
+    padding: 12px 20px; /* 버튼 내부의 패딩 */
+    margin: 5px 0; /* 버튼 외부의 마진 */
+    border: none; /* 버튼 테두리 없음 */
+    border-radius: 5px; /* 버튼의 모서리를 둥글게 */
+    font-size: 16px; /* 텍스트 사이즈 */
+    font-weight: bold; /* 텍스트를 굵게 */
+    cursor: pointer; /* 커서를 포인터로 */
+    transition: background-color 0.3s, box-shadow 0.3s; /* 색상과 그림자에 대한 전환 효과 */
+    float: right; /* 버튼을 오른쪽으로 정렬 */
+    clear: both; /* float된 요소의 영향을 받지 않도록 설정 */
+    display: block; /* 블록 레벨 요소로 만들어 줄바꿈 효과 */
+  }
+
+  & input[type="button"]:hover {
+    background-color: #A080FF; /* 호버 시 버튼의 배경색 변경 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* 호버 시 그림자 효과 */
+  }
+  
 `;
 
 const CenteredButtonContainer = styled.div`
