@@ -6,36 +6,25 @@
 
     <!-- 입양 신청 리스트 조회 -->
     <select id="list" resultType="com.kh.app.adoption.vo.AdoptionVo">
-        SELECT
-		    A.ADOPTION_BOARD_NO,
-		    A.IMAGE_NO,
-		    A.RESCUE_DOG_NO,
-		    A.ADMIN_NO,
-		    A.ENROLL_DATE,
-		    A.MODIFY_DATE,
-		    A.DEL_YN,
-		    I.IMAGE_PATH,
-		    R.BREED,
-		    R.ADMISSION_DATE,
-		    R.QUIT_DATE,
-		    R.DOG_NAME,
-		    R.AGE,
-		    R.GENDER_MF,
-		    R.INOCULATION_OX,
-		    R.NEUTERING_OX,
-		    R.WEIGHT
-		FROM 
+    	SELECT *
+    	FROM (
+	        SELECT
+		    RD.IMAGE_NO AS DOG_IMAGE_NO,
+		    RD.DOG_NAME,
+		    RD.BREED,
+		    RD.GENDER_MF,
+		    RD.NEUTERING_OX,
+		    RD.AGE,
+		    RD.WEIGHT
+		FROM
 		    ADOPTION_BOARD A
 		JOIN
-		    IMAGE I 
-		    ON I.IMAGE_NO = A.IMAGE_NO
-		JOIN
-		    RESCUE_DOG R
-		    ON R.RESCUE_DOG_NO = A.RESCUE_DOG_NO
-		WHERE 
+		    RESCUE_DOG RD ON A.RESCUE_DOG_NO = RD.RESCUE_DOG_NO
+		WHERE
 		    A.DEL_YN = 'N'
-		ORDER BY 
-		    A.ADOPTION_BOARD_NO DESC;
+		ORDER BY
+		    A.ENROLL_DATE DESC
+    	)
     </select>
 
     <!-- 입양 신청 상세 조회 -->
@@ -53,51 +42,46 @@
         WHERE 
         	ADOPTION_BOARD_NO = #{adoptionNo}
     </select>
+    
+    <!-- 게시글 작성 -->
+    <insert id="write" >
+		INSERT INTO ADOPTION_BOARD
+        (
+            ADOPTION_BOARD_NO
+            , IMAGE_NO
+            , RESCUE_DOG_NO
+            , ADMIN_NO
+        )
+        VALUES
+        (
+            SEQ_ADOPTION_BOARD_NO.NEXTVAL
+            , #{imageNo}
+            , #{rescueDogNo}
+            , #{adminNo}
+        ) 
+	</insert>
 
-    <!-- 입양 신청 등록 -->
+    <!-- 이미지 업로드 -->
     <insert id="insert">
-    	INSERT INTO ADOPTION_BOARD
+    	INSERT INTO IMAGE
 		(
-		    ADOPTION_BOARD_NO,
-		    IMAGE_NO,
-		    RESCUE_DOG_NO,
-		    ADMIN_NO
+			IMAGE_NO
+			,IMAGE_PATH
 		)
-		SELECT
-		    SEQ_ADOPTION_BOARD_NO.NEXTVAL,
-		    I.IMAGE_NO,  
-		    RD.RESCUE_DOG_NO,  
-		    1
-		FROM
-		    RESCUE_DOG RD,
-		    IMAGE I
-		WHERE
-		    RD.RESCUE_DOG_NO = #{rescueDogNo}
-		AND
-		    I.IMAGE_PATH = #{imagePath}
+		VALUES
+		(
+			SEQ_IMAGE_NO.NEXTVAL
+			,#{imagePath}
+		)
     </insert>
-    <!-- <insert id="write" parameterType="com.kh.app.adoption.vo.AdoptionVo">
-        INSERT INTO ADOPTION_BOARD 
-        (
-        	ADOPTION_BOARD_NO
-        	, IMAGE_NO
-        	, RESCUE_DOG_NO
-        	, ADMIN_NO
-        	, ENROLL_DATE
-        	, MODIFY_DATE
-        	, DEL_YN
-        )
-        VALUES 
-        (
-        	SEQ_ADOPTION_BOARD_NO.NEXTVAL
-        	, #{imageNo}
-        	, #{rescueDogNo}
-        	, #{adminNo}
-        	, #{enrollDate}
-        	, #{modifyDate}
-        	, #{delYn}
-        )
-    </insert> -->
+   
+	<!-- 이미지 시퀀스 가져오는 쿼리문  -->
+	<select id="imageSeqNo"  resultType="java.lang.String">
+		SELECT 
+			SEQ_IMAGE_NO.CURRVAL
+		FROM 
+			DUAL
+	</select>
 
     <!-- 입양 신청 수정 -->
     <update id="edit" parameterType="com.kh.app.adoption.vo.AdoptionVo">
