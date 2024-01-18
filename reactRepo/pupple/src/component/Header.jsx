@@ -45,8 +45,8 @@ const Header = () => {
     useEffect(() => {
         const loginMemberStr = sessionStorage.getItem("loginMemberVo")
         setLoginMemberVo(JSON.parse(loginMemberStr));
-    },[])
-    console.log(loginMemberVo)
+    },[]);
+    console.log(loginMemberVo);
     const navigate = useNavigate();
     const handleClickJoin = () => {
         navigate("/member/join");
@@ -62,7 +62,6 @@ const Header = () => {
         logout();
         navigate("/");
     }
-    console.log(loginMemberVo);
     return (
         
         <StyledHeaderDiv>

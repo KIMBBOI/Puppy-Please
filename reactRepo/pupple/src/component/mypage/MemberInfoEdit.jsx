@@ -1,7 +1,60 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../PuppleContext';
+import styled from 'styled-components';
 
+const StyledMemberInfoEditDiv = styled.div`
+
+`;
+
+const Form = styled.form`
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+`;
+
+const Table = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+`;
+
+const InputRow = styled.tr`
+  & > td {
+    padding: 10px;
+    text-align: center; /* 가운데 정렬을 위한 스타일 */
+  }
+`;
+
+const Input = styled.input`
+  width: 300px; /* 너비를 300px로 조정 */
+  padding: 12px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+`;
+const ErrorMsg = styled.span`
+  color: red;
+  font-size: 12px; /* 폰트 크기를 원하는 크기로 조정하세요 */
+  font-weight: bold;
+  margin-top: 5px;
+  display: block;
+`;
+const SubmitButton = styled.input`
+  width: 100%;
+  padding: 10px 0;
+  border: none;
+  border-radius: 5px;
+  background-color: #C8ADFF;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #A080FF;
+  }
+`;
 const MemberInfoEdit = () => {
   const navigate = useNavigate();
   const jsonStr = sessionStorage.getItem("loginMemberVo");
@@ -44,7 +97,7 @@ const MemberInfoEdit = () => {
     });
   };
   const [loginMemberVo, setLoginMemberVo] = useState(sessionLoginMemberVo);
-  const {login} = useAuth();
+  const {login} = useAuth(loginMemberVo);
 
   const handleEditSubmit = (event) => {
     event.preventDefault();
@@ -147,13 +200,13 @@ setPasswordMatchError(false);
 };
 
 return (
-<div>
-<form onSubmit={handleEditSubmit}>
-        <table>
+<StyledMemberInfoEditDiv>
+<Form onSubmit={handleEditSubmit}>
+        <Table>
           <tbody>
-            <tr>
+            <InputRow>
               <td>
-                <input
+                <Input
                   type="text"
                   name="memberNo"
                   value={vo.memberNo}
@@ -161,63 +214,59 @@ return (
                   hidden
                 />
               </td>
-            </tr>
-            <tr>
+            </InputRow>
+            <InputRow>
               <td>비밀번호</td>
               <td>
-                <input type="password" name="pwd" onChange={handleInputChange} />
+                <Input type="password" name="pwd" onChange={handleInputChange} />
               </td>
-            </tr>
-            <tr>
+            </InputRow>
+            <InputRow>
               <td>비밀번호 확인</td>
               <td>
-                <input
+                <Input
                   type="password"
                   name="pwd2"
                   value={vo.pwd2}
                   onChange={handleInputChange}
                   onBlur={handleComparePwd}
                 />
-                {passwordMatchError && (
-                  <span style={{ color: 'red', display: 'block', marginTop: '5px' }}>
-                    비밀번호가 일치하지 않습니다.
-                  </span>
-                )}
+                {passwordMatchError && <ErrorMsg>비밀번호가 일치하지 않습니다.</ErrorMsg>}
               </td>
-            </tr>
-            <tr>
+            </InputRow>
+            <InputRow>
               <td>닉네임</td>
               <td>
-                <input type="text" name="nick" onChange={handleInputChange} />
+                <Input type="text" name="nick" onChange={handleInputChange} />
               </td>
-            </tr>
-            <tr>
+            </InputRow>
+            <InputRow>
               <td>전화번호</td>
               <td>
-                <input type="text" name="phoneNumber" onChange={handleInputChange} />
+                <Input type="text" name="phoneNumber" onChange={handleInputChange} />
               </td>
-            </tr>
-            <tr>
+            </InputRow>
+            <InputRow>
               <td>이메일</td>
               <td>
-                <input type="email" name="email" onChange={handleInputChange} />
+                <Input type="email" name="email" onChange={handleInputChange} />
               </td>
-            </tr>
-            <tr>
+            </InputRow>
+            <InputRow>
               <td>생년월일</td>
               <td>
-                <input type="text" name="birthday" onChange={handleInputChange} />
+                <Input type="text" name="birthday" onChange={handleInputChange} />
               </td>
-            </tr>
-            <tr>
+            </InputRow>
+            <InputRow>
               <td colSpan="2">
-                <input type="submit" value="정보 수정" />
+                <SubmitButton type="submit" value="정보 수정" />
               </td>
-            </tr>
+            </InputRow>
           </tbody>
-        </table>
-</form>
-</div>
+        </Table>
+</Form>
+</StyledMemberInfoEditDiv>
 );
 };
 
