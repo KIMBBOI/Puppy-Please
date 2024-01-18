@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.app.adoptionnews.dao.AdoptionNewsDao;
 import com.kh.app.adoptionnews.vo.AdoptionNewsVo;
+import com.kh.app.page.vo.PageVo;
 
 import lombok.RequiredArgsConstructor;
 
@@ -34,15 +35,15 @@ public class AdoptionNewsService {
 	}
 
 	// 입양 후 소식 목록
-	public List<AdoptionNewsVo> list() {
-		List<AdoptionNewsVo> newsList = dao.list(sst);
-		// imagePath 설정
-		for (AdoptionNewsVo news : newsList) {
-			String imagePath = news.getImageNo().replace("D:\\pupple\\springRepo\\team5final\\team5\\src\\main\\webapp", "http://127.0.0.1:8080/app");
-			news.setImagePath(imagePath);
-		}
-		return dao.list(sst);
+	public List<AdoptionNewsVo> list(PageVo pvo) {
+		return dao.list(sst, pvo);
 	}
+	
+	// 전체 게시글 갯수 조회
+	public int selectBoardCount() {
+		return dao.selectBoardCount(sst);
+	}
+	
 
 	// 입양 후 소식 상세 조회
 	public AdoptionNewsVo detail(AdoptionNewsVo vo) {
@@ -61,7 +62,6 @@ public class AdoptionNewsService {
 	public int delete(String no) {
 		return dao.delete(sst, no);
 	}
-
 
 
 	
