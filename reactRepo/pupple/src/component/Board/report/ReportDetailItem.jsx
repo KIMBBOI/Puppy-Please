@@ -49,9 +49,30 @@ const ReportDetailItem = ( {vo} ) => {
     const currentUser = vo.memberNo === loginMemberNo
 
 
+
     const navigate = useNavigate();
     const handleEdit = () => {
         navigate("/board/report/write", {state: {vo}} );
+    }
+    const handleDelete = (vo) => {
+        fetch("http://127.0.0.1:8080/app/report" , {
+            method: 'delete',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(vo)
+        })
+        .then( resp => resp.json() )
+        .then( data => {
+            if (data.msg === 'success') {
+                alert('게시글 삭제 성공 !');
+                navigate("/board/report/list");
+            } else {
+                alert('게시글 삭제 실패 ...');
+                navigate(-1)
+            }
+            
+        } )
     }
 
 
@@ -70,7 +91,7 @@ const ReportDetailItem = ( {vo} ) => {
             {currentUser && (
                 <div className='controllArea'>
                     <button onClick={ () => handleEdit(vo) }>수정</button>
-                    <button>삭제</button>
+                    <button onClick={ () => handleDelete(vo) }>삭제</button>
                 </div>
             )}
         </StyeldDitailDiv>

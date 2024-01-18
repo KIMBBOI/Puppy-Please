@@ -129,7 +129,7 @@
 	
 	<!--게시글 삭제 -->
 	<update id="delete">
-		UPDATE 
+		UPDATE
 			REPORT_BULLETIN_BOARD
 	    SET
 	        DEL_YN = 'Y'
