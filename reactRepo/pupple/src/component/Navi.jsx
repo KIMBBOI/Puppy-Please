@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const StyledNaviDiv = styled.div`
     width: 100%;
-    height: 80%;
+    height: 40%;
     background-color: #C8ADFF;
     color: black;
     display: grid;
@@ -14,7 +14,8 @@ const StyledNaviDiv = styled.div`
     grid-auto-columns: 1fr;
     grid-auto-flow: column;
     place-items: center center;
-    font-size: 1.5rem;
+    font-size: 20px;
+    margin: 50px 0 50px 0;
 `;
 
 const StyledMenuItem = styled.div`
@@ -67,7 +68,7 @@ const Navi = () => {
                 <div><Link to="/board/report/list">제보</Link></div>
             </StyledMenuItem>
             <StyledMenuItem>
-                <div><Link to="/board/visit/write">방문예약</Link></div>
+                <div><Link to="/board/visit/reservation">방문예약</Link></div>
             </StyledMenuItem>   
         </StyledNaviDiv>
     );

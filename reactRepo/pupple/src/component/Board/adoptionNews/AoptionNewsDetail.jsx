@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import AoptionNewsDetailItem from './AoptionNewsDetailItem';
 import { useLocation } from 'react-router-dom';

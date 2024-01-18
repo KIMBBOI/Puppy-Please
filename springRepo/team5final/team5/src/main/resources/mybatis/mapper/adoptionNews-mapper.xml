@@ -45,32 +45,45 @@
 			DUAL
 	</select>
 
-	
+	<!-- 게시글 목록 조회 -->
 	<select id="list" resultType="com.kh.app.adoptionnews.vo.AdoptionNewsVo">
 		SELECT *
 		FROM (
-			SELECT 
-			    N.NEWS_AFTER_ADOPTION_NO
-			    , N.MEMBER_NO
-			    , N.IMAGE_NO
-			    , N.TITLE
-			    , N.CONTENT
-			    , N.ENROLL_DATE
-			    , N.MODIFY_DATE
-			    , N.DEL_YN
-			    , I.IMAGE_PATH
-			    , M.NICK AS WRITER_NICK 
-			FROM 
-				NEWS_AFTER_ADOPTION N
-				JOIN IMAGE I ON I.IMAGE_NO = N.IMAGE_NO
-				JOIN MEMBER M ON M.MEMBER_NO = N.MEMBER_NO
-			WHERE 
-				N.DEL_YN = 'N'
-			ORDER BY 
-				NEWS_AFTER_ADOPTION_NO DESC	
+			SELECT ROWNUM RNUM, T.*
+			FROM (
+				SELECT 
+				    N.NEWS_AFTER_ADOPTION_NO
+				    , N.MEMBER_NO
+				    , N.IMAGE_NO
+				    , N.TITLE
+				    , N.CONTENT
+				    , N.ENROLL_DATE
+				    , N.MODIFY_DATE
+				    , N.DEL_YN
+				    , I.IMAGE_PATH
+				    , M.NICK AS WRITER_NICK 
+				FROM 
+					NEWS_AFTER_ADOPTION N
+					JOIN IMAGE I ON I.IMAGE_NO = N.IMAGE_NO
+					JOIN MEMBER M ON M.MEMBER_NO = N.MEMBER_NO
+				WHERE 
+					N.DEL_YN = 'N'
+				ORDER BY 
+					NEWS_AFTER_ADOPTION_NO DESC	
+			) T
 		)
 	</select>
 	
+	<select id='listCount' resultType="Integer">
+		SELECT 
+			COUNT(*) as cnt 
+		FROM 
+			NEWS_AFTER_ADOPTION 
+		WHERE 
+			DEL_YN = 'N'
+	</select>
+	
+	<!-- 상세조회 -->
 	<select id="detail" resultType="com.kh.app.adoptionnews.vo.AdoptionNewsVo">
 		SELECT 
 		    N.NEWS_AFTER_ADOPTION_NO

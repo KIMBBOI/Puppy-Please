@@ -7,7 +7,7 @@ public class AnimalVo {
 	
 	private String no;
 	private String imageNo;
-	private String name;
+	private String dogName;
 	private String age;
 	private String weight;
 	private String breed;			

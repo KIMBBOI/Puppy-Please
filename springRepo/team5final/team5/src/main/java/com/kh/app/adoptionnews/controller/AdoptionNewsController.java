@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.app.adoptionnews.service.AdoptionNewsService;
 import com.kh.app.adoptionnews.vo.AdoptionNewsVo;
+import com.kh.app.page.vo.PageVo;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,6 +21,39 @@ import lombok.RequiredArgsConstructor;
 public class AdoptionNewsController {
 	
 	private final AdoptionNewsService service;
+	
+	// 목록조회
+	@GetMapping("list")
+	public Map<String, Object> list(@RequestParam(value="pno", required=false, defaultValue="1")String pno) {
+		
+		//전체 게시글 갯수 조회
+		int listCount = service.selectBoardCount();
+		
+		System.out.println(pno);
+		
+		String currentPage_ = pno;							//pno 받아오기. "1" 안됨 변수로!
+		int currentPage = Integer.parseInt(currentPage_);	//현재 페이지 (화면에서 전달받기)
+		int pageLimit = 5;									// 페이징 영역 페이지 갯수 (페이지를 몇개씩 띄울껀지)
+		int boatdLimit = 8;									// 한 페이지에 보여줄 게시글 갯수
+		PageVo pvo = new PageVo(listCount, currentPage, pageLimit, boatdLimit);
+		System.out.println("전체 게시글 갯수 조회 pvo : " + pvo);
+		
+		
+		//목록조회
+		List<AdoptionNewsVo> voList = service.list(pvo);
+		System.out.println("목록조회 voList : " + voList);
+		
+		Map<String, Object> map = new HashMap<>();
+		if (currentPage_ == null && voList == null) {
+			map.put("msg", "bad");
+		} else {
+			map.put("msg", "good");
+			map.put("voList", voList);
+			map.put("pvo", pvo);
+		}
+		
+		return map;
+	}
 	
 	// 작성
 	@PostMapping("write")
@@ -77,16 +111,6 @@ public class AdoptionNewsController {
 		file.transferTo(target);
 		
 		return path + originName;
-	}
-
-	// 목록조회
-	@GetMapping("list")
-	public Map<String, Object> list() {
-		List<AdoptionNewsVo> voList = service.list();
-		Map<String, Object> map = new HashMap<>();
-		map.put("msg", "good");
-		map.put("voList", voList);
-		return map;
 	}
 	
 	//상세조회

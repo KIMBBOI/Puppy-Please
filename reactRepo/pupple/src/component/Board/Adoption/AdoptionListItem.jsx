@@ -8,6 +8,12 @@ const StyledItemDiv = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
+
+    img {
+        width: 300px;
+        height: 200px;
+    }
 `;
 
 const AdoptionListItem = ( {a, b, c, d, e, f, g } ) => {
@@ -16,8 +22,6 @@ const AdoptionListItem = ( {a, b, c, d, e, f, g } ) => {
             <img 
                 src={a}
                 alt='사진'
-                width='300px'
-                height='200px'
             />
             <span>{b}</span>
             <span>{c}</span>

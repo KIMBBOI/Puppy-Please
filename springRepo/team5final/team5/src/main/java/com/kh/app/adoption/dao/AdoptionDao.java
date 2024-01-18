@@ -16,6 +16,11 @@ public class AdoptionDao {
 		System.out.println("에러확인 dao : " + sst.selectList("AdoptionMapper.list"));
 		return sst.selectList("AdoptionMapper.list");
 	}
+	
+	// 전체 게시글 갯수 조회
+	public int selectBoardCount(SqlSessionTemplate sst) {
+		return sst.selectOne("AdoptionMapper.listCount");
+	}
 
 	// 입양 게시글 상세 조회
 	public AdoptionVo detail(SqlSessionTemplate sst, AdoptionVo vo) {
@@ -45,6 +50,8 @@ public class AdoptionDao {
 	public int delete(SqlSessionTemplate sst, AdoptionVo vo) {
 		return sst.update("AdoptionMapper.delete", vo);
 	}
+
+	
 
 	
 

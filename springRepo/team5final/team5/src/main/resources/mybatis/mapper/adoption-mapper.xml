@@ -8,39 +8,66 @@
     <select id="list" resultType="com.kh.app.adoption.vo.AdoptionVo">
     	SELECT *
     	FROM (
-	        SELECT
-		    RD.IMAGE_NO AS DOG_IMAGE_NO,
-		    RD.DOG_NAME,
-		    RD.BREED,
-		    RD.GENDER_MF,
-		    RD.NEUTERING_OX,
-		    RD.AGE,
-		    RD.WEIGHT
-		FROM
-		    ADOPTION_BOARD A
-		JOIN
-		    RESCUE_DOG RD ON A.RESCUE_DOG_NO = RD.RESCUE_DOG_NO
-		WHERE
-		    A.DEL_YN = 'N'
-		ORDER BY
-		    A.ENROLL_DATE DESC
-    	)
+	        SELECT ROWNUM RNUM, T.*
+	        FROM (
+	        	SELECT
+		        	A.ADOPTION_BOARD_NO
+		        	, A.ADMIN_NO
+				    , A.DEL_YN
+				    , RD.IMAGE_NO 
+				    , RD.DOG_NAME
+				    , RD.BREED
+				    , RD.GENDER_MF
+				    , RD.NEUTERING_OX
+				    , RD.AGE
+				    , RD.WEIGHT
+				    , I.IMAGE_PATH
+				FROM
+				    ADOPTION_BOARD A
+					JOIN RESCUE_DOG RD 
+						ON A.RESCUE_DOG_NO = RD.RESCUE_DOG_NO
+					JOIN IMAGE I
+				  		ON I.IMAGE_NO = RD.IMAGE_NO
+				WHERE
+				    A.DEL_YN = 'N'
+				ORDER BY
+				    A.ENROLL_DATE DESC
+	    	) T
+		)
     </select>
+    
+    <select id='listCount' resultType="Integer">
+		SELECT 
+			COUNT(*) as cnt 
+		FROM 
+			ADOPTION_BOARD 
+		WHERE 
+			DEL_YN = 'N'
+	</select>
 
     <!-- 입양 신청 상세 조회 -->
     <select id="detail" resultType="com.kh.app.adoption.vo.AdoptionVo">
-        SELECT 
-        	ADOPTION_BOARD_NO
-        	, IMAGE_NO
-        	, RESCUE_DOG_NO
-        	, ADMIN_NO
-        	, ENROLL_DATE
-        	, MODIFY_DATE
-        	, DEL_YN
-        FROM 
-        	ADOPTION_BOARD
-        WHERE 
-        	ADOPTION_BOARD_NO = #{adoptionNo}
+         SELECT
+	        A.ADOPTION_BOARD_NO,
+	        A.ADMIN_NO,
+	        A.DEL_YN,
+	        RD.IMAGE_NO,
+	        RD.DOG_NAME,
+	        RD.BREED,
+	        RD.GENDER_MF,
+	        RD.NEUTERING_OX,
+	        RD.AGE,
+	        RD.WEIGHT,
+	        I.IMAGE_PATH
+	    FROM
+	        ADOPTION_BOARD A
+	    JOIN
+	        RESCUE_DOG RD ON A.RESCUE_DOG_NO = RD.RESCUE_DOG_NO
+	    JOIN
+	        IMAGE I ON I.IMAGE_NO = RD.IMAGE_NO
+	    WHERE
+	        A.DEL_YN = 'N'
+	        AND A.ADOPTION_BOARD_NO = #{adoptionBoardNo}
     </select>
     
     <!-- 게시글 작성 -->

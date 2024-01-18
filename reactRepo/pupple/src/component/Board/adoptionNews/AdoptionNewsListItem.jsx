@@ -14,18 +14,22 @@ const StyledItemDiv = styled.div`
     img {
         width: 100%;
         height: 100%;
-        margin: 0 auto;
-
     }
 
     .imgDiv {
+        width: 300px;
+        height: 200px;
+
+    }
+
+    /* .imgDiv {
         width: 100%;
         height: 100%;
         background-image: url(${props =>  props.img.replaceAll("\\" , "/")});
             // 이미지 태그에서는 되는데 여기서는 안됨 => 역슬래시 때문에 안됨 **************
         background-size: cover;
         background-position: 100%;
-    }
+    } */
 
     span {
         width: 100%;
@@ -35,6 +39,7 @@ const StyledItemDiv = styled.div`
 
 const AdoptionNewsListItem = ( {a, b, c, d, vo} ) => {
 
+
     const navigate = useNavigate();
 
     const handleClickDetail = (vo) => {
@@ -42,13 +47,17 @@ const AdoptionNewsListItem = ( {a, b, c, d, vo} ) => {
     }
 
     return (
-        <StyledItemDiv img={c} value={d} onClick={ () => handleClickDetail(vo) } >
+        <StyledItemDiv 
+            img={a} 
+            value={d} 
+            onClick={ () => handleClickDetail(vo) } 
+        >
             <div className='imgDiv'></div>
             {
 
             }
-            <span>{a}</span> 
-            <span>{b}</span>
+            <span>{b}</span> 
+            <span>{c}</span>
         </StyledItemDiv>
     );
 };

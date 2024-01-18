@@ -5,7 +5,6 @@ import styled from 'styled-components';
 const StyledAdoptionWriteDiv = styled.div`
     width: 100%;
     height: 100%;
-
 `;
 
 const AdoptionWrite = ( ) => {
@@ -15,7 +14,7 @@ const AdoptionWrite = ( ) => {
     const navigate = useNavigate(); 
 
     const [fileObj , setFileObj] = useState();
-    const [name , setName] = useState();
+    const [dogName , setDogName] = useState();
     const [breed , setBreed] = useState();
     const [genderMf , setGenderMf] = useState();
     const [neuteringOx , setNeuteringOx] = useState();
@@ -41,8 +40,8 @@ const AdoptionWrite = ( ) => {
     const handleChangeFile = (e) => {
         setFileObj(e.target.files[0]);
     };
-    const handleChangeName = (e) => {
-        setName(e.target.value);
+    const handleChangeDogName = (e) => {
+        setDogName(e.target.value);
     };
     const handleChangeBreed= (e) => {
         setBreed(e.target.value);
@@ -86,7 +85,7 @@ const AdoptionWrite = ( ) => {
         const formData = new FormData();
         // formData.append("rescueDogNo", rescueDogNo);
         formData.append('file', fileObj);
-        formData.append('name', name);
+        formData.append('dpgName', dogName);
         formData.append('breed', breed);
         formData.append('genderMf', genderMf);
         formData.append('neuteringOx', neuteringOx);
@@ -95,7 +94,7 @@ const AdoptionWrite = ( ) => {
         // formData.append('adminNo', adminNo);
 
 
-        fetch('http://127.0.0.1:8080/app/adoption' , {
+        fetch('http://127.0.0.1:8080/app/adoption/write' , {
             method: 'POST' ,
             body: formData ,
         })
@@ -126,7 +125,7 @@ const AdoptionWrite = ( ) => {
                     <input type="file" name="file" onClick={handleChangeFile} />
                     <label>
                     이름:
-                    <input type="text" name="name" onChange={handleChangeName} />
+                    <input type="text" name="dogName" onChange={handleChangeDogName} />
                     </label>
                     <label>
                     견종:

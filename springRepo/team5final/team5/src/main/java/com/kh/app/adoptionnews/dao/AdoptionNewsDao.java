@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.app.adoptionnews.vo.AdoptionNewsVo;
+import com.kh.app.page.vo.PageVo;
 
 @Repository
 public class AdoptionNewsDao {
@@ -24,9 +25,14 @@ public class AdoptionNewsDao {
 	}
 
 	// 입양 후 소식 목록
-	public List<AdoptionNewsVo> list(SqlSessionTemplate sst) {
+	public List<AdoptionNewsVo> list(SqlSessionTemplate sst, PageVo pvo) {
 		System.out.println("에러확인 dao : " + sst.selectList("AdoptionNewsMapper.list"));
-		return sst.selectList("AdoptionNewsMapper.list");
+		return sst.selectList("AdoptionNewsMapper.list", pvo);
+	}
+	
+	// 전체 게시글 갯수 조회
+	public int selectBoardCount(SqlSessionTemplate sst) {
+		return sst.selectOne("AdoptionNewsMapper.listCount");
 	}
 
 	// 입양 후 소식 상세 조회
@@ -43,6 +49,7 @@ public class AdoptionNewsDao {
 	public int delete(SqlSessionTemplate sst, String no) {
 		return sst.update("AdoptionNewsMapper.delete", no);
 	}
+	
 
 
 	
