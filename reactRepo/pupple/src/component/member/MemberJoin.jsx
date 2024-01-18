@@ -178,9 +178,9 @@ const MemberJoin = () => {
                 <Form onSubmit={handleJoinSubmit}>
                     <Table>
                         <tbody>
-                            <InputRow>
-                                <td>아이디</td>
-                                <td><Input type="text" name='id' value={vo.id} onChange={handleInputChange} placeholder='6자 이상 12자 이하로 작성'/></td>
+                        <InputRow>
+                              <td>아이디</td>
+                              <td><Input type="text" name='id' value={vo.id} onChange={handleInputChange} placeholder='6자 이상 12자 이하로 작성'/></td>
                         </InputRow>
                         <InputRow>
                             <td>비밀번호</td>
