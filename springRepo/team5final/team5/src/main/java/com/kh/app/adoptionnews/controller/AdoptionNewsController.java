@@ -10,7 +10,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.app.adoptionnews.service.AdoptionNewsService;
 import com.kh.app.adoptionnews.vo.AdoptionNewsVo;
-import com.kh.app.report.vo.ReportVo;
 
 import lombok.RequiredArgsConstructor;
 
@@ -29,7 +28,7 @@ public class AdoptionNewsController {
 		//이미지 업로드
 		String imagePath = saveFile(file);
 		AdoptionNewsVo imgVo = new AdoptionNewsVo();
-		imgVo.setImagePath(imagePath);;
+		imgVo.setImagePath(imagePath);
 		int resultImg = service.insert(imgVo);
 		
 		//이미지 시퀀스넘버 조회

@@ -3,20 +3,40 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledAdoptionWriteDiv = styled.div`
-    width: 80%;
+    width: 100%;
+    height: 100%;
 
 `;
 
-const AdoptionWrite = ( { adminNo , imageNo} ) => {
+const AdoptionWrite = ( ) => {
 
-    const [fileObj , setFileObj] = useState(null);
+    let isFetching = false;
+
+    const navigate = useNavigate(); 
+
+    const [fileObj , setFileObj] = useState();
     const [name , setName] = useState();
     const [breed , setBreed] = useState();
-    const [gender , setGender] = useState();
-    const [inoculation , setInoculation] = useState();
+    const [genderMf , setGenderMf] = useState();
+    const [neuteringOx , setNeuteringOx] = useState();
     const [age , setAge] = useState();
     const [weight , setWeight] = useState();
     // const [rescueDogNo, setRescueDogNo] = useState();
+
+    // const [formData, setFormData] = useState({
+    //     dogName: '',
+    //     breed: '',
+    //     gender: '',
+    //     neutering: '',
+    //     age: '',
+    //     weight: '',
+    //     coatColor: '',
+    // });
+
+    // const handleChange = (e) => {
+    //     const { name, value } = e.target;
+    //     setFormData({ ...formData, [name]: value });
+    // };
 
     const handleChangeFile = (e) => {
         setFileObj(e.target.files[0]);
@@ -28,10 +48,10 @@ const AdoptionWrite = ( { adminNo , imageNo} ) => {
         setBreed(e.target.value);
     };
     const handleChangeGender= (e) => {
-        setGender(e.target.value);
+        setGenderMf(e.target.value);
     };
-    const handleChangeInoculation = (e) => {
-        setInoculation(e.target.value);
+    const handleChangeNeutering = (e) => {
+        setNeuteringOx(e.target.value);
     };
     const handleChangeAge = (e) => {
         setAge(e.target.value);
@@ -44,22 +64,36 @@ const AdoptionWrite = ( { adminNo , imageNo} ) => {
     //     setRescueDogNo(e.target.value);
     // }
 
-    const navigate = useNavigate();
+    // const jsonStr = sessionStorage.getItem("adminVo");
+    // const sessionAdminVo = JSON.parse(jsonStr);
+    // const [adminVo , setAdminVo] = useState(sessionAdminVo);
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
+
+        // < isFetching >
+        // 게시글 작성이 겹치면 이미지 시퀀스를 호출하는 과정에서 
+        // 다른 게시글의 이미지 넘버를 불러올 수 있음
+        //   ㄴSELECT SEQ_MEMBER_NO.CURRVAL FROM IMAGE
+        if (isFetching) {
+            return;
+        }
+        isFetching = true;
+
+
         const formData = new FormData();
-        // fd.append("rescueDogNo", rescueDogNo);
+        // formData.append("rescueDogNo", rescueDogNo);
         formData.append('file', fileObj);
         formData.append('name', name);
         formData.append('breed', breed);
-        formData.append('gender', gender);
-        formData.append('inoculation', inoculation);
+        formData.append('genderMf', genderMf);
+        formData.append('neuteringOx', neuteringOx);
         formData.append('age', age);
         formData.append('weight', weight);
-        formData.append('adminNo', adminNo);
-        formData.append('imageNo', imageNo); // 이 부분도 사용되는 변수 이름으로 변경 필요
+        // formData.append('adminNo', adminNo);
+
 
         fetch('http://127.0.0.1:8080/app/adoption' , {
             method: 'POST' ,
@@ -67,49 +101,56 @@ const AdoptionWrite = ( { adminNo , imageNo} ) => {
         })
         .then( (resp) => resp.json() )
         .then( (data) => {
-            if(data.msg === 'good'){
-                alert('입양신청목록 등록 완료 !');
-                navigate("/board/adoption/list");
-            }else{
-                alert('입양신청목록 등록 실패 ...');
-                console.log("등록실패 : " + data);
+            if (data.imgMsg === 'img insert good') {
+                if (data.boardMsg === 'board write good') {
+                    alert('게시글 등록 완료하였습니다.');
+                    navigate('/board/adoption/list');
+                } else {
+                    alert('게시글 등록 실패하였습니다.');
+                    navigate("/board/adoption/write");
+                }
+            } else {
+                alert("이미지 업로드 실패");
+                navigate("/board/adoptionNews/write");
             }
         } )
-        .catch((error) => {
-            console.error('입양 신청 목록 작성 오류: ', error);
-            alert('입양 후 소식 등록 중 오류가 발생했습니다.');
-        });
         ;
     };
 
+
     return (
         <StyledAdoptionWriteDiv>
-            <form onSubmit={handleSubmit}>
-                {/* <input type="text" name='rescueDogNo' placeholder='구조견 번호 입력' onChange={handleChangeRescueDogNo} /> */}
-                <input type="file" multiple name='file' onChange={handleChangeFile}/>
-                <div>
-                    <span>이름</span><input type="text" name='name' placeholder="이름입력" onChange={handleChangeName} />
-                </div>
-                <div>
-                    <span>종</span><input type="text" name='breed' placeholder="견종입력" onChange={handleChangeBreed} />
-                </div>
-                <div>
-                    <span>성별</span><input type="text" name='gender' placeholder="성별입력" onChange={handleChangeGender} />
-                </div>
-                <div>
-                    <span>중성화</span><input type="text" name='inoculation' placeholder="중성화입력" onChange={handleChangeInoculation} />
-                </div>
-                <div>
-                    <span>나이</span><input type="text" name='age' placeholder="나이입력" onChange={handleChangeAge} />
-                </div>
-                <div>
-                    <span>몸무게</span><input type="text" name='weight' placeholder="몸무게입력" onChange={handleChangeWeight} />
-                </div>
-                <div>
-                    <input type="submit" value="등록하기" />
-                </div>
-                    {/* <span>종</span> <input type="text" name='name' placeholder="털색입력" /> */}
-            </form>
+            <div className="adoption-write">
+                <h1>입양 글 작성</h1>
+                <form onSubmit={handleSubmit}>
+                    <input type="file" name="file" onClick={handleChangeFile} />
+                    <label>
+                    이름:
+                    <input type="text" name="name" onChange={handleChangeName} />
+                    </label>
+                    <label>
+                    견종:
+                    <input type="text" name="breed" onChange={handleChangeBreed} />
+                    </label>
+                    <label>
+                    성별:
+                    <input type="text" name="genderMf" onChange={handleChangeGender} />
+                    </label>
+                    <label>
+                    중성화:
+                    <input type="text" name="neuteringOx" onChange={handleChangeNeutering} />
+                    </label>
+                    <label>
+                    나이:
+                    <input type="text" name="age" onChange={handleChangeAge} />
+                    </label>
+                    <label>
+                    몸무게:
+                    <input type="text" name="weight" onChange={handleChangeWeight} />
+                    </label>
+                    <button type="submit">작성</button>
+                </form>
+            </div>
         </StyledAdoptionWriteDiv>
     );
 };
