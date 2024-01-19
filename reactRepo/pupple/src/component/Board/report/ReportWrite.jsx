@@ -5,26 +5,40 @@ import { useLocation, useNavigate } from 'react-router-dom';
 const StyeldReportWriteDiv = styled.div`
     width: 100%;
     height: 100%;
+    display: grid;
+    justify-content: center;
     text-align: center;
 
-    & > form {
-        width: 100%;
-        height: 100%;
+    div {
+        width: 600px;
+        height: 10%;
+        background-color: rgb(223, 255, 223);
+    }
+        h1 {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+
+    form {
+        width: 600px;
+        height: 400px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        background-color: #ffecec;
 
-        & > input[type=text] {
-            width: 50%;
-            height: 40px;
-        }
-
-        textarea {
-            height: 50%;
-            width: 50%;
-        } 
     }
+        input {
+            width: 70%;
+            height: 10%;
+        }
+        textarea {
+            width: 70%;
+            height: 60%;
+        } 
+
 `;
 
 

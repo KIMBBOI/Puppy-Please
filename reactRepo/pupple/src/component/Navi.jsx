@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import NoticeList from './board/notice/NoticeList';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const StyledNaviDiv = styled.div`
     width: 100%;
@@ -45,10 +45,26 @@ const StyledSubMenu = styled.div`
 
 const Navi = () => {
     const [isNewsAdoptionOpen, setIsNewsAdoptionOpen] = useState(undefined);
+    const navigate = useNavigate();
 
     const toggleNewsAdoption = () => {
         setIsNewsAdoptionOpen(!isNewsAdoptionOpen);
     };
+
+
+
+    const handleVisitReservationClick = () => {
+        const isLoggedIn = sessionStorage.getItem("loginMemberVo") !== null;
+        if (isLoggedIn) {
+            navigate("/board/visit/reservation");
+        } else {
+            alert("로그인이 필요한 서비스입니다.");
+            navigate("/");
+        }
+    };
+
+
+
 
     return (
         <StyledNaviDiv>
@@ -69,7 +85,7 @@ const Navi = () => {
             <StyledMenuItem>
                 <div><Link to="/board/report/list">제보</Link></div>
             </StyledMenuItem>
-            <StyledMenuItem>
+            <StyledMenuItem onClick={handleVisitReservationClick}>
                 <div><Link to="/board/visit/reservation">방문예약</Link></div>
             </StyledMenuItem>   
         </StyledNaviDiv>
