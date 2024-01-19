@@ -19,21 +19,18 @@ const StyledItemDiv = styled.div`
     .imgDiv {
         width: 300px;
         height: 200px;
-
-    }
-
-    /* .imgDiv {
-        width: 100%;
-        height: 100%;
         background-image: url(${props =>  props.img.replaceAll("\\" , "/")});
             // 이미지 태그에서는 되는데 여기서는 안됨 => 역슬래시 때문에 안됨 **************
         background-size: cover;
         background-position: 100%;
-    } */
+        margin-bottom: 10px;
+    }
 
     span {
         width: 100%;
         height: auto;
+        font-size: 12px;
+        text-align: center;
     }
 `;
 
@@ -48,7 +45,7 @@ const AdoptionNewsListItem = ( {a, b, c, d, vo} ) => {
 
     return (
         <StyledItemDiv 
-            img={a} 
+            img={a}
             value={d} 
             onClick={ () => handleClickDetail(vo) } 
         >

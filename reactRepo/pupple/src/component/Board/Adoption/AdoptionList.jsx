@@ -73,9 +73,10 @@ const StyledAdoptionListDiv = styled.div`
     gap: 20px; /* 열과 행 사이의 간격 조절 */
     padding: 30px 0;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1.5fr 1.5fr 1.5fr; 
+    grid-template-rows: 2fr 2fr 2fr; 
     place-items: center center;
     padding: 30px 0 30px 0;
+
 `;
 
 const AdoptionList = () => {
