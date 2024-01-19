@@ -88,18 +88,32 @@ public class AdoptionController {
 	@PostMapping("write")
 	public Map<String, String> write(AdoptionVo vo, MultipartFile file) throws Exception {
 		
-		//이미지 업로드
+		//이미지 업로드 (1)
 		String imagePath = saveFile(file);
 		AdoptionVo imgVo = new AdoptionVo();
 		imgVo.setImagePath(imagePath);
 		int resultImg = service.insert(imgVo);
 		
-		//이미지 시퀀스넘버 조회
+		
+		//이미지 시퀀스넘버 조회 (2)
 		vo.setImageNo(service.selectImageSeqNo());
 		
-		//게시글 작성
+		
 		Map<String, String> map = new HashMap<String, String>();
+		
+		// 견종을 기반으로 RESCUE_DOG_NO 조회 (3)
+		String dogNo = service.findDogNoBtBreed(vo.getBreed());
+		
+		// 견종 기반 유기견NO 조회
+		if (dogNo != null) {
+		    vo.setRescueDogNo(dogNo);
+		}
+		
+		//게시글 작성 (4)
 		int resultBoard = service.write(vo);
+		System.out.println("게시글 작성 실패시 : " + resultBoard);
+
+		
 		
 		//이미지 작성 성공 여부
 		if (resultImg == 1) {
@@ -109,8 +123,17 @@ public class AdoptionController {
 			map.put("imgMsg", "img insert bad");
 			System.out.println("이미지 업로드 실패");
 		}
+		
+		// 견종 기반 유기견NO 조회
+		if (dogNo == null) {
+			map.put("dogMsg", "dog insert good");
+		} else {
+			map.put("dogMsg", "dog insert bad");
+		}
+		
 		// 게시글 작성 성공 여부
 		map.put("imagePath", imagePath);
+		System.out.println(imagePath);
 		if (resultBoard == 1) {
 			map.put("boardMsg", "board write good");
 			System.out.println("게시글 작성 성공");
@@ -132,6 +155,7 @@ public class AdoptionController {
 	private String saveFile(MultipartFile file) throws Exception {
 		String path = "D:\\pupple\\springRepo\\team5final\\team5\\src\\main\\webapp\\resources\\upload\\img\\";
 		String originName = file.getOriginalFilename();
+		System.out.println("입양신청 등록 에러 : " + originName);
 		
 		// 원래는 "path + changeName(랜덤값) + 확장자" 로 해야함 
 		File target = new File(path + originName);

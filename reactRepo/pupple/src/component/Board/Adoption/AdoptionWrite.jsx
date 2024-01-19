@@ -101,17 +101,19 @@ const AdoptionWrite = ( ) => {
         .then( (resp) => resp.json() )
         .then( (data) => {
             if (data.imgMsg === 'img insert good') {
-                if (data.boardMsg === 'board write good') {
-                    alert('게시글 등록 완료하였습니다.');
-                    navigate('/board/adoption/list');
-                } else {
-                    alert('게시글 등록 실패하였습니다.');
-                    navigate("/board/adoption/write");
+                if (data.dogMsg === 'dog insert good') {
+                    if (data.boardMsg === 'board write good') {
+                        alert('게시글 등록 완료하였습니다.');
+                        navigate('/board/adoption/list');
+                    } else {
+                        alert('게시글 등록 실패하였습니다.');
+                        navigate("/board/adoption/write");
+                    }
                 }
-            } else {
-                alert("이미지 업로드 실패");
-                navigate("/board/adoptionNews/write");
-            }
+             } else {
+                 alert("이미지 업로드 실패");
+                 navigate("/board/adoption/write");
+             }
         } )
         ;
     };
@@ -122,30 +124,31 @@ const AdoptionWrite = ( ) => {
             <div className="adoption-write">
                 <h1>입양 글 작성</h1>
                 <form onSubmit={handleSubmit}>
-                    <input type="file" name="file" onClick={handleChangeFile} />
+                    <input type="file" className="file" onChange={handleChangeFile} />
+                    <br />
                     <label>
                     이름:
-                    <input type="text" name="dogName" onChange={handleChangeDogName} />
+                    <input type="text" className="dogName" onChange={handleChangeDogName} />
                     </label>
                     <label>
                     견종:
-                    <input type="text" name="breed" onChange={handleChangeBreed} />
+                    <input type="text" className="breed" onChange={handleChangeBreed} />
                     </label>
                     <label>
                     성별:
-                    <input type="text" name="genderMf" onChange={handleChangeGender} />
+                    <input type="text" className="genderMf" onChange={handleChangeGender} />
                     </label>
                     <label>
                     중성화:
-                    <input type="text" name="neuteringOx" onChange={handleChangeNeutering} />
+                    <input type="text" className="neuteringOx" onChange={handleChangeNeutering} />
                     </label>
                     <label>
                     나이:
-                    <input type="text" name="age" onChange={handleChangeAge} />
+                    <input type="number" className="age" onChange={handleChangeAge} />
                     </label>
                     <label>
                     몸무게:
-                    <input type="text" name="weight" onChange={handleChangeWeight} />
+                    <input type="number" className="weight" onChange={handleChangeWeight} />
                     </label>
                     <button type="submit">작성</button>
                 </form>

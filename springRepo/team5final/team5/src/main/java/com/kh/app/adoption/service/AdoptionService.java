@@ -44,6 +44,12 @@ public class AdoptionService {
 	public String selectImageSeqNo() {
 		return dao.selectImageSeqNo(sst);
 	}
+
+	//견종 기반 유기견no 조회
+	public String findDogNoBtBreed(String breed) {
+		return dao.findDogNoByBreed(sst, breed);
+	}
+	
 	// 입양 게시글 작성
 	public int write(AdoptionVo vo) {
 		return dao.write(sst, vo);
@@ -58,6 +64,7 @@ public class AdoptionService {
 	public int delete(AdoptionVo vo) {
 		return dao.delete(sst, vo);
 	}
+
 
 
 	
