@@ -70,6 +70,15 @@
 	        AND A.ADOPTION_BOARD_NO = #{adoptionBoardNo}
     </select>
     
+    <select id="findDogNoByBreed" resultType="java.lang.String">
+    	SELECT 
+    		RESCUE_DOG_NO
+	    FROM 
+	    	RESCUE_DOG
+	    WHERE 
+	    	BREED = #{breed}
+    </select>
+    
     <!-- 게시글 작성 -->
     <insert id="write" >
 		INSERT INTO ADOPTION_BOARD

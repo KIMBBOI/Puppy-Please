@@ -33,8 +33,15 @@ public class AdoptionDao {
 	}
 	//이미지 시퀀스넘버 조회
 	public String selectImageSeqNo(SqlSessionTemplate sst) {
+		System.out.println("이미지 시퀀스넘버 : " + sst.selectOne("AdoptionMapper.imageSeqNo"));
 		return sst.selectOne("AdoptionMapper.imageSeqNo");
 	}
+
+	//견종 기반으로 유기견no 조회
+	public String findDogNoByBreed(SqlSessionTemplate sst, String breed) {
+		return sst.selectOne("AdoptionMapper.findDogNoByBreed", breed);
+	}
+
 	
 	//게시글 작성
 	public int write(SqlSessionTemplate sst, AdoptionVo vo) {
@@ -51,7 +58,6 @@ public class AdoptionDao {
 		return sst.update("AdoptionMapper.delete", vo);
 	}
 
-	
 
 	
 
