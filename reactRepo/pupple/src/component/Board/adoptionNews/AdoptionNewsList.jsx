@@ -27,7 +27,10 @@ const StyledAdoptionNewsListDiv = styled.div`
 `;
 
 const AdoptionNewsList = () => {
-
+    
+    const loginInfo = sessionStorage.getItem("loginMemberVo");
+    const navigate = useNavigate();
+    
     // 현재 페이지의 URL을 가져옴
     const currentUrl = window.location.href;
     // URL 객체 생성 ( 현재 URL 파싱 )
@@ -62,7 +65,6 @@ const AdoptionNewsList = () => {
         ;
     } , [pno] );
 
-    const navigate = useNavigate();
 
     return (
         <>
@@ -83,10 +85,12 @@ const AdoptionNewsList = () => {
                         } )
                     }
                 {/* </div> */}
-                <div>
-                    <button onClick={ () => {
-                        navigate("/board/adoptionNews/write");
-                    } }>작성하기</button>
+                <div className='body'>
+                    { loginInfo ? (
+                        <button onClick={ () => navigate("/board/adoptionNews/write") }>작성하기</button>
+                    ) : (
+                        <button onClick={ () => alert("로그인 후 이용바랍니다.") }>작성하기</button>
+                    ) }
                 </div>
                 <div className='footer'>
                     <AdoptionNewsPageItem pvo={pvo} />

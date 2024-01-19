@@ -50,18 +50,24 @@ public class AdoptionNewsService {
 		return dao.detail(sst, vo);
 	}
 
-	// 입양 후 소식 수정
-	public int edit(AdoptionNewsVo vo) {
-		if (vo != null && vo.getTitle() != null && vo.getTitle().length() < 1) {
-			throw new IllegalStateException("제목 너무 짧음 ...");
-		}
-		return dao.edit(sst, vo);
+	// 입양 후 소식 이미지 수정
+	public int editImage(AdoptionNewsVo imgVo) {
+		String str = imgVo.getImagePath().replace("D:\\pupple\\springRepo\\team5final\\team5\\src\\main\\webapp", "http://127.0.0.1:8080/app");
+		imgVo.setImagePath(str);
+		return dao.editImage(sst, imgVo);
+	}
+	
+	// 입양 후 소식 게시글 수정
+	public int editBoard(AdoptionNewsVo vo) {
+		return dao.editBoard(sst, vo);
 	}
 
 	// 입양 후 소식 삭제
-	public int delete(String no) {
-		return dao.delete(sst, no);
+	public int delete(AdoptionNewsVo vo) {
+		return dao.delete(sst, vo);
 	}
+	
+	
 
 
 	

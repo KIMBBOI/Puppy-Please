@@ -108,19 +108,36 @@
 			N.NEWS_AFTER_ADOPTION_NO = #{newsAfterAdoptionNo}
 	</select>
 	
-	<update id="edit">
-		UPDATE NEWS_AFTER_ADOPTION
+	<!-- 게시글 수정 -->
+	<update id="editBard">
+		UPDATE 
+			NEWS_AFTER_ADOPTION
 	    SET 
 	        TITLE = #{title}
-	    WHERE NEWS_AFTER_ADOPTION_NO = #{newsAfterAdoptionNo}
-	    AND DEL_YN = 'N'
+	        , CONTENT = #{content}
+	        , MODIFY_DATE = #{modifyDate}
+	    WHERE 
+	    	NEWS_AFTER_ADOPTION_NO = #{newsAfterAdoptionNo}
+	    	AND DEL_YN = 'N'
 	</update>
 	
+	<!-- 이미지 수정 -->
+	<update id="editImage">
+		UPDATE 
+			IMAGE
+		SET
+			IMAGE_PATH = #{imagePath}
+	    WHERE
+	        IMAGE_NO = #{imageNo}
+	</update>
+	
+	<!-- 삭제 -->
 	<update id="delete">
 		UPDATE NEWS_AFTER_ADOPTION
 	    SET
 	        DEL_YN = 'Y'
-	    WHERE NEWS_AFTER_ADOPTION_NO = #{newsAfterAdoptionNo}
+	    WHERE 
+	    	NEWS_AFTER_ADOPTION_NO = #{newsAfterAdoptionNo}
 	</update>
   
 </mapper>

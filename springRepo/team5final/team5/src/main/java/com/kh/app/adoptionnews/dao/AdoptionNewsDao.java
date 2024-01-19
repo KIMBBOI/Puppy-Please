@@ -40,14 +40,20 @@ public class AdoptionNewsDao {
 		return sst.selectOne("AdoptionNewsMapper.detail", vo);
 	}
 
-	// 입양 후 소식 수정
-	public int edit(SqlSessionTemplate sst, AdoptionNewsVo vo) {
-		return sst.update("AdoptionNewsMapper.edit", vo);
+	// 입양 후 소식 이미지 수정
+	public int editImage(SqlSessionTemplate sst, AdoptionNewsVo imgVo) {
+		return sst.update("AdoptionNewsMapper.editImage" , imgVo);
 	}
+	
+	//게시글 수정
+	public int editBoard(SqlSessionTemplate sst, AdoptionNewsVo vo) {
+		return sst.update("AdoptionNewsMapper.editBoard" , vo);
+	}
+	
 
 	// 입양 후 소식 삭제
-	public int delete(SqlSessionTemplate sst, String no) {
-		return sst.update("AdoptionNewsMapper.delete", no);
+	public int delete(SqlSessionTemplate sst, AdoptionNewsVo vo) {
+		return sst.update("AdoptionNewsMapper.delete", vo);
 	}
 	
 
