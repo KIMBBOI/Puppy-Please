@@ -53,7 +53,7 @@ public class VisitController {
 	// 예약 목록 조회
 	@GetMapping("list")
 	public List<VisitVo> list(@RequestBody VisitVo vo) {
-		System.out.println("vo : " + vo);
+		System.out.println("예약 목록 조회 vo : " + vo);
 		System.out.println(vo.getReservationDate().substring(0, 10));
 		vo.setReservationDate(vo.getReservationDate().substring(0, 10));
 		return service.list(vo);
