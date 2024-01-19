@@ -49,14 +49,13 @@ const ReportDetailItem = ( {vo} ) => {
         const sessionVo = JSON.parse(str);
         const loginMemberNo = sessionVo.memberNo;
         currentUser = vo.memberNo === loginMemberNo
-    } else {
-        console.log(sessionStorage.getItem("loginMemberVo"));
     }
 
 
 
     const navigate = useNavigate();
-    const handleEdit = () => {
+    const handleEdit = (vo) => {
+        console.log('vo :::',vo);
         navigate("/board/report/write", {state: {vo}} );
     }
     const handleDelete = (vo) => {

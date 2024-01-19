@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,6 +29,7 @@ import lombok.RequiredArgsConstructor;
 public class ReportController {
 
 	private final ReportService service;
+	private final HttpServletRequest req;
 	
 	
 	// 제보 목록 조회
@@ -34,26 +37,21 @@ public class ReportController {
 	public Map<String, Object> list(@RequestParam(value="pno", 
 		    required = false, defaultValue="1")String pno) {
 		
-		
 		// 전체 게시글 갯수 조회
 		int listCount = service.selectBoardCount();
 		
-		System.out.println(pno);
-		
-		String currentPage_ = pno; // pno 받아와야함 "1"ㄴㄴ 변수로
-//		if(currentPage_ == null) {
-//			currentPage_ = "1";
-//		}
+		String currentPage_ = pno; // pno 받아와야함("1"ㄴㄴ변수로) 
+		if(currentPage_ == null) {
+			currentPage_ = "1";
+		}
 		int currentPage = Integer.parseInt(currentPage_);	// 현재 페이지 (화면에서 전달받기)
 		int pageLimit = 5;									// 페이징 영역 페이지 갯수 (페이지를 몇개씩 띄울껀지)
 		int boatdLimit = 8;									// 한 페이지에 보여줄 게시글 갯수
 		PageVo pvo = new PageVo(listCount, currentPage, pageLimit, boatdLimit);
-			System.out.println("전체 게시글 갯수 조회 pvo : " + pvo);
 		
 		
 		// 목록 조회
 		List<ReportVo> voList = service.list(pvo);
-			System.out.println("제보 목록 조회 voList : " + voList);
 		Map<String, Object> map = new HashMap<>();
 		if (currentPage_ == null && voList == null) {
 			map.put("msg", "fail");
@@ -70,11 +68,7 @@ public class ReportController {
 	@PostMapping("detail")
 	public Map<String, Object> detail(@RequestBody ReportVo vo) {
 		
-		System.out.println("제보 상세 조회 vo : " + vo);
-		
 		ReportVo dbVo = service.detail(vo);
-		
-		System.out.println("제보 상세 조회 dbvo : " + dbVo );
 		
 		Map<String, Object> map = new HashMap<>();
 		
@@ -127,8 +121,6 @@ public class ReportController {
 	@PostMapping("edit")
 	public Map<String, String> edit(ReportVo vo, MultipartFile f) throws Exception {
 		
-		System.out.println("수정하기 ov : " + vo);
-		
 		// 이미지 업데이트
 		String imagePath = saveFile(f);
 		ReportVo imgVo = new ReportVo();
@@ -158,7 +150,7 @@ public class ReportController {
 		return map;
 	}
 	/**
-	 * 파일을 서버에 젖아하고, 파일 전체 경로를 리턴함
+	 * 파일을 서버에 저장하고, 파일 전체 경로를 리턴함
 	 * 
 	 * @param 파일객체
 	 * @param 파일경로
@@ -167,17 +159,30 @@ public class ReportController {
 	 */
 	private String saveFile(MultipartFile f) throws Exception {
 		
-		String path = "C:\\dev\\team5Repo\\springRepo\\team5final\\team5\\src\\main\\webapp\\resources\\upload\\img\\";
-		String originName = f.getOriginalFilename();
-		
-		// 원래는 "path + changeName(랜덤값) + 확장자" 로 해야함 
-		File target = new File(path + originName); 
-		
-		// 파일 바이트코드 읽어서 타겟에 저장
-		f.transferTo(target);
-		
-		return path + originName;
-	}
+        String myUrl = req.getServletContext().getRealPath("/");
+        int lastIndex = myUrl.lastIndexOf("\\");
+        int lastIndexBeforeTarget = myUrl.lastIndexOf("target");
+        String changeUrl = myUrl.substring(lastIndexBeforeTarget, lastIndex);
+        
+        String str = "";
+        if (lastIndexBeforeTarget != -1) {
+            str = myUrl.replace(changeUrl
+            		, "src\\main\\webapp\\resources\\upload\\img\\");
+        }
+       
+        
+        String path = str;
+        
+        String originName = f.getOriginalFilename();
+        
+        // 원래는 "path + changeName(랜덤값) + 확장자" 로 해야함 
+        File target = new File(path + originName); 
+        
+        // 파일 바이트코드 읽어서 타겟에 저장
+        f.transferTo(target);
+        
+        return path + originName;
+	} //method
 	
 	
 	// 제보 삭제

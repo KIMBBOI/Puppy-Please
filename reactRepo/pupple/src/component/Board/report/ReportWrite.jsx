@@ -80,8 +80,8 @@ const ReportWrite = () => {
         setFileObj(e.target.files[0]);
     }
     const str = sessionStorage.getItem("loginMemberVo");
-    const vo = JSON.parse(str);
-    const memberNo = vo.memberNo;
+    const sessionVo = JSON.parse(str);
+    const memberNo = sessionVo.memberNo;
 
 
 
@@ -115,26 +115,29 @@ const ReportWrite = () => {
 
         // 작성하기로 전환 시 state 에 데이터가 있으면 수정하기로 변경
         const existingReport = location.state?.vo;
+        // 로캐이션으로 받은 데이터 vo 할당
+        
         if (existingReport) {
-            if (!title) {
+            const vo = location.state.vo;
+            if (title === null || title === undefined) {
                 alert('제목을 입력하세요');
-                return navigate("/board/report/write");
+                return navigate("/board/report/write", {state: {vo}} );
             }
             if (title.length < 4) {
                 alert('제목이 너무 짧습니다');
-                return navigate("/board/report/write");
+                return navigate("/board/report/write", {state: {vo}} );
             }
             if (content === undefined) {
                 alert('내용을 입력하세요');
-                return navigate("/board/report/write");
+                return navigate("/board/report/write", {state: {vo}} );
             }
             if (content.length < 4) {
                 alert('내용이 너무 짧습니다');
-                return navigate("/board/report/write");
+                return navigate("/board/report/write", {state: {vo}} );
             }
             if (fileObj === undefined) {
                 alert('사진을 등록하세요');
-                return navigate("/board/report/write");
+                return navigate("/board/report/write", {state: {vo}} );
             }
             
 
