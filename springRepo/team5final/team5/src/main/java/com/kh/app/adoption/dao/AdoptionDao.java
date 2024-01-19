@@ -58,6 +58,10 @@ public class AdoptionDao {
 		return sst.update("AdoptionMapper.delete", vo);
 	}
 
+	public int insertRescueDog(SqlSessionTemplate sst, AdoptionVo vo) {
+		return sst.insert("AdoptionMapper.insertRescueDog", vo);
+	}
+
 
 	
 

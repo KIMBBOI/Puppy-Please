@@ -64,6 +64,10 @@ public class AdoptionService {
 	public int delete(AdoptionVo vo) {
 		return dao.delete(sst, vo);
 	}
+	
+	public int insertRescueDog(AdoptionVo vo) {
+		return dao.insertRescueDog(sst, vo);
+	}
 
 
 

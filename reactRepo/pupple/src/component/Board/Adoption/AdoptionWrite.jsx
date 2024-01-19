@@ -20,22 +20,7 @@ const AdoptionWrite = ( ) => {
     const [neuteringOx , setNeuteringOx] = useState();
     const [age , setAge] = useState();
     const [weight , setWeight] = useState();
-    // const [rescueDogNo, setRescueDogNo] = useState();
 
-    // const [formData, setFormData] = useState({
-    //     dogName: '',
-    //     breed: '',
-    //     gender: '',
-    //     neutering: '',
-    //     age: '',
-    //     weight: '',
-    //     coatColor: '',
-    // });
-
-    // const handleChange = (e) => {
-    //     const { name, value } = e.target;
-    //     setFormData({ ...formData, [name]: value });
-    // };
 
     const handleChangeFile = (e) => {
         setFileObj(e.target.files[0]);
@@ -66,12 +51,15 @@ const AdoptionWrite = ( ) => {
     // const jsonStr = sessionStorage.getItem("adminVo");
     // const sessionAdminVo = JSON.parse(jsonStr);
     // const [adminVo , setAdminVo] = useState(sessionAdminVo);
-
-
+    
     const handleSubmit = (e) => {
         e.preventDefault();
 
-
+        const adminNoStr = sessionStorage.getItem("loginAdminVo");
+        const adminNo = JSON.parse(adminNoStr);
+   
+        console.log(adminNoStr);
+    
         // < isFetching >
         // 게시글 작성이 겹치면 이미지 시퀀스를 호출하는 과정에서 
         // 다른 게시글의 이미지 넘버를 불러올 수 있음
@@ -82,20 +70,20 @@ const AdoptionWrite = ( ) => {
         isFetching = true;
 
         
+        
 
-
+        
         const formData = new FormData();
         // formData.append("rescueDogNo", rescueDogNo);
         formData.append('file', fileObj);
-        formData.append('dpgName', dogName);
+        formData.append('dogName', dogName);
         formData.append('breed', breed);
         formData.append('genderMf', genderMf);
         formData.append('neuteringOx', neuteringOx);
         formData.append('age', age);
         formData.append('weight', weight);
         // formData.append('rescueDogNo', rescueDogNo);
-        // formData.append('adminNo', adminNo);
-
+        formData.append('adminNo', adminNo.adminNo);
 
         fetch('http://127.0.0.1:8080/app/adoption/write' , {
             method: 'POST' ,
@@ -105,8 +93,6 @@ const AdoptionWrite = ( ) => {
         .then( (data) => {
             if (data.imgMsg === 'img insert good') {
                 if (data.dogMsg === 'dog insert good') {
-                    alert('게시글 등록 완료하였습니다.');
-                    navigate('/board/adoption/list');
                     if (data.boardMsg === 'board write good') {
                         alert('게시글 등록 완료하였습니다.');
                         navigate('/board/adoption/list');
@@ -141,10 +127,23 @@ const AdoptionWrite = ( ) => {
                     이름:
                     <input type="text" className="dogName" onChange={handleChangeDogName} />
                     </label>
-                    <label>
-                    견종:
-                    <input type="text" className="breed" onChange={handleChangeBreed} />
-                    </label>
+                    <select className='breed' onChange={handleChangeBreed}>
+                        <option value="0">견종</option>
+                        <option value="1">믹스견</option>
+                        <option value="2">불독</option>
+                        <option value="3">비숑</option>
+                        <option value="4">골든리트리버</option>
+                        <option value="5">시베리안 허스키</option>
+                        <option value="6">라브라도 리트리버</option>
+                        <option value="7">프렌치 불독</option>
+                        <option value="8">푸들</option>
+                        <option value="9">말티즈</option>
+                        <option value="10">비글</option>
+                        <option value="11">포메라니안</option>
+                        <option value="12">요크셔테리어</option>
+                        <option value="13">치와와</option>
+                        <option value="14">진돗개</option>
+                    </select>
                     <label>
                     성별:
                     <input type="text" className="genderMf" onChange={handleChangeGender} />

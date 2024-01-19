@@ -87,23 +87,32 @@ public class AdoptionController {
 	// 입양신청 작성
 	@PostMapping("write")
 	public Map<String, String> write(AdoptionVo vo, MultipartFile file) throws Exception {
-		
+		System.out.println("vo : " + vo);
 		//이미지 업로드 (1)
 		String imagePath = saveFile(file);
 		AdoptionVo imgVo = new AdoptionVo();
 		imgVo.setImagePath(imagePath);
 		int resultImg = service.insert(imgVo);
 		
-		
+		System.out.println(resultImg);
 		//이미지 시퀀스넘버 조회 (2)
 		vo.setImageNo(service.selectImageSeqNo());
 		
 		
 		Map<String, String> map = new HashMap<String, String>();
 		
+		//vo를 통해서 RESCUE_DOG 추가
+		
+		int insertRescueDogResult = service.insertRescueDog(vo);
+		if(insertRescueDogResult != 1){
+			throw new Exception();
+		}
+		
+		
+		
 		// 견종을 기반으로 RESCUE_DOG_NO 조회 (3)
 		String dogNo = service.findDogNoBtBreed(vo.getBreed());
-		
+		System.out.println("dogNo : " + dogNo);
 		// 견종 기반 유기견NO 조회
 		if (dogNo != null) {
 		    vo.setRescueDogNo(dogNo);
@@ -113,8 +122,6 @@ public class AdoptionController {
 		int resultBoard = service.write(vo);
 		System.out.println("게시글 작성 실패시 : " + resultBoard);
 
-		
-		
 		//이미지 작성 성공 여부
 		if (resultImg == 1) {
 			map.put("imgMsg", "img insert good");
@@ -125,7 +132,7 @@ public class AdoptionController {
 		}
 		
 		// 견종 기반 유기견NO 조회
-		if (dogNo == null) {
+		if (dogNo != null) {
 			map.put("dogMsg", "dog insert good");
 		} else {
 			map.put("dogMsg", "dog insert bad");

@@ -14,11 +14,11 @@ public class AdoptionVo {
 	private String delYn;
 	private String imagePath;  // FullPath 대신 imagePath로 변경
 	
-	private String dogName; // 개 이름
-    private String breed; // 견종
-    private String genderMf; // 성별
+	private String dogName; 	// 개 이름
+    private String breed;		// 견종
+    private String genderMf; 	// 성별
     private String neuteringOx; // 중성화 여부
-    private String age; // 나이
-    private String weight; // 몸무게
+    private String age; 		// 나이
+    private String weight; 		// 몸무게
 
 }
