@@ -70,13 +70,12 @@
 	        AND A.ADOPTION_BOARD_NO = #{adoptionBoardNo}
     </select>
     
+    <!-- 입력한 견종에 해당하는 RESCUE_DOG_NO 가져오기 -->
     <select id="findDogNoByBreed" resultType="java.lang.String">
     	SELECT 
-    		RESCUE_DOG_NO
+    		SEQ_RESCUE_DOG_NO.CURRVAL
 	    FROM 
-	    	RESCUE_DOG
-	    WHERE 
-	    	BREED = #{breed}
+	    	DUAL
     </select>
     
     <!-- 게시글 작성 -->
@@ -93,7 +92,7 @@
             SEQ_ADOPTION_BOARD_NO.NEXTVAL
             , #{imageNo}
             , #{rescueDogNo}
-            , 1
+            , #{adminNo}
         ) 
 	</insert>
 
@@ -141,6 +140,32 @@
         WHERE 
         	ADOPTION_BOARD_NO = #{adoptionNo}
     </update>
-
+	
+	<!-- 관리자가 입양하기->입양신청-> 등록하기클릭 후 입력한 정보부터 입력 -->
+	<insert id="insertRescueDog">
+    	INSERT INTO RESCUE_DOG
+		(
+			RESCUE_DOG_NO
+			, IMAGE_NO
+			, BREED
+			, ADMISSION_DATE
+			, AGE
+			, GENDER_MF
+			, NEUTERING_OX
+			, WEIGHT
+		)
+		VALUES
+		(
+			SEQ_RESCUE_DOG_NO.NEXTVAL
+			, #{imageNo}
+			, #{breed}
+			, SYSDATE
+			, #{age}
+			, #{genderMf}
+			, #{neuteringOx}
+			, #{weight}
+		)
+    </insert>
+	
 </mapper>
 
