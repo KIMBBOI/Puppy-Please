@@ -93,7 +93,7 @@
             SEQ_ADOPTION_BOARD_NO.NEXTVAL
             , #{imageNo}
             , #{rescueDogNo}
-            , #{adminNo}
+            , 1
         ) 
 	</insert>
 

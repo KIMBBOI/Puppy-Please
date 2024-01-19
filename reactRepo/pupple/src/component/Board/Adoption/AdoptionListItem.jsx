@@ -22,6 +22,8 @@ const AdoptionListItem = ( {a, b, c, d, e, f, g } ) => {
             <img 
                 src={a}
                 alt='사진'
+                width='300px'
+                height='200px'
             />
             <span>{b}</span>
             <span>{c}</span>
@@ -29,7 +31,7 @@ const AdoptionListItem = ( {a, b, c, d, e, f, g } ) => {
             <span>{e}</span>
             <span>{f}</span>
             <span>{g}</span>
-            {/* <span>{i}</span> */}
+            <button type="submit">입양신청</button>
         </StyledItemDiv>
     );
 };

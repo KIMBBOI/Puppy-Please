@@ -14,7 +14,7 @@ const StyledNaviDiv = styled.div`
     grid-auto-columns: 1fr;
     grid-auto-flow: column;
     place-items: center center;
-    font-size: 20px;
+    font-size: 21px;
     margin: 50px 0 50px 0;
 `;
 
@@ -25,11 +25,13 @@ const StyledMenuItem = styled.div`
         color: #DBE76D;
     }
     & > div:nth-child(2){
-        font-size: 15px;
+        font-size: 13px;
+        text-align: center;
     }
     & > div:nth-child(2) :hover {
         color: #292929;
         border-bottom: 1px solid #292929;
+        
     }
 `;
 
