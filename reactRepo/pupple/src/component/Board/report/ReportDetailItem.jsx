@@ -39,14 +39,19 @@ const StyeldDitailDiv = styled.div`
 
 
 const ReportDetailItem = ( {vo} ) => {
+    let currentUser = false
 
 
 
     // 게시글 작성자 판단 ( 수정/삭제 )
-    const str = sessionStorage.getItem("loginMemberVo");
-    const sessionVo = JSON.parse(str);
-    const loginMemberNo = sessionVo.memberNo;
-    const currentUser = vo.memberNo === loginMemberNo
+    if (sessionStorage.getItem("loginMemberVo") !== null) {
+        const str = sessionStorage.getItem("loginMemberVo");
+        const sessionVo = JSON.parse(str);
+        const loginMemberNo = sessionVo.memberNo;
+        currentUser = vo.memberNo === loginMemberNo
+    } else {
+        console.log(sessionStorage.getItem("loginMemberVo"));
+    }
 
 
 
