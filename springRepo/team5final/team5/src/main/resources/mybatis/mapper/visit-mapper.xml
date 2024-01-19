@@ -8,11 +8,17 @@
 	<select id="list" resultType="com.kh.app.visit.vo.VisitVo">
 		SELECT
 			VISIT_NO
+			,MEMBER_NO
+			,RESERVATION_STATUS_NO
 			,RESERVATION_DATE
+			,SUMMIT_DATE
+			,MODIFY_DATE
+			,DEL_YN
 		FROM 
 			VISIT_RESERVATION
 		WHERE 
-			RESERVATION_STATUS_NO = 1
+			DEL_YN = 'N'
+			AND RESERVATION_STATUS_NO = 1
 		ORDER BY 
 			RESERVATION_DATE ASC;
 	</select>
@@ -39,13 +45,15 @@
 		(
 			VISIT_NO
 			,MEMBER_NO
+			,RESERVATION_STATUS_NO
 			,RESERVATION_DATE
 		) 
 		VALUES
 		(
 			SEQ_VISIT_RESERVATION_NO.NEXTVAL 
 			,#{memberNo}
-			,#{reservationDate}
+			,'1'
+			,TO_DATE(#{reservationDate},'YYYY-MM-DD')
 		)
 	</insert>
 	

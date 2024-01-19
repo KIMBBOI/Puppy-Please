@@ -12,7 +12,7 @@ public class VisitDao {
 
 	
 	// 예약 목록 조회
-	public List<VisitVo> list(SqlSessionTemplate sst) {
+	public List<VisitVo> list(SqlSessionTemplate sst, VisitVo vo) {
 		return sst.selectList("VisitMapper.list");
 	}
 
