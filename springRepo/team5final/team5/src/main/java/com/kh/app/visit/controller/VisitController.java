@@ -25,24 +25,15 @@ public class VisitController {
 	private final VisitService service;
 	
 	
-	// 예약 목록 조회
-	@GetMapping("list")
-	public List<VisitVo> list() {
-		return service.list();
-	}
-	
-	
-	// 예약 상세 조회
-	@GetMapping
-	public VisitVo detail(@RequestBody VisitVo vo) {
-		return service.detail(vo);
-	}
-	
-	
 	// 예약 작성
 	@PostMapping
 	public Map<String, String> write(@RequestBody VisitVo vo) {
 		
+		// 날짜형식 데이터 문자열 자르기
+		System.out.println("vo : " + vo);
+		System.out.println(vo.getReservationDate().substring(0, 10));
+		vo.setReservationDate(vo.getReservationDate().substring(0, 10));
+			
 		Map<String, String> map = new HashMap<String, String>();
 		int result = service.insert(vo);
 		
@@ -57,6 +48,24 @@ public class VisitController {
 		return map;
 	}
 	
+	
+	
+	// 예약 목록 조회
+	@GetMapping("list")
+	public List<VisitVo> list(@RequestBody VisitVo vo) {
+		System.out.println("vo : " + vo);
+		System.out.println(vo.getReservationDate().substring(0, 10));
+		vo.setReservationDate(vo.getReservationDate().substring(0, 10));
+		return service.list(vo);
+	}
+	
+	
+	// 예약 상세 조회
+	@GetMapping
+	public VisitVo detail(@RequestBody VisitVo vo) {
+		return service.detail(vo);
+	}
+		
 	
 	// 예약 수정
 	@PutMapping
