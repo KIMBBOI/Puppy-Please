@@ -7,20 +7,21 @@
 	<!--방문예약 목록 조회 -->
 	<select id="list" resultType="com.kh.app.visit.vo.VisitVo">
 		SELECT
-			VISIT_NO
-			,MEMBER_NO
-			,RESERVATION_STATUS_NO
-			,RESERVATION_DATE
-			,SUMMIT_DATE
-			,MODIFY_DATE
-			,DEL_YN
+		    VISIT_NO
+		    ,MEMBER_NO
+		    ,RESERVATION_STATUS_NO
+		    ,RESERVATION_DATE
+		    ,SUMMIT_DATE
+		    ,MODIFY_DATE
+		    ,DEL_YN
 		FROM 
-			VISIT_RESERVATION
+		    VISIT_RESERVATION
 		WHERE 
-			DEL_YN = 'N'
-			AND RESERVATION_STATUS_NO = 1
+		    DEL_YN = 'N'
+		    AND RESERVATION_STATUS_NO = '1'
+		    AND TRUNC(RESERVATION_DATE) = TRUNC(TO_DATE(#{reservationDate}, 'YY/MM/DD HH24:MI:SS'))
 		ORDER BY 
-			RESERVATION_DATE ASC;
+		    RESERVATION_DATE ASC
 	</select>
 	
 	<!--방문예약 상세 조회 -->

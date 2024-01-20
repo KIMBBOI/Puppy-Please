@@ -19,8 +19,8 @@ public class VisitService {
 	
 	
 	// 예약 목록 조회
-	public List<VisitVo> list(VisitVo vo) {
-		return dao.list(sst, vo); 
+	public List<VisitVo> list(String reservationDate) {
+		return dao.list(sst, reservationDate); 
 	}
 
 	// 예약 상세 조회

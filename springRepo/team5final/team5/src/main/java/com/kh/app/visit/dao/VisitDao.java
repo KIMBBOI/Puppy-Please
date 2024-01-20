@@ -12,8 +12,8 @@ public class VisitDao {
 
 	
 	// 예약 목록 조회
-	public List<VisitVo> list(SqlSessionTemplate sst, VisitVo vo) {
-		return sst.selectList("VisitMapper.list");
+	public List<VisitVo> list(SqlSessionTemplate sst, String reservationDate) {
+		return sst.selectList("VisitMapper.list", reservationDate);
 	}
 
 	// 예약 상세 조회
@@ -25,8 +25,6 @@ public class VisitDao {
 	public int insert(SqlSessionTemplate sst, VisitVo vo) {
 		return sst.insert("VisitMapper.insert", vo);
 	}
-		// 로그인 멤버의 프라이머리 키
-		// 이미지의 프라이머리 키
 	
 	// 예약 수정
 	public int edit(SqlSessionTemplate sst, VisitVo vo) {
