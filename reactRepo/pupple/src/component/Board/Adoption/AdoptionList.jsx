@@ -70,6 +70,8 @@ const AdoptionList = () => {
                                 e={vo.neuteringOx} 
                                 f={vo.age} 
                                 g={vo.weight} 
+                                h={vo.adoptionBoardNo}
+                                vo={vo}
                             />
                         )
                     } )

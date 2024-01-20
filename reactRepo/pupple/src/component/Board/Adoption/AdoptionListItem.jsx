@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledItemDiv = styled.div`
@@ -16,16 +17,25 @@ const StyledItemDiv = styled.div`
     }
 `;
 
-const AdoptionListItem = ( {a, b, c, d, e, f, g } ) => {
+const AdoptionListItem = ( {a, b, c, d, e, f, g, h, vo } ) => {
+
+    const navigate = useNavigate();
+
+    const handleDetail = (vo) => {
+        navigate("/board/adoption/detail" , {state: {vo}});
+    }
+
     return (
         <StyledItemDiv>
             <img 
                 src={a}
                 alt='사진'
+                value={h}
+                onClick={ () => handleDetail(vo) }
                 width='300px'
                 height='200px'
             />
-            <span>{b}</span>
+            <span>이름 : {b}</span>
             <span>{c}</span>
             <span>{d}</span>
             <span>{e}</span>

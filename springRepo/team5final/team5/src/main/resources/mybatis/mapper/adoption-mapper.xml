@@ -149,6 +149,7 @@
 			, IMAGE_NO
 			, BREED
 			, ADMISSION_DATE
+			, DOG_NAME
 			, AGE
 			, GENDER_MF
 			, NEUTERING_OX
@@ -160,6 +161,7 @@
 			, #{imageNo}
 			, #{breed}
 			, SYSDATE
+			, #{dogName}
 			, #{age}
 			, #{genderMf}
 			, #{neuteringOx}

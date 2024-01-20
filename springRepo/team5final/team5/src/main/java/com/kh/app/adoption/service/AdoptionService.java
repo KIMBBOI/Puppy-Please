@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.kh.app.adoption.dao.AdoptionDao;
 import com.kh.app.adoption.vo.AdoptionVo;
-import com.kh.app.adoptionnews.vo.AdoptionNewsVo;
 import com.kh.app.page.vo.PageVo;
 
 import lombok.RequiredArgsConstructor;
