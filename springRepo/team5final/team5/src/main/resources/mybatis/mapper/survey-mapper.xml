@@ -2,11 +2,11 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="SurvayMapper">
+<mapper namespace="SurveyMapper">
   <insert id="insert">
-  	INSERT INTO SURVAY
+  	INSERT INTO SURVEY
   	(
-  		SURVAY_NO
+  		SURVEY_NO
   		, MEMBER_NO
   		, RESIDENCE
   		, JOB
@@ -15,7 +15,7 @@
   	) 
   	VALUES
   	(
-  		SEQ_SURVAY_NO.NEXTVAL
+  		SEQ_SURVEY_NO.NEXTVAL
   		, #{memberNo}
   		, #{residence}
   		, #{job}

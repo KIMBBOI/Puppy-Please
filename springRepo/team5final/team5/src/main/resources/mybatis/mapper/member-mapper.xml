@@ -47,7 +47,7 @@
   			, PHONE_NUMBER
   			, EMAIL
   			, PASS_YN
-  			, SURVAY_RESULT
+  			, SURVEY_RESULT
   		FROM MEMBER
   		WHERE ID = #{id}
   		AND DEL_YN = 'N'
