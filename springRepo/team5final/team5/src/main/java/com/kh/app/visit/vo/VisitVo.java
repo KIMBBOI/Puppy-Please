@@ -11,6 +11,7 @@ public class VisitVo {
 		private String reservationStatus;
 	private String reservationDate;
 	private String summitDate;
+	private String modifyDate;
 	private String delYn;
 	
 }

@@ -56,13 +56,31 @@ public class VisitController {
 		Map<String, Object> map = new HashMap<>();
 		List<VisitVo> voList = service.list(reservationDate);
 		
+		
+//		// 배열 만들기
+//		VisitVo[] arr = new VisitVo[16];
+//        // 배열에 예약완료 객체 넣기
+//        for (int i = 0; i < arr.length; i++) {
+//        	arr[i] = voList[i];
+//        }
+        
+		
+		// List를 VisitVo[] 배열로 변환
+			// visitVo[0] : 크기가 0인 배열을 제공하여 내부에서 새로운 배열을 생성하게 함
+        VisitVo[] voArr = voList.toArray(new VisitVo[0]);
+        // 배열 확인
+        for (VisitVo vo : voArr) {
+            System.out.println(vo);
+        }
+		
+        
 		if (voList != null) {
 			map.put("msg", "success");
-			map.put("voList", voList);
-				System.out.println("예약 수정 성공 !");
+			map.put("voArr", voArr);
+				System.out.println("방문예약 목록 조회 성공 !");
 		} else {
 			map.put("msg", "fail");
-				System.out.println("예약 수정 실패 ...");
+				System.out.println("방문예약 목록 조회 실패 ...");
 		}
 		
 		return map;

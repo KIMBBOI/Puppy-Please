@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import ko from "date-fns/locale/ko";
-import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import VisitReservationItem from './VisitReservationItem';
 
@@ -17,11 +16,9 @@ const StyledVisitReservationDiv = styled.div`
     align-items: center;
     background-color: #ffffff;
     padding: 20px 0 20px 0;
-    
-    
 
     .line {
-        width: 95%;
+        width: 580px;
         height: 1px;
         border-top: 1px solid #e9e9e9;;
         padding: 10px 0 10px 0;
@@ -75,27 +72,21 @@ const StyledVisitReservationDiv = styled.div`
                         font-size: 1.0rem;
                     }
                 }
-    /* .sunday {
-        color: rgb(255, 0, 0) !important; 
-    }
-    .ui-datepicker-week-end {color:red;} */
 `;
 
 
 
 
 const VisitReservation = () => {
-
-
-
-    console.log('---------------------------시작---------------------------');
+    console.log('----------- VisitReservation 시작 -----------');
     const [selectedDate, setSelectedDate] = useState(moment()._d);
-    const navigate = useNavigate();
+    const [dbVoArr,setDbVoArr] = useState();
     
     
     
     const currentDate = moment()._d;
     const maxSelectableDate = moment().add(28,'days')._d;
+
 
 
 
@@ -112,16 +103,15 @@ const VisitReservation = () => {
         })
         .then( resp => resp.json() )
         .then( data => {
-            console.log('---------------------------패치---------------------------');
-            console.log(data);
+            console.log(data.voArr);
             if(data.msg === "success"){
                 console.log(data.msg);
                 alert("조회 성공 !");
-                // navigate("/board/report/list?pno=1");
+                setDbVoArr(data.voArr);
+                    // *컴포턴트로 전달 가능*
             }else{
                 console.log(data.msg);
                 alert("조회 실패 ...");
-                // navigate(-1);
             }
         } )
         ;
@@ -130,7 +120,7 @@ const VisitReservation = () => {
 
 
 
-
+    console.log('----------- VisitReservation 종료 -----------');
     return (
         <StyledVisitReservationDiv>
             <DatePicker
@@ -146,7 +136,8 @@ const VisitReservation = () => {
                 }}
             />
             <div className='line'></div>
-            <VisitReservationItem />
+            <VisitReservationItem dbVoArr={dbVoArr}/>
+                {/* *컴포턴트로 전달 가능* */}
         </StyledVisitReservationDiv>
     );
 };

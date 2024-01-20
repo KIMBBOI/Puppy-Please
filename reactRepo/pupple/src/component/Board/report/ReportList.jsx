@@ -49,11 +49,6 @@ const StyledReportListDiv = styled.div`
 
 
 const ReportList = () => {
-    const loginInfo = sessionStorage.getItem("loginMemberVo") !== null;
-    const navigate = useNavigate();
-    // 13. 작성하기 누르면 페이지 전환
-
-
 
     // 현재 페이지의 URL을 가져옴
     const currentUrl = window.location.href;
@@ -94,14 +89,8 @@ const ReportList = () => {
     }, [pno] );
     // 9. 배열은 컴포넌트가 처음 마운트될 때( or pno 값이 바뀔때) 만 실행되도록 함
 
-
-
-        
-
-    
-
-
-
+    const navigate = useNavigate();
+        // 13. 작성하기 누르면 페이지 전환
 
     return (
         <StyledReportListDiv>
@@ -122,11 +111,7 @@ const ReportList = () => {
                 }
             </div>
             <div className='body'>
-                {loginInfo ? (
-                    <button onClick={() => navigate("/board/report/write")}>작성하기</button>
-                ) : (
-                    <button onClick={() => alert("로그인이 필요한 서비스입니다.")}>작성하기</button>
-                )}
+                <button onClick={ () => {navigate("/board/report/write");} }>작성하기</button>
             </div>
             <div className='footer'>
                 <ReportPageItem pvo={pvo} />

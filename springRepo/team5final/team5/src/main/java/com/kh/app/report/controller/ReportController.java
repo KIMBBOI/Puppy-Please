@@ -37,10 +37,10 @@ public class ReportController {
 	public Map<String, Object> list(@RequestParam(value="pno", 
 		    required = false, defaultValue="1")String pno) {
 		
-		// 전체 게시글 갯수 조회
+		// 전체 게시글 수 조회
 		int listCount = service.selectBoardCount();
 		
-		String currentPage_ = pno; // pno 받아와야함("1"ㄴㄴ변수로) 
+		String currentPage_ = pno; // pno 받아와야함
 		if(currentPage_ == null) {
 			currentPage_ = "1";
 		}
