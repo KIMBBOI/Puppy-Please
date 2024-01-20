@@ -19,8 +19,9 @@
 		WHERE 
 			DEL_YN = 'N'
 			AND RESERVATION_STATUS_NO = 1
+			AND TRUNC(RESERVATION_DATE) = TRUNC(TO_DATE(#{reservationDate}, 'DD/MM/YY HH24:MI:SS'))
 		ORDER BY 
-			RESERVATION_DATE ASC;
+			RESERVATION_DATE ASC
 	</select>
 	
 	<!--방문예약 상세 조회 -->

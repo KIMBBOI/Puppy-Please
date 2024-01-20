@@ -14,7 +14,6 @@ public class ReportDao {
 	
 	// 게시글 목록 조회
 	public List<ReportVo> list(SqlSessionTemplate sst, PageVo pvo) {
-		System.out.println("에러확인 dao : " + sst.selectList("ReportMapper.list", pvo));
 		return sst.selectList("ReportMapper.list", pvo);
 	}
 	// 전게 게시글 갯수 조회
