@@ -57,7 +57,7 @@ const AdoptionOkList = () => {
 
   return (
     <AdoptionOkListWrapper>
-      <h2>입양 가능한 유기견 목록</h2>
+      <h2>입양된 유기견 목록</h2>
       <FilterSection>
         <label>Date:</label>
         <input

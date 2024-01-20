@@ -127,22 +127,23 @@ const AdoptionWrite = ( ) => {
                     이름:
                     <input type="text" className="dogName" onChange={handleChangeDogName} />
                     </label>
+                    <br />
                     <select className='breed' onChange={handleChangeBreed}>
                         <option value="0">견종</option>
-                        <option value="1">믹스견</option>
-                        <option value="2">불독</option>
-                        <option value="3">비숑</option>
-                        <option value="4">골든리트리버</option>
-                        <option value="5">시베리안 허스키</option>
-                        <option value="6">라브라도 리트리버</option>
-                        <option value="7">프렌치 불독</option>
-                        <option value="8">푸들</option>
-                        <option value="9">말티즈</option>
-                        <option value="10">비글</option>
-                        <option value="11">포메라니안</option>
-                        <option value="12">요크셔테리어</option>
-                        <option value="13">치와와</option>
-                        <option value="14">진돗개</option>
+                        <option value="믹스견">믹스견</option>
+                        <option value="불독">불독</option>
+                        <option value="비숑">비숑</option>
+                        <option value="골든리트리버">골든리트리버</option>
+                        <option value="시베리안 허스키">시베리안 허스키</option>
+                        <option value="라브라도 리트리버">라브라도 리트리버</option>
+                        <option value="프렌치 불독">프렌치 불독</option>
+                        <option value="푸들">푸들</option>
+                        <option value="말티즈">말티즈</option>
+                        <option value="비글">비글</option>
+                        <option value="포메라니안">포메라니안</option>
+                        <option value="요크셔테리어">요크셔테리어</option>
+                        <option value="치와와">치와와</option>
+                        <option value="진돗개">진돗개</option>
                     </select>
                     <label>
                     성별:

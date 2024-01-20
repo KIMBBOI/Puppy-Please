@@ -6,7 +6,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.app.adoption.vo.AdoptionVo;
-import com.kh.app.adoptionnews.vo.AdoptionNewsVo;
 
 @Repository
 public class AdoptionDao {
