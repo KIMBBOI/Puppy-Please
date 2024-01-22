@@ -13,7 +13,7 @@
 	        	SELECT
 		        	A.ADOPTION_BOARD_NO
 		        	, A.ADMIN_NO
-		        	, A.ADOPTION_COMPLETE_YN
+		        	, A.RESCUE_DOG_NO
 				    , A.DEL_YN
 				    , RD.IMAGE_NO 
 				    , RD.DOG_NAME
@@ -22,6 +22,7 @@
 				    , RD.NEUTERING_OX
 				    , RD.AGE
 				    , RD.WEIGHT
+		        	, RD.ADOPTION_COMPLETE_YN
 				    , I.IMAGE_PATH
 				FROM
 				    ADOPTION_BOARD A
@@ -31,6 +32,8 @@
 				  		ON I.IMAGE_NO = RD.IMAGE_NO
 				WHERE
 				    A.DEL_YN = 'N'
+				AND
+					A.ADOPTION_COMPLETE_YN = 'N'
 				ORDER BY
 				    A.ENROLL_DATE DESC
 	    	) T
@@ -61,6 +64,7 @@
 	        RD.NEUTERING_OX,
 	        RD.AGE,
 	        RD.WEIGHT,
+	        RD.ADOPTION_COMPLETE_YN,
 	        I.IMAGE_PATH
 	    FROM
 	        ADOPTION_BOARD A
@@ -70,7 +74,10 @@
 	        IMAGE I ON I.IMAGE_NO = RD.IMAGE_NO
 	    WHERE
 	        A.DEL_YN = 'N'
-	        AND A.ADOPTION_BOARD_NO = #{adoptionBoardNo}
+	    AND
+	        RD.ADOPTION_COMPLETE_YN ='N'
+	    AND 
+	    	A.ADOPTION_BOARD_NO = #{adoptionBoardNo}
     </select>
     
     <!-- 입력한 견종에 해당하는 RESCUE_DOG_NO 가져오기 -->
@@ -140,11 +147,11 @@
     <!-- 입양신청 -> 입양완료 -->
     <update id="adoptionOk">
     	UPDATE 
-    		ADOPTION_BOARD
-    	SET
-    		ADOPTION_COMPLETE_YN = 'Y'
-    	WHERE
-    		ADOPTION_BOARD_NO = {adoptionBoardNo}
+    		RESCUE_DOG
+		SET 
+			ADOPTION_COMPLETE_YN = 'Y'
+		WHERE 
+			RESCUE_DOG_NO = {rescueDogNo};
     </update>
 
     <!-- 입양 신청 삭제 -->
