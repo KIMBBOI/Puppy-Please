@@ -10,11 +10,11 @@ const StyledPageItemDiv = styled.div`
     place-items: center;
 `;
 
-const AdoptionPageItem = ( {pvo} ) => {
+const AdoptionOkPageItem = ( {pvo} ) => {
     return (
         <StyledPageItemDiv>
-            {/* 여기는 이전 버튼 !!! */}
-            {pvo.startPage !== 1 && (
+           {/* 여기는 이전 버튼 !!! */}
+           {pvo.startPage !== 1 && (
                 <Link Link to={`/board/adoption/list?pno=${pvo.startPage - 1}`}>이전</Link>
             )}
             
@@ -43,10 +43,9 @@ const AdoptionPageItem = ( {pvo} ) => {
             {/* 여기는 다음 버튼 !!! */}
             {pvo.endPage !== pvo.maxPage && (
                 <Link to={`/board/aoption/list?pno=${pvo.endPage + 1}`}>다음</Link>
-            )}
-
+            )} 
         </StyledPageItemDiv>
     );
 };
 
-export default AdoptionPageItem;
+export default AdoptionOkPageItem;

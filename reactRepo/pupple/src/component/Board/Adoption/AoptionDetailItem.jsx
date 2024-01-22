@@ -56,18 +56,18 @@ const AoptionDetailItem = ( {vo} ) => {
     };
 
     //${vo.adoptionBoardNo}
-    const handleAdoptionOk = (vo) => {
+    const handleAdoptionOk = () => {
         // 입양완료 버튼 클릭 시 실행되는 로직
         // 서버에 해당 게시글을 입양완료 상태로 업데이트하는 요청을 보낼 수 있습니다.
         // 이후 입양완료 게시판으로 이동
         // 아래는 예시 코드
-        fetch(`http://127.0.0.1:8080/app/adoptionOk`, {
-            method: 'POST', // 또는 다른 HTTP 메서드를 사용하십시오.
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(vo)
-        })
+        const adoptionCompleteYn = 'Y';
+        fetch(`http://127.0.0.1:8080/app/adoptionOk/list?pno=${vo.adoptionBoardNo}&adoptionCompleteYn=${adoptionCompleteYn}`)
+            // method: 'POST', // 또는 다른 HTTP 메서드를 사용하십시오.
+            // headers: {
+            //     'Content-Type': 'application/json',
+            // },
+            // body: JSON.stringify(vo)
         .then(resp => resp.json())
         .then(data => {
             if (data.msg === 'good') {
@@ -77,14 +77,15 @@ const AoptionDetailItem = ( {vo} ) => {
                 alert('입양완료 처리에 실패하였습니다.');
                 navigate(-1);
             }
-        });
+        })
+        ;
     };
     
 
     return (
         <StyledAdoptionDetailItem>
             <div className='detailArea'>
-                <button onClick={handleAdoptionOk(vo)}>입양완료</button>
+                <button onClick={() => handleAdoptionOk(vo.pno)}>입양완료</button>
                 <img 
                     src={vo.imagePath} 
                     alt={'imageNo' + vo.imageNo}
