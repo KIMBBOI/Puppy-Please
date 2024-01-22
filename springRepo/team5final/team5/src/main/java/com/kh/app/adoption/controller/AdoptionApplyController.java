@@ -25,7 +25,13 @@ public class AdoptionApplyController {
 	@PostMapping
 	public Map<String, String> apply(@RequestBody ApplyVo vo){
 		Map<String, String> map = new HashMap<String, String>();
-		
+		System.out.println(vo);
+		int result = service.insertApply(vo);
+		map.put("msg", "good");
+		if(result != 1) {
+			map.put("msg", "bad");
+		}
+		return map;
 		
 	}
 	

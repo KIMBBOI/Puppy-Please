@@ -1,42 +1,116 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledAdoptionApply = styled.div`
+  font-family: 'Arial', sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  label {
+    margin-bottom: 10px;
+  }
+
+  input[type='text'],
+  textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 4px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  input[type='checkbox'] {
+    margin-right: 5px;
+  }
+
+  button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+
+  button:hover {
+    background-color: #45a049;
+  }
+
+  h1, h2 {
+    color: #333;
+  }
+
+  p {
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  ul li {
+    padding-left: 20px;
+    text-indent: -20px;
+  }
+
+  ul li:before {
+    content: '•';
+    padding-right: 10px;
+    color: #4CAF50;
+  }
 `;
 
 
 const AdoptionApply = () => {
 
     const navigate = useNavigate();
+    const location = useLocation();
+
+    let rescueDogVo = location.state.rescueDogVo;
     const [formData, setFormData] = useState({
-        name: '',
-        contactNumber: '',
-        alternateContact: '',
-        email: '',
-        gender: '',
-        age: '',
-        address: '',
-        sns: '',
-        job: '',
-        maritalStatus: '',
-        agreeToTerms: false,
-        // 추가 필요한 필드들...
+        memberNo: JSON.parse(sessionStorage.getItem("loginMemberVo")).memberNo,
+        rescueDogNo: rescueDogVo.rescueDogNo,
+        decisionTime: '',
+        mainReason: '', 
+        familyMembers: '', 
+        currentPets: '',
+        landlordPermissionYN: '', 
+        conflictResolution: '',
     });
 
     const handleChange = (event) => {
-        const {checked} = event.target;
-        setFormData(prevState => ({
-            ...prevState,
-            [name] : type === 'checkbox' ? checked : value
-        }));
+        const {name, type, value, checked} = event.target;
+        if(type === 'radio'){
+            setFormData(prevState => ({
+                ...prevState,
+                [name]: value
+            }));
+        }else{
+            setFormData(prevState => ({
+                ...prevState,
+                [name] : type === 'checkbox' ? checked : value
+            }));
+        }
     };
 
 
     const handleSubmit = (event) => {
         event.preventDefault();
-
+        
         fetch('http://127.0.0.1:8080/app/board/adoption/apply', {
             method: "post",
             headers: {
@@ -76,7 +150,7 @@ const AdoptionApply = () => {
                     <p>
                         카라는 법률에서 정하는 경우를 제외하고는 귀하의 동의 없어 개인정보을 제3자에게 제공하지 않습니다. 
                         <br />
-                        문의 : 02-3482-0999 / info@ekara.org
+                        문의 : 02-3482-0999 / info@epupple.org
                     </p>
                     <label>
                     <input
@@ -86,6 +160,9 @@ const AdoptionApply = () => {
                         onChange={handleChange}
                     /> 개인정보 이용에 동의합니다
                     </label>
+                    <br />
+                    <hr />
+                    <br />
                     <label>
                     1. 입양을 희망하는 동물의 이름을 적어주세요.
                     <input 
@@ -135,14 +212,30 @@ const AdoptionApply = () => {
 
                     <label>
                     6. 임대한 주택의 경우 집주인의 동의를 얻으셨나요?
-                    <input 
-                        type="checkbox" 
-                        name="landlordPermission" 
-                        checked={formData.landlordPermission} 
-                        onChange={handleChange} 
-                    />
+                    <div>
+                        <label>
+                        <input
+                            type="radio"
+                            name="landlordPermissionYN"
+                            value="Y"
+                            checked={formData.landlordPermissionYN === 'Y'}
+                            onChange={handleChange}
+                        />
+                        예
+                        </label>
+                        <label>
+                        <input
+                            type="radio"
+                            name="landlordPermissionYN"
+                            value="N"
+                            checked={formData.landlordPermissionYN === 'N'}
+                            onChange={handleChange}
+                        />
+                        아니오
+                        </label>
+                    </div>
                     </label>
-
+                    <br />
                     <label>
                     7. 소음이나 위생 등으로 인한 이웃과의 마찰로 입양동물의 양육이 불가능해질 경우 어떻게 하실건가요?
                     <textarea 

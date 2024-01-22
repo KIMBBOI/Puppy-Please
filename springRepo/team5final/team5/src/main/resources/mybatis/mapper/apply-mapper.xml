@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ApplyMapper">
+	<insert id="insert">
+  		INSERT INTO APPLY
+  		(
+  			APPLY_NO
+			, MEMBER_NO
+			, RESCUE_DOG_NO
+			, DECISION_TIME
+			, MAIN_REASON
+			, FAMILY_MEMBERS
+			, CURRENT_PETS
+			, LANDLORD_PERMISSION_YN
+			, CONFLICTRESOLUTION
+  		)
+  		VALUES
+  		(
+  			SEQ_APPLY_NO.NEXTVAL
+  			, #{memberNo}
+  			, #{rescueDogNo}
+  			, #{decisionTime}
+  			, #{mainReason}
+  			, #{familyMembers}
+  			, #{currentPets}
+  			, #{landlordPermissionYN}
+  			, #{conflictResolution}
+  		)
+  	</insert>
+<!--     <select id="list" resultType="ApplyVo"> -->
+<!--     	SELECT -->
+    		
+    		
+<!--     </select> -->
+</mapper>
+
