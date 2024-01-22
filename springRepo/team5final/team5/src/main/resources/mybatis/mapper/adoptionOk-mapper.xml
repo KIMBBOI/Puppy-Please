@@ -6,10 +6,37 @@
 
     <!-- 입양 승인 리스트 조회 -->
     <select id="list" resultType="com.kh.app.adoptionOk.vo.AdoptionOkVo">
-        SELECT ADOPTION_NO, IMAGE_NO, RESCUE_DOG_NO, ADMIN_NO, ENROLL_DATE, MODIFY_DATE, DEL_YN
-        FROM ADOPTION_OK
-        WHERE DEL_YN = 'N'
-        ORDER BY ADOPTION_NO DESC
+        SELECT *
+    	FROM (
+	        SELECT ROWNUM RNUM, T.*
+	        FROM (
+	        	SELECT
+		        	A.ADOPTION_BOARD_NO
+		        	, A.ADMIN_NO
+		        	, A.ADOPTION_COMPLETE_YN
+				    , A.DEL_YN
+				    , RD.IMAGE_NO 
+				    , RD.DOG_NAME
+				    , RD.BREED
+				    , RD.GENDER_MF
+				    , RD.NEUTERING_OX
+				    , RD.AGE
+				    , RD.WEIGHT
+				    , I.IMAGE_PATH
+				FROM
+				    ADOPTION_BOARD A
+					JOIN RESCUE_DOG RD 
+						ON A.RESCUE_DOG_NO = RD.RESCUE_DOG_NO
+					JOIN IMAGE I
+				  		ON I.IMAGE_NO = RD.IMAGE_NO
+				WHERE
+				    A.DEL_YN = 'N'
+				AND
+					A.ADOPTION_COMPLETE_YN = 'Y'
+				ORDER BY
+				    A.ENROLL_DATE DESC
+	    	) T
+		)
     </select>
 
     <!-- 입양 승인 상세 조회 -->

@@ -51,6 +51,11 @@ public class AdoptionDao {
 	public int edit(SqlSessionTemplate sst, AdoptionVo vo) {
 		return sst.update("AdoptionMapper.edit", vo);
 	}
+	
+	// 입양신청 -> 입양완료
+	public int adoptionOk(SqlSessionTemplate sst, AdoptionVo vo) {
+		return sst.update("AdoptionMapper.adoptionOk", vo);
+	}
 
 	// 입양 게시글 삭제
 	public int delete(SqlSessionTemplate sst, AdoptionVo vo) {
@@ -60,6 +65,8 @@ public class AdoptionDao {
 	public int insertRescueDog(SqlSessionTemplate sst, AdoptionVo vo) {
 		return sst.insert("AdoptionMapper.insertRescueDog", vo);
 	}
+
+	
 
 
 	

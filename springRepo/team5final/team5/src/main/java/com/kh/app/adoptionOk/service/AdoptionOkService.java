@@ -5,8 +5,10 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Service;
 
+import com.kh.app.adoption.vo.AdoptionVo;
 import com.kh.app.adoptionOk.dao.AdoptionOkDao;
 import com.kh.app.adoptionOk.vo.AdoptionOkVo;
+import com.kh.app.page.vo.PageVo;
 
 import lombok.RequiredArgsConstructor;
 
@@ -19,8 +21,13 @@ public class AdoptionOkService {
 	
 	
 	// 게시글 목록 조회
-	public List<AdoptionOkVo> list() {
+	public List<AdoptionVo> list(PageVo pvo) {
 		return dao.list(sst); 
+	}
+	
+
+	public int selectBoardCount() {
+		return dao.selectBoardCount(sst);
 	}
 
 	// 게시글 상세 조회
@@ -42,5 +49,6 @@ public class AdoptionOkService {
 	public int delete(AdoptionOkVo vo) {
 		return dao.delete(sst, vo);
 	}
+
 
 }

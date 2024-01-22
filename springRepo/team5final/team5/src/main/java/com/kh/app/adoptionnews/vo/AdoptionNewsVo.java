@@ -14,5 +14,6 @@ public class AdoptionNewsVo {
 	private String modifyDate;
 	private String delYn;
 	private String imagePath;  // FullPath 대신 imagePath로 변경
+	private String writerNick;
 
 }

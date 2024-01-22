@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import AoptionDetailItem from './AoptionDetailItem';
 
@@ -14,41 +14,31 @@ const StyledAdoptionDetailDiv = styled.div`
 
 const AdoptionDetail = () => {
 
+    const navigate = useNavigate();
     const location = useLocation();
     let vo = location.state.vo;
 
-    // 현재 사용자 정보 (예: 로그인한 사용자 정보)를 가져오는 함수
-    const getCurrentAdmin = () => {
-        // 현재 사용자 정보를 가져오는 로직을 추가하세요.
-        // 예: 로그인 상태에 따라 서버에서 사용자 정보를 가져올 수 있습니다.
+    // 입양완료 처리 함수
+    const handleAdoptionComplete = (adoptionBoardNo) => {
+        try {
+            // 서버에 입양완료 상태를 업데이트하는 요청을 보냅니다.
+            // 예: axios 또는 fetch를 사용하여 서버로 요청을 보냅니다.
+            // 서버 응답을 기다리고, 성공하면 입양완료 게시판으로 이동합니다.
+            // 서버 응답에 따라 적절한 처리를 해야 합니다.
+
+            // 입양완료 상태 업데이트 완료 후 이동
+            navigate('/board/adoptionOk/list');
+        } catch (error) {
+            // 오류 처리
+            console.error('입양완료 처리 중 오류 발생: ', error);
+        }
     };
-
-    const currentAdmin = getCurrentAdmin();
-
-    const handleEdit = () => {
-        // 수정 버튼 클릭 시 실행되는 로직을 추가하세요.
-    };
-
-    const handleDelete = () => {
-        // 삭제 버튼 클릭 시 실행되는 로직을 추가하세요.
-    };
-
-    // 현재 사용자가 작성자인지 확인
-    const isAdmin = currentAdmin && currentAdmin.AdminNo === vo.adminNo;
 
     return (
         <StyledAdoptionDetailDiv>
             {vo ? (
-                <>
-                    <AoptionDetailItem key={vo.adoptionBoardNo} vo={vo} />
-                    {isAdmin && (
-                        <>
-                            <button onClick={handleEdit}>수정</button>
-                            <button onClick={handleDelete}>삭제</button>
-                        </>
-                        )}
-                </>
-                ) : (
+                <AoptionDetailItem key={vo.adoptionBoardNo} vo={vo} onAdoptionComplete={handleAdoptionComplete} />
+            ) : (
                     <div>로딩중</div>
             )}
         </StyledAdoptionDetailDiv>
