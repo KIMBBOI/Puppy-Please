@@ -54,7 +54,7 @@
 			SEQ_VISIT_RESERVATION_NO.NEXTVAL 
 			,#{memberNo}
 			,'1'
-			,TO_DATE(#{reservationDate},'YYYY-MM-DD')
+			,TO_DATE(#{reservationDate},'YY/MM/DD HH24:MI:SS')
 		)
 	</insert>
 	

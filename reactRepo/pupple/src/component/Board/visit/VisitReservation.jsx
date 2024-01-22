@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -17,8 +17,33 @@ const StyledVisitReservationDiv = styled.div`
     background-color: #ffffff;
     padding: 20px 0 20px 0;
 
+    
+    .react-datepicker__day:hover {
+        background-color: #ece2ff; 
+        color: #fff;  
+        border-radius: 5%;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        font-weight: 600;
+    }   
+    .react-datepicker__day--today {
+    background-color: transparent;
+    color: #333;
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-decoration: none;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.61);
+    }
+    .react-datepicker__day--selected {
+        background-color: #ece2ff; 
+        color: #fff;  
+        border-radius: 5%;  
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        font-weight: 600;
+    }
+
+  
     .line {
-        width: 580px;
+        width: 680px;
         height: 1px;
         border-top: 1px solid #e9e9e9;;
         padding: 10px 0 10px 0;
@@ -26,8 +51,8 @@ const StyledVisitReservationDiv = styled.div`
         
     }
     .react-datepicker {
-        width: 600px;
-        height: 400px;
+        width: 700px;
+        height: 550px;
         border: 0px;
     }
         .react-datepicker__month-container {
@@ -42,13 +67,14 @@ const StyledVisitReservationDiv = styled.div`
                 height: 20%;
                 border: 0px;
                 background-color: white;
+                margin-bottom: 1%;
             }
                 .react-datepicker__current-month {
-                    height: 40%;
+                    height: 55%;
                     font-size: 1.2rem;
                 }
                 .react-datepicker__day-names {
-                    height: 60%;
+                    height: 45%;
                     & > div {
                         width: 14%;
                         height: 100%;
@@ -58,17 +84,21 @@ const StyledVisitReservationDiv = styled.div`
                     }
                 }
             .react-datepicker__month {
-                height: 80%;
+                height: 78%;
                 margin: 0;
             }
                 .react-datepicker__week {
-                    height: 20%;
+                    height: 19%;
+                    display: flex;
+                    justify-content: space-evenly;
+                    margin-bottom: 3px;
+
                     & > div {
                         /* line-height: 350%; */
-                        width: 14%;
+                        width: 13.6%;
                         height: 100%;
                         margin: 0;
-                        padding: 3% 4px 0 4px;
+                        padding: 3.5% 4px 0 4px;
                         font-size: 1.0rem;
                     }
                 }
@@ -79,11 +109,22 @@ const StyledVisitReservationDiv = styled.div`
 
 const VisitReservation = () => {
     console.log('----------- VisitReservation 시작 -----------');
+    // 방문예약 페이지 접속만 해도 fetch 실행 ( 기본 선택 날짜로 디비 조회 )
+    useEffect( () => {
+        handleSelectRerv(moment());
+    }, []);
+
+
+
+
+
     const [selectedDate, setSelectedDate] = useState(moment()._d);
-    const [dbVoArr,setDbVoArr] = useState();
+    const [dbDateStrArr,setDbDateStrArr] = useState();
     
     
     
+    
+
     const currentDate = moment()._d;
     const maxSelectableDate = moment().add(28,'days')._d;
 
@@ -91,7 +132,7 @@ const VisitReservation = () => {
 
 
 
-
+    // 예약현황 조회
     function handleSelectRerv(moment) {
         const vo = { 'reservationDate' : moment.format("YY/MM/DD HH:mm:ss")}
         const queryString = new URLSearchParams(vo).toString();
@@ -103,11 +144,9 @@ const VisitReservation = () => {
         })
         .then( resp => resp.json() )
         .then( data => {
-            console.log(data.voArr);
             if(data.msg === "success"){
-                console.log(data.msg);
                 alert("조회 성공 !");
-                setDbVoArr(data.voArr);
+                setDbDateStrArr(data.reservationDateArr);
                     // *컴포턴트로 전달 가능*
             }else{
                 console.log(data.msg);
@@ -115,7 +154,8 @@ const VisitReservation = () => {
             }
         } )
         ;
-    }
+    }    
+
  
 
 
@@ -126,17 +166,17 @@ const VisitReservation = () => {
             <DatePicker
                 inline
                 locale={ko}
-                dateFormat='yyyy.MM.dd'     // 날짜 형태
+                dateFormat="yyyy-MM-dd"
                 minDate={currentDate}       // minDate 이전 날짜 선택 불가
                 maxDate={maxSelectableDate} // maxDate 이후 날짜 선택 불가
-                selected={selectedDate}
+                selected={selectedDate}     // value
                 onChange={(date) => {
                     setSelectedDate(date); 
                     handleSelectRerv(moment(date));
                 }}
             />
             <div className='line'></div>
-            <VisitReservationItem dbVoArr={dbVoArr}/>
+            <VisitReservationItem dbDateStrArr={dbDateStrArr}/>
                 {/* *컴포턴트로 전달 가능* */}
         </StyledVisitReservationDiv>
     );

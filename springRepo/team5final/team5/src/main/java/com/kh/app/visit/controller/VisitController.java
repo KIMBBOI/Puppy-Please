@@ -29,9 +29,7 @@ public class VisitController {
 	// 방문예약하기
 	@PostMapping
 	public Map<String, String> write(@RequestBody VisitVo vo) {
-		
-		// 날짜형식 데이터 문자열 자르기
-		vo.setReservationDate(vo.getReservationDate().substring(0, 10));
+		System.out.println(vo);
 			
 		Map<String, String> map = new HashMap<String, String>();
 		int result = service.insert(vo);
@@ -55,28 +53,19 @@ public class VisitController {
 		
 		Map<String, Object> map = new HashMap<>();
 		List<VisitVo> voList = service.list(reservationDate);
-		
-		
-//		// 배열 만들기
-//		VisitVo[] arr = new VisitVo[16];
-//        // 배열에 예약완료 객체 넣기
-//        for (int i = 0; i < arr.length; i++) {
-//        	arr[i] = voList[i];
-//        }
-        
-		
-		// List를 VisitVo[] 배열로 변환
-			// visitVo[0] : 크기가 0인 배열을 제공하여 내부에서 새로운 배열을 생성하게 함
-        VisitVo[] voArr = voList.toArray(new VisitVo[0]);
-        // 배열 확인
-        for (VisitVo vo : voArr) {
-            System.out.println(vo);
-        }
-		
         
 		if (voList != null) {
+			// voList에서 객체의 reservationDate 값들을 추출하여 문자 배열로 만들기
+			String[] reservationDateArr = voList.stream()
+					.map(VisitVo::getReservationDate)
+					.toArray(String[]::new);
+			
+			for (String date : reservationDateArr) {
+				System.out.println("Reservation Date: " + date);
+			}
+			
 			map.put("msg", "success");
-			map.put("voArr", voArr);
+			map.put("reservationDateArr", reservationDateArr);
 				System.out.println("방문예약 목록 조회 성공 !");
 		} else {
 			map.put("msg", "fail");
