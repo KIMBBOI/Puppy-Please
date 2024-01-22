@@ -18,14 +18,14 @@ public class VisitService {
 	private final SqlSessionTemplate sst;
 	
 	
-	// 예약 목록 조회
+	// 특정일 예약 목록 조회
 	public List<VisitVo> list(String reservationDate) {
 		return dao.list(sst, reservationDate); 
 	}
 
 	// 예약 상세 조회
-	public VisitVo detail(VisitVo vo) {
-		return dao.detail(sst, vo);
+	public VisitVo detail(String memberNo) {
+		return dao.detail(sst, memberNo);
 	}
 	
 	// 예약 작성
