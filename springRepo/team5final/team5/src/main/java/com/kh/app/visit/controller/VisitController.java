@@ -84,7 +84,7 @@ public class VisitController {
 		
 	
 	// 예약 수정
-	@PutMapping
+	@PutMapping("edit")
 	public Map<String, String> edit(@RequestBody VisitVo vo) {
 		
 		Map<String, String> map = new HashMap<String, String>();

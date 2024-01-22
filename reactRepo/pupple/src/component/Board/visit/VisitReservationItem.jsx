@@ -233,40 +233,6 @@ const VisitReservationItem = ({dbDateStrArr}) => {
 
 
 
-    function handleReservation(vo) {
-        console.log('패치 vo 확인 :::', vo);
-
-        fetch("http://127.0.0.1:8080/app/visit" , {
-            method: "POST" ,
-            headers: {
-                'Content-Type': 'application/json',
-              },
-            body: JSON.stringify(vo)
-        })
-        .then( resp => resp.json() )
-        .then( data => {
-            console.log(data);
-            if(data.msg === "success"){
-                console.log(data.msg);
-                alert("예약 완료 !");
-                navigate("/");
-            }else{
-                console.log(data.msg);
-                alert("예약 실패 ...");
-                navigate(-1);
-            }
-        } )
-        ;
-    }
-
-
-
-
-
-
-
-
-
     console.log('------------------ Item 종료 ------------------');
     return (
         <StyeldVisitReservationItemDiv>
@@ -289,10 +255,10 @@ const VisitReservationItem = ({dbDateStrArr}) => {
                     <button 
                         className={`btn ${selectedDate === null ? 'notReadyVo' : ''}`}
                         onClick={ () => {
-                            selectedDate !== null && handleReservation(vo)
+                            selectedDate !== null && navigate("/board/visit/reservationInfo", {state:{vo}});
                         }}
                     >
-                        예약하기
+                        다음단계
                     </button>
                 </div>
             </div>
