@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -73,5 +74,12 @@ public class MyPageController {
 		return map;
 	}
 	
+	
+//	// 입양신청내역
+//	@GetMapping
+//	public Map<String, Object> adoptList(@RequestBody MemberVo vo){
+//		
+//	}
+//	
 	
 }

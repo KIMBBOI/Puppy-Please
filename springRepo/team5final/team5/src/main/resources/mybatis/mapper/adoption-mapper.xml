@@ -15,6 +15,7 @@
 		        	, A.ADMIN_NO
 		        	, A.ADOPTION_COMPLETE_YN
 				    , A.DEL_YN
+				    , RD.RESCUE_DOG_NO
 				    , RD.IMAGE_NO 
 				    , RD.DOG_NAME
 				    , RD.BREED
@@ -54,6 +55,7 @@
 	        A.ADOPTION_BOARD_NO,
 	        A.ADMIN_NO,
 	        A.DEL_YN,
+	        RD.RESCUE_DOG_NO,
 	        RD.IMAGE_NO,
 	        RD.DOG_NAME,
 	        RD.BREED,

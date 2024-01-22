@@ -5,6 +5,7 @@ import AdoptionWrite from './AdoptionWrite';
 import AdoptionDetail from './AdoptionDetail';
 import SurveyMain from '../../survey/SurveyMain';
 import QuizMain from '../quiz/QuizMain';
+import AdoptionApply from './AdoptionApply';
 
 const AdoptionMain = () => {
     return (
@@ -14,6 +15,7 @@ const AdoptionMain = () => {
             <Route path='/detail' element={<AdoptionDetail />} />
             <Route path='/survey' element={<SurveyMain />} />
             <Route path='/quiz' element={<QuizMain />} />
+            <Route path='/apply' element={<AdoptionApply/>}/>
         </Routes>
     );
 };

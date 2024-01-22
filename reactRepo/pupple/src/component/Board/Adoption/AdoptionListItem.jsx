@@ -24,7 +24,10 @@ const AdoptionListItem = ( {a, b, c, d, e, f, g, h, vo } ) => {
     const handleDetail = (vo) => {
         navigate("/board/adoption/detail" , {state: {vo}});
     }
-
+    const handleAdoption = () => {
+        console.log(vo);
+        navigate("/board/adoption/survey", {state: {vo}});
+    }
     return (
         <StyledItemDiv>
             <img 
@@ -41,7 +44,7 @@ const AdoptionListItem = ( {a, b, c, d, e, f, g, h, vo } ) => {
             <span>{e}</span>
             <span>{f}</span>
             <span>{g}</span>
-            <button type="submit">입양신청</button>
+            <button onClick={ handleAdoption }>입양신청</button>
         </StyledItemDiv>
     );
 };

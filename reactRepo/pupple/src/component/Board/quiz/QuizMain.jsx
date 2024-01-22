@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import QuizData from './QuizData';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const StyledQuizDiv = styled.div`
     display: flex;
@@ -66,6 +66,10 @@ const StyledQuizDiv = styled.div`
 
 const QuizMain = () => {
     const navigate = useNavigate();
+
+    //유기견 정보 가져오기
+    const location = useLocation();
+    let rescueDogVo = location.state?.rescueDogVo;
     //퀴즈 데이터 불러오기
     const quizData = QuizData;
     //현재 퀴즈번호 셋팅하기
@@ -144,7 +148,7 @@ const QuizMain = () => {
         })
         .then((data) => {
             if(data.msg === "pass"){
-                navigate("/board/adoption/apply")
+                navigate("/board/adoption/apply", {state: {rescueDogVo}})
             }
         })
 

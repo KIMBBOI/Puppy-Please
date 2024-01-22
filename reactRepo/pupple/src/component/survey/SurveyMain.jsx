@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 const StyledSurveyDiv = styled.div`
 
@@ -7,7 +7,8 @@ const StyledSurveyDiv = styled.div`
 const SurveyMain = () => {
 
     const navigate = useNavigate();
-
+    const location = useLocation();
+    const rescueDogVo = location.state?.vo;
     const loginMemberVo = JSON.parse(sessionStorage.getItem('loginMemberVo'));
 
 
@@ -36,7 +37,7 @@ const SurveyMain = () => {
         .then(data => {
             if(data.msg === "good"){
                 alert("설문 작성 완료! 퀴즈를 진행해 주세요")
-                navigate("/board/adoption/quiz")
+                navigate("/board/adoption/quiz", {state: {rescueDogVo}})
             }else{
                 alert("설문 작성 실패!")
                 navigate("/adoption/survey")
@@ -51,8 +52,8 @@ const SurveyMain = () => {
                 <table>
                     <tbody>
                         <tr>
-                            <td><span>주거 형태를 작성해 주세요</span></td>
-                            <td><input type="text" name="residence" onChange={handleInputChange} placeholder='주거 형태'/></td>
+                            <td><span>거주지(시, 군, 구)를 작성해 주세요</span></td>
+                            <td><input type="text" name="residence" onChange={handleInputChange} placeholder='거주지'/></td>
                         </tr>
                         <tr>
                             <td><span>결혼 여부를 작성해 주세요</span></td>

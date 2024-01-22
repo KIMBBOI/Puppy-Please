@@ -13,6 +13,7 @@
   <typeAliases>
   	<typeAlias type="com.kh.app.member.vo.MemberVo" alias="MemberVo" />
   	<typeAlias type="com.kh.app.admin.vo.AdminVo" alias="AdminVo" />
+  	<typeAlias type="com.kh.app.adoption.vo.ApplyVo" alias="ApplyVo" />
   	<typeAlias type="java.lang.Integer" alias="Integer" />
   </typeAliases>
   
