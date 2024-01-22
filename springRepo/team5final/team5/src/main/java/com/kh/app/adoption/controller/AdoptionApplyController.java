@@ -1,4 +1,4 @@
-package com.kh.app.quiz.controller;
+package com.kh.app.adoption.controller;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,31 +9,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kh.app.quiz.service.QuizService;
-import com.kh.app.quiz.vo.QuizVo;
+import com.kh.app.adoption.service.AdoptionApplyService;
+import com.kh.app.adoption.vo.ApplyVo;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@ResponseBody
 @RequiredArgsConstructor
-@RequestMapping("board/adoption/quiz")
-public class QuizController {
+@RequestMapping("board/adoption/apply")
+@ResponseBody
+public class AdoptionApplyController {
 	
-	private final QuizService service;
-	
+	private final AdoptionApplyService service;
 	
 	@PostMapping
-	public Map<String, String> quizCheck(@RequestBody QuizVo vo){
+	public Map<String, String> apply(@RequestBody ApplyVo vo){
 		Map<String, String> map = new HashMap<String, String>();
-		System.out.println(vo);
-		int result = service.quizCheck(vo);
 		
-		map.put("msg", "pass");
-		if(result != 1) {
-			map.put("msg", "non pass");
-		}
-		return map;
+		
 	}
 	
 	
