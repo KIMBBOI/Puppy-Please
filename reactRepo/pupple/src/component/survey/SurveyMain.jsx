@@ -36,7 +36,7 @@ const SurveyMain = () => {
         .then(data => {
             if(data.msg === "good"){
                 alert("설문 작성 완료! 퀴즈를 진행해 주세요")
-                navigate("/adoption/quiz")
+                navigate("/board/adoption/quiz")
             }else{
                 alert("설문 작성 실패!")
                 navigate("/adoption/survey")
