@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="QuizMapper">
+  <insert id="insert">
+  	INSERT INTO QUIZ
+  	(
+  		QUIZ_NO
+  		, MEMBER_NO
+  		, SCORE
+  	) 
+  	VALUES 
+  	(
+  		SEQ_QUIZ_NO.NEXTVAL
+  		, #{memberNo}
+  		, #{score}
+  	)
+  </insert>
+</mapper>
