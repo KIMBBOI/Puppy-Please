@@ -13,6 +13,7 @@
 	        	SELECT
 		        	A.ADOPTION_BOARD_NO
 		        	, A.ADMIN_NO
+		        	, A.ADOPTION_COMPLETE_YN
 				    , A.DEL_YN
 				    , RD.IMAGE_NO 
 				    , RD.DOG_NAME
@@ -43,6 +44,8 @@
 			ADOPTION_BOARD 
 		WHERE 
 			DEL_YN = 'N'
+		AND
+			ADOPTION_COMPLETE_YN = 'N'
 	</select>
 
     <!-- 입양 신청 상세 조회 -->
@@ -120,25 +123,38 @@
 
     <!-- 입양 신청 수정 -->
     <update id="edit" parameterType="com.kh.app.adoption.vo.AdoptionVo">
-        UPDATE ADOPTION_BOARD
+        UPDATE 
+        	ADOPTION_BOARD
         SET 
-        	IMAGE_NO = #{imageNo},
-            RESCUE_DOG_NO = #{rescueDogNo},
-            ADMIN_NO = #{adminNo},
-            ENROLL_DATE = #{enrollDate},
-            MODIFY_DATE = #{modifyDate},
-            DEL_YN = #{delYn}
+        	IMAGE_NO = #{imageNo}
+            , RESCUE_DOG_NO = #{rescueDogNo}
+            , ADMIN_NO = #{adminNo}
+            , ENROLL_DATE = #{enrollDate}
+            , MODIFY_DATE = #{modifyDate}
+            , ADOPTION_COMPLETE_YN = #{adoptionCompleteYn}
+            , DEL_YN = #{delYn}
         WHERE 
-        	ADOPTION_BOARD_NO = #{adoptionNo}
+        	ADOPTION_BOARD_NO = #{adoptionBoardNo}
+    </update>
+    
+    <!-- 입양신청 -> 입양완료 -->
+    <update id="adoptionOk">
+    	UPDATE 
+    		ADOPTION_BOARD
+    	SET
+    		ADOPTION_COMPLETE_YN = 'Y'
+    	WHERE
+    		ADOPTION_BOARD_NO = {adoptionBoardNo}
     </update>
 
     <!-- 입양 신청 삭제 -->
     <update id="delete">
-        UPDATE ADOPTION_BOARD
+        UPDATE 
+        	ADOPTION_BOARD
         SET 
         	DEL_YN = 'Y'
         WHERE 
-        	ADOPTION_BOARD_NO = #{adoptionNo}
+        	ADOPTION_BOARD_NO = #{adoptionBoardNo}
     </update>
 	
 	<!-- 관리자가 입양하기->입양신청-> 등록하기클릭 후 입력한 정보부터 입력 -->

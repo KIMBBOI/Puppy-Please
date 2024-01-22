@@ -5,15 +5,21 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.app.adoption.vo.AdoptionVo;
 import com.kh.app.adoptionOk.vo.AdoptionOkVo;
 
 @Repository
 public class AdoptionOkDao {
 	
 	// 게시글 목록 조회
-	public List<AdoptionOkVo> list(SqlSessionTemplate sst) {
+	public List<AdoptionVo> list(SqlSessionTemplate sst) {
 		System.out.println("에러확인 dao : " + sst.selectList("AdoptionOkMapper.list"));
 		return sst.selectList("AdoptionOkMapper.list");
+	}
+	
+	// 전체 게시글 갯수 조회
+	public int selectBoardCount(SqlSessionTemplate sst) {
+		return sst.selectOne("AdoptionOkMapper.listCount");
 	}
 
 	// 게시글 상세 조회

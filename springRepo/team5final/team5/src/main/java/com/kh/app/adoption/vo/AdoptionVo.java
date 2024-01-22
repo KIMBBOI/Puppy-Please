@@ -11,6 +11,7 @@ public class AdoptionVo {
 	private String adminNo;
 	private String enrollDate;
 	private String modifyDate;
+	private String adoptionCompleteYn;
 	private String delYn;
 	private String imagePath;  // FullPath 대신 imagePath로 변경
 	

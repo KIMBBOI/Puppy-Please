@@ -191,6 +191,24 @@ public class AdoptionController {
 		return map;
 	}
 	
+	// 입양신청 -> 입양완료
+	@PostMapping("adoptionOk")
+	public Map<String, String> adoptionOk(@RequestBody AdoptionVo vo) {
+		
+		Map<String, String> map = new HashMap<String, String>();
+		
+		int result = service.adoptionOk(vo);
+		if (result == 1) {
+			map.put("msg", "good");
+			System.out.println("입양완료 처리 성공");
+		} else {
+			map.put("msg", "bad");
+			System.out.println("입양완료 처리 실패");
+		}
+		
+		return map;
+	}
+	
 	// 입양신청 삭제
 	@DeleteMapping
 	public Map<String, String> delete(@RequestBody AdoptionVo vo) {

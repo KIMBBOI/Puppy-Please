@@ -58,6 +58,11 @@ public class AdoptionService {
 	public int edit(AdoptionVo vo) {
 		return dao.edit(sst, vo);
 	}
+	
+	// 입양신청 -> 입양완료
+	public int adoptionOk(AdoptionVo vo) {
+		return dao.adoptionOk(sst, vo);
+	}
 
 	// 입양 게시글 삭제
 	public int delete(AdoptionVo vo) {
@@ -67,6 +72,8 @@ public class AdoptionService {
 	public int insertRescueDog(AdoptionVo vo) {
 		return dao.insertRescueDog(sst, vo);
 	}
+
+	
 
 
 
