@@ -92,6 +92,15 @@ const ReportList = () => {
     const navigate = useNavigate();
         // 13. 작성하기 누르면 페이지 전환
 
+
+
+
+    const str = sessionStorage.getItem("loginMemberVo");
+    console.log('str :::',str);
+
+
+
+
     return (
         <StyledReportListDiv>
             <div className='wrap'>
@@ -111,7 +120,8 @@ const ReportList = () => {
                 }
             </div>
             <div className='body'>
-                <button onClick={ () => {navigate("/board/report/write");} }>작성하기</button>
+                <button onClick={ 
+                    str === null ? () => {alert('로그인이 필요한 서비스입니다.')} : () => {navigate("/board/report/write");} }>작성하기</button>
             </div>
             <div className='footer'>
                 <ReportPageItem pvo={pvo} />
