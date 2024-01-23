@@ -13,13 +13,27 @@ const AdoptionOkListDiv = styled.div`
     }
 
     .wrap {
+        /* border: 1px solid gray; */
         display: grid;
-        // grid-template-columns: repeat(3, 1fr); 3개의 열로 구성
-        gap: 50px; /* 열과 행 사이의 간격 조절 */
+        gap: 80px 50px; /* 열과 행 사이의 간격 조절 */
         padding: 30px 0;
+        /* grid-template-rows: 1.5fr;  */
         grid-template-columns: 6fr 7fr 6fr;
-        grid-template-rows: 1fr; 
+        // grid-template-columns: repeat(3, 1fr); 3개의 열로 구성
+        
         place-items: center center;
+        
+    }
+
+    .wrap > div {
+        border: 1px solid #e6e6e6;
+        border-radius: 4px;
+        box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1); /* 그림자 스타일 조정 */
+    }
+
+    span {
+        padding: 6px;
+        font-size: 14px;
     }
     
 `;

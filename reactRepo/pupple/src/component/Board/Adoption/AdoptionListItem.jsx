@@ -14,16 +14,24 @@ const StyledItemDiv = styled.div`
     img {
         width: 300px;
         height: 200px;
+        margin-bottom: 5px;
     }
 
     .adoptionBtn {
         width: 100%;
-        height: 38px;
+        height: 47px;
         border: none;
-        font-size: 15px;
+        font-size: 16.5px;
+        font-weight: 450;
         color: #ffff;
         background-color: #cfb7fd;
         cursor: pointer;
+        margin-top: 7px;
+    }
+
+    span {
+        padding: 6px;
+        font-size: 14px;
     }
 `;
 
