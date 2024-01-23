@@ -27,9 +27,9 @@ public class SurveyController {
 		Map<String, String> map = new HashMap<String, String>();
 		System.out.println("survey fetch처음 들어올 때의 vo : " + vo);
 		int result = service.insert(vo);
-		
+		int result2 = service.updateSurveyResult(vo);
 		map.put("msg", "good");
-		if(result != 1) {
+		if(result != 1 || result2 != 1) {
 			map.put("msg", "bad");
 		}
 		return map;

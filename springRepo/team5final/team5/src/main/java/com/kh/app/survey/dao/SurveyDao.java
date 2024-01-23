@@ -11,6 +11,11 @@ public class SurveyDao {
 	public int insert(SqlSessionTemplate sst, SurveyVo vo) {
 		return sst.insert("SurveyMapper.insert", vo);
 	}
+
+	public int updateSurveyResult(SqlSessionTemplate sst, SurveyVo vo) {
+		return sst.update("SurveyMapper.updateResult", vo);
+		
+	}
 	
 	
 	

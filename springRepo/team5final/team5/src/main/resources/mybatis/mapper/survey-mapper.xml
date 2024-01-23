@@ -23,4 +23,12 @@
   		, #{reason}
 	)
   </insert>
+  
+  <update id="updateResult">
+  	UPDATE MEMBER 
+  		SET 
+  			SURVEY_RESULT = 'O' 
+		WHERE
+			MEMBER_NO = #{memberNo}
+  </update>
 </mapper>

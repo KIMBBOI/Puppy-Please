@@ -17,4 +17,10 @@
   		, #{score}
   	)
   </insert>
+  
+  <update id="passUpdate">
+  	UPDATE MEMBER SET
+  		PASS_YN = 'Y'
+  	WHERE MEMBER_NO = #{memberNo}
+  </update>
 </mapper>

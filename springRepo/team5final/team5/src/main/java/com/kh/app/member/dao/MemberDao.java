@@ -1,8 +1,11 @@
 package com.kh.app.member.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.app.adoption.vo.ApplyVo;
 import com.kh.app.member.vo.MemberVo;
 
 @Repository
@@ -34,6 +37,9 @@ public class MemberDao {
 	}
 	public int changeTempPwd(SqlSessionTemplate sst, MemberVo vo) {
 		return sst.update("MemberMapper.changeTempPwd", vo);
+	}
+	public List<ApplyVo> getAdoptList(SqlSessionTemplate sst, MemberVo vo) {
+		return sst.selectList("ApplyMapper.getApplyList", vo);
 	}
 
 }

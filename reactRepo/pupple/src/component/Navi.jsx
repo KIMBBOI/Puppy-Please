@@ -44,7 +44,7 @@ const StyledSubMenu = styled.div`
 `;
 
 const Navi = () => {
-    const [isNewsAdoptionOpen, setIsNewsAdoptionOpen] = useState(undefined);
+    const [isNewsAdoptionOpen, setIsNewsAdoptionOpen] = useState(false);
     const navigate = useNavigate();
 
     const toggleNewsAdoption = () => {
