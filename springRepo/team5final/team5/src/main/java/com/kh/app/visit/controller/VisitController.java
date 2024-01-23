@@ -36,10 +36,8 @@ public class VisitController {
 		
 		if (result == 1) {
 			map.put("msg", "success");
-				System.out.println("예약 성공 !");
 		} else {
 			map.put("msg", "fail");
-				System.out.println("예약 실패 ...");
 		}
 		
 		return map;
@@ -47,7 +45,7 @@ public class VisitController {
 	
 	
 	
-	// 예약 목록 조회
+	// 특정일 예약 목록 조회
 	@GetMapping("list")
 	public Map<String, Object> list(@RequestParam("reservationDate") String reservationDate) {
 		
@@ -60,26 +58,31 @@ public class VisitController {
 					.map(VisitVo::getReservationDate)
 					.toArray(String[]::new);
 			
-			for (String date : reservationDateArr) {
-				System.out.println("Reservation Date: " + date);
-			}
-			
 			map.put("msg", "success");
 			map.put("reservationDateArr", reservationDateArr);
-				System.out.println("방문예약 목록 조회 성공 !");
 		} else {
 			map.put("msg", "fail");
-				System.out.println("방문예약 목록 조회 실패 ...");
 		}
-		
 		return map;
 	}
 	
 	
 	// 예약 상세 조회
 	@GetMapping
-	public VisitVo detail(@RequestBody VisitVo vo) {
-		return service.detail(vo);
+	public Map<String, Object> detail(@RequestParam(value="memberNo", 
+		    required = false, defaultValue="1") String memberNo) {
+		
+		Map<String, Object> map = new HashMap<>();
+		VisitVo dbVo = service.detail(memberNo);
+		
+		if (dbVo != null) {
+			map.put("msg", "success");
+			map.put("dbVo", dbVo);
+		} else {
+			map.put("msg", "fail");
+		}
+		
+		return map;
 	}
 		
 	
@@ -92,10 +95,8 @@ public class VisitController {
 		
 		if (result == 1) {
 			map.put("msg", "success");
-				System.out.println("예약 수정 성공 !");
 		} else {
 			map.put("msg", "fail");
-				System.out.println("예약 수정 실패 ...");
 		}
 		
 		return map;
@@ -111,10 +112,8 @@ public class VisitController {
 		
 		if (result == 1) {
 			map.put("msg", "success");
-				System.out.println("예약 취소 성공 !");
 		} else {
 			map.put("msg", "fail");
-				System.out.println("예약 취소 실패 ...");
 		}
 		
 		return map;
@@ -129,10 +128,8 @@ public class VisitController {
 		
 		if (result == 1) {
 			map.put("msg", "success");
-			System.out.println("상담 완료 글 삭제 성공 !");
 		} else {
 			map.put("msg", "fail");
-			System.out.println("상담 완료 글 삭제 실패 ...");
 		}
 		
 		return map;

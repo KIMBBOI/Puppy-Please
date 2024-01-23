@@ -43,6 +43,9 @@ const MyPageMainSidebar = () => {
             <SidebarItem>
                 <Link to="/member/mypage/MemberAdoptList">입양신청내역</Link>
             </SidebarItem>
+            <SidebarItem>
+                <Link to="/member/mypage/MemberReservation">방문예약내역</Link>
+            </SidebarItem>
         </StyledMyPageSidebarDiv>
     );
 };

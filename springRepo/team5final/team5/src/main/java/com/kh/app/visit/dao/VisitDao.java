@@ -11,14 +11,14 @@ import com.kh.app.visit.vo.VisitVo;
 public class VisitDao {
 
 	
-	// 예약 목록 조회
+	// 특정일 예약 목록 조회
 	public List<VisitVo> list(SqlSessionTemplate sst, String reservationDate) {
 		return sst.selectList("VisitMapper.list", reservationDate);
 	}
 
 	// 예약 상세 조회
-	public VisitVo detail(SqlSessionTemplate sst, VisitVo vo) {
-		return sst.selectOne("VisitMapper.detail", vo);
+	public VisitVo detail(SqlSessionTemplate sst, String memberNo) {
+		return sst.selectOne("VisitMapper.detail", memberNo);
 	} 
 	
 	// 예약 작성

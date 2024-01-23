@@ -5,6 +5,7 @@ import MemberAdoptList from './MemberAdoptList';
 import MemberInfoEdit from './MemberInfoEdit';
 import styled from 'styled-components';
 import MyPageMainSidebar from './MyPageMainSidebar';
+import MemberReservation from './MemberReservation';
 
 const StyledMyPageMainDiv = styled.div`
     width: 100%;
@@ -22,6 +23,7 @@ const MyPageMain = () => {
                 <Route path='/memberInfoEdit' element = {<MemberInfoEdit />}></Route>
                 <Route path='/memberQuit' element = {<MemberQuit />}></Route>
                 <Route path='/memberAdoptList' element = {<MemberAdoptList />}></Route>
+                <Route path='/memberReservation' element = {<MemberReservation />}></Route>
             </Routes>
         </StyledMyPageMainDiv>
     );

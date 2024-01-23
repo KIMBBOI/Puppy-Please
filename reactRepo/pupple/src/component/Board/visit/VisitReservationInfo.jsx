@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -122,13 +122,46 @@ const VisitReservationInfoDiv = styled.div`
 const VisitReservationInfo = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const vo = location.state?.vo;
-    console.log('vo :::', vo);
+    const [vo, setVo] = useState();
+    const [DateNo, setDateNo] = useState();
+
+
+
+
     const str = sessionStorage.getItem("loginMemberVo");
     const sessionVo = JSON.parse(str);
-    console.log('sessionVo :::', sessionVo);
-
-
+    const memberNo = sessionVo.memberNo;
+    const stateVo = location.state?.vo;
+    useEffect( ()=>{
+        setDateNo(stateVo);
+        {/* reservationDate 없으면 디비에서 불러와야 함 */}
+        if ( location.state?.vo !== undefined) {
+            setVo(location.state.vo)
+        } else {
+            fetch(`http://127.0.0.1:8080/app/visit?memberNo=${memberNo}` , {
+                method: "get" ,
+                headers: {
+                    'Content-Type': 'application/json',
+                  }
+            })
+            .then( resp => resp.json() )
+            .then( data => {
+                console.log(data);
+                if(data.msg === "success"){
+                    console.log(data.msg);
+                    alert("조회 완료 !");
+                    setDateNo(data.dbVo);
+                    // navigate("/");
+                } else {
+                    console.log(data.msg);
+                    alert("조회 실패 ...");
+                    alert("예약 내역이 없습니다.");
+                    navigate("/");
+                }
+            } )
+            ;
+        }
+    },[] )
 
 
 
@@ -162,9 +195,12 @@ const VisitReservationInfo = () => {
         } )
         ;
     }
-
     {/* 변경 UPDATE */}
     // 네비게이트(/board/visit/reservation)
+
+
+
+
 
     {/* INSERT */}
     function handleReservation() {
@@ -199,16 +235,10 @@ const VisitReservationInfo = () => {
 
 
 
-
     const handleMyReservation = () => {
-        // navigate("/board/visit/reservationInfo", {state:{'x': 'y'}})
-        // const test = location.state.x;
-        // console.log('test :::',test);
+        navigate("/board/visit/reservationInfo")
     }
-
-
-
-
+    console.log('vo :::',vo);
 
 
 
@@ -221,7 +251,9 @@ const VisitReservationInfo = () => {
                 <div>
                     <div>
                         <div>일정</div>
-                        <div>{vo.reservationDate}</div>
+                        {
+                            DateNo === undefined ? <div>조회중...</div> : <div>{DateNo.reservationDate}</div>
+                        }
                     </div>
                 </div>
                 <div>
@@ -235,7 +267,7 @@ const VisitReservationInfo = () => {
                             <div>연락처</div>
                             <div>{sessionVo.phoneNumber}</div>
                         </div>
-                        <div>
+                        <div>l
                             <div>이메일</div>
                             <div>{sessionVo.email}</div>
                         </div>
