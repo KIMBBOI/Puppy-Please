@@ -10,6 +10,10 @@ import com.kh.app.visit.vo.VisitVo;
 @Repository
 public class VisitDao {
 
+	// 방문예약 중복 확인
+	public VisitVo check(SqlSessionTemplate sst, String memberNo) {
+		return sst.selectOne("VisitMapper.check", memberNo);
+	} 
 	
 	// 특정일 예약 목록 조회
 	public List<VisitVo> list(SqlSessionTemplate sst, String reservationDate) {

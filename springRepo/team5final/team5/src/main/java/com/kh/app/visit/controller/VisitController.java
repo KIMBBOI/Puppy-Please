@@ -25,6 +25,24 @@ public class VisitController {
 
 	private final VisitService service;
 	
+	// 방문예약 중복 확인
+	@GetMapping
+	public Map<String, Object> check(@RequestParam(value="memberNo", 
+		    required = false, defaultValue="1") String memberNo) {
+		
+		Map<String, Object> map = new HashMap<>();
+		VisitVo dbVo = service.detail(memberNo);
+		
+		if (dbVo != null) {
+			map.put("msg", "success");
+			map.put("dbVo", dbVo);
+		} else {
+			map.put("msg", "fail");
+		}
+		
+		return map;
+	}
+	
 	
 	// 방문예약하기
 	@PostMapping
@@ -68,7 +86,7 @@ public class VisitController {
 	
 	
 	// 예약 상세 조회
-	@GetMapping
+	@GetMapping("detail")
 	public Map<String, Object> detail(@RequestParam(value="memberNo", 
 		    required = false, defaultValue="1") String memberNo) {
 		

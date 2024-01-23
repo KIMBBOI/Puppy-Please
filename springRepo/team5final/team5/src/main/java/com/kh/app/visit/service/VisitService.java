@@ -17,6 +17,10 @@ public class VisitService {
 	private final VisitDao dao;
 	private final SqlSessionTemplate sst;
 	
+	// 방문예약 중복 확인
+	public VisitVo check(String memberNo) {
+		return dao.check(sst, memberNo);
+	}
 	
 	// 특정일 예약 목록 조회
 	public List<VisitVo> list(String reservationDate) {

@@ -119,84 +119,85 @@ const VisitReservationInfoDiv = styled.div`
     }
 `;
 
-const VisitReservationInfo = ({fromSidebar}) => {
+const VisitReservationInfo = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const [vo, setVo] = useState();
-    const [DateNo, setDateNo] = useState();
-    
+    // const [vo, setVo] = useState();
+    // const [DateNo, setDateNo] = useState();
+    // console.log('fromSidebar :::',fromSidebar);
 
 
-
+    const vo = location.state?.vo;
+    const fromSidebar = location.state?.fromSidebar;
 
 
     const str = sessionStorage.getItem("loginMemberVo");
     const sessionVo = JSON.parse(str);
-    const memberNo = sessionVo.memberNo;
-    const stateVo = location.state?.vo;
-    useEffect( ()=>{
-        setDateNo(stateVo);
-        {/* reservationDate 없으면 디비에서 불러와야 함 */}
-        if ( location.state?.vo !== undefined) {
-            setVo(location.state.vo)
-        } else {
-            fetch(`http://127.0.0.1:8080/app/visit?memberNo=${memberNo}` , {
-                method: "get" ,
-                headers: {
-                    'Content-Type': 'application/json',
-                  }
-            })
-            .then( resp => resp.json() )
-            .then( data => {
-                console.log(data);
-                if(data.msg === "success"){
-                    console.log(data.msg);
-                    alert("조회 완료 !");
-                    setDateNo(data.dbVo);
-                    // navigate("/");
-                } else {
-                    console.log(data.msg);
-                    alert("조회 실패 ...");
-                    alert("예약 내역이 없습니다.");
-                    navigate("/");
-                }
-            } )
-            ;
-        }
-    },[] )
+    // const memberNo = sessionVo.memberNo;
+    // const stateVo = location.state?.vo;
+    // useEffect( ()=>{
+    //     setDateNo(stateVo);
+    //     {/* reservationDate 없으면 디비에서 불러와야 함 */}
+    //     if ( location.state?.vo !== undefined) {
+    //         setVo(location.state.vo)
+    //     } else {
+    //         fetch(`http://127.0.0.1:8080/app/visit?memberNo=${memberNo}` , {
+    //             method: "get" ,
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //               }
+    //         })
+    //         .then( resp => resp.json() )
+    //         .then( data => {
+    //             console.log(data);
+    //             if(data.msg === "success"){
+    //                 console.log(data.msg);
+    //                 alert("조회 완료 !");
+    //                 setDateNo(data.dbVo);
+    //                 // navigate("/");
+    //             } else {
+    //                 console.log(data.msg);
+    //                 alert("조회 실패 ...");
+    //                 alert("예약 내역이 없습니다.");
+    //                 navigate("/");
+    //             }
+    //         } )
+    //         ;
+    //     }
+    // },[] )
 
 
 
 
 
 
-    {/* 취소 UPDATE */}
-    function handleQuit() {
-        console.log('패치 vo 확인 :::', vo);
+    // {/* 취소 UPDATE */}
+    // function handleQuit() {
+    //     console.log('패치 vo 확인 :::', vo);
 
-        fetch("http://127.0.0.1:8080/app/visit" , {
-            method: "delete" ,
-            headers: {
-                'Content-Type': 'application/json',
-              },
-            body: JSON.stringify(vo)
-        })
-        .then( resp => resp.json() )
-        .then( data => {
-            console.log(data);
-            if(data.msg === "success"){
-                console.log(data.msg);
-                alert("취소 완료 !");
-                navigate("/");
-            }else{
-                console.log(data.msg);
-                alert("취소 실패 ...");
-                alert("처음부터 다시 시도하세요.");
-                navigate("/");
-            }
-        } )
-        ;
-    }
+    //     fetch("http://127.0.0.1:8080/app/visit" , {
+    //         method: "delete" ,
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //           },
+    //         body: JSON.stringify(vo)
+    //     })
+    //     .then( resp => resp.json() )
+    //     .then( data => {
+    //         console.log(data);
+    //         if(data.msg === "success"){
+    //             console.log(data.msg);
+    //             alert("취소 완료 !");
+    //             navigate("/");
+    //         }else{
+    //             console.log(data.msg);
+    //             alert("취소 실패 ...");
+    //             alert("처음부터 다시 시도하세요.");
+    //             navigate("/");
+    //         }
+    //     } )
+    //     ;
+    // }
     {/* 변경 UPDATE */}
     // 네비게이트(/board/visit/reservation)
 
@@ -245,7 +246,7 @@ const VisitReservationInfo = ({fromSidebar}) => {
                     <div>
                         <div>일정</div>
                         {
-                            DateNo === undefined ? <div>조회중...</div> : <div>{DateNo.reservationDate}</div>
+                            vo === undefined ? <div>조회중...</div> : <div>{vo.reservationDate}</div>
                         }
                     </div>
                 </div>
@@ -282,7 +283,6 @@ const VisitReservationInfo = ({fromSidebar}) => {
                             <div><button className='btn_change'>예약 변경</button></div>
                         </>
                 }
-
             </div>
         </VisitReservationInfoDiv>
     );

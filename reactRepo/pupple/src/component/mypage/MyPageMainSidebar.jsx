@@ -36,13 +36,43 @@ const SidebarItem = styled.div`
 
 
 const MyPageMainSidebar = () => {
+    // 예약했는지 검사
     const navigate = useNavigate();
+    // const statusVo 
 
-    const statusVo = {status : true}
 
-    const handle = ()=>{
-        navigate("/member/mypage/memberReservation", {state: {statusVo}})
+
+
+    const handle = () => {
+        const str = sessionStorage.getItem("loginMemberVo");
+        const sessionVo = JSON.parse(str);
+        const memberNo = sessionVo.memberNo;
+
+        fetch(`http://127.0.0.1:8080/app/visit?memberNo=${memberNo}` , {
+        })
+        .then( resp => resp.json() )
+        .then( data => {
+            console.log('data :::',data);
+            if(data.msg === "success"){
+                let vo = data.dbVo;
+                const fromSidebar = true
+                console.log('vo :::',vo);
+                navigate("/member/mypage/memberReservation", {state: {vo, fromSidebar}})
+            } else {
+                alert("예약 내역이 없습니다.");
+                navigate("/");
+            }
+        } )
+        ;
     }
+
+    
+
+
+
+
+    
+
 
     return (
         <StyledMyPageSidebarDiv>
@@ -58,7 +88,6 @@ const MyPageMainSidebar = () => {
             </SidebarItem>
             <SidebarItem>
                 <div className='myReservation' onClick={handle}>방문예약내역</div>
-                {/* <Link  to={{ pathname: '/member/mypage/memberReservation', state: test }}>방문예약내역</Link> */}
             </SidebarItem>
         </StyledMyPageSidebarDiv>
     );
