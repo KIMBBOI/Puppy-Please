@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.app.adoption.vo.ApplyVo;
 import com.kh.app.member.vo.MemberVo;
+import com.kh.app.survey.vo.SurveyVo;
 
 @Repository
 public class MemberDao {
@@ -40,6 +41,9 @@ public class MemberDao {
 	}
 	public List<ApplyVo> getAdoptList(SqlSessionTemplate sst, MemberVo vo) {
 		return sst.selectList("ApplyMapper.getApplyList", vo);
+	}
+	public List<SurveyVo> getSurveyList(SqlSessionTemplate sst, MemberVo vo) {
+		return sst.selectList("SurveyMapper.getSurveyList", vo);
 	}
 
 }

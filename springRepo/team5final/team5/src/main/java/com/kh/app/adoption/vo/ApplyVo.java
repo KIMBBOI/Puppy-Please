@@ -7,6 +7,7 @@ public class ApplyVo {
 	private String ApplyNo;
 	private String memberNo;
 	private String rescueDogNo;
+	private String dogName;
 	private String decisionTime;
 	private String mainReason;
 	private String familyMembers;

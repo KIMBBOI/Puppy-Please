@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kh.app.adoption.vo.ApplyVo;
 import com.kh.app.member.service.MemberService;
 import com.kh.app.member.vo.MemberVo;
+import com.kh.app.survey.vo.SurveyVo;
 
 import lombok.RequiredArgsConstructor;
 
@@ -81,10 +82,13 @@ public class MyPageController {
 		System.out.println(vo);
 		
 		List<ApplyVo> adoptList = service.getAdoptList(vo);
+		List<SurveyVo> surveyList = service.getSurveyList(vo);
 		System.out.println(adoptList);
+		System.out.println("surveyVo : " + surveyList);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("msg", "good");
 		map.put("adoptList", adoptList);
+		map.put("surveyList", surveyList);
 		if(adoptList == null) {
 			map.put("msg", "bad");
 		}

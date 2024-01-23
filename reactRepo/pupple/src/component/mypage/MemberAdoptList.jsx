@@ -7,40 +7,47 @@ const StyledMemberAdoptList = styled.div`
 `;
 
 const MemberAdoptList = () => {
-    const [applyData, setApplyData] = useState(null);
-    const [surveyData, setSurveyData] = useState(null);
-
+    const [applyData, setApplyData] = useState();
+    const [surveyData, setSurveyData] = useState([]);
+    
     const memberNo = JSON.parse(sessionStorage.getItem("loginMemberVo")).memberNo;
     console.log(memberNo);
     useEffect( () => {
-        const fetchApplyData = () => {
+        const fetchApplyAndSurveyData = () => {
             fetch(`http://127.0.0.1:8080/app/member/mypage/memberAdoptList?memberNo=${memberNo}`)
             .then( resp => resp.json())
             .then( data => {
+                
                 console.log(data.adoptList);
+                console.log(data.surveyList);
                 setApplyData(data.applyList);
+                setSurveyData(data.surveyList);
             })
         }
-        // const fetchSurveyData = () => {
-        //     fetch('http://127.0.0.1:8080/app/board/')
-        //     .then( resp => resp.json())
-        //     .then( (data) => {
-        //         setSurveyData(data.surveyVo);
-        //     })
-        // }
-        fetchApplyData();
-        // fetchSurveyData();
-
-        // console.log("surveyData : ", surveyData);
+        fetchApplyAndSurveyData();
+        
     }, [memberNo]);
     return (
         <StyledMemberAdoptList>
-            <div>
-
-            </div>
-            
+          <h2>입양신청내역</h2>
+          {applyData && applyData.length > 0 ? (
+            <table>
+              <tbody>
+                {applyData.map((item, index) => (
+                  <tr key={index}>
+                    <td>{item.enrollDate}</td>
+                    <td>{item.dogName}</td>
+                    <td>입양신청서</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <p>데이터가 없습니다.</p>
+          )}
         </StyledMemberAdoptList>
-    );
+      );
+      
 };
 
 export default MemberAdoptList;
