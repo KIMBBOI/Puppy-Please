@@ -1,5 +1,6 @@
 package com.kh.app.member.service;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -7,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.kh.app.adoption.vo.ApplyVo;
 import com.kh.app.member.dao.MemberDao;
 import com.kh.app.member.vo.MemberVo;
 
@@ -181,6 +183,10 @@ public class MemberService {
 		String changedPwd = encoder.encode(tempPwd);
 		vo.setPwd(changedPwd);
 		return dao.changeTempPwd(sst, vo);
+	}
+
+	public List<ApplyVo> getAdoptList(MemberVo vo) {
+		return dao.getAdoptList(sst, vo);
 	}
 
 

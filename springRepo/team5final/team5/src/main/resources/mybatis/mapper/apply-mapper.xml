@@ -29,10 +29,18 @@
   			, #{conflictResolution}
   		)
   	</insert>
-<!--     <select id="list" resultType="ApplyVo"> -->
-<!--     	SELECT -->
+    <select id="getApplyList" resultType="ApplyVo">
+    	SELECT 
+    		RESCUE_DOG_NO
+    		, DECISION_TIME
+    		, MAIN_REASON
+    		, CURRENT_PETS
+    		, LANDlORD_PERMISSION_YN
+    		, CONFLICTRESOLUTION
+    		, ENROLL_DATE
+    	FROM APPLY
+    	WHERE MEMBER_NO = #{memberNo}
     		
-    		
-<!--     </select> -->
+    </select>
 </mapper>
 

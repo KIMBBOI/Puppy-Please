@@ -14,8 +14,12 @@ public class SurveyService {
 
 	private final SurveyDao dao;
 	private final SqlSessionTemplate sst;
+
 	public int insert(SurveyVo vo) {
 		return dao.insert(sst, vo);
+	}
+	public int updateSurveyResult(SurveyVo vo) {
+		return dao.updateSurveyResult(sst, vo);
 	}
 	
 }

@@ -20,4 +20,8 @@ public class QuizService {
 		return dao.quizCheck(sst, vo);
 	}
 
+	public int memberQuizPass(QuizVo vo) {
+		return dao.memberQuizPass(sst, vo);
+	}
+
 }

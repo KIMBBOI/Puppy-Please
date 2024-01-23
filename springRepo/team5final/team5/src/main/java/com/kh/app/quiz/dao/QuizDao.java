@@ -13,4 +13,8 @@ public class QuizDao {
 		return sst.insert("QuizMapper.insert", vo);
 	}
 
+	public int memberQuizPass(SqlSessionTemplate sst, QuizVo vo) {
+		return sst.update("QuizMapper.passUpdate", vo);
+	}
+
 }

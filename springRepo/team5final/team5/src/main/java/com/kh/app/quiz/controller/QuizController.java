@@ -29,8 +29,10 @@ public class QuizController {
 		System.out.println(vo);
 		int result = service.quizCheck(vo);
 		
+		int result2 = service.memberQuizPass(vo);
+		
 		map.put("msg", "pass");
-		if(result != 1) {
+		if(result != 1 || result2 != 1) {
 			map.put("msg", "non pass");
 		}
 		return map;
