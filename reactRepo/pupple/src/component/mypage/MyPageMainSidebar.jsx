@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledMyPageSidebarDiv = styled.div`
@@ -17,20 +17,33 @@ const SidebarItem = styled.div`
   margin-bottom: 10px;
   font-size: 16px;
   font-weight: bold;
-  a {
-    text-decoration: none;
-    color: #333;
+    a {
+        text-decoration: none;
+        color: #333;
 
-    &:hover {
-      color: #555;
+        &:hover {
+            color: #555;
+        }
     }
-}
+
+    .myReservation:hover {
+        cursor: pointer;
+        color: #555;
+    }
 `;
 
 
 
 
 const MyPageMainSidebar = () => {
+    const navigate = useNavigate();
+
+    const statusVo = {status : true}
+
+    const handle = ()=>{
+        navigate("/member/mypage/memberReservation", {state: {statusVo}})
+    }
+
     return (
         <StyledMyPageSidebarDiv>
             <SidebarItem>마이페이지</SidebarItem>
@@ -44,7 +57,8 @@ const MyPageMainSidebar = () => {
                 <Link to="/member/mypage/MemberAdoptList">입양신청내역</Link>
             </SidebarItem>
             <SidebarItem>
-                <Link to="/member/mypage/MemberReservation">방문예약내역</Link>
+                <div className='myReservation' onClick={handle}>방문예약내역</div>
+                {/* <Link  to={{ pathname: '/member/mypage/memberReservation', state: test }}>방문예약내역</Link> */}
             </SidebarItem>
         </StyledMyPageSidebarDiv>
     );
