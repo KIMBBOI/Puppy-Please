@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 const VisitReservationInfoDiv = styled.div`
@@ -119,11 +119,13 @@ const VisitReservationInfoDiv = styled.div`
     }
 `;
 
-const VisitReservationInfo = () => {
+const VisitReservationInfo = ({fromSidebar}) => {
     const navigate = useNavigate();
     const location = useLocation();
     const [vo, setVo] = useState();
     const [DateNo, setDateNo] = useState();
+    
+
 
 
 
@@ -235,15 +237,6 @@ const VisitReservationInfo = () => {
 
 
 
-    const handleMyReservation = () => {
-        navigate("/board/visit/reservationInfo")
-    }
-    console.log('vo :::',vo);
-
-
-
-
-
     return (
         <VisitReservationInfoDiv>
             <div className='section_top'>
@@ -267,7 +260,7 @@ const VisitReservationInfo = () => {
                             <div>연락처</div>
                             <div>{sessionVo.phoneNumber}</div>
                         </div>
-                        <div>l
+                        <div>
                             <div>이메일</div>
                             <div>{sessionVo.email}</div>
                         </div>
@@ -275,15 +268,21 @@ const VisitReservationInfo = () => {
                 </div>
             </div>
             <div className='section_bottom'>
-                <div>
-                    <button onClick={ () => {navigate(-1);}}>이전</button>
-                </div>
-                <div>
-                    <button onClick={(handleReservation)}>예약하기</button>
-                </div>
-                <div>
-                    <button onClick={(handleMyReservation)}>테스트접속</button>
-                </div>
+                { 
+                    fromSidebar === undefined
+                    ? 
+                        <>
+                            <div><button onClick={ () => {navigate(-1);}}>이전</button></div>
+                            <div><button onClick={(handleReservation)}>예약하기</button></div>
+                        </>
+                        
+                    :
+                        <>
+                            <div><button className='btn_quit'>예약 취소</button></div>
+                            <div><button className='btn_change'>예약 변경</button></div>
+                        </>
+                }
+
             </div>
         </VisitReservationInfoDiv>
     );

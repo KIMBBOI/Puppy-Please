@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import VisitReservationInfo from '../board/visit/VisitReservationInfo';
+import { useLocation } from 'react-router';
 
 const StyledMemberReservationDiv = styled.div`
     width: 100%;
@@ -9,9 +10,13 @@ const StyledMemberReservationDiv = styled.div`
 `;
 
 const MemberReservation = () => {
+    const location = useLocation();
+    const fromSidebar = location.state.statusVo;
+    console.log('fromSidebar :::',fromSidebar); // fromSidebar ::: {status: true}
+
     return (
         <StyledMemberReservationDiv>
-            <VisitReservationInfo />
+            <VisitReservationInfo fromSidebar={fromSidebar}/>
         </StyledMemberReservationDiv>
     );
 };
