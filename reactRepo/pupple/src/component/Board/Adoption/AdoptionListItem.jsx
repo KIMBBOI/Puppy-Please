@@ -15,6 +15,16 @@ const StyledItemDiv = styled.div`
         width: 300px;
         height: 200px;
     }
+
+    .adoptionBtn {
+        width: 100%;
+        height: 38px;
+        border: none;
+        font-size: 15px;
+        color: #ffff;
+        background-color: #cfb7fd;
+        cursor: pointer;
+    }
 `;
 
 const AdoptionListItem = ( {a, b, c, d, e, f, g, h, vo } ) => {
@@ -44,7 +54,7 @@ const AdoptionListItem = ( {a, b, c, d, e, f, g, h, vo } ) => {
             <span>{e}</span>
             <span>{f}</span>
             <span>{g}</span>
-            <button onClick={ handleAdoption }>입양신청</button>
+            <button className='adoptionBtn' onClick={ handleAdoption }>입양신청</button>
         </StyledItemDiv>
     );
 };

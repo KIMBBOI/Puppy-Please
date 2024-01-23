@@ -8,22 +8,36 @@ import AdoptionNewsPageItem from './AdoptionNewsPageItem';
 const StyledAdoptionNewsListDiv = styled.div`
     width: 100%;
     height: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1.5fr 1.5fr 1.5fr;
-    place-items: center center;
-    padding: 30px 0 30px 0;
+    padding: 40px 0 40px 0;
 
-    /* .wrap {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: space-;
-    } */
+    .tit {
+        margin: 0 0 30px 20px;
+    }
+    
+    .wrap {
+        display: grid;
+        // grid-template-columns: repeat(3, 1fr); 3개의 열로 구성
+        gap: 50px; /* 열과 행 사이의 간격 조절 */
+        padding: 30px 0;
+        grid-template-columns: 6fr 7fr 6fr;
+        grid-template-rows: 1fr; 
+        place-items: center center;
+        
+    }
+
+    .wrap > div {
+        border: 1px solid #e6e6e6;
+    }
+
+    .footer {
+        align-items: center;
+    }
 
     span {
         margin-bottom: 13px;
     }
+
+    
 `;
 
 const AdoptionNewsList = () => {
@@ -69,7 +83,8 @@ const AdoptionNewsList = () => {
     return (
         <>
             <StyledAdoptionNewsListDiv>
-                {/* <div className='wrap'> */}
+                <div className='tit'>입양 후 소식</div>
+                <div className='wrap'>
                     {
                         arr.map( (vo) => {
                             return (
@@ -84,7 +99,7 @@ const AdoptionNewsList = () => {
                             )
                         } )
                     }
-                {/* </div> */}
+                </div>
                 <div className='body'>
                     { loginInfo ? (
                         <button onClick={ () => navigate("/board/adoptionNews/write") }>작성하기</button>

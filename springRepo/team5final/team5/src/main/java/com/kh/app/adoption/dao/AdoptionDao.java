@@ -21,6 +21,11 @@ public class AdoptionDao {
 		return sst.selectOne("AdoptionMapper.listCount");
 	}
 
+	// 입양완료 처리
+	public int complete(SqlSessionTemplate sst, String adoptionBoardNo) {
+		return sst.update("AdoptionMapper.complete", adoptionBoardNo);
+	}
+		
 	// 입양 게시글 상세 조회
 	public AdoptionVo detail(SqlSessionTemplate sst, AdoptionVo vo) {
 		return sst.selectOne("AdoptionMapper.detail", vo);

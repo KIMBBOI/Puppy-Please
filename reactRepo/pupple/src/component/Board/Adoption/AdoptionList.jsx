@@ -3,18 +3,36 @@ import AdoptionListItem from './AdoptionListItem';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import AdoptionPageItem from './AdoptionPageItem';
+// import Modal from 'react-modal';
+
 
 const StyledAdoptionListDiv = styled.div`
     width: 100%;
     height: 100%;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3개의 열로 구성 */
-    gap: 20px; /* 열과 행 사이의 간격 조절 */
-    padding: 30px 0;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 2fr 2fr 2fr; 
-    place-items: center center;
-    padding: 30px 0 30px 0;
+    padding: 40px 0 40px 0;
+    
+
+    .tit {
+      margin: 0 0 30px 20px;
+      /* display: none; */
+    }
+
+    .wrap {
+        /* border: 1px solid gray; */
+        display: grid;
+        gap: 50px; /* 열과 행 사이의 간격 조절 */
+        padding: 30px 0;
+        grid-template-rows: 1fr; 
+        grid-template-columns: 6fr 7fr 6fr;
+        // grid-template-columns: repeat(3, 1fr); 3개의 열로 구성
+        
+        place-items: center center;
+        
+    }
+
+    .wrap > div {
+        border: 1px solid #e6e6e6;
+    }
 
 `;
 
@@ -58,24 +76,27 @@ const AdoptionList = () => {
     return (
         <>
             <StyledAdoptionListDiv className="adoptionList">
-                {
-                    arr.map((vo) => {
-                        return (
-                            <AdoptionListItem 
-                                key={vo.adoptionBoardNo} 
-                                a={vo.imagePath} 
-                                b={vo.dogName} 
-                                c={vo.breed} 
-                                d={vo.genderMf} 
-                                e={vo.neuteringOx} 
-                                f={vo.age} 
-                                g={vo.weight} 
-                                h={vo.adoptionBoardNo}
-                                vo={vo}
-                            />
-                        )
-                    } )
-                }
+                <div className='tit'>입양신청 페이지</div>
+                <div className='wrap'>
+                    {
+                        arr.map((vo) => {
+                            return (
+                                <AdoptionListItem 
+                                    key={vo.adoptionBoardNo} 
+                                    a={vo.imagePath} 
+                                    b={vo.dogName} 
+                                    c={vo.breed} 
+                                    d={vo.genderMf} 
+                                    e={vo.neuteringOx} 
+                                    f={vo.age} 
+                                    g={vo.weight} 
+                                    h={vo.adoptionBoardNo}
+                                    vo={vo}
+                                />
+                            )
+                        } )
+                    }
+                </div>
                 <div>
                     <button onClick={ () => {
                         navigate("/board/adoption/write");

@@ -56,7 +56,7 @@ const AoptionDetailItem = ( {vo} ) => {
     };
 
     //${vo.adoptionBoardNo}
-    const handleAdoptionOk = () => {
+    const handleAdoptionOk = (adoption) => {
         // 입양완료 버튼 클릭 시 실행되는 로직
         // 서버에 해당 게시글을 입양완료 상태로 업데이트하는 요청을 보낼 수 있습니다.
         // 이후 입양완료 게시판으로 이동
@@ -85,7 +85,7 @@ const AoptionDetailItem = ( {vo} ) => {
     return (
         <StyledAdoptionDetailItem>
             <div className='detailArea'>
-                <button onClick={() => handleAdoptionOk(vo.pno)}>입양완료</button>
+                <button onClick={() => handleAdoptionOk(vo.adoptionCompleteYn)}>입양완료</button>
                 <img 
                     src={vo.imagePath} 
                     alt={'imageNo' + vo.imageNo}

@@ -6,20 +6,22 @@ import AdoptionOkPageItem from './AdoptionOkPageItem';
 const AdoptionOkListDiv = styled.div`
     width: 100%;
     height: 100%;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3개의 열로 구성 */
-    gap: 20px; /* 열과 행 사이의 간격 조절 */
-    padding: 30px 0;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 2fr 2fr 2fr; 
-    place-items: center center;
-    padding: 30px 0 30px 0;
-    text-align: center;
+    padding: 40px 0 40px 0;
 
-
-    h3 {
-      display: flex;
+    .tit {
+      margin: 0 0 30px 20px;
     }
+
+    .wrap {
+        display: grid;
+        // grid-template-columns: repeat(3, 1fr); 3개의 열로 구성
+        gap: 50px; /* 열과 행 사이의 간격 조절 */
+        padding: 30px 0;
+        grid-template-columns: 6fr 7fr 6fr;
+        grid-template-rows: 1fr; 
+        place-items: center center;
+    }
+    
 `;
 
 
@@ -60,30 +62,34 @@ const AdoptionOkList = () => {
 
 
     return (
-        <AdoptionOkListDiv>
-            <div><h3>입양완료 페이지</h3></div>
-            {
-                arr.map((vo) => {
-                    return (
-                        <AdoptionOkListItem 
-                            key={vo.adoptionBoardNo} 
-                            a={vo.imagePath} 
-                            b={vo.dogName} 
-                            c={vo.breed} 
-                            d={vo.genderMf} 
-                            e={vo.neuteringOx} 
-                            f={vo.age} 
-                            g={vo.weight} 
-                            h={vo.adoptionBoardNo}
-                            // vo={vo}
-                        />
-                    )
-                } )
-            }
-            <div className='footer'>
-                <AdoptionOkPageItem pvo={pvo} />
-            </div>
-        </AdoptionOkListDiv>
+      <>
+          <AdoptionOkListDiv>
+              <div className='tit'>입양완료 페이지</div>
+              <div className='wrap'>
+                {
+                    arr.map((vo) => {
+                        return (
+                            <AdoptionOkListItem 
+                                key={vo.adoptionBoardNo} 
+                                a={vo.imagePath} 
+                                b={vo.dogName} 
+                                c={vo.breed} 
+                                d={vo.genderMf} 
+                                e={vo.neuteringOx} 
+                                f={vo.age} 
+                                g={vo.weight} 
+                                h={vo.adoptionBoardNo}
+                                // vo={vo}
+                            />
+                        )
+                    } )
+                }
+              </div>
+              <div className='footer'>
+                  <AdoptionOkPageItem pvo={pvo} />
+              </div>
+          </AdoptionOkListDiv>
+      </>
     );
 
 };

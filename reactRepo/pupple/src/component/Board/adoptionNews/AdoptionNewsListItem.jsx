@@ -7,7 +7,7 @@ const StyledItemDiv = styled.div`
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     cursor: pointer;
 
@@ -23,7 +23,7 @@ const StyledItemDiv = styled.div`
             // 이미지 태그에서는 되는데 여기서는 안됨 => 역슬래시 때문에 안됨 **************
         background-size: cover;
         background-position: 100%;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
     }
 
     span {
