@@ -31,4 +31,16 @@
 		WHERE
 			MEMBER_NO = #{memberNo}
   </update>
+  <select id="getSurveyList" resultType="SurveyVo">
+  	SELECT
+  		RESIDENCE
+  		, MARITAL_STATUS_YN
+  		, JOB
+  		, HOUSING_TYPE
+  		, REASON
+  		, SURVEY_DATE
+  	FROM SURVEY
+  	WHERE MEMBER_NO = #{memberNo}
+  </select>
+  
 </mapper>

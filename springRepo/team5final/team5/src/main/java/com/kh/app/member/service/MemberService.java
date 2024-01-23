@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.kh.app.adoption.vo.ApplyVo;
 import com.kh.app.member.dao.MemberDao;
 import com.kh.app.member.vo.MemberVo;
+import com.kh.app.survey.vo.SurveyVo;
 
 import lombok.RequiredArgsConstructor;
 
@@ -187,6 +188,10 @@ public class MemberService {
 
 	public List<ApplyVo> getAdoptList(MemberVo vo) {
 		return dao.getAdoptList(sst, vo);
+	}
+
+	public List<SurveyVo> getSurveyList(MemberVo vo) {
+		return dao.getSurveyList(sst, vo);
 	}
 
 
