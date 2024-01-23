@@ -33,6 +33,11 @@ public class AdoptionService {
 		return dao.detail(sst , vo);
 	}
 	
+	// 입양완료 처리
+	public int complete(String adoptionBoardNo) {
+		return dao.complete(sst, adoptionBoardNo);
+	}
+	
 	//이미지 업로드
 	public int insert(AdoptionVo imgVo) {
 		String str = imgVo.getImagePath().replace("D:\\pupple\\springRepo\\team5final\\team5\\src\\main\\webapp", "http://127.0.0.1:8080/app");

@@ -28,6 +28,11 @@ public class AdoptionOkService {
 	public int selectBoardCount() {
 		return dao.selectBoardCount(sst);
 	}
+
+	// 입양완료 처리
+	public int complete(String adoptionBoardNo) {
+		return dao.complete(sst, adoptionBoardNo);
+	}
 	
 //	// 게시글 상세 조회
 //	public AdoptionVo detail(AdoptionVo vo) {

@@ -46,4 +46,9 @@ public class AdoptionOkDao {
 //		return sst.delete("AdoptionOkMapper.delete", vo);
 //		}
 
+	// 입양완료 처리
+	public int complete(SqlSessionTemplate sst, String adoptionBoardNo) {
+		return sst.update("AdoptionOkMapper.complete", adoptionBoardNo);
+	}
+
 }

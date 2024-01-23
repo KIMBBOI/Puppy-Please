@@ -6,39 +6,33 @@
 
     <!-- 입양 신청 리스트 조회 -->
     <select id="list" resultType="com.kh.app.adoption.vo.AdoptionVo">
-    	SELECT *
-    	FROM (
-	        SELECT ROWNUM RNUM, T.*
-	        FROM (
-	        	SELECT
-		        	A.ADOPTION_BOARD_NO
-		        	, A.ADMIN_NO
-		        	, A.RESCUE_DOG_NO
-				    , A.DEL_YN
-				    , RD.RESCUE_DOG_NO
-				    , RD.IMAGE_NO 
-				    , RD.DOG_NAME
-				    , RD.BREED
-				    , RD.GENDER_MF
-				    , RD.NEUTERING_OX
-				    , RD.AGE
-				    , RD.WEIGHT
-		        	, RD.ADOPTION_COMPLETE_YN
-				    , I.IMAGE_PATH
-				FROM
-				    ADOPTION_BOARD A
-					JOIN RESCUE_DOG RD 
-						ON A.RESCUE_DOG_NO = RD.RESCUE_DOG_NO
-					JOIN IMAGE I
-				  		ON I.IMAGE_NO = RD.IMAGE_NO
-				WHERE
-				    A.DEL_YN = 'N'
-				AND
-					A.ADOPTION_COMPLETE_YN = 'N'
-				ORDER BY
-				    A.ENROLL_DATE DESC
-	    	) T
-		)
+    	SELECT 
+		    A.ADOPTION_BOARD_NO,
+		    A.ADMIN_NO,
+		    A.RESCUE_DOG_NO,
+		    A.DEL_YN AS ADOPTION_DEL_YN,
+		    RD.RESCUE_DOG_NO AS RD_RESCUE_DOG_NO,
+		    RD.IMAGE_NO,
+		    RD.DOG_NAME,
+		    RD.BREED,
+		    RD.GENDER_MF,
+		    RD.NEUTERING_OX,
+		    RD.AGE,
+		    RD.WEIGHT,
+		    RD.ADOPTION_COMPLETE_YN AS RD_ADOPTION_COMPLETE_YN,
+		    I.IMAGE_PATH
+		FROM 
+		    ADOPTION_BOARD A
+		JOIN 
+		    RESCUE_DOG RD ON A.RESCUE_DOG_NO = RD.RESCUE_DOG_NO
+		JOIN 
+		    IMAGE I ON I.IMAGE_NO = RD.IMAGE_NO
+		WHERE 
+		    A.DEL_YN = 'N'
+		AND 
+		    A.ADOPTION_COMPLETE_YN = 'N'
+		ORDER BY 
+		    A.ENROLL_DATE DESC
     </select>
     
     <select id='listCount' resultType="Integer">
@@ -51,6 +45,16 @@
 		AND
 			ADOPTION_COMPLETE_YN = 'N'
 	</select>
+	
+	<!-- 게시글의 입양 완료 처리 -->
+    <update id="complete">
+        UPDATE 
+        	ADOPTION_BOARD
+        SET 
+        	ADOPTION_COMPLETE_YN = 'Y'
+        WHERE 
+        	ADOPTION_BOARD_NO = #{adoptionBoardNo}
+    </update>
 
     <!-- 입양 신청 상세 조회 -->
     <select id="detail" resultType="com.kh.app.adoption.vo.AdoptionVo">
