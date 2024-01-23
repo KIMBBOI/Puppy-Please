@@ -10,8 +10,25 @@ const StyledAdoptionNewsListDiv = styled.div`
     height: 100%;
     padding: 40px 0 40px 0;
 
-    .tit {
+    .mark {
         margin: 0 0 30px 20px;
+    }
+
+    button {
+        width: 110px;
+        height: 36px;
+        font-size: 14px;
+        font-weight: 500;
+        border: 1.5px solid #d1b8ffe9;
+        border-radius: 3px;
+        color: #ffff;
+        background-color: #d1b8ffe9;
+        cursor: pointer;
+    }
+
+    .writeBtn {
+        display: flex;
+        justify-content: end;
     }
     
     .wrap {
@@ -27,6 +44,8 @@ const StyledAdoptionNewsListDiv = styled.div`
 
     .wrap > div {
         border: 1px solid #e6e6e6;
+        border-radius: 4px;
+        box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1); /* 그림자 스타일 조정 */
     }
 
     .footer {
@@ -83,7 +102,14 @@ const AdoptionNewsList = () => {
     return (
         <>
             <StyledAdoptionNewsListDiv>
-                <div className='tit'>입양 후 소식</div>
+                <div className='mark'>입양 후 소식</div>
+                <div className='writeBtn'>
+                    { loginInfo ? (
+                        <button onClick={ () => navigate("/board/adoptionNews/write") }>작성하기</button>
+                    ) : (
+                        <button onClick={ () => alert("로그인 후 이용바랍니다.") }>작성하기</button>
+                    ) }
+                </div>
                 <div className='wrap'>
                     {
                         arr.map( (vo) => {
@@ -93,19 +119,13 @@ const AdoptionNewsList = () => {
                                     a={vo.imagePath}  
                                     b={vo.title}
                                     c={vo.content}
-                                    d={vo.newsAfterAdoptionNo} 
+                                    d={vo.enrollDate}
+                                    c={vo.newsAfterAdoptionNo} 
                                     vo={vo} 
                                 />
                             )
                         } )
                     }
-                </div>
-                <div className='body'>
-                    { loginInfo ? (
-                        <button onClick={ () => navigate("/board/adoptionNews/write") }>작성하기</button>
-                    ) : (
-                        <button onClick={ () => alert("로그인 후 이용바랍니다.") }>작성하기</button>
-                    ) }
                 </div>
                 <div className='footer'>
                     <AdoptionNewsPageItem pvo={pvo} />

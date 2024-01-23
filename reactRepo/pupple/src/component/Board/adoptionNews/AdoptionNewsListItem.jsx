@@ -11,6 +11,10 @@ const StyledItemDiv = styled.div`
     align-items: center;
     cursor: pointer;
 
+    .content {
+        padding: 7px 20px 5px 20px;
+    }
+
     img {
         width: 100%;
         height: 100%;
@@ -45,16 +49,17 @@ const AdoptionNewsListItem = ( {a, b, c, d, vo} ) => {
 
     return (
         <StyledItemDiv 
-            img={a}
-            value={d} 
-            onClick={ () => handleClickDetail(vo) } 
+        img={a}
+        value={d} 
+        onClick={ () => handleClickDetail(vo) } 
         >
             <div className='imgDiv'></div>
             {
-
+                
             }
-            <span>{b}</span> 
-            <span>{c}</span>
+            <span className='tit'>{b}</span> 
+            <span className='content'>{c}</span>
+            <div className='date'>{d}</div>
         </StyledItemDiv>
     );
 };
