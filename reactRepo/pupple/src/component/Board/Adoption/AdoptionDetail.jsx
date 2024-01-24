@@ -10,6 +10,20 @@ const StyledAdoptionDetailDiv = styled.div`
     flex-direction: column;
     place-items: center center;
     padding: 30px 0 30px 0;
+
+    button{
+        width: 89px;
+        height: 34px;
+        font-size: 13.5px;
+        font-weight: 550;
+        border: none;
+        border-radius: 20px;
+        margin-top: 50px;
+        color: #ffffff;
+        background-color: #c8adffdd;
+        cursor: pointer;
+
+    }
 `;
 
 const AdoptionDetail = () => {
@@ -34,13 +48,20 @@ const AdoptionDetail = () => {
         }
     };
 
+    const handleReturnList = () => {
+        navigate(-1);
+    }
+
     return (
         <StyledAdoptionDetailDiv>
-            {vo ? (
-                <AoptionDetailItem key={vo.adoptionBoardNo} vo={vo} onAdoptionComplete={handleAdoptionComplete} />
-            ) : (
+            <>
+                {vo ? (
+                    <AoptionDetailItem key={vo.adoptionBoardNo} vo={vo} onAdoptionComplete={handleAdoptionComplete} />
+                ) : (
                     <div>로딩중</div>
-            )}
+                )}
+                <button onClick={handleReturnList}>글 목록</button>
+            </>
         </StyledAdoptionDetailDiv>
     );
 };

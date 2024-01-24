@@ -21,34 +21,21 @@ public class AdoptionOkDao {
 		return sst.selectOne("AdoptionOkMapper.listCount");
 	}
 	
-//	// 게시글 상세 조회
-//	public AdoptionVo detail(SqlSessionTemplate sst, AdoptionVo vo) {
-//		return sst.selectOne("AdoptionOkMapper.detail", vo);
-//	}
 
 	public int updateAdoptionStatus(SqlSessionTemplate sst, AdoptionVo vo) {
 		return sst.update("AdoptionOkMapper.adoptionOk" , vo);
 	}
-//	// 게시글 작성
-//	public int insert(SqlSessionTemplate sst, AdoptionOkVo vo) {
-//		return sst.insert("AdoptionOkMapper.insert", vo);
-//	}
-//		// 로그인 멤버의 프라이머리 키
-//		// 이미지의 프라이머리 키
-//	
-//	// 게시글 수정
-//	public int edit(SqlSessionTemplate sst, AdoptionOkVo vo) {
-//		return sst.update("AdoptionOkMapper.edit", vo);
-//	}
-//	
-//	// 게시글 삭제
-//	public int delete(SqlSessionTemplate sst, AdoptionOkVo vo) {
-//		return sst.delete("AdoptionOkMapper.delete", vo);
-//		}
-
+	
+	// 상세조회
+	public AdoptionVo detail(SqlSessionTemplate sst, AdoptionVo vo) {
+		return sst.selectOne("AdoptionOkMapper.detail", vo);
+	}
+	
 	// 입양완료 처리
 	public int complete(SqlSessionTemplate sst, String adoptionBoardNo) {
 		return sst.update("AdoptionOkMapper.complete", adoptionBoardNo);
 	}
+
+
 
 }

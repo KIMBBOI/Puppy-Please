@@ -19,8 +19,9 @@ const StyledItemDiv = styled.div`
 
     .adoptionBtn {
         width: 100%;
-        height: 47px;
+        height: 50px;
         border: none;
+        border-radius: 2px;
         font-size: 16.5px;
         font-weight: 450;
         color: #ffff;

@@ -38,7 +38,7 @@ const StyledItemDiv = styled.div`
     }
 `;
 
-const AdoptionNewsListItem = ( {a, b, c, d, vo} ) => {
+const AdoptionNewsListItem = ( {a, b, c, d, e, vo} ) => {
 
 
     const navigate = useNavigate();
@@ -59,7 +59,7 @@ const AdoptionNewsListItem = ( {a, b, c, d, vo} ) => {
             }
             <span className='tit'>{b}</span> 
             <span className='content'>{c}</span>
-            <div className='date'>{d}</div>
+            {/* <div className='date'>{d}</div> */}
         </StyledItemDiv>
     );
 };

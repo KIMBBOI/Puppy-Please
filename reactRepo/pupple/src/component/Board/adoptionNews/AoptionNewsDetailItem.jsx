@@ -3,31 +3,43 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledNewsDetatilDiv = styled.div`
-    width: 90%;
+    width: 80%;
     height: 90%;
     display: flex;
     flex-direction: column;
     place-items: center center;
-    /* text-align: center; */
+    background-color: #e5d8fd44;
+    text-align: center;
 
     img {
-        width: 450px;
-        height: 400px;
+        width: 550px;
+        height: 500px;
+        padding: 30px;
     }
 
     .tit {
         font-size: 17px;
         font-weight: 550;
-    }
-
-    .writer {
-        font-size: 13.3px;
-        margin-bottom: 15px;
+        text-align: start;
+        padding-left: 75px;
     }
 
     .con {
-        font-size: 15px;
+        font-size: 14px;
+        margin: 0 20px 45px 20px;
     }
+
+    .date {
+        margin-right: 250px; /* 원하는 간격 조절 */
+    }
+
+    .date, .writer {
+        font-size: 13px;
+        margin-bottom: 9px;
+        display: inline-block;
+    }
+
+
 `;
 
 const AoptionNewsDetailItem = ( {vo} ) => {
@@ -45,7 +57,7 @@ const AoptionNewsDetailItem = ( {vo} ) => {
     
     const handleEdit = (vo) => {
         console.log('vo ::: ' , vo);
-        navigate("board/adoptionNews/write" , {state: {vo}});
+        navigate("/board/adoptionNews/write" , {state: {vo}});
     };
 
     const handleDelete = (vo) => {
@@ -74,7 +86,7 @@ const AoptionNewsDetailItem = ( {vo} ) => {
             <div className='detailArea'>
                 <div className='tit'><h2>{vo.title}</h2></div>
                 <div className='date'>{vo.enrollDate}</div>
-                <div className='writer'>작성자 : {vo.writerNick}</div>
+                <div className='writer'>작성자 　{vo.writerNick}</div>
                 <img 
                     src={vo.imagePath} 
                     alt={'imageNo' + vo.imageNo} />

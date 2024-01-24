@@ -6,9 +6,10 @@ import lombok.Data;
 public class SurveyVo {
 	private String surveyNo;
 	private String memberNo;
+	private String rescueDogNo;
 	private String residence;
 	private String job;
 	private String housingType;
-	private String reason;
+	private String maritalStatusYn;	
 	
 }

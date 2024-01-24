@@ -8,6 +8,9 @@ import MyPageMainSidebar from './MyPageMainSidebar';
 import MemberReservation from './MemberReservation';
 import VisitReservationInfo from '../board/visit/VisitReservationInfo';
 
+import VisitReservationInfo from '../board/visit/VisitReservationInfo';
+import MemberAdoptDetail from './MemberAdoptDetail';
+
 const StyledMyPageMainDiv = styled.div`
     width: 100%;
     height: 100%;
@@ -26,6 +29,7 @@ const MyPageMain = () => {
                 <Route path='/memberAdoptList' element = {<MemberAdoptList />}></Route>
                 <Route path='/memberReservation' element = {<MemberReservation />}></Route>
                 <Route path='/memberReservationInfo' element = {<VisitReservationInfo />}></Route>
+                <Route path='/memberAdoptList/adoptDetail' element={<MemberAdoptDetail />} />
             </Routes>
         </StyledMyPageMainDiv>
     );

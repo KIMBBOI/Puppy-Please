@@ -3,16 +3,30 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledAdoptionDetailItem = styled.div`
-    width: 100%;
-    height: 100%;
+    width: 80%;
+    height: 90%;
     display: flex;
     flex-direction: column;
     place-items: center center;
+    background-color: #e5d8fd44;
     text-align: center;
 
     img {
-        width: 450px;
-        height: 400px;
+        width: 550px;
+        height: 500px;
+        padding: 30px;
+    }
+
+    .date {
+        margin-right: 250px; /* 원하는 간격 조절 */
+        font-size: 13px;
+        margin-bottom: 9px;
+        display: inline-block;
+    }
+
+    .name {
+        font-size: 15px;
+        font-weight: ;
     }
 `;
 
@@ -46,7 +60,7 @@ const AoptionDetailItem = ( {vo} ) => {
         .then( data => {
             if (data.msg === 'good') {
                 alert("게시글을 삭제하였습니다.");
-                navigate("/board/adoptionNews/list");
+                navigate("/board/adoption/list");
             } else {
                 alert('게시글 삭제에 실패하였습니다.');
                 navigate(-1);
@@ -86,16 +100,17 @@ const AoptionDetailItem = ( {vo} ) => {
         <StyledAdoptionDetailItem>
             <div className='detailArea'>
                 <button onClick={() => handleAdoptionOk(vo.adoptionCompleteYn)}>입양완료</button>
+                <div className='date'>작성일 : {vo.enrollDate}</div>
                 <img 
                     src={vo.imagePath} 
                     alt={'imageNo' + vo.imageNo}
                 />
-                <div><h4>이름 : {vo.dogName}</h4></div>
-                <div><h5>종 : {vo.breed}</h5></div>
-                <div><h5>성별 : {vo.genderMf}</h5></div>
-                <div><h5>중성화 : {vo.neuteringOx}</h5></div>
-                <div><h5>나이 : {vo.age}</h5></div>
-                <div><h5>몸무게 : {vo.weight}</h5></div>
+                <div className='name'><h4>이름 : {vo.dogName}</h4></div>
+                <div className='breed'><h5>종 : {vo.breed}</h5></div>
+                <div className='gender'><h5>성별 : {vo.genderMf}</h5></div>
+                <div className='neutering'><h5>중성화 : {vo.neuteringOx}</h5></div>
+                <div className='age'><h5>나이 : {vo.age}</h5></div>
+                <div className='weight'><h5>몸무게 : {vo.weight}</h5></div>
             </div>
             <div>
                 {currentAdmin && (
