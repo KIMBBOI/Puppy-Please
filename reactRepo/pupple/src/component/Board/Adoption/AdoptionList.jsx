@@ -22,7 +22,7 @@ const StyledAdoptionListDiv = styled.div`
         font-size: 14px;
         font-weight: 545;
         border: 1.5px solid #d1b8ffe9;
-        border-radius: 2px;
+        border-radius: 20px;
         color: #ffff;
         background-color: #d1b8ffe9;
     }

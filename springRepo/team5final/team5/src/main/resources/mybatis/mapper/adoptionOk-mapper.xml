@@ -49,7 +49,7 @@
 		)
     </select>
 
-
+	<!--  -->
 	<select id='listCount' resultType="Integer">
 		SELECT 
 			COUNT(*) as cnt 
@@ -60,6 +60,39 @@
 		AND
 			ADOPTION_COMPLETE_YN = 'N'
 	</select>
+	
+	<!-- 상세조회 -->
+	<select id="detail" resultType="com.kh.app.adoption.vo.AdoptionVo">
+         SELECT
+	        A.ADOPTION_BOARD_NO,
+	        A.ADMIN_NO,
+	        A.ENROLL_DATE,
+	        A.MODIFY_DATE,
+	        A.DEL_YN,
+	        RD.RESCUE_DOG_NO,
+	        RD.IMAGE_NO,
+	        RD.DOG_NAME,
+	        RD.BREED,
+	        RD.GENDER_MF,
+	        RD.NEUTERING_OX,
+	        RD.AGE,
+	        RD.WEIGHT,
+	        RD.ADOPTION_COMPLETE_YN,
+	        I.IMAGE_PATH
+	    FROM
+	        ADOPTION_BOARD A
+	    JOIN
+	        RESCUE_DOG RD ON A.RESCUE_DOG_NO = RD.RESCUE_DOG_NO
+	    JOIN
+	        IMAGE I ON I.IMAGE_NO = RD.IMAGE_NO
+	    WHERE
+	        A.DEL_YN = 'N'
+	    AND
+	        RD.ADOPTION_COMPLETE_YN ='Y'
+	    AND 
+	    	A.ADOPTION_BOARD_NO = #{adoptionBoardNo}
+    </select>
+    
 	
 	
     <!-- 입양 승인 상세 조회 -->

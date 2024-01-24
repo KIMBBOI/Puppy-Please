@@ -61,6 +61,8 @@
          SELECT
 	        A.ADOPTION_BOARD_NO,
 	        A.ADMIN_NO,
+	        A.ENROLL_DATE,
+	        A.MODIFY_DATE,
 	        A.DEL_YN,
 	        RD.RESCUE_DOG_NO,
 	        RD.IMAGE_NO,
@@ -83,7 +85,7 @@
 	    AND
 	        RD.ADOPTION_COMPLETE_YN ='N'
 	    AND 
-	    	A.ADOPTION_BOARD_NO = #{adoptionBoardNo}
+	    	A.ENROLL_DATE = #{enrollDate}
     </select>
     
     <!-- 입력한 견종에 해당하는 RESCUE_DOG_NO 가져오기 -->

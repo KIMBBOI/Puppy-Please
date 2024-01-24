@@ -20,7 +20,7 @@ const StyledAdoptionNewsListDiv = styled.div`
         font-size: 14px;
         font-weight: 500;
         border: 1.5px solid #d1b8ffe9;
-        border-radius: 3px;
+        border-radius: 20px;
         color: #ffff;
         background-color: #d1b8ffe9;
         cursor: pointer;
@@ -50,6 +50,7 @@ const StyledAdoptionNewsListDiv = styled.div`
 
     .footer {
         align-items: center;
+        margin-top: 20px;
     }
 
     span {
@@ -119,8 +120,8 @@ const AdoptionNewsList = () => {
                                     a={vo.imagePath}  
                                     b={vo.title}
                                     c={vo.content}
-                                    d={vo.enrollDate}
-                                    c={vo.newsAfterAdoptionNo} 
+                                    // d={vo.enrollDate}
+                                    e={vo.newsAfterAdoptionNo} 
                                     vo={vo} 
                                 />
                             )
