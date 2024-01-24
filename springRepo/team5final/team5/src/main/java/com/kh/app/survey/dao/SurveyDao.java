@@ -16,6 +16,7 @@ public class SurveyDao {
 		return sst.update("SurveyMapper.updateResult", vo);
 		
 	}
+
 	
 	
 	

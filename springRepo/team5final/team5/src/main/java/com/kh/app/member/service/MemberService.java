@@ -195,4 +195,11 @@ public class MemberService {
 	}
 
 
+	public int editSurvey(SurveyVo vo) {
+		return dao.editSurvey(sst, vo);
+	}
+
+	public int editApply(ApplyVo vo) {
+		return dao.editApply(sst, vo);
+	}
 }

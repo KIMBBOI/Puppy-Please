@@ -45,5 +45,11 @@ public class MemberDao {
 	public List<SurveyVo> getSurveyList(SqlSessionTemplate sst, MemberVo vo) {
 		return sst.selectList("SurveyMapper.getSurveyList", vo);
 	}
-
+	public int editSurvey(SqlSessionTemplate sst, SurveyVo vo) {
+		return sst.update("SurveyMapper.editSurvey", vo);
+	}
+	public int editApply(SqlSessionTemplate sst, ApplyVo vo) {
+		return sst.update("ApplyMapper.editApply", vo);
+	}
+	
 }
