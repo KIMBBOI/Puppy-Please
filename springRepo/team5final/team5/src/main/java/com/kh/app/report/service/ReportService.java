@@ -48,7 +48,7 @@ public class ReportService {
         
         if (index != -1) {
             String leftSubstring = originalString.substring(0, index);
-            System.out.println(leftSubstring); // "C:\\dev\\team5Repo\\springRepo\\team5final\\team5\\src\\main\\webapp"
+            // "C:\\dev\\team5Repo\\springRepo\\team5final\\team5\\src\\main\\webapp"
             String str = imgVo.getImagePath().replace(leftSubstring
             		, "http://127.0.0.1:8080/app");
             

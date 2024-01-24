@@ -11,12 +11,13 @@ const StyledMemberReservationDiv = styled.div`
 
 const MemberReservation = () => {
     const location = useLocation();
-    const fromSidebar = location.state.statusVo;
-    console.log('fromSidebar :::',fromSidebar); // fromSidebar ::: {status: true}
+    let fromSidebar = location.state.fromSidebar
+    let beforeVo = location.state.brforeVo
+
 
     return (
         <StyledMemberReservationDiv>
-            <VisitReservationInfo fromSidebar={fromSidebar}/>
+            <VisitReservationInfo />
         </StyledMemberReservationDiv>
     );
 };

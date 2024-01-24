@@ -102,17 +102,13 @@ public class ReportController {
 		
 		if (resultImg == 1 ) {
 			map.put("ImgMsg", "img insert success");
-			System.out.println("이미지 업로드 성공 !");
 			if (resultReport == 1 ) {
 				map.put("ReportMsg", "board write success");
-					System.out.println("게시글 작성 성공 !");
 			} else {
 				map.put("ReportMsg", "board write fail");
-					System.out.println("게시글 작성 실패 ...");
 			}
 		} else {
 			map.put("ImgMsg", "img insert fail");
-			System.out.println("이미지 업로드 실패 ...");
 		}
 		
 		return map;
@@ -134,17 +130,13 @@ public class ReportController {
 		
 		if (resultImg == 1) {
 			map.put("ImgMsg", "img update success");
-			System.out.println("이미지 수정 성공 !");
 			if (resultReport == 1 ) {
 				map.put("ReportMsg", "board update success");
-					System.out.println("게시글 수정 성공 !");
 			} else {
 				map.put("ReportMsg", "board update fail");
-					System.out.println("게시글 수정 실패 ...");
 			}
 		} else {
 			map.put("ImgMsg", "img update fail");
-			System.out.println("이미지 수정 실패 ...");
 		}
 		
 		return map;
@@ -194,10 +186,8 @@ public class ReportController {
 		
 		if (result == 1) {
 			map.put("msg", "success");
-				System.out.println("게시글 삭제 성공 !");
 		} else {
 			map.put("msg", "fail");
-				System.out.println("게시글 삭제 실패 ...");
 		}
 		
 		return map;
