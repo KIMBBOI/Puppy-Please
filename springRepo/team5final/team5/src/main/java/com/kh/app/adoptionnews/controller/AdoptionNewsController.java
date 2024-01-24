@@ -41,7 +41,6 @@ public class AdoptionNewsController {
 		
 		//목록조회
 		List<AdoptionNewsVo> voList = service.list(pvo);
-		System.out.println("목록조회 voList : " + voList);
 		
 		Map<String, Object> map = new HashMap<>();
 		if (currentPage_ == null && voList == null) {
@@ -94,6 +93,42 @@ public class AdoptionNewsController {
 		return map;
 	}
 	
+	//수정
+	@PostMapping("edit")
+	public Map<String, String> edit(AdoptionNewsVo vo , MultipartFile file) throws Exception {
+		
+		System.out.println(" 수정 vo : " + vo);
+		
+		//이미지 업데이트
+		String imagePath = saveFile(file);
+		AdoptionNewsVo imgVo = new AdoptionNewsVo();
+		imgVo.setImagePath(imagePath);
+		imgVo.setImageNo(vo.getImageNo());
+		int resultImg =service.editImage(imgVo);
+		
+		//게시글 업데이트
+		Map<String, String> map = new HashMap<String, String>();
+		int resultBoard = service.editBoard(vo);
+		
+		if (resultImg == 1) {
+			map.put("imgMsg", "img update good");
+			System.out.println("이미지 수정 성공");
+			if (resultBoard == 1) {
+				map.put("boardMsg", "board update good");
+				System.out.println("게시글 수정 성공");
+			} else {
+				map.put("boardMsg", "board update bad");
+				System.out.println("게시글 수정 실패");
+			} 
+		} else {
+			map.put("imgMsg", "imgMsg update bad");
+			System.out.println("이미지 수정 실채");
+		}
+		
+		return map;
+	}
+		
+	
 	/**
 	 * 파일을 서버에 저장하고, 파일 전체 경로를 리턴함
 	 * @param 파일객경로
@@ -134,40 +169,6 @@ public class AdoptionNewsController {
 		return map;
 	}
 	
-	//수정
-	@PostMapping("edit")
-	public Map<String, String> edit(AdoptionNewsVo vo , MultipartFile file) throws Exception {
-		
-		System.out.println(" 수정 vo : " + vo);
-		
-		//이미지 업데이트
-		String imagePath = saveFile(file);
-		AdoptionNewsVo imgVo = new AdoptionNewsVo();
-		imgVo.setImagePath(imagePath);
-		imgVo.setImageNo(vo.getImageNo());
-		int resultImg =service.editImage(imgVo);
-		
-		//게시글 업데이트
-		Map<String, String> map = new HashMap<String, String>();
-		int resultBoard = service.editBoard(vo);
-		
-		if (resultImg == 1) {
-			map.put("imgMsg", "img update good");
-			System.out.println("이미지 수정 성공");
-			if (resultBoard == 1) {
-				map.put("boardMsg", "board update good");
-				System.out.println("게시글 수정 성공");
-			} else {
-				map.put("boardMsg", "board update bad");
-				System.out.println("게시글 수정 실패");
-			} 
-		} else {
-			map.put("imgMsg", "imgMsg update bad");
-			System.out.println("이미지 수정 실채");
-		}
-		
-		return map;
-	}
 	
 	//삭제
 	@DeleteMapping
@@ -177,11 +178,11 @@ public class AdoptionNewsController {
 		int result = service.delete(vo);
 		
 		if (result == 1) {
-			map.put("msg", "success");
-				System.out.println("게시글 삭제 성공 !");
+			map.put("msg", "good");
+			System.out.println("게시글 삭제 성공 !");
 		} else {
-			map.put("msg", "fail");
-				System.out.println("게시글 삭제 실패 ...");
+			map.put("msg", "bad");
+			System.out.println("게시글 삭제 실패 ...");
 		}
 		
 		return map;

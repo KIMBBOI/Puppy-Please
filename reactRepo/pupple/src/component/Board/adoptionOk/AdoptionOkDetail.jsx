@@ -1,23 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { useLocation } from 'react-router';
+import styled from 'styled-components';
+import AoptionOkDetailItem from './AoptionOkDetailItem';
 
-const AdoptionOkDetail = ({ match }) => {
-  const [dogInfo, setDogInfo] = useState(null);
+const StyledAdoptionOkDetailDiv = styled.div`
+    width: 800px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    place-items: center center;
+    padding: 30px 0 30px 0;
+`;
 
-  useEffect(() => {
-    // 유기견 정보를 서버로부터 가져오는 API 호출
-    // match.params.id 를 사용하여 특정 유기견 정보를 가져옴
-  }, [match.params.id]);
+const AdoptionOkDetail = () => {
 
-  if (!dogInfo) {
-    return <div>Loading...</div>;
-  }
+  const location = useLocation();
+  let vo = location.state.vo;
 
   return (
-    <div>
-      <h2>유기견 상세 정보</h2>
-      <p>이름: {dogInfo.name}</p>
-      {/* 다른 유기견 정보 표시 */}
-    </div>
+      <StyledAdoptionOkDetailDiv>
+          {vo ? (
+              <AoptionOkDetailItem key={vo.adoptionBoardNo} vo={vo} />
+          ) : (
+              <div>로딩중</div>
+          )}
+      </StyledAdoptionOkDetailDiv>
   );
 };
 

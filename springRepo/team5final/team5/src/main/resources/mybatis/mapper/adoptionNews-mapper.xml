@@ -115,7 +115,7 @@
 	    SET 
 	        TITLE = #{title}
 	        , CONTENT = #{content}
-	        , MODIFY_DATE = #{modifyDate}
+	        , MODIFY_DATE = SYSDATE
 	    WHERE 
 	    	NEWS_AFTER_ADOPTION_NO = #{newsAfterAdoptionNo}
 	    	AND DEL_YN = 'N'

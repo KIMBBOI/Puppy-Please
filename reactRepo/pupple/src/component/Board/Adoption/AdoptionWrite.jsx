@@ -3,8 +3,26 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledAdoptionWriteDiv = styled.div`
-    width: 100%;
-    height: 100%;
+    width: 80%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    /* place-items: center center; */
+    /* margin-right: 15px; */
+    padding: 30px 0 30px 15px;
+    background-color: #e5d8fd44;
+    
+    form {
+        align-items: center;
+    }
+
+    div {
+        margin-bottom: 30px;
+    }
+
+    label {
+        margin-right: 100px;
+    }
 `;
 
 const AdoptionWrite = ( ) => {
@@ -71,8 +89,6 @@ const AdoptionWrite = ( ) => {
 
         
         
-
-        
         const formData = new FormData();
         // formData.append("rescueDogNo", rescueDogNo);
         formData.append('file', fileObj);
@@ -119,49 +135,56 @@ const AdoptionWrite = ( ) => {
     return (
         <StyledAdoptionWriteDiv>
             <div className="adoption-write">
-                <h1>입양 글 작성</h1>
+                <h2>입양 글 작성</h2>
                 <form onSubmit={handleSubmit}>
-                    <input type="file" className="file" onChange={handleChangeFile} />
                     <br />
-                    <label>
-                    이름:
-                    <input type="text" className="dogName" onChange={handleChangeDogName} />
-                    </label>
-                    <br />
-                    <select className='breed' onChange={handleChangeBreed}>
-                        <option value="0">견종</option>
-                        <option value="믹스견">믹스견</option>
-                        <option value="불독">불독</option>
-                        <option value="비숑">비숑</option>
-                        <option value="골든리트리버">골든리트리버</option>
-                        <option value="시베리안 허스키">시베리안 허스키</option>
-                        <option value="라브라도 리트리버">라브라도 리트리버</option>
-                        <option value="프렌치 불독">프렌치 불독</option>
-                        <option value="푸들">푸들</option>
-                        <option value="말티즈">말티즈</option>
-                        <option value="비글">비글</option>
-                        <option value="포메라니안">포메라니안</option>
-                        <option value="요크셔테리어">요크셔테리어</option>
-                        <option value="치와와">치와와</option>
-                        <option value="진돗개">진돗개</option>
-                    </select>
-                    <label>
-                    성별:
-                    <input type="text" className="genderMf" onChange={handleChangeGender} />
-                    </label>
-                    <label>
-                    중성화:
-                    <input type="text" className="neuteringOx" onChange={handleChangeNeutering} />
-                    </label>
-                    <label>
-                    나이:
-                    <input type="number" className="age" onChange={handleChangeAge} />
-                    </label>
-                    <label>
-                    몸무게:
-                    <input type="number" className="weight" onChange={handleChangeWeight} />
-                    </label>
-                    <button type="submit">작성</button>
+                    <div>
+                        <label>이름</label>
+                        <input type="text" className="dogName" onChange={handleChangeDogName} />
+                    </div>
+                    <div className='breed'>
+                        <label>견종선택</label>
+                        <select onChange={handleChangeBreed}>
+                            <option value="0">견종</option>
+                            <option value="믹스견">믹스견</option>
+                            <option value="불독">불독</option>
+                            <option value="비숑">비숑</option>
+                            <option value="골든리트리버">골든리트리버</option>
+                            <option value="시베리안 허스키">시베리안 허스키</option>
+                            <option value="라브라도 리트리버">라브라도 리트리버</option>
+                            <option value="프렌치 불독">프렌치 불독</option>
+                            <option value="푸들">푸들</option>
+                            <option value="말티즈">말티즈</option>
+                            <option value="비글">비글</option>
+                            <option value="포메라니안">포메라니안</option>
+                            <option value="요크셔테리어">요크셔테리어</option>
+                            <option value="치와와">치와와</option>
+                            <option value="진돗개">진돗개</option>
+                        </select>
+                    </div>
+                    <div className="genderMf">
+                        <label>성</label>
+                        <input type="text" onChange={handleChangeGender} />
+                    </div>
+                    <div className="neuteringOx">
+                        <label>중성화</label>
+                        <input type="text" onChange={handleChangeNeutering} />
+                    </div>
+                    <div className="age">
+                        <label>나이</label>
+                        <input type="number" onChange={handleChangeAge} />
+                    </div>
+                    <div className="weight">
+                        <label>몸무게</label>
+                        <input type="number" onChange={handleChangeWeight} />
+                    </div>
+                    <div className="file">
+                        <label>사진선택</label>
+                        <input type="file" onChange={handleChangeFile} />
+                    </div>
+                    <div className='submit'>
+                        <button type="submit">작성</button>
+                    </div>
                 </form>
             </div>
         </StyledAdoptionWriteDiv>

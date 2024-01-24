@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledAdoptionNewsWriteDiv = styled.div`
@@ -36,11 +36,21 @@ const AdoptionNewsWrite = ( ) => {
 
 
   const navigate = useNavigate();
-
+  const location = useLocation();
 
   const [title, setTitle] = useState();
   const [content, setContent] = useState();
   const [fileObj, setFileObj] = useState();
+  // 1. 수정인지 작성인지 판단해서 수정이면 기존의 데이터로 값을 채워줌
+  // 2. location.state 에 값이 없으면 에러를 발생시키기 않고 undefind 반환. (location.state?)
+  // 3. 조건문으로 확인 후 setter 로 데이터 삽입
+  useEffect( () => {
+    const existing = location.state?.vo;
+    if (existing) {
+      setTitle(existing.title);
+      setContent(existing.content);
+  }
+  } );
 
   const handleChangeTitle = (e) => {
     setTitle(e.target.value);
@@ -81,32 +91,66 @@ const AdoptionNewsWrite = ( ) => {
     formData.append('memberNo', memberNo); // 이 부분은 실제로 사용되는 변수 이름으로 변경해야 합니다.
 
 
-    fetch('http://127.0.0.1:8080/app/adoptionNews/write', {
-      method: 'POST',
-      body: formData,
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        if (data.imgMsg === 'img insert good') {
-          if (data.boardMsg === 'board write good') {
-            alert('게시글 등록 완료하였습니다.');
-            navigate('/board/adoptionNews/list');
-          } else {
-            alert('게시글 등록 실패하였습니다.');
-            navigate("/board/adoptionNews/write");
+    // 작성하기로 전환 시 state 에 데이터가 있으면 수정하기로 변경
+    const existing = location.state?.vo;
+    // 로캐이션으로 받은 데이터 vo 할당
+
+    if (existing) {
+
+      // 수정 시 WHERE 에 필요한 데이터 준비
+      formData.append("adoptionNewsNo" , existing.adoptionNewsNo);
+      formData.append("imageNo" , existing.imageNo);
+
+      // 수정하기
+      fetch("http://127.0.0.1:8080/app/adoptionNews/edit" , {
+        method: "POST",
+        body: formData , 
+      })
+      .then( resp => resp.json() )
+      .then( data => {
+        if (data.ImgMsg === "img update good") {
+          if(data.ReportMsg === "board update good"){
+              alert("게시글 수정 완료 !");
+              navigate("/board/adoptionNews/list?pno=1");
+          }else{
+              alert("게시글 수정 실패 ...");
+              navigate(-1);
           }
         } else {
-            alert("이미지 업로드 실패");
-            navigate("/board/adoptionNews/write");
+            alert("이미지 수정 실패 ...");
+            navigate(-1);
         }
-      })
+      } )
       ;
+    } else {
+      // 작성하기
+      fetch('http://127.0.0.1:8080/app/adoptionNews/write', {
+        method: 'POST',
+        body: formData,
+      })
+        .then((resp) => resp.json())
+        .then((data) => {
+          if (data.imgMsg === 'img insert good') {
+            if (data.boardMsg === 'board write good') {
+              alert('게시글 등록 완료하였습니다.');
+              navigate('/board/adoptionNews/list');
+            } else {
+              alert('게시글 등록 실패하였습니다.');
+              navigate("/board/adoptionNews/write");
+            }
+          } else {
+              alert("이미지 업로드 실패");
+              navigate("/board/adoptionNews/write");
+          }
+        })
+        ;
+    }
   };
 
-  
+
   return (
     <StyledAdoptionNewsWriteDiv>
-      <div><h3>게시글 작성</h3></div>
+      <div><h3>{location.state ? '게시글 수정' : '게시글 작성'}</h3></div>
       <form onSubmit={handleSubmit}>
         <input type="text" className="title" placeholder="제목을 작성하세요" onChange={handleChangeTitle} />
         <br />
@@ -115,8 +159,7 @@ const AdoptionNewsWrite = ( ) => {
         <input type="file" className="file" onChange={handleChangeFile} />
         <br />
         <div className='submit'>
-          <input type="submit" className='cancle' value="취소" />
-          <input type="submit" className='ok' value="확인" />
+        <input type="submit" value={location.state ? '수정하기' : '작성하기'} />
         </div>
       </form>
     </StyledAdoptionNewsWriteDiv>

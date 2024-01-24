@@ -174,7 +174,7 @@ public class AdoptionController {
 	}
 
 	// 입양신청 수정
-	@PutMapping
+	@PutMapping("edit")
 	public Map<String, String> edit(@RequestBody AdoptionVo vo) {
 		
 		Map<String, String> map = new HashMap<String, String>();

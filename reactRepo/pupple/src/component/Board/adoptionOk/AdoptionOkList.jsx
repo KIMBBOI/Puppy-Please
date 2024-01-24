@@ -57,14 +57,14 @@ const AdoptionOkList = () => {
 
     let [arr, setArr] = useState([]);
     let [pvo, setPvo] = useState([]);
-    let adoptionCompleteYn = 'Y';
+    // let adoptionCompleteYn = 'Y';
     
 
     useEffect(() => {
       // 서버에서 데이터를 가져오는 비동기 함수 호출
       // 예: axios 또는 fetch를 사용하여 데이터를 가져옴
       // 가져온 데이터를 setAdoptionData로 설정
-      fetch(`http://127.0.0.1:8080/app/adoptionOk/list?pno=${pno}&adoptionCompleteYn=${adoptionCompleteYn}`)
+      fetch(`http://127.0.0.1:8080/app/adoptionOk/list?pno=${pno}`)
       .then( (resp) => {return resp.json()} )
       .then( (data) => {
           setArr(data.voList)
@@ -72,7 +72,7 @@ const AdoptionOkList = () => {
     } )
     ;
 
-}, [pno, adoptionCompleteYn]);
+}, [pno]);
 
 
     return (
@@ -93,7 +93,7 @@ const AdoptionOkList = () => {
                                 f={vo.age} 
                                 g={vo.weight} 
                                 h={vo.adoptionBoardNo}
-                                // vo={vo}
+                                vo={vo}
                             />
                         )
                     } )
