@@ -25,33 +25,13 @@ public class VisitController {
 
 	private final VisitService service;
 	
-	
-	// 방문예약하기
-	@PostMapping
-	public Map<String, String> write(@RequestBody VisitVo vo) {
-		System.out.println(vo);
-			
-		Map<String, String> map = new HashMap<String, String>();
-		int result = service.insert(vo);
-		
-		if (result == 1) {
-			map.put("msg", "success");
-		} else {
-			map.put("msg", "fail");
-		}
-		
-		return map;
-	}
-	
-	
-	
 	// 특정일 예약 목록 조회
 	@GetMapping("list")
 	public Map<String, Object> list(@RequestParam("reservationDate") String reservationDate) {
 		
 		Map<String, Object> map = new HashMap<>();
 		List<VisitVo> voList = service.list(reservationDate);
-        
+		
 		if (voList != null) {
 			// voList에서 객체의 reservationDate 값들을 추출하여 문자 배열로 만들기
 			String[] reservationDateArr = voList.stream()
@@ -67,8 +47,27 @@ public class VisitController {
 	}
 	
 	
-	// 예약 상세 조회
+	// 방문예약 중복 확인
 	@GetMapping
+	public Map<String, Object> check(@RequestParam(value="memberNo", 
+		    required = false, defaultValue="1") String memberNo) {
+		
+		Map<String, Object> map = new HashMap<>();
+		VisitVo dbVo = service.detail(memberNo);
+		
+		if (dbVo != null) {
+			map.put("msg", "success");
+			map.put("dbVo", dbVo);
+		} else {
+			map.put("msg", "fail");
+		}
+		
+		return map;
+	}
+	
+	
+	// 예약 상세 조회
+	@GetMapping("detail")
 	public Map<String, Object> detail(@RequestParam(value="memberNo", 
 		    required = false, defaultValue="1") String memberNo) {
 		
@@ -84,10 +83,27 @@ public class VisitController {
 		
 		return map;
 	}
-		
 	
-	// 예약 수정
-	@PutMapping("edit")
+	
+	// 방문예약하기
+	@PostMapping
+	public Map<String, String> write(@RequestBody VisitVo vo) {		
+			
+		Map<String, String> map = new HashMap<String, String>();
+		int result = service.insert(vo);
+		
+		if (result == 1) {
+			map.put("msg", "success");
+		} else {
+			map.put("msg", "fail");
+		}
+		
+		return map;
+	}
+	
+	
+	// 예약 변경
+	@PutMapping
 	public Map<String, String> edit(@RequestBody VisitVo vo) {
 		
 		Map<String, String> map = new HashMap<String, String>();

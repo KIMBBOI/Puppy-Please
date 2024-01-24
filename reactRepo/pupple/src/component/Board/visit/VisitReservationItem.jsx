@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyeldVisitReservationItemDiv = styled.div`
@@ -77,26 +77,22 @@ const StyeldVisitReservationItemDiv = styled.div`
 
 
 
-
-
-
-
-const VisitReservationItem = ({dbDateStrArr}) => {
+const VisitReservationItem = ({db_DateStrArr}) => {
     const navigate = useNavigate();
-    console.log('------------------ Item 시작 ------------------');
-    console.log('1. dbDateStrArr :::',dbDateStrArr);
+
+
+
     useEffect( () => {
         setSelectedTime(null);
         setSelectedDate(null);
-    }, [dbDateStrArr])
-
+    }, [db_DateStrArr])
 
 
 
 
 
     {/* 
-        < 예약내열 배열을 새로운 배열("HH:mm")로 만들기>
+        < 예약내역 배열을 새로운 배열("HH:mm")로 만들기>
             1. 배열 생성
             2. 배열에서 문자열 추출
             3. Date 객체로 파싱
@@ -111,9 +107,9 @@ const VisitReservationItem = ({dbDateStrArr}) => {
                 * 날짜를 클릭하지 않았고 
     */}
     const extractedTimes = [];
-    if (dbDateStrArr) {
-        for (let i = 0; i < dbDateStrArr.length; i++) {
-          const formattedTime = new Date(dbDateStrArr[i]).toLocaleTimeString([], { 
+    if (db_DateStrArr) {
+        for (let i = 0; i < db_DateStrArr.length; i++) {
+          const formattedTime = new Date(db_DateStrArr[i]).toLocaleTimeString([], { 
                                                                                     hour: '2-digit', 
                                                                                     minute: '2-digit', 
                                                                                     hour12: false 
@@ -121,8 +117,6 @@ const VisitReservationItem = ({dbDateStrArr}) => {
           extractedTimes.push(formattedTime);
         }
     }
-    console.log('2. extractedTimes :::',extractedTimes);
-
 
 
 
@@ -134,9 +128,6 @@ const VisitReservationItem = ({dbDateStrArr}) => {
     // 시작 시간과 종료 시간 설정
     const startTime = new Date(0, 0, 0, 10, 0); // startTime.setHours(10, 0); // 10:00 AM
     const endTime = new Date(0, 0, 0, 17, 30);  // endTime.setHours(17, 30); // 15:30 PM
-    console.log('startTime :::',startTime);
-    console.log('endTime :::',endTime);
-   
     // 배열 생성
     const timeSlots = [];
     // 현재 시간
@@ -149,33 +140,25 @@ const VisitReservationItem = ({dbDateStrArr}) => {
         currentTime.setMinutes(currentTime.getMinutes() + 30);
             // 현재시간 분에 30분을 더함.
     }
-    console.log('3. timeSlots 확인 :::',timeSlots);
-
-
- 
 
 
 
 
 
-    {/* 예약시간 선택 시 Date객체 생성 */}
+    {/* 
+        < 예약시간 선택 시 Date객체 생성 >
+    */}
     const [selectedTime, setSelectedTime] = useState(null);
     const [selectedDate, setSelectedDate] = useState(null);
     const handleReservDivClick = (time) => {
-        console.log('------------- 핸들 클릭 시작 -------------');
-        console.log('time :::', time);
-
-
-
-
         // 클릭한 시간을 상태에 저장 또는 다른 동작 수행
         setSelectedTime(time);
         // insert 데이터 준비
         const insertDate = new Date();
         const [hours, minutes] = time.split(':');   
         insertDate.setHours(hours, minutes, 0, 0);
-        const tltsDate = insertDate.toLocaleTimeString([], { 
-                                                        year: '2-digit',
+        const tltsInsertDate = insertDate.toLocaleTimeString([], { 
+                                                        year: 'numeric',
                                                         month: '2-digit',
                                                         day: '2-digit',
                                                         hour: '2-digit',
@@ -184,56 +167,35 @@ const VisitReservationItem = ({dbDateStrArr}) => {
                                                         hour12: false
                                                         });
         // Date 문자열 데이터 가공
-        const plDate = tltsDate.replace('. ', '/').replace('. ', '/').replace('.','');
-        setSelectedDate(plDate);
-        console.log('selectedDate 이전클릭 :::', selectedDate);
-        
-
-
-
-        console.log('------------- 핸들 종료 -------------');
+        const plTltsInsertDate = tltsInsertDate.replace('. ', '-').replace('. ', '-').replace('.','');
+        setSelectedDate(plTltsInsertDate);
     };
-    console.log('selectedDate 현재클릭 :::', selectedDate);
-    console.log('selectedTime :::', selectedTime);
-    console.log('------------ insert ------------');
-    console.log('selectedDate :::', selectedDate);
-
-    
 
 
 
 
-
+    {/* 
+        < 로그인 확인 및 vo 준비( reservationInfo 컴포넌트 전달 )
+    */}
     const str = sessionStorage.getItem("loginMemberVo");
     const sessionVo = JSON.parse(str);
     const memberNo = sessionVo.memberNo;
-    console.log('memberNo :::',memberNo);
     let vo = {};
     if (typeof memberNo === 'string') {
-        console.log('memberNo :::', 'memberNo 데이터 있음');
         if (selectedDate !== null) {
-            console.log('selectedDate :::', 'selectedDate 데이터 있음');
-            console.log('selectedDate :::',selectedDate);
             vo = {
                 memberNo,
-                'reservationDate': selectedDate
+                'reservationDate': selectedDate,
             }
-            console.log('vo :::', vo);
         } else {
-            console.log('selectedDate :::', 'selectedDate 데이터 없음');
-            console.log('selectedDate :::',selectedDate);
         }
     } else {
-        console.log('memberNo :::', 'memberNo 데이터 없음');
     }
 
     
+    
 
 
-
-
-
-    console.log('------------------ Item 종료 ------------------');
     return (
         <StyeldVisitReservationItemDiv>
             {timeSlots.map((time, index) => (

@@ -49,6 +49,10 @@ const StyledReportListDiv = styled.div`
 
 
 const ReportList = () => {
+    const navigate = useNavigate();
+    // 13. 작성하기 누르면 페이지 전환
+
+
 
     // 현재 페이지의 URL을 가져옴
     const currentUrl = window.location.href;
@@ -63,10 +67,12 @@ const ReportList = () => {
     }
 
 
-        // let arr = [];
-        let [arr, setArr] = useState([]);
-        let [pvo, setPvo] = useState({});
-        // 7. uesState 사용
+
+    // let arr = [];
+    let [arr, setArr] = useState([]);
+    let [pvo, setPvo] = useState({});
+    // 7. uesState 사용
+
 
 
     useEffect( () => {
@@ -83,21 +89,14 @@ const ReportList = () => {
             setArr(data.voList);
             setPvo(data.pvo);
                 // 8. useState 로 변경
-            
         } )
         ;
     }, [pno] );
     // 9. 배열은 컴포넌트가 처음 마운트될 때( or pno 값이 바뀔때) 만 실행되도록 함
 
-    const navigate = useNavigate();
-        // 13. 작성하기 누르면 페이지 전환
-
-
 
 
     const str = sessionStorage.getItem("loginMemberVo");
-    console.log('str :::',str);
-
 
 
 

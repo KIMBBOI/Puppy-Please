@@ -14,17 +14,17 @@ const StyledMyPageSidebarDiv = styled.div`
 `;
 
 const SidebarItem = styled.div`
-  margin-bottom: 10px;
-  font-size: 16px;
-  font-weight: bold;
-    a {
-        text-decoration: none;
-        color: #333;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: bold;
+        a {
+            text-decoration: none;
+            color: #333;
 
-        &:hover {
-            color: #555;
+            &:hover {
+                color: #555;
+            }
         }
-    }
 
     .myReservation:hover {
         cursor: pointer;
@@ -34,15 +34,33 @@ const SidebarItem = styled.div`
 
 
 
-
 const MyPageMainSidebar = () => {
     const navigate = useNavigate();
 
-    const statusVo = {status : true}
 
-    const handle = ()=>{
-        navigate("/member/mypage/memberReservation", {state: {statusVo}})
+
+    // 예약했는지 확인
+    const handleReservationCheck = () => {
+        const str = sessionStorage.getItem("loginMemberVo");
+        const sessionVo = JSON.parse(str);
+        const memberNo = sessionVo.memberNo;
+
+        fetch(`http://127.0.0.1:8080/app/visit?memberNo=${memberNo}` , {
+        })
+        .then( resp => resp.json() )
+        .then( data => {
+            if(data.msg === "success"){
+                const myPageBeforeVo = data.dbVo;
+                const myPagefromSidebar = 'true';
+                navigate("/member/mypage/memberReservationInfo", {state: {myPageBeforeVo, myPagefromSidebar}})
+            } else {
+                alert("예약 내역이 없습니다.");
+            }
+        } )
     }
+
+    
+
 
     return (
         <StyledMyPageSidebarDiv>
@@ -57,8 +75,7 @@ const MyPageMainSidebar = () => {
                 <Link to="/member/mypage/memberAdoptList">입양신청내역</Link>
             </SidebarItem>
             <SidebarItem>
-                <div className='myReservation' onClick={handle}>방문예약내역</div>
-                {/* <Link  to={{ pathname: '/member/mypage/memberReservation', state: test }}>방문예약내역</Link> */}
+                <div className='myReservation' onClick={handleReservationCheck}>방문예약내역</div>
             </SidebarItem>
         </StyledMyPageSidebarDiv>
     );

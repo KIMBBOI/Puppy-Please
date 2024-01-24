@@ -106,9 +106,7 @@ const StyledVisitReservationDiv = styled.div`
 
 
 
-
 const VisitReservation = () => {
-    console.log('----------- VisitReservation 시작 -----------');
     // 방문예약 페이지 접속만 해도 fetch 실행 ( 기본 선택 날짜로 디비 조회 )
     useEffect( () => {
         handleSelectRerv(moment());
@@ -116,12 +114,8 @@ const VisitReservation = () => {
 
 
 
-
-
     const [selectedDate, setSelectedDate] = useState(moment()._d);
-    const [dbDateStrArr,setDbDateStrArr] = useState();
-    
-    
+    const [db_DateStrArr,setDbDateStrArr] = useState();
     
     
 
@@ -145,12 +139,10 @@ const VisitReservation = () => {
         .then( resp => resp.json() )
         .then( data => {
             if(data.msg === "success"){
-                alert("조회 성공 !");
                 setDbDateStrArr(data.reservationDateArr);
                     // *컴포턴트로 전달 가능*
             }else{
-                console.log(data.msg);
-                alert("조회 실패 ...");
+                alert('예약현황 조회 실패 ...')
             }
         } )
         ;
@@ -160,23 +152,22 @@ const VisitReservation = () => {
 
 
 
-    console.log('----------- VisitReservation 종료 -----------');
     return (
         <StyledVisitReservationDiv>
             <DatePicker
                 inline
                 locale={ko}
                 dateFormat="yyyy-MM-dd"
-                minDate={currentDate}       // minDate 이전 날짜 선택 불가
-                maxDate={maxSelectableDate} // maxDate 이후 날짜 선택 불가
-                selected={selectedDate}     // value
+                minDate={currentDate}               // minDate 이전 날짜 선택 불가
+                maxDate={maxSelectableDate}         // maxDate 이후 날짜 선택 불가
+                selected={selectedDate}             // value
                 onChange={(date) => {
                     setSelectedDate(date); 
-                    handleSelectRerv(moment(date));
+                    handleSelectRerv(moment(date)); // date 변수를 moment 객체에 set
                 }}
             />
             <div className='line'></div>
-            <VisitReservationItem dbDateStrArr={dbDateStrArr}/>
+            <VisitReservationItem db_DateStrArr={db_DateStrArr}/>
                 {/* *컴포턴트로 전달 가능* */}
         </StyledVisitReservationDiv>
     );
