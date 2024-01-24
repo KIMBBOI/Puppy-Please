@@ -11,9 +11,9 @@ const SurveyMain = () => {
     const rescueDogVo = location.state?.vo;
     const loginMemberVo = JSON.parse(sessionStorage.getItem('loginMemberVo'));
 
-
+    console.log(rescueDogVo);
     const [vo, setVo] = useState({
-       memberNo: loginMemberVo.memberNo, residence: '', maritalStatusYn: '', job: '', housingType: '', reason: ''
+       memberNo: loginMemberVo.memberNo, rescueDogNo: rescueDogVo.rescueDogNo, residence: '', maritalStatusYn: '', job: '', housingType: '', reason: ''
     });
 
     const handleInputChange = (event) => {
@@ -51,6 +51,9 @@ const SurveyMain = () => {
             <form onSubmit={ handleSurveySubmit }>
                 <table>
                     <tbody>
+                        <tr>
+                            <td><input type="text" name="rescueDogNo" onChange={handleInputChange} hidden /></td>
+                        </tr>
                         <tr>
                             <td><span>거주지(시, 군, 구)를 작성해 주세요</span></td>
                             <td><input type="text" name="residence" onChange={handleInputChange} placeholder='거주지'/></td>

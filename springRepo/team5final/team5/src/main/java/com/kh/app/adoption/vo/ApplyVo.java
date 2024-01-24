@@ -12,7 +12,7 @@ public class ApplyVo {
 	private String mainReason;
 	private String familyMembers;
 	private String currentPets;
-	private String landlordPermissionYN;
+	private String landlordPermissionYn;
 	private String conflictResolution;
 	private String enrollDate;
 }

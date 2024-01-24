@@ -32,8 +32,10 @@
     <select id="getApplyList" resultType="ApplyVo">
     	SELECT 
     		RD.DOG_NAME
+    		,RD.RESCUE_DOG_NO
     		, A.DECISION_TIME
     		, A.MAIN_REASON
+    		, A.FAMILY_MEMBERS
     		, A.CURRENT_PETS
     		, A.LANDlORD_PERMISSION_YN
     		, A.CONFLICTRESOLUTION
@@ -43,5 +45,30 @@
     	WHERE A.MEMBER_NO = #{memberNo}
     		
     </select>
+    
+    <update id="editApply">
+		  UPDATE APPLY 
+		  SET
+		   <if test="decisionTime != null">
+		      DECISION_TIME = #{decisionTime}<if test="mainReason != null or familyMembers != null or currentPets != null or landlordPermissionYn != null or conflictResolution != null">,</if>
+		    </if>
+		    <if test="mainReason != null">
+		      MAIN_REASON = #{mainReason}<if test="familyMembers != null or currentPets != null or landlordPermissionYn != null or conflictResolution != null">,</if>
+		    </if>
+		    <if test="familyMembers != null">
+		      FAMILY_MEMBERS = #{familyMembers}<if test="currentPets != null or landlordPermissionYn != null or conflictResolution != null">,</if>
+		    </if>
+		    <if test="currentPets != null">
+		      CURRENT_PETS = #{currentPets}<if test="landlordPermissionYn != null or conflictResolution != null">,</if>
+		    </if>
+		    <if test="landlordPermissionYn != null">
+		      LANDLORD_PERMISSION_YN = #{landlordPermissionYn}<if test="conflictResolution != null">,</if>
+		    </if>
+		    <if test="conflictResolution != null">
+		      CONFLICTRESOLUTION = #{conflictResolution}
+		    </if>
+		  WHERE MEMBER_NO = #{memberNo} 
+		  AND RESCUE_DOG_NO = #{rescueDogNo}
+	</update>
 </mapper>
 

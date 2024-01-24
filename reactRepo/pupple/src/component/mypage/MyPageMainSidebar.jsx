@@ -54,7 +54,7 @@ const MyPageMainSidebar = () => {
                     <Link to="/member/mypage/memberQuit">회원 탈퇴</Link>
             </SidebarItem>
             <SidebarItem>
-                <Link to="/member/mypage/MemberAdoptList">입양신청내역</Link>
+                <Link to="/member/mypage/memberAdoptList">입양신청내역</Link>
             </SidebarItem>
             <SidebarItem>
                 <div className='myReservation' onClick={handle}>방문예약내역</div>
