@@ -17,14 +17,14 @@ public class VisitService {
 	private final VisitDao dao;
 	private final SqlSessionTemplate sst;
 	
-	// 방문예약 중복 확인
-	public VisitVo check(String memberNo) {
-		return dao.check(sst, memberNo);
-	}
-	
 	// 특정일 예약 목록 조회
 	public List<VisitVo> list(String reservationDate) {
 		return dao.list(sst, reservationDate); 
+	}
+	
+	// 방문예약 중복 확인
+	public VisitVo check(String memberNo) {
+		return dao.check(sst, memberNo);
 	}
 
 	// 예약 상세 조회
@@ -32,12 +32,12 @@ public class VisitService {
 		return dao.detail(sst, memberNo);
 	}
 	
-	// 예약 작성
+	// 방문 예약하기
 	public int insert(VisitVo vo) {
 		return dao.insert(sst, vo);
 	}
 	
-	// 예약 수정
+	// 예약 변경
 	public int edit(VisitVo vo) {
 		return dao.edit(sst, vo);
 	}

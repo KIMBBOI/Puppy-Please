@@ -59,7 +59,7 @@ const Navi = () => {
             navigate("/board/visit/reservation");
         } else {
             alert("로그인이 필요한 서비스입니다.");
-            navigate("/");
+            
         }
     };
 
@@ -83,10 +83,10 @@ const Navi = () => {
                 </StyledSubMenu>
             </StyledMenuItem>
             <StyledMenuItem>
-                <div><Link to="/board/report/list">제보</Link></div>
+                <div><Link to="/board/report/list">제보게시판</Link></div>
             </StyledMenuItem>
-            <StyledMenuItem onClick={handleVisitReservationClick}>
-                <div><Link to="/board/visit/reservation">방문예약</Link></div>
+            <StyledMenuItem >
+                <div onClick={handleVisitReservationClick}><Link>방문예약</Link></div>
             </StyledMenuItem>   
         </StyledNaviDiv>
     );

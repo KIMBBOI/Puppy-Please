@@ -99,10 +99,11 @@
 		UPDATE 
 			VISIT_RESERVATION
 	    SET
-	        RESERVATION_DATE = #{reservationDate}
-	        ,MODIFY_DATA = SYSDATE
+            RESERVATION_DATE = #{reservationDate}
+	        ,MODIFY_DATE = SYSDATE
 	    WHERE
-	        VISIT_NO = #{visitNo}
+            MEMBER_NO = #{memberNo}
+            AND DEL_YN = 'N'
 	</update>
 	
 	<!--방문예약 취소/삭제 -->
@@ -110,10 +111,12 @@
 		UPDATE 
 			VISIT_RESERVATION
 	    SET
-	        DEL_YN = 'Y'
-	        ,RESERVATION_STAYUS_NO = 3
-	    WHERE 
-	    	REPORT_NO = #{reportNo}
+            RESERVATION_STATUS_NO = 3
+	        ,MODIFY_DATE = SYSDATE
+            ,DEL_YN = 'Y'
+	    WHERE
+            MEMBER_NO = #{memberNo}
+            AND DEL_YN = 'N'
 	</update>
 
 	<!--방문예약 완료/삭제 -->
