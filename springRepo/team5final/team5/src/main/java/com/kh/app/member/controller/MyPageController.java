@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -98,5 +99,28 @@ public class MyPageController {
 		
 	}
 	
+	@PostMapping("editSurvey")
+	public Map<String, String> editSurvey(@RequestBody SurveyVo vo){
+		Map<String, String> map = new HashMap<String, String>();
+		System.out.println("survey edit :" + vo);
+		int result = service.editSurvey(vo);
+		map.put("msg", "good");
+		if(result != 1) {
+			map.put("msg", "bad");
+		}
+		return map;
+	}
+	
+	@PostMapping("editApply")
+	public Map<String, String> editApply(@RequestBody ApplyVo vo){
+		Map<String, String> map = new HashMap<String, String>();
+		System.out.println("apply edit :" + vo);
+		int result = service.editApply(vo);
+		map.put("msg", "good");
+		if(result != 1) {
+			map.put("msg", "bad");
+		}
+		return map;
+	}
 	
 }

@@ -21,5 +21,6 @@ public class SurveyService {
 	public int updateSurveyResult(SurveyVo vo) {
 		return dao.updateSurveyResult(sst, vo);
 	}
+
 	
 }

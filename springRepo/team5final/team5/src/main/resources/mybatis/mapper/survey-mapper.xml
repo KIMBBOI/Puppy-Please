@@ -7,6 +7,7 @@
   	INSERT INTO SURVEY
   	(
   		SURVEY_NO
+  		, RESCUE_DOG_NO
   		, MEMBER_NO
   		, RESIDENCE
   		, JOB
@@ -16,6 +17,7 @@
   	VALUES
   	(
   		SEQ_SURVEY_NO.NEXTVAL
+  		, #{rescueDogNo}
   		, #{memberNo}
   		, #{residence}
   		, #{job}
@@ -33,14 +35,35 @@
   </update>
   <select id="getSurveyList" resultType="SurveyVo">
   	SELECT
-  		RESIDENCE
-  		, MARITAL_STATUS_YN
-  		, JOB
-  		, HOUSING_TYPE
-  		, REASON
-  		, SURVEY_DATE
-  	FROM SURVEY
-  	WHERE MEMBER_NO = #{memberNo}
+  		S.RESIDENCE
+  		, S.RESCUE_DOG_NO
+  		, S.MARITAL_STATUS_YN
+  		, S.JOB
+  		, S.HOUSING_TYPE
+  		, S.REASON
+  		, S.SURVEY_DATE
+  		, M.MEMBER_NO
+  	FROM SURVEY S
+  	JOIN MEMBER M ON M.MEMBER_NO = S.MEMBER_NO
+  	WHERE M.MEMBER_NO = #{memberNo}
   </select>
-  
+  <update id="editSurvey">
+		  UPDATE SURVEY 
+		  SET
+		    <if test="residence != null">
+		      RESIDENCE = #{residence}<if test="job != null or housingType != null or maritalStatusYn != null">,</if>
+		    </if>
+		    <if test="job != null">
+		      JOB = #{job}<if test="housingType != null or maritalStatusYn != null">,</if>
+		    </if>
+		    <if test="housingType != null">
+		      HOUSING_TYPE = #{housingType}<if test="maritalStatusYn != null">,</if>
+		    </if>
+		    <if test="maritalStatusYn != null">
+		      MARITAL_STATUS_YN = #{maritalStatusYn}
+		    </if>
+		    
+		  WHERE MEMBER_NO = #{memberNo} 
+		  AND RESCUE_DOG_NO = #{rescueDogNo}
+	</update>
 </mapper>
