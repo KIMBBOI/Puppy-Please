@@ -90,7 +90,7 @@ public class MyPageController {
 		map.put("msg", "good");
 		map.put("adoptList", adoptList);
 		map.put("surveyList", surveyList);
-		if(adoptList == null) {
+		if(adoptList == null || surveyList == null) {
 			map.put("msg", "bad");
 		}
 		return map;

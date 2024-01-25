@@ -88,7 +88,7 @@ const AdoptionApply = () => {
         mainReason: '', 
         familyMembers: '', 
         currentPets: '',
-        landlordPermissionYN: '', 
+        landlordPermissionYn: '', 
         conflictResolution: '',
     });
 
@@ -216,9 +216,9 @@ const AdoptionApply = () => {
                         <label>
                         <input
                             type="radio"
-                            name="landlordPermissionYN"
+                            name="landlordPermissionYn"
                             value="Y"
-                            checked={formData.landlordPermissionYN === 'Y'}
+                            checked={formData.landlordPermissionYn === 'Y'}
                             onChange={handleChange}
                         />
                         예
@@ -226,9 +226,9 @@ const AdoptionApply = () => {
                         <label>
                         <input
                             type="radio"
-                            name="landlordPermissionYN"
+                            name="landlordPermissionYn"
                             value="N"
-                            checked={formData.landlordPermissionYN === 'N'}
+                            checked={formData.landlordPermissionYn === 'N'}
                             onChange={handleChange}
                         />
                         아니오

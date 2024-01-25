@@ -111,8 +111,6 @@
         if(!adoptVo){
             return <div>선택된 입양 정보가 없습니다.</div>
         }
-        const adoptVoString = JSON.stringify(adoptVo);
-        const surveyVoString = JSON.stringify(surveyVo);
         const handleAdoptSubmit = (event) => {
             event.preventDefault();
 

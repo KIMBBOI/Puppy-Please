@@ -24,13 +24,32 @@ const StyledHeaderDiv = styled.div`
         background-size: 25%;
         background-position-x: right;
         background-position-y: center;
-
+        cursor: pointer;
     }
     & > .loginArea{
         display: flex;
         justify-content: center;
+        cursor: pointer;
     }
-    
+    & > div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: #333;
+        font-size: 16px;
+      }
+      h3 {
+        margin-bottom: 10px;
+    }
+    div:not(.loginArea) {
+        margin: 5px 0;
+        padding: 10px 20px;
+        color: black; /* 버튼 텍스트 색상 */
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+    }
 `;
 const StyledMemberDiv = styled.div`
 width: 100%;
@@ -39,10 +58,6 @@ display: flex;
 justify-content: center;
 align-items: center;
 
-& > .loginArea {
-  display: flex;
-  justify-content: center;
-}
 `;
 
 
@@ -83,6 +98,10 @@ const Header = () => {
         logout();
         navigate("/");
     }
+    const AdminPage = () => {
+      navigate("/admin/adoptList");
+    }
+
     return (
         
         <StyledHeaderDiv>
@@ -101,6 +120,7 @@ const Header = () => {
               // 관리자로 로그인한 경우
               <div>
                 <h3>관리자로 로그인되었습니다.</h3>
+                <div onClick={AdminPage}>관리자 메뉴</div>
                 <div onClick={logoutAdmin}>로그아웃</div>
               </div>
             ) : (

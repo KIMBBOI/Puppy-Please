@@ -25,7 +25,7 @@
   			, #{mainReason}
   			, #{familyMembers}
   			, #{currentPets}
-  			, #{landlordPermissionYN}
+  			, #{landlordPermissionYn}
   			, #{conflictResolution}
   		)
   	</insert>
@@ -43,6 +43,7 @@
     	FROM APPLY A
     	JOIN RESCUE_DOG RD ON RD.RESCUE_DOG_NO = A.RESCUE_DOG_NO
     	WHERE A.MEMBER_NO = #{memberNo}
+    	ORDER BY A.ENROLL_DATE DESC
     		
     </select>
     
@@ -70,5 +71,29 @@
 		  WHERE MEMBER_NO = #{memberNo} 
 		  AND RESCUE_DOG_NO = #{rescueDogNo}
 	</update>
+	
+	<update id="approveAdoption">
+		UPDATE APPLY
+			SET
+				APPROVE_YN = 'Y'
+			WHERE MEMBER_NO = #{memberNo}
+			AND RESCUE_DOG_NO = #{rescueDogNo}	
+	</update>
+	
+	<insert id="insertApproveDate">
+		UPDATE APPLY
+			SET
+				APPROVE_DATE = SYSDATE
+			WHERE MEMBER_NO = #{memberNo}
+			AND RESCUE_DOG_NO = #{rescueDogNo}
+	</insert>
+	<update id="rejectAdoption">
+		UPDATE APPLY
+			SET
+				APPROVE_YN = 'N'
+			WHERE MEMBER_NO = #{memberNo}
+			AND RESCUE_DOG_NO = #{rescueDogNo}	
+	</update>
+	
 </mapper>
 

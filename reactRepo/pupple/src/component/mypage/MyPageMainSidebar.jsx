@@ -4,13 +4,14 @@ import styled from 'styled-components';
 
 const StyledMyPageSidebarDiv = styled.div`
     width: 250px;
-    height: 500px;
+    height: 300px;
     background-color: #f1f1f1;
     display: flex;
     flex-direction: column;
     padding: 20px;
     box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
     align-items: center;
+    justify-content: flex-start;
 `;
 
 const SidebarItem = styled.div`

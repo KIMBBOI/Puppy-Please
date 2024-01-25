@@ -12,7 +12,6 @@
   		, RESIDENCE
   		, JOB
   		, HOUSING_TYPE
-  		, REASON
   	) 
   	VALUES
   	(
@@ -22,7 +21,6 @@
   		, #{residence}
   		, #{job}
   		, #{housingType}
-  		, #{reason}
 	)
   </insert>
   
@@ -40,12 +38,12 @@
   		, S.MARITAL_STATUS_YN
   		, S.JOB
   		, S.HOUSING_TYPE
-  		, S.REASON
   		, S.SURVEY_DATE
   		, M.MEMBER_NO
   	FROM SURVEY S
   	JOIN MEMBER M ON M.MEMBER_NO = S.MEMBER_NO
   	WHERE M.MEMBER_NO = #{memberNo}
+  	ORDER BY S.SURVEY_DATE DESC
   </select>
   <update id="editSurvey">
 		  UPDATE SURVEY 

@@ -10,5 +10,33 @@
   	WHERE ID=#{id}
   	AND PWD = #{pwd}
   </select>
-  
+
+  <select id="getAdoptList" resultType="ApplyVo">
+    	SELECT 
+    		RD.DOG_NAME
+    		,RD.RESCUE_DOG_NO
+    		, A.DECISION_TIME
+    		, A.MAIN_REASON
+    		, A.FAMILY_MEMBERS
+    		, A.CURRENT_PETS
+    		, A.LANDlORD_PERMISSION_YN
+    		, A.CONFLICTRESOLUTION
+    		, A.ENROLL_DATE
+    	FROM APPLY A
+    	JOIN RESCUE_DOG RD ON RD.RESCUE_DOG_NO = A.RESCUE_DOG_NO
+    		
+    </select>
+    
+    <select id="getSurveyList" resultType="SurveyVo">
+  	SELECT
+  		S.RESIDENCE
+  		, S.RESCUE_DOG_NO
+  		, S.MARITAL_STATUS_YN
+  		, S.JOB
+  		, S.HOUSING_TYPE
+  		, S.SURVEY_DATE
+  		, M.MEMBER_NO
+  	FROM SURVEY S
+  	JOIN MEMBER M ON M.MEMBER_NO = S.MEMBER_NO
+  </select>
 </mapper>

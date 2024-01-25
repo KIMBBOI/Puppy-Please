@@ -5,6 +5,38 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledMemberAdoptList = styled.div`
+ h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    table, th, td {
+        border: 1px solid #ddd;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+    }
+
+    tr {
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: #f5f5f5;
+        }
+    }
+
+    p {
+        font-size: 16px;
+        margin-top: 10px;
+    }
 `;
 
 const MemberAdoptList = () => {
@@ -42,7 +74,6 @@ const MemberAdoptList = () => {
                     <td>{item.enrollDate}</td>
                     <td>{item.dogName}</td>
                     <td>입양신청서</td>
-                    <td>{item.dogNo}</td>
                   </tr>
                 ))}
               </tbody>
