@@ -33,7 +33,7 @@ const AdoptionDetail = () => {
     let vo = location.state.vo;
 
     // 입양완료 처리 함수
-    const handleAdoptionComplete = (adoptionBoardNo) => {
+    const handleAdoptionComplete = () => {
         try {
             // 서버에 입양완료 상태를 업데이트하는 요청을 보냅니다.
             // 예: axios 또는 fetch를 사용하여 서버로 요청을 보냅니다.

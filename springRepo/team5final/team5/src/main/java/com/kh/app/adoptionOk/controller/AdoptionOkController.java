@@ -34,16 +34,20 @@ public class AdoptionOkController {
 	private final AdoptionOkService service;
 	
 	@GetMapping("list")
-	public Map<String, Object> list(@RequestParam(value = "pno", required = false, defaultValue = "1") String pno) {
-	    // 전체 게시글 갯수 조회
+	public Map<String, Object> list(@RequestParam(value="pno", required=false, defaultValue="1") String pno) {
+	   
+		// 전체 게시글 갯수 조회
 	    int listCount = service.selectBoardCount();
 
 	    System.out.println(pno);
 
 	    String currentPage_ = pno; // pno 받아오기. "1" 안됨 변수로!
-	    int currentPage = Integer.parseInt(currentPage_); // 현재 페이지 (화면에서 전달받기)
-	    int pageLimit = 5; // 페이징 영역 페이지 갯수 (페이지를 몇개씩 띄울껀지)
-	    int boatdLimit = 9; // 한 페이지에 보여줄 게시글 갯수
+	    if(currentPage_ == null) {
+			currentPage_ = "1";
+		}
+	    int currentPage = Integer.parseInt(currentPage_); 	// 현재 페이지 (화면에서 전달받기)
+	    int pageLimit = 5; 									// 페이징 영역 페이지 갯수 (페이지를 몇개씩 띄울껀지)
+	    int boatdLimit = 6; 								// 한 페이지에 보여줄 게시글 갯수
 	    PageVo pvo = new PageVo(listCount, currentPage, pageLimit, boatdLimit);
 	    System.out.println("전체 게시글 갯수 조회 pvo : " + pvo);
 

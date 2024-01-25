@@ -22,7 +22,7 @@ const AoptionOkDetailItem = ( {vo} ) => {
     return (
         <StyledDetailItem>
             <div>
-                <div className='date'>입양완료일 : {vo.mdifyDate}</div>
+                <div className='date'>입양완료일 : {vo.quitDate}</div>
                 <img 
                     src={vo.imagePath} 
                     alt={'imageNo' + vo.imageNo}
