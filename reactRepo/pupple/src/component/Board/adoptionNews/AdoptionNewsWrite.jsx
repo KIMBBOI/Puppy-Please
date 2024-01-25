@@ -41,25 +41,23 @@ const AdoptionNewsWrite = ( ) => {
   const [title, setTitle] = useState();
   const [content, setContent] = useState();
   const [fileObj, setFileObj] = useState();
-  // 1. 수정인지 작성인지 판단해서 수정이면 기존의 데이터로 값을 채워줌
-  // 2. location.state 에 값이 없으면 에러를 발생시키기 않고 undefind 반환. (location.state?)
-  // 3. 조건문으로 확인 후 setter 로 데이터 삽입
-  useEffect( () => {
-    const existing = location.state?.vo;
-    if (existing) {
-      setTitle(existing.title);
-      setContent(existing.content);
-  }
-  } );
+    // 1. 수정인지 작성인지 판단해서 수정이면 기존의 데이터로 값을 채워줌
+    // 2. location.state 에 값이 없으면 에러를 발생시키기 않고 undefind 반환. (location.state?)
+    // 3. 조건문으로 확인 후 setter 로 데이터 삽입
+    useEffect( () => {
+      const existing = location.state?.vo;
+      if (existing) {
+        setTitle(existing.title);
+        setContent(existing.content);
+    }
+    }, [location.state]  );
 
   const handleChangeTitle = (e) => {
     setTitle(e.target.value);
   };
-
   const handleChangeContent = (e) => {
     setContent(e.target.value);
   };
-
   const handleChangeFile = (e) => {
     setFileObj(e.target.files[0]);
   };
@@ -67,7 +65,6 @@ const AdoptionNewsWrite = ( ) => {
   const str = sessionStorage.getItem("loginMemberVo");
   const vo = JSON.parse(str);
   const memberNo = vo.memberNo;
-  console.log(memberNo);
 
 
   const handleSubmit = (e) => {
@@ -98,7 +95,7 @@ const AdoptionNewsWrite = ( ) => {
     if (existing) {
 
       // 수정 시 WHERE 에 필요한 데이터 준비
-      formData.append("adoptionNewsNo" , existing.adoptionNewsNo);
+      formData.append("newsAfterAdoptionNo" , existing.newsAfterAdoptionNo);
       formData.append("imageNo" , existing.imageNo);
 
       // 수정하기
@@ -108,12 +105,12 @@ const AdoptionNewsWrite = ( ) => {
       })
       .then( resp => resp.json() )
       .then( data => {
-        if (data.ImgMsg === "img update good") {
-          if(data.ReportMsg === "board update good"){
-              alert("게시글 수정 완료 !");
+        if (data.imgMsg === "img update good") {
+          if(data.boardMsg === "board update good"){
+              alert("게시글이 수정되었습니다.");
               navigate("/board/adoptionNews/list?pno=1");
           }else{
-              alert("게시글 수정 실패 ...");
+              alert("게시글 수정에 실패하였습니다.");
               navigate(-1);
           }
         } else {
@@ -128,12 +125,12 @@ const AdoptionNewsWrite = ( ) => {
         method: 'POST',
         body: formData,
       })
-        .then((resp) => resp.json())
-        .then((data) => {
+        .then( resp => resp.json() )
+        .then( data => {
           if (data.imgMsg === 'img insert good') {
             if (data.boardMsg === 'board write good') {
               alert('게시글 등록 완료하였습니다.');
-              navigate('/board/adoptionNews/list');
+              navigate('/board/adoptionNews/list?pno=1');
             } else {
               alert('게시글 등록 실패하였습니다.');
               navigate("/board/adoptionNews/write");

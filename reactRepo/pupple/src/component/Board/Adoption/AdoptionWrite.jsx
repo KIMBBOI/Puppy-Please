@@ -163,7 +163,7 @@ const AdoptionWrite = ( ) => {
                         </select>
                     </div>
                     <div className="genderMf">
-                        <label>성</label>
+                        <label>성별</label>
                         <input type="text" onChange={handleChangeGender} />
                     </div>
                     <div className="neuteringOx">

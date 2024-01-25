@@ -10,8 +10,8 @@
 		    A.ADOPTION_BOARD_NO,
 		    A.ADMIN_NO,
 		    A.RESCUE_DOG_NO,
-		    A.DEL_YN AS ADOPTION_DEL_YN,
-		    RD.RESCUE_DOG_NO AS RD_RESCUE_DOG_NO,
+		    A.DEL_YN,
+		    RD.RESCUE_DOG_NO,
 		    RD.IMAGE_NO,
 		    RD.DOG_NAME,
 		    RD.BREED,
@@ -19,7 +19,7 @@
 		    RD.NEUTERING_OX,
 		    RD.AGE,
 		    RD.WEIGHT,
-		    RD.ADOPTION_COMPLETE_YN AS RD_ADOPTION_COMPLETE_YN,
+		    RD.ADOPTION_COMPLETE_YN,
 		    I.IMAGE_PATH
 		FROM 
 		    ADOPTION_BOARD A
@@ -30,30 +30,42 @@
 		WHERE 
 		    A.DEL_YN = 'N'
 		AND 
-		    A.ADOPTION_COMPLETE_YN = 'N'
+		    RD.ADOPTION_COMPLETE_YN = 'N'
 		ORDER BY 
 		    A.ENROLL_DATE DESC
     </select>
     
     <select id='listCount' resultType="Integer">
 		SELECT 
-			COUNT(*) as cnt 
+			COUNT(*) AS cnt
 		FROM 
-			ADOPTION_BOARD 
+			ADOPTION_BOARD A
+		JOIN 
+			RESCUE_DOG RD 
+				ON A.RESCUE_DOG_NO = RD.RESCUE_DOG_NO
 		WHERE 
-			DEL_YN = 'N'
-		AND
-			ADOPTION_COMPLETE_YN = 'N'
+			A.DEL_YN = 'N' 
+		AND 
+			RD.ADOPTION_COMPLETE_YN = 'N'
+
 	</select>
 	
 	<!-- 게시글의 입양 완료 처리 -->
     <update id="complete">
-        UPDATE 
-        	ADOPTION_BOARD
-        SET 
-        	ADOPTION_COMPLETE_YN = 'Y'
-        WHERE 
-        	ADOPTION_BOARD_NO = #{adoptionBoardNo}
+	    UPDATE 
+	    	RESCUE_DOG RD
+		SET 
+			RD.ADOPTION_COMPLETE_YN = 'Y'
+			, RD.QUIT_DATE = SYSDATE
+		WHERE 
+			RD.RESCUE_DOG_NO = #{rescueDogNo}
+		AND 
+			NOT EXISTS (
+			    SELECT 1
+			    FROM ADOPTION_BOARD AB
+			    WHERE AB.RESCUE_DOG_NO = RD.RESCUE_DOG_NO
+			    AND RD.ADOPTION_COMPLETE_YN = 'Y'
+			)
     </update>
 
     <!-- 입양 신청 상세 조회 -->
@@ -77,15 +89,17 @@
 	    FROM
 	        ADOPTION_BOARD A
 	    JOIN
-	        RESCUE_DOG RD ON A.RESCUE_DOG_NO = RD.RESCUE_DOG_NO
+	        RESCUE_DOG RD 
+	        	ON A.RESCUE_DOG_NO = RD.RESCUE_DOG_NO
 	    JOIN
-	        IMAGE I ON I.IMAGE_NO = RD.IMAGE_NO
+	        IMAGE I 
+	        	ON I.IMAGE_NO = RD.IMAGE_NO
 	    WHERE
 	        A.DEL_YN = 'N'
 	    AND
 	        RD.ADOPTION_COMPLETE_YN ='N'
 	    AND 
-	    	A.ENROLL_DATE = #{enrollDate}
+	    	A.ADOPTION_BOARD_NO = #{adoptionBoardNo}
     </select>
     
     <!-- 입력한 견종에 해당하는 RESCUE_DOG_NO 가져오기 -->
@@ -153,14 +167,14 @@
     </update>
     
     <!-- 입양신청 -> 입양완료 -->
-    <update id="adoptionOk">
+    <!-- <update id="adoptionOk">
     	UPDATE 
     		RESCUE_DOG
 		SET 
 			ADOPTION_COMPLETE_YN = 'Y'
 		WHERE 
 			RESCUE_DOG_NO = {rescueDogNo};
-    </update>
+    </update> -->
 
     <!-- 입양 신청 삭제 -->
     <update id="delete">

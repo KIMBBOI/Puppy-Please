@@ -64,10 +64,10 @@ public class AdoptionService {
 		return dao.edit(sst, vo);
 	}
 	
-	// 입양신청 -> 입양완료
-	public int adoptionOk(AdoptionVo vo) {
-		return dao.adoptionOk(sst, vo);
-	}
+//	// 입양신청 -> 입양완료
+//	public int adoptionOk(AdoptionVo vo) {
+//		return dao.adoptionOk(sst, vo);
+//	}
 
 	// 입양 게시글 삭제
 	public int delete(AdoptionVo vo) {

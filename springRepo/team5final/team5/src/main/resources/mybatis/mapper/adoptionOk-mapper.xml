@@ -4,61 +4,54 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="AdoptionOkMapper">
 
-	<!-- 입양완료 처리 -->
-	<!-- <update id="adoptionOk" parameterType="com.kh.app.adoptionOk.vo.AdoptionOkVo">
-        UPDATE 
-        	ADOPTION_BOARD
-        SET 
-        	ADOPTION_COMPLETE_YN = 'Y'  
-        WHERE 
-        	ADOPTION_BOARD_NO = #{adoptionBoardNo}
-    </update> -->
-
     <!-- 입양 승인 리스트 조회 -->
     <select id="list" resultType="com.kh.app.adoption.vo.AdoptionVo">
-        SELECT *
-    	FROM (
-	        SELECT ROWNUM RNUM, T.*
-	        FROM (
-	        	SELECT
-		        	A.ADOPTION_BOARD_NO
-		        	, A.ADMIN_NO
-				    , A.DEL_YN
-				    , RD.IMAGE_NO 
-				    , RD.DOG_NAME
-				    , RD.BREED
-				    , RD.GENDER_MF
-				    , RD.NEUTERING_OX
-				    , RD.AGE
-				    , RD.WEIGHT
-		        	, RD.ADOPTION_COMPLETE_YN
-				    , I.IMAGE_PATH
-				FROM
-				    ADOPTION_BOARD A
-					JOIN RESCUE_DOG RD 
-						ON A.RESCUE_DOG_NO = RD.RESCUE_DOG_NO
-					JOIN IMAGE I
-				  		ON I.IMAGE_NO = RD.IMAGE_NO
-				WHERE
-				    A.DEL_YN = 'N'
-				AND
-					A.ADOPTION_COMPLETE_YN = 'Y'
-				ORDER BY
-				    A.ENROLL_DATE DESC
-	    	) T
-		)
+        SELECT
+	        A.ADOPTION_BOARD_NO,
+	        A.ADMIN_NO,
+	        A.RESCUE_DOG_NO,
+	        A.DEL_YN,
+	        RD.RESCUE_DOG_NO,
+	        RD.IMAGE_NO,
+	        RD.DOG_NAME,
+	        RD.BREED,
+	        RD.GENDER_MF,
+	        RD.NEUTERING_OX,
+	        RD.AGE,
+	        RD.WEIGHT,
+	        RD.ADOPTION_COMPLETE_YN,
+	        RD.QUIT_DATE,
+	        I.IMAGE_PATH
+	    FROM
+	        ADOPTION_BOARD A
+	    JOIN
+	        RESCUE_DOG RD ON A.RESCUE_DOG_NO = RD.RESCUE_DOG_NO
+	    JOIN
+	        IMAGE I ON I.IMAGE_NO = RD.IMAGE_NO
+	    WHERE
+	        A.DEL_YN = 'N'
+	    AND
+	        RD.ADOPTION_COMPLETE_YN = 'Y'
+	    ORDER BY
+	        A.ENROLL_DATE DESC
+		<!-- ORDER BY
+		    A.ENROLL_DATE DESC -->
     </select>
 
-	<!--  -->
+	<!-- 페이지 갯수 -->
 	<select id='listCount' resultType="Integer">
-		SELECT 
+		SELECT COUNT(*) AS cnt
+		FROM ADOPTION_BOARD A
+		JOIN RESCUE_DOG RD ON A.RESCUE_DOG_NO = RD.RESCUE_DOG_NO
+		WHERE A.DEL_YN = 'N' AND RD.ADOPTION_COMPLETE_YN = 'Y'
+		<!-- SELECT 
 			COUNT(*) as cnt 
 		FROM 
 			ADOPTION_BOARD 
 		WHERE 
 			DEL_YN = 'N'
 		AND
-			ADOPTION_COMPLETE_YN = 'N'
+			ADOPTION_COMPLETE_YN = 'N' -->
 	</select>
 	
 	<!-- 상세조회 -->
@@ -78,6 +71,7 @@
 	        RD.AGE,
 	        RD.WEIGHT,
 	        RD.ADOPTION_COMPLETE_YN,
+	        RD.QUIT_DATE,
 	        I.IMAGE_PATH
 	    FROM
 	        ADOPTION_BOARD A
@@ -89,43 +83,14 @@
 	        A.DEL_YN = 'N'
 	    AND
 	        RD.ADOPTION_COMPLETE_YN ='Y'
+	    AND
+	    	RD.QUIT_DATE = SYSDATE
 	    AND 
 	    	A.ADOPTION_BOARD_NO = #{adoptionBoardNo}
     </select>
     
 	
 	
-    <!-- 입양 승인 상세 조회 -->
-    <!-- <select id="detail" resultType="com.kh.app.adoptionOk.vo.AdoptionOkVo">
-        SELECT ADOPTION_NO, IMAGE_NO, RESCUE_DOG_NO, ADMIN_NO, ENROLL_DATE, MODIFY_DATE, DEL_YN
-        FROM ADOPTION_OK
-        WHERE ADOPTION_NO = #{adoptionNo}
-    </select>
-
-    입양 승인 등록
-    <insert id="insert" parameterType="com.kh.app.adoptionOk.vo.AdoptionOkVo">
-        INSERT INTO ADOPTION_OK (ADOPTION_NO, IMAGE_NO, RESCUE_DOG_NO, ADMIN_NO, ENROLL_DATE, MODIFY_DATE, DEL_YN)
-        VALUES (#{adoptionNo}, #{imageNo}, #{rescueDogNo}, #{adminNo}, #{enrollDate}, #{modifyDate}, #{delYn})
-    </insert>
-
-    입양 승인 수정
-    <update id="edit" parameterType="com.kh.app.adoptionOk.vo.AdoptionOkVo">
-        UPDATE ADOPTION_OK
-        SET IMAGE_NO = #{imageNo},
-            RESCUE_DOG_NO = #{rescueDogNo},
-            ADMIN_NO = #{adminNo},
-            ENROLL_DATE = #{enrollDate},
-            MODIFY_DATE = #{modifyDate},
-            DEL_YN = #{delYn}
-        WHERE ADOPTION_NO = #{adoptionNo}
-    </update>
-
-    입양 승인 삭제
-    <update id="delete">
-        UPDATE ADOPTION_OK
-        SET DEL_YN = 'Y'
-        WHERE ADOPTION_NO = #{adoptionNo}
-    </update> -->
 
 </mapper>
 

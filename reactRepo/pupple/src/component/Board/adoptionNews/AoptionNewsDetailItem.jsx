@@ -55,11 +55,13 @@ const AoptionNewsDetailItem = ( {vo} ) => {
 
     const navigate = useNavigate();
     
+    //수정
     const handleEdit = (vo) => {
         console.log('vo ::: ' , vo);
         navigate("/board/adoptionNews/write" , {state: {vo}});
     };
 
+    //삭제
     const handleDelete = (vo) => {
         fetch("http://127.0.0.1:8080/app/adoptionNews" ,{
             method: 'delete',

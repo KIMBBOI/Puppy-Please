@@ -191,27 +191,6 @@ public class AdoptionController {
 		return map;
 	}
 	
-	// 입양신청 -> 입양완료
-	@PutMapping("adoptionOk")
-	public Map<String, String> adoptionOk(@RequestBody AdoptionVo vo) {
-		
-		Map<String, String> map = new HashMap<String, String>();
-		// 서비스를 통해 해당 게시물을 입양완료 상태로 업데이트하는 로직 추가
-		int result = service.adoptionOk(vo);
-		
-//        int result = service.updateAdoptionStatus(vo);
-        
-		if (result == 1) {
-			map.put("msg", "good");
-			System.out.println("입양완료 처리 성공");
-		} else {
-			map.put("msg", "bad");
-			System.out.println("입양완료 처리 실패");
-		}
-		
-		return map;
-	}
-	
 	// 입양완료 처리
     @PostMapping("complete")
     public Map<String, String> completeAdoption(@RequestBody AdoptionVo vo) throws Exception {

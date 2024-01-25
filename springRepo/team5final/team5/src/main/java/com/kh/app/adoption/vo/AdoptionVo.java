@@ -21,5 +21,6 @@ public class AdoptionVo {
     private String age; 		// 나이
     private String weight; 		// 몸무게
     private String adoptionCompleteYn;
+    private String quitDate;
 
 }
