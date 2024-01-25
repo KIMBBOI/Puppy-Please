@@ -24,7 +24,7 @@ public class ReportService {
 	public List<ReportVo> list(PageVo pvo) {
 		return dao.list(sst, pvo); 
 	}
-	// 전게 게시글 갯수 조회
+	// 전체 게시글 갯수 조회
 	public int selectBoardCount() {
 		return dao.selectBoardCount(sst);
 	}
@@ -54,7 +54,6 @@ public class ReportService {
             
             imgVo.setImagePath(str);
         }
-        
 		return dao.insertImg(sst, imgVo);
 	}
 	// 이미지 시퀀스넘버 조회
@@ -71,13 +70,9 @@ public class ReportService {
 		imgVo.setImagePath(str);
 		return dao.editImage(sst, imgVo);
 	}
-	
 	// 게시글 삭제
 	public int delete(ReportVo vo) {
 		return dao.delete(sst, vo);
 	}
-
-
-	
 
 } // class

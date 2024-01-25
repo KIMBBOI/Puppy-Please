@@ -13,5 +13,8 @@ public class VisitVo {
 	private String summitDate;
 	private String modifyDate;
 	private String delYn;
+		private String name;
+		private String phoneNumber;
+		
 	
 }

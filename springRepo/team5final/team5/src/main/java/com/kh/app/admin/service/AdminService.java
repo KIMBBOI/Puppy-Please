@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import com.kh.app.admin.dao.AdminDao;
 import com.kh.app.admin.vo.AdminVo;
 import com.kh.app.adoption.vo.ApplyVo;
+import com.kh.app.page.vo.PageVo;
 import com.kh.app.survey.vo.SurveyVo;
+import com.kh.app.visit.vo.VisitVo;
 
 import lombok.RequiredArgsConstructor;
 
@@ -46,6 +48,19 @@ public class AdminService {
 
 	public int rejectAdoption(ApplyVo vo) {
 		return dao.rejectAdoption(sst, vo);
+	}
+	
+	// 방문예약 목록조회
+	public List<VisitVo> reservationList(PageVo pvo) {
+		return dao.reservationList(sst, pvo); 
+	}
+	// 전체 방문예약 수 조회
+	public int selectVisitReservationCount() {
+		return dao.selectVisitReservationCount(sst);
+	}
+	// 방문예약 상세 조회
+	public VisitVo reservationDetail(VisitVo vo) {
+		return dao.reservationDetail(sst, vo);
 	}
 
 }
