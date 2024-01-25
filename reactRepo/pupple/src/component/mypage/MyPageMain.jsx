@@ -8,7 +8,7 @@ import MyPageMainSidebar from './MyPageMainSidebar';
 import MemberReservation from './MemberReservation';
 import VisitReservationInfo from '../board/visit/VisitReservationInfo';
 
-import VisitReservationInfo from '../board/visit/VisitReservationInfo';
+
 import MemberAdoptDetail from './MemberAdoptDetail';
 
 const StyledMyPageMainDiv = styled.div`
@@ -17,6 +17,7 @@ const StyledMyPageMainDiv = styled.div`
     display: grid;
     grid-template-columns: 1.5fr 4fr 1.5fr;
     place-items: center center;
+    align-items: baseline;
 `;
 
 const MyPageMain = () => {

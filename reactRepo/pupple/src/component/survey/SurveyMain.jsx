@@ -13,7 +13,7 @@ const SurveyMain = () => {
 
     console.log(rescueDogVo);
     const [vo, setVo] = useState({
-       memberNo: loginMemberVo.memberNo, rescueDogNo: rescueDogVo.rescueDogNo, residence: '', maritalStatusYn: '', job: '', housingType: '', reason: ''
+       memberNo: loginMemberVo.memberNo, rescueDogNo: rescueDogVo.rescueDogNo, residence: '', maritalStatusYn: '', job: '', housingType: ''
     });
 
     const handleInputChange = (event) => {
@@ -70,10 +70,7 @@ const SurveyMain = () => {
                             <td><span>주거형태를 작성해 주세요</span></td>
                             <td><input type="text" name="housingType" onChange={handleInputChange} placeholder='주거형태' /></td>
                         </tr>
-                        <tr>
-                            <td><span>입양하는 이유를 작성해 주세요</span></td>
-                            <td><input type="text" name="reason" onChange={handleInputChange} placeholder='입양 이유' /></td>
-                        </tr>
+                       
                         <tr>
                             <td colSpan="2"><input type="submit" value="제출하기" /></td>
                         </tr>
