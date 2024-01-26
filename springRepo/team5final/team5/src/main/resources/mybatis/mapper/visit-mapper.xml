@@ -115,8 +115,7 @@
 	        ,MODIFY_DATE = SYSDATE
             ,DEL_YN = 'Y'
 	    WHERE
-            MEMBER_NO = #{memberNo}
-            AND DEL_YN = 'N'
+            VISIT_NO = #{memberNo}
 	</update>
 
 	<!--방문예약 완료/삭제 -->
@@ -124,10 +123,11 @@
 		UPDATE 
 			VISIT_RESERVATION
 	    SET
-	        DEL_YN = 'Y'
 	        ,RESERVATION_STAYUS_NO = 2
+	        MODIFY_DATE = SYSDATE
+	        DEL_YN = 'Y'
 	    WHERE 
-	    	REPORT_NO = #{reportNo}
+	    	VISIT_NO = #{reportNo}
 	</update>
 	
 </mapper>

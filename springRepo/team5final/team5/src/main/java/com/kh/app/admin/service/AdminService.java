@@ -62,5 +62,13 @@ public class AdminService {
 	public VisitVo reservationDetail(VisitVo vo) {
 		return dao.reservationDetail(sst, vo);
 	}
+	// 방문예약 상담취소
+	public int adviceQuit(VisitVo vo) {
+		return dao.adviceQuit(sst, vo);
+	}
+	// 방문예약 상담완료
+	public int adviceComplete(VisitVo vo) {
+		return dao.adviceComplete(sst, vo);
+	}
 
 }

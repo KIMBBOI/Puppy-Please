@@ -8,6 +8,17 @@ const StyledReportPageItemDiv = styled.div`
     display: flex;
     justify-content: center;
     place-items: center;
+    
+    .pageNumber {
+        padding: 0 5px 0 5px;
+        margin: 5px 5px 5px 5px;;
+    }
+    .selectPage {
+        padding: 0 5px 0 5px;
+        margin: 5px 5px 5px 5px;;
+        border: 1px solid #cfcfcf;
+        color: #000000;
+    }
 `;
 
 const ReportPageItem = ( {pvo} ) => {
@@ -30,9 +41,12 @@ const ReportPageItem = ( {pvo} ) => {
 
                         <div key={pageNumber}>
 
-                            {pageNumber === pvo.currentPage ? 
-                            ( <div>{pageNumber}</div>) : 
-                            ( <Link to={`/board/report/list?pno=${pageNumber}`}>{pageNumber}</Link> )
+                            {
+                                pageNumber === pvo.currentPage 
+                                ? 
+                                    ( <div className='selectPage'>{pageNumber}</div> ) 
+                                : 
+                                    ( <Link className='pageNumber' to={`/board/report/list?pno=${pageNumber}`}>{pageNumber}</Link> )
                                 // 11. 백틱 사용해야 올바름 템플릿 리터럴임. 참고할 것 ************************************************
                             }
 
