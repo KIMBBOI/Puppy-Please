@@ -39,4 +39,59 @@
   	FROM SURVEY S
   	JOIN MEMBER M ON M.MEMBER_NO = S.MEMBER_NO
   </select>
+	
+	<!-- 방문예약 목록조회 -->
+	<select id="reservationList" resultType="com.kh.app.visit.vo.VisitVo">
+		SELECT *
+		FROM (
+		    SELECT ROWNUM RNUM, T.*
+		    FROM (
+		        SELECT
+				    V.VISIT_NO
+				    ,V.MEMBER_NO
+				    ,V.RESERVATION_STATUS_NO
+				    ,V.RESERVATION_DATE
+				    ,V.SUMMIT_DATE
+				    ,V.MODIFY_DATE
+				    ,V.DEL_YN
+				    ,S.RESERVATION_STATUS
+				    ,M.NAME
+				    ,M.PHONE_NUMBER
+				FROM 
+				    VISIT_RESERVATION V
+					JOIN RESERVATION_STATUS S ON S.RESERVATION_STATUS_NO = V.RESERVATION_STATUS_NO
+					JOIN MEMBER M ON M.MEMBER_NO = V.MEMBER_NO
+		        ORDER BY
+		            VISIT_NO DESC
+		    ) T
+		)
+		WHERE RNUM BETWEEN #{startRow} AND #{lastRow}
+	</select>
+	<select id='listCount' resultType="Integer">
+		SELECT 
+			COUNT(*) as cnt 
+		FROM 
+			VISIT_RESERVATION
+	</select>
+	<!-- 방문예약 상세 조회 -->
+	<select id="reservationDetail" resultType="com.kh.app.visit.vo.VisitVo">
+        SELECT
+		    V.VISIT_NO
+		    ,V.MEMBER_NO
+		    ,V.RESERVATION_STATUS_NO
+		    ,V.RESERVATION_DATE
+		    ,V.SUMMIT_DATE
+		    ,V.MODIFY_DATE
+		    ,V.DEL_YN
+		    ,S.RESERVATION_STATUS
+		    ,M.NAME
+		    ,M.PHONE_NUMBER
+		FROM 
+		    VISIT_RESERVATION V
+			JOIN RESERVATION_STATUS S ON S.RESERVATION_STATUS_NO = V.RESERVATION_STATUS_NO
+			JOIN MEMBER M ON M.MEMBER_NO = V.MEMBER_NO
+		WHERE 
+			V.VISIT_NO = #{visitNo}
+	</select>
+	
 </mapper>

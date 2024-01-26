@@ -41,7 +41,7 @@ const AdminPageMainSidebar = () => {
                 <Link to ="/admin/adoptList">입양신청목록</Link>
             </SidebarItem>
             <SidebarItem>
-                <Link to ="/"></Link>
+                <Link to ="/admin/visitReservation">방문예약관리</Link>
             </SidebarItem>
             
         </StyledAdminPageSidebarDiv>

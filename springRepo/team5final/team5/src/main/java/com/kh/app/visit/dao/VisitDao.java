@@ -44,6 +44,6 @@ public class VisitDao {
 	public int complete(SqlSessionTemplate sst, VisitVo vo) {
 		return sst.update("VisitMapper.complete", vo);
 	}
-	
+
 	
 } // class
