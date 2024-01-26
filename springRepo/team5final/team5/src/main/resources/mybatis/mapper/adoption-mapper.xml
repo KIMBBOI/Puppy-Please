@@ -53,19 +53,19 @@
 	<!-- 게시글의 입양 완료 처리 -->
     <update id="complete">
 	    UPDATE 
-	    	RESCUE_DOG RD
+	    	RESCUE_DOG 
 		SET 
-			RD.ADOPTION_COMPLETE_YN = 'Y'
-			, RD.QUIT_DATE = SYSDATE
+			ADOPTION_COMPLETE_YN = 'Y'
+			, QUIT_DATE = SYSDATE
 		WHERE 
-			RD.RESCUE_DOG_NO = #{rescueDogNo}
-		AND 
+			RESCUE_DOG_NO = #{rescueDogNo}
+		<!-- AND 
 			NOT EXISTS (
 			    SELECT 1
 			    FROM ADOPTION_BOARD AB
 			    WHERE AB.RESCUE_DOG_NO = RD.RESCUE_DOG_NO
 			    AND RD.ADOPTION_COMPLETE_YN = 'Y'
-			)
+			) -->
     </update>
 
     <!-- 입양 신청 상세 조회 -->

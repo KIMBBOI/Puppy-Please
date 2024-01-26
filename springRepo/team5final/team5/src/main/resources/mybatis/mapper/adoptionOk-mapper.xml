@@ -33,7 +33,7 @@
 	    AND
 	        RD.ADOPTION_COMPLETE_YN = 'Y'
 	    ORDER BY
-	        A.ENROLL_DATE DESC
+	        RD.QUIT_DATE DESC
 		<!-- ORDER BY
 		    A.ENROLL_DATE DESC -->
     </select>
