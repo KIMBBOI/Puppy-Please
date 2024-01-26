@@ -45,7 +45,7 @@ const StyledHeaderDiv = styled.div`
     div:not(.loginArea) {
         margin: 5px 0;
         padding: 10px 20px;
-        color: black; /* 버튼 텍스트 색상 */
+        color: black; 
         cursor: pointer;
         transition: background-color 0.3s ease;
 
@@ -101,7 +101,12 @@ const Header = () => {
     const AdminPage = () => {
       navigate("/admin/adoptList");
     }
-
+    
+    const handleAdminLogout = () => {
+      sessionStorage.removeItem("loginAdminVo")
+      logoutAdmin();
+      navigate("/")
+    }
     return (
         
         <StyledHeaderDiv>
@@ -121,7 +126,7 @@ const Header = () => {
               <div>
                 <h3>관리자로 로그인되었습니다.</h3>
                 <div onClick={AdminPage}>관리자 메뉴</div>
-                <div onClick={logoutAdmin}>로그아웃</div>
+                <div onClick={handleAdminLogout}>로그아웃</div>
               </div>
             ) : (
               // 일반 사용자인 경우
