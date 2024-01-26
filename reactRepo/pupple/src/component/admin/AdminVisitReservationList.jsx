@@ -11,7 +11,7 @@ const StyledAdminVisitReservation = styled.div`
 
 const AdminVisitReservationList = () => {
     // useNavigate();
-    useLocation();
+    // useLocation();
 
     
     let [arr, setArr] = useState([]);
@@ -21,12 +21,16 @@ const AdminVisitReservationList = () => {
 
     // 현재 페이지의 URL을 가져옴
     const currentUrl = window.location.href;
+                                                            console.log('currentUrl :::',currentUrl);
     // URL 객체 생성 ( 현재 URL 파싱 )
     const url = new URL(currentUrl);
+                                                            console.log('url :::', url);
     // URLSearchParams 객체 생성 ( URL의 쿼리 문자열 추출 )
     const queryParams = new URLSearchParams(url.search);
+                                                            console.log('queryParams :::', queryParams);
     // 특정 쿼리스트링 파라미터 값 가져오기
     let pno = queryParams.get('pno');
+                                                            console.log('pno :::', pno);
     if (pno === null) {
         pno = 1;
     }

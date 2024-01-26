@@ -49,6 +49,14 @@ public class AdminDao {
 	// 방문예약 상세 조회
 	public VisitVo reservationDetail(SqlSessionTemplate sst, VisitVo vo) {
 		return sst.selectOne("AdminMapper.reservationDetail", vo);
-	} 
+	}
+	// 방문예약 상담취소
+	public int adviceQuit(SqlSessionTemplate sst, VisitVo vo) {
+		return sst.update("AdminMapper.quit", vo);
+	}
+	// 방문예약 상담완료
+	public int adviceComplete(SqlSessionTemplate sst, VisitVo vo) {
+		return sst.update("AdminMapper.complete", vo);
+	}
 	
 }

@@ -93,5 +93,27 @@
 		WHERE 
 			V.VISIT_NO = #{visitNo}
 	</select>
+	<!--방문예약 상담취소/삭제 -->
+	<update id="quit">
+		UPDATE 
+			VISIT_RESERVATION
+	    SET
+            RESERVATION_STATUS_NO = 3
+	        ,MODIFY_DATE = SYSDATE
+            ,DEL_YN = 'Y'
+	    WHERE
+            VISIT_NO = #{visitNo}
+	</update>
+	<!--방문예약 상담완료/삭제 -->
+	<update id="complete">
+		UPDATE 
+			VISIT_RESERVATION
+	    SET
+	        RESERVATION_STATUS_NO = 2
+	        ,MODIFY_DATE = SYSDATE
+	        ,DEL_YN = 'Y'
+	    WHERE 
+	    	VISIT_NO = #{visitNo}
+	</update>
 	
 </mapper>

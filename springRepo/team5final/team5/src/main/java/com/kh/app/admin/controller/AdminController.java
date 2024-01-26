@@ -4,8 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -111,6 +113,40 @@ public class AdminController {
 		Map<String, Object> map = new HashMap<>();
 		
 		if (dbVo == null) {
+			map.put("msg", "fail");
+		} else {
+			map.put("msg", "success");
+			map.put("dbVo", dbVo);
+		}
+		return map;
+	}
+	// 방문예약 상담취소
+	@DeleteMapping
+	public Map<String, Object> adviceQuit(@RequestBody VisitVo vo) {
+		
+		int result = service.adviceQuit(vo);
+		VisitVo dbVo = service.reservationDetail(vo);
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		if (result != 1 || dbVo == null) {
+			map.put("msg", "fail");
+		} else {
+			map.put("msg", "success");
+			map.put("dbVo", dbVo);
+		}
+		return map;
+	}
+	// 방문예약 상담완료
+	@PutMapping
+	public Map<String, Object> adviceComplete(@RequestBody VisitVo vo) {
+		
+		int result = service.adviceComplete(vo);
+		VisitVo dbVo = service.reservationDetail(vo);
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		if (result != 1 || dbVo == null) {
 			map.put("msg", "fail");
 		} else {
 			map.put("msg", "success");
