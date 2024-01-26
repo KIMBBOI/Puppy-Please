@@ -52,10 +52,15 @@ public class AdoptionDao {
 	public int write(SqlSessionTemplate sst, AdoptionVo vo) {
 		return sst.insert("AdoptionMapper.write", vo);
 	}
+	
+	// 이미지 수정
+	public int editImage(SqlSessionTemplate sst, AdoptionVo imgVo) {
+		return sst.update("AdoptionMapper.editImage", imgVo);
+	}
 
 	// 입양 게시글 수정
-	public int edit(SqlSessionTemplate sst, AdoptionVo vo) {
-		return sst.update("AdoptionMapper.edit", vo);
+	public int editBoard(SqlSessionTemplate sst, AdoptionVo vo) {
+		return sst.update("AdoptionMapper.editBoard", vo);
 	}
 	
 //	// 입양신청 -> 입양완료
@@ -71,6 +76,7 @@ public class AdoptionDao {
 	public int insertRescueDog(SqlSessionTemplate sst, AdoptionVo vo) {
 		return sst.insert("AdoptionMapper.insertRescueDog", vo);
 	}
+
 
 	
 

@@ -6,34 +6,36 @@
 
     <!-- 입양 신청 리스트 조회 -->
     <select id="list" resultType="com.kh.app.adoption.vo.AdoptionVo">
-    	SELECT 
-		    A.ADOPTION_BOARD_NO,
-		    A.ADMIN_NO,
-		    A.RESCUE_DOG_NO,
-		    A.DEL_YN,
-		    RD.RESCUE_DOG_NO,
-		    RD.IMAGE_NO,
-		    RD.DOG_NAME,
-		    RD.BREED,
-		    RD.GENDER_MF,
-		    RD.NEUTERING_OX,
-		    RD.AGE,
-		    RD.WEIGHT,
-		    RD.ADOPTION_COMPLETE_YN,
-		    I.IMAGE_PATH
-		FROM 
-		    ADOPTION_BOARD A
-		JOIN 
-		    RESCUE_DOG RD ON A.RESCUE_DOG_NO = RD.RESCUE_DOG_NO
-		JOIN 
-		    IMAGE I ON I.IMAGE_NO = RD.IMAGE_NO
-		WHERE 
-		    A.DEL_YN = 'N'
-		AND 
-		    RD.ADOPTION_COMPLETE_YN = 'N'
-		ORDER BY 
-		    A.ENROLL_DATE DESC
-    </select>
+	    SELECT 
+	        A.ADOPTION_BOARD_NO,
+	        A.ADMIN_NO,
+	        A.RESCUE_DOG_NO,
+	        A.DEL_YN,
+	        RD.RESCUE_DOG_NO,
+	        RD.IMAGE_NO,
+	        RD.DOG_NAME,
+	        RD.BREED,
+	        CASE WHEN RD.GENDER_MF = 'M' THEN '남아' 
+	             WHEN RD.GENDER_MF = 'F' THEN '여아'
+	             ELSE RD.GENDER_MF END AS GENDER_MF,
+	        RD.NEUTERING_OX,
+	        RD.AGE,
+	        RD.WEIGHT,
+	        RD.ADOPTION_COMPLETE_YN,
+	        I.IMAGE_PATH
+	    FROM 
+	        ADOPTION_BOARD A
+	    JOIN 
+	        RESCUE_DOG RD ON A.RESCUE_DOG_NO = RD.RESCUE_DOG_NO
+	    JOIN 
+	        IMAGE I ON I.IMAGE_NO = RD.IMAGE_NO
+	    WHERE 
+	        A.DEL_YN = 'N'
+	    AND 
+	        RD.ADOPTION_COMPLETE_YN = 'N'
+	    ORDER BY 
+	        A.ENROLL_DATE DESC
+	</select>
     
     <select id='listCount' resultType="Integer">
 		SELECT 
@@ -70,7 +72,7 @@
 
     <!-- 입양 신청 상세 조회 -->
     <select id="detail" resultType="com.kh.app.adoption.vo.AdoptionVo">
-         SELECT
+	    SELECT
 	        A.ADOPTION_BOARD_NO,
 	        A.ADMIN_NO,
 	        A.ENROLL_DATE,
@@ -80,7 +82,9 @@
 	        RD.IMAGE_NO,
 	        RD.DOG_NAME,
 	        RD.BREED,
-	        RD.GENDER_MF,
+	        CASE WHEN RD.GENDER_MF = 'M' THEN '남아' 
+	             WHEN RD.GENDER_MF = 'F' THEN '여아'
+	             ELSE RD.GENDER_MF END AS GENDER_MF,
 	        RD.NEUTERING_OX,
 	        RD.AGE,
 	        RD.WEIGHT,
@@ -90,17 +94,17 @@
 	        ADOPTION_BOARD A
 	    JOIN
 	        RESCUE_DOG RD 
-	        	ON A.RESCUE_DOG_NO = RD.RESCUE_DOG_NO
+	            ON A.RESCUE_DOG_NO = RD.RESCUE_DOG_NO
 	    JOIN
 	        IMAGE I 
-	        	ON I.IMAGE_NO = RD.IMAGE_NO
+	            ON I.IMAGE_NO = RD.IMAGE_NO
 	    WHERE
 	        A.DEL_YN = 'N'
 	    AND
 	        RD.ADOPTION_COMPLETE_YN ='N'
 	    AND 
-	    	A.ADOPTION_BOARD_NO = #{adoptionBoardNo}
-    </select>
+	        A.ADOPTION_BOARD_NO = #{adoptionBoardNo}
+	</select>
     
     <!-- 입력한 견종에 해당하는 RESCUE_DOG_NO 가져오기 -->
     <select id="findDogNoByBreed" resultType="java.lang.String">
@@ -151,30 +155,35 @@
 	</select>
 
     <!-- 입양 신청 수정 -->
-    <update id="edit" parameterType="com.kh.app.adoption.vo.AdoptionVo">
-        UPDATE 
-        	ADOPTION_BOARD
-        SET 
-        	IMAGE_NO = #{imageNo}
-            , RESCUE_DOG_NO = #{rescueDogNo}
-            , ADMIN_NO = #{adminNo}
-            , ENROLL_DATE = #{enrollDate}
-            , MODIFY_DATE = #{modifyDate}
-            , ADOPTION_COMPLETE_YN = #{adoptionCompleteYn}
-            , DEL_YN = #{delYn}
-        WHERE 
-        	ADOPTION_BOARD_NO = #{adoptionBoardNo}
-    </update>
+	<update id="editBoard">
+	    UPDATE 
+	    	RESCUE_DOG
+	    SET
+	        BREED = #{breed},
+	        DOG_NAME = #{dogName},
+	        AGE = #{age},
+	        GENDER_MF = #{genderMf},
+	        NEUTERING_OX = #{neuteringOx},
+	        WEIGHT = #{weight}
+	    WHERE
+	        RESCUE_DOG_NO = (
+	            SELECT RESCUE_DOG_NO
+	            FROM ADOPTION_BOARD
+	            WHERE ADOPTION_BOARD_NO = #{adoptionBoardNo}
+	        )
+	</update>
+	
+	<!-- 이미지 수정 -->
+	<update id="editImage">
+		UPDATE
+			IMAGE
+		SET
+			IMAGE_PATH = #{imagePath}
+		WHERE
+			IMAGE_NO = #{imageNo}
+	</update>
+
     
-    <!-- 입양신청 -> 입양완료 -->
-    <!-- <update id="adoptionOk">
-    	UPDATE 
-    		RESCUE_DOG
-		SET 
-			ADOPTION_COMPLETE_YN = 'Y'
-		WHERE 
-			RESCUE_DOG_NO = {rescueDogNo};
-    </update> -->
 
     <!-- 입양 신청 삭제 -->
     <update id="delete">
