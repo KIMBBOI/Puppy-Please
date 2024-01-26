@@ -13,6 +13,9 @@ const StyeldAdminVisitReservationListItemDetailDiv = styled.div`
         height: 100%;
         background-color: #f5f5f5;
         display: flex;
+        justify-content: center;
+        align-items: center;
+        
 
         & > div:nth-of-type(1) {
             text-align: center;
