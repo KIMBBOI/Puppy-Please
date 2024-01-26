@@ -100,6 +100,7 @@ const AdoptionWrite = ( ) => {
         formData.append('weight', weight);
         // formData.append('rescueDogNo', rescueDogNo);
         formData.append('adminNo', adminNo.adminNo);
+        formData.append('ADOPTION_COMPLETE_YN', 'N');
 
         fetch('http://127.0.0.1:8080/app/adoption/write' , {
             method: 'POST' ,

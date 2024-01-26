@@ -23,6 +23,7 @@ public class AdoptionDao {
 
 	// 입양완료 처리
 	public int complete(SqlSessionTemplate sst, String adoptionBoardNo) {
+		System.out.println("dao에서  확인 ::: " + adoptionBoardNo);
 		return sst.update("AdoptionMapper.complete", adoptionBoardNo);
 	}
 		

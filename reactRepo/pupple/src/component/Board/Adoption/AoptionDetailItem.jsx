@@ -36,44 +36,46 @@ const AdoptionDetailItem = ( {vo, onAdoptionComplete} ) => {
     let currentAdmin = false;
 
     // 게시글 작성자 판단 (수정/입양완료)
-    if (sessionStorage.getItem("loginMemberVo") != null) {
-        const str = sessionStorage.getItem("loginMemberVo");
+    if (sessionStorage.getItem("loginAdminVo") != null) {
+        const str = sessionStorage.getItem("loginAdminVo");
         const sesssionVo = JSON.parse(str);
-        const loginMemberVo = sesssionVo.adminNo;
-        currentAdmin = vo.adminNo === loginMemberVo;
+        const loginAdminVo = sesssionVo.adminNo;
+        currentAdmin = vo.adminNo === loginAdminVo;
     }
 
     const navigate = useNavigate();
 
     const handleEdit = (vo) => {
-        navigate("board/adoption/write", { state: { vo } });
+        console.log("edit vo ::: ", vo);
+        navigate("/board/adoption/write", { state: { vo } });
     };
 
-    const handleDelete = (vo) => {
-        fetch("http://127.0.0.1:8080/app/adoption", {
-            method: 'delete',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(vo)
-        })
-        .then(resp => resp.json())
-        .then(data => {
-            if (data.msg === 'good') {
-                alert("게시글을 삭제하였습니다.");
-                navigate("/board/adoption/list");
-            } else {
-                alert('게시글 삭제에 실패하였습니다.');
-                navigate(-1);
-            }
-        });
-    };
+    // const handleDelete = (vo) => {
+    //     fetch("http://127.0.0.1:8080/app/adoption", {
+    //         method: 'delete',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify(vo)
+    //     })
+    //     .then(resp => resp.json())
+    //     .then(data => {
+    //         if (data.msg === 'good') {
+    //             alert("게시글을 삭제하였습니다.");
+    //             navigate("/board/adoption/list");
+    //         } else {
+    //             alert('게시글 삭제에 실패하였습니다.');
+    //             navigate(-1);
+    //         }
+    //     });
+    // };
 
     const handleAdoptionOk = () => {
         // 입양완료 버튼 클릭 시 실행되는 로직
         // 서버에 해당 게시글을 입양완료 상태로 업데이트하는 요청을 보낼 수 있습니다.
         // 이후 입양완료 게시판으로 이동
         // 아래는 예시 코드
+        console.log("complete vo 확인 : ", vo);
         const adoptionCompleteYn = 'Y';
         fetch('http://127.0.0.1:8080/app/adoption/complete', {
             method: 'POST',
@@ -85,6 +87,7 @@ const AdoptionDetailItem = ( {vo, onAdoptionComplete} ) => {
             .then(resp => resp.json())
             .then(data => {
                 if (data.msg === 'good') {
+                    console.log('complete data : ', data);
                     alert("입양완료 처리가 완료되었습니다.");
                     onAdoptionComplete();
                 } else {
@@ -106,9 +109,15 @@ const AdoptionDetailItem = ( {vo, onAdoptionComplete} ) => {
     return (
         <StyledAdoptionDetailItem>
             <div className='detailArea'>
-                {/* {currentAdmin && ( */}
+                <div>
+                    {currentAdmin && (
+                        <div className='controlArea'>
+                            <button onClick={() => handleEdit(vo)}>수정</button>
+                            {/* <button onClick={() => handleDelete(vo)}>삭제</button> */}
+                        </div>
+                    )}
                     <button onClick={handleAdoptionOk}>입양완료</button>
-                {/* )} */}
+                </div>
                 <div className='date'>등록일 : {vo.enrollDate}</div>
                 <img
                     src={vo.imagePath}
@@ -121,14 +130,7 @@ const AdoptionDetailItem = ( {vo, onAdoptionComplete} ) => {
                 <div className='age'><h5>나이 : {vo.age}</h5></div>
                 <div className='weight'><h5>몸무게 : {vo.weight}</h5></div>
             </div>
-            <div>
-                {currentAdmin && (
-                    <div className='controlArea'>
-                        <button onClick={() => handleEdit(vo)}>수정</button>
-                        <button onClick={() => handleDelete(vo)}>삭제</button>
-                    </div>
-                )}
-            </div>
+            
         </StyledAdoptionDetailItem>
     );
 };
