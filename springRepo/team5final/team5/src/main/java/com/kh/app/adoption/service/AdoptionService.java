@@ -58,10 +58,18 @@ public class AdoptionService {
 	public int write(AdoptionVo vo) {
 		return dao.write(sst, vo);
 	}
+	
+
+	// 이미지 수정
+	public int editImage(AdoptionVo imgVo) {
+		String str = imgVo.getImagePath().replace("D:\\pupple\\team5Repo\\springRepo\\team5final\\team5\\src\\main\\webapp", "http://127.0.0.1:8080/app");
+		imgVo.setImagePath(str);
+		return dao.editImage(sst, imgVo);
+	}
 
 	// 입양 게시글 수정
-	public int edit(AdoptionVo vo) {
-		return dao.edit(sst, vo);
+	public int editBoard(AdoptionVo vo) {
+		return dao.editBoard(sst, vo);
 	}
 	
 //	// 입양신청 -> 입양완료
@@ -77,6 +85,7 @@ public class AdoptionService {
 	public int insertRescueDog(AdoptionVo vo) {
 		return dao.insertRescueDog(sst, vo);
 	}
+
 
 	
 

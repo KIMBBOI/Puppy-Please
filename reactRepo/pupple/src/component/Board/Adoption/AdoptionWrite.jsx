@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledAdoptionWriteDiv = styled.div`
@@ -29,7 +29,11 @@ const AdoptionWrite = ( ) => {
 
     let isFetching = false;
 
+
     const navigate = useNavigate(); 
+    const location = useLocation();
+
+
 
     const [fileObj , setFileObj] = useState();
     const [dogName , setDogName] = useState();
@@ -38,6 +42,20 @@ const AdoptionWrite = ( ) => {
     const [neuteringOx , setNeuteringOx] = useState();
     const [age , setAge] = useState();
     const [weight , setWeight] = useState();
+        // 1. 수정인지 작성인지 판단해서 수정이면 기존의 데이터로 값을 채워줌
+        // 2. location.state 에 값이 없으면 에러를 발생시키기 않고 undefind 반환. (location.state?)
+        // 3. 조건문으로 확인 후 setter 로 데이터 삽입
+        useEffect( () => {
+            const existing = location.state?.vo;
+            if (existing) {
+                setDogName(existing.dogName);
+                setBreed(existing.breed);
+                setGenderMf(existing.genderMf);
+                setNeuteringOx(existing.neuteringOx);
+                setAge(existing.age);
+                setWeight(existing.weight);
+            }
+        }, [location.state] );
 
 
     const handleChangeFile = (e) => {
@@ -62,14 +80,8 @@ const AdoptionWrite = ( ) => {
         setWeight(e.target.value);
     };
 
-    // const handleChangeRescueDogNo = (e) => {
-    //     setRescueDogNo(e.target.value);
-    // }
 
-    // const jsonStr = sessionStorage.getItem("adminVo");
-    // const sessionAdminVo = JSON.parse(jsonStr);
-    // const [adminVo , setAdminVo] = useState(sessionAdminVo);
-    
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -90,7 +102,6 @@ const AdoptionWrite = ( ) => {
         
         
         const formData = new FormData();
-        // formData.append("rescueDogNo", rescueDogNo);
         formData.append('file', fileObj);
         formData.append('dogName', dogName);
         formData.append('breed', breed);
@@ -98,54 +109,93 @@ const AdoptionWrite = ( ) => {
         formData.append('neuteringOx', neuteringOx);
         formData.append('age', age);
         formData.append('weight', weight);
-        // formData.append('rescueDogNo', rescueDogNo);
         formData.append('adminNo', adminNo.adminNo);
         formData.append('ADOPTION_COMPLETE_YN', 'N');
+        // formData.append('rescueDogNo', rescueDogNo);
 
-        fetch('http://127.0.0.1:8080/app/adoption/write' , {
-            method: 'POST' ,
-            body: formData ,
-        })
-        .then( (resp) => resp.json() )
-        .then( (data) => {
-            if (data.imgMsg === 'img insert good') {
-                if (data.dogMsg === 'dog insert good') {
-                    if (data.boardMsg === 'board write good') {
-                        alert('게시글 등록 완료하였습니다.');
-                        navigate('/board/adoption/list');
-                        console.log("이미지오류로 작성싫=패 : " , data.imgMsg );
+        console.log("file :" , fileObj);
+
+        // 작성하기로 전환 시 state 에 데이터가 있으면 수정하기로 변경
+        const existing = location.state?.vo;
+        // 로캐이션으로 받은 데이터 vo 할당
+
+        if (existing) {
+
+            // 수정 시 WHERE 에 필요한 데이터 준비
+            formData.append("adoptionBoardNo", existing.adoptionBoardNo);
+            formData.append("imageNo", existing.imageNo);
+
+            // 수정하기
+            fetch('http://127.0.0.1:8080/app/adoption/edit', {
+                method: 'POST' , 
+                body: formData ,
+            })
+            .then( resp => resp.json() )
+            .then( data => {
+                if (data.imgMsg === "img update good") {
+                    if(data.boardMsg === "board update good"){
+                        alert("게시글 수정 완료 !");
+                        navigate("/board/adoption/list?pno=1");
+                    }else{
+                        alert("게시글 수정 실패 ...");
+                        navigate(-1);
+                    }
+                } else {
+                    alert("이미지 수정 실패 ...");
+                    navigate(-1);
+                }
+            } )
+            ;
+        } else {
+            // 작성하기
+            fetch('http://127.0.0.1:8080/app/adoption/write' , {
+                method: 'POST' ,
+                body: formData ,
+            })
+            .then( (resp) => resp.json() )
+            .then( (data) => {
+                if (data.imgMsg === 'img insert good') {
+                    if (data.dogMsg === 'dog insert good') {
+                        if (data.boardMsg === 'board write good') {
+                            alert('게시글 등록 완료하였습니다.');
+                            navigate('/board/adoption/list');
+                            console.log("이미지오류로 작성싫=패 : " , data.imgMsg );
+                        } else {
+                            alert('게시글 등록 실패하였습니다.');
+                            navigate("/board/adoption/write");
+                            console.log("유기견오류로 작성싫=패 : " , data.dogMsg );
+                        }
                     } else {
                         alert('게시글 등록 실패하였습니다.');
                         navigate("/board/adoption/write");
-                        console.log("유기견오류로 작성싫=패 : " , data.dogMsg );
+                        console.log("게시글오류로 작성싫=패 : " , data.boardMsg );
                     }
                 } else {
-                    alert('게시글 등록 실패하였습니다.');
+                    alert("이미지 업로드 실패");
                     navigate("/board/adoption/write");
-                    console.log("게시글오류로 작성싫=패 : " , data.boardMsg );
                 }
-             } else {
-                 alert("이미지 업로드 실패");
-                 navigate("/board/adoption/write");
-             }
-        } )
-        ;
+            } )
+            ;
+        }
+            
     };
+
+        
 
 
     return (
         <StyledAdoptionWriteDiv>
             <div className="adoption-write">
-                <h2>입양 글 작성</h2>
+                <div><h2>{location.state ? '게시글 수정' : '게시글 작성'}</h2></div>
                 <form onSubmit={handleSubmit}>
                     <br />
                     <div>
                         <label>이름</label>
-                        <input type="text" className="dogName" onChange={handleChangeDogName} />
+                        <input type="text" className="dogName" value={dogName} onChange={handleChangeDogName} />
                     </div>
                     <div className='breed'>
                         <label>견종선택</label>
-                        <select onChange={handleChangeBreed}>
+                        <select value={breed} onChange={handleChangeBreed}>
                             <option value="0">견종</option>
                             <option value="믹스견">믹스견</option>
                             <option value="불독">불독</option>
@@ -164,27 +214,27 @@ const AdoptionWrite = ( ) => {
                         </select>
                     </div>
                     <div className="genderMf">
-                        <label>성별</label>
-                        <input type="text" onChange={handleChangeGender} />
+                        <label>성별 (M / F)</label>
+                        <input type="text" value={genderMf} onChange={handleChangeGender} />
                     </div>
                     <div className="neuteringOx">
-                        <label>중성화</label>
-                        <input type="text" onChange={handleChangeNeutering} />
+                        <label>중성화   (O / X)</label>
+                        <input type="text" value={neuteringOx} onChange={handleChangeNeutering} />
                     </div>
                     <div className="age">
                         <label>나이</label>
-                        <input type="number" onChange={handleChangeAge} />
+                        <input type="number" value={age} onChange={handleChangeAge} />
                     </div>
                     <div className="weight">
                         <label>몸무게</label>
-                        <input type="number" onChange={handleChangeWeight} />
+                        <input type="number" value={weight} onChange={handleChangeWeight} />
                     </div>
                     <div className="file">
                         <label>사진선택</label>
-                        <input type="file" onChange={handleChangeFile} />
+                        <input type="file" multiple name='file' onChange={handleChangeFile} />
                     </div>
                     <div className='submit'>
-                        <button type="submit">작성</button>
+                        <input type="submit" value={location.state ? '수정' : '등록'} />
                     </div>
                 </form>
             </div>

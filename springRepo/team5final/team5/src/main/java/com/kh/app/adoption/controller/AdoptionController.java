@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +31,7 @@ import lombok.RequiredArgsConstructor;
 public class AdoptionController {
 
 	private final AdoptionService service;
+	private final HttpServletRequest req;
 	
 	// 입양신청 목록 조회
 	@GetMapping("list")
@@ -152,7 +155,41 @@ public class AdoptionController {
 				
 		return map;
 	}
+
+	// 입양신청 수정
+	@PostMapping("edit")
+	public Map<String, String> edit(AdoptionVo vo, MultipartFile file) throws Exception {
+		
+		// 이미지 업데이트
+		String imagePath = saveFile(file);
+		AdoptionVo imgVo = new AdoptionVo();
+		imgVo.setImagePath(imagePath);
+		imgVo.setImageNo(vo.getImageNo());
+		int resultImg = service.editImage(imgVo);
+		
+		// 게시글 업데이트
+		Map<String, String> map = new HashMap<String, String>();
+		int resultBoard = service.editBoard(vo);
+		
+		if (resultImg == 1) {
+			map.put("imgMsg", "img update good");
+			System.out.println("이미지 수정 성공 !");
+			if (resultBoard == 1) {
+				map.put("boardMsg", "board update good");
+				System.out.println("게시글 수정 성공 !");
+			} else {
+				map.put("boardMsg", "board update bad");
+				System.out.println("게시글 수정 실패");
+			}
+		} else {
+			map.put("imgMsg", "img update bad");
+			System.out.println("게시글 수정 실패");
+		}
+		
+		return map;
+	}
 	
+
 	/**
 	 * 파일을 서버에 저장하고, 파일 전체 경로를 리턴함
 	 * @param 파일객경로
@@ -160,35 +197,31 @@ public class AdoptionController {
 	 * @return 실제파일저장경로(파일경로 + 파일명)
 	 */
 	private String saveFile(MultipartFile file) throws Exception {
-		String path = "D:\\pupple\\springRepo\\team5final\\team5\\src\\main\\webapp\\resources\\upload\\img\\";
-		String originName = file.getOriginalFilename();
-		System.out.println("입양신청 등록 에러 : " + originName);
 		
-		// 원래는 "path + changeName(랜덤값) + 확장자" 로 해야함 
-		File target = new File(path + originName);
+		System.out.println("file ::: " + file);
 		
-		// 파일 바이트코드 읽어서 타겟에 저장
-		file.transferTo(target);
-		
-		return path + originName;
-	}
-
-	// 입양신청 수정
-	@PutMapping("edit")
-	public Map<String, String> edit(@RequestBody AdoptionVo vo) {
-		
-		Map<String, String> map = new HashMap<String, String>();
-		int result = service.edit(vo);
-		
-		if (result == 1) {
-			map.put("msg", "success");
-				System.out.println("게시글 수정 성공 !");
-		} else {
-			map.put("msg", "fail");
-				System.out.println("게시글 수정 실패 ...");
-		}
-		
-		return map;
+		String myUrl = req.getServletContext().getRealPath("/");
+        int lastIndex = myUrl.lastIndexOf("\\");
+        int lastIndexBeforeTarget = myUrl.lastIndexOf("target");
+        String changeUrl = myUrl.substring(lastIndexBeforeTarget, lastIndex);
+        
+        String str = "";
+        if (lastIndexBeforeTarget != -1) {
+            str = myUrl.replace(changeUrl
+            		, "src\\main\\webapp\\resources\\upload\\img\\");
+        }
+        
+        String path = str;
+        
+        String originName = file.getOriginalFilename();
+        
+        // 원래는 "path + changeName(랜덤값) + 확장자" 로 해야함 
+        File target = new File(path + originName); 
+        
+        // 파일 바이트코드 읽어서 타겟에 저장
+        file.transferTo(target);
+        
+        return path + originName;
 	}
 	
 	// 입양완료 처리
