@@ -39,8 +39,8 @@ public class AdminDao {
 	}
 	
 	// 방문예약 목록조회
-	public List<VisitVo> reservationList(SqlSessionTemplate sst, PageVo pvo) {
-		return sst.selectList("AdminMapper.reservationList", pvo);
+	public List<VisitVo> reservationList(SqlSessionTemplate sst, VisitVo vo) {
+		return sst.selectList("AdminMapper.reservationList", vo);
 	}
 	// 전체 방문예약 수 조회
 	public int selectVisitReservationCount(SqlSessionTemplate sst) {

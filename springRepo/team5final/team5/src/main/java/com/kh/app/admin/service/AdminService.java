@@ -51,8 +51,8 @@ public class AdminService {
 	}
 	
 	// 방문예약 목록조회
-	public List<VisitVo> reservationList(PageVo pvo) {
-		return dao.reservationList(sst, pvo); 
+	public List<VisitVo> reservationList(VisitVo vo) {
+		return dao.reservationList(sst, vo); 
 	}
 	// 전체 방문예약 수 조회
 	public int selectVisitReservationCount() {

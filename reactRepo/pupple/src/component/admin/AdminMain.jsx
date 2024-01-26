@@ -13,7 +13,7 @@ const StyledAdminPageMain = styled.div`
     display: flex;
     justify-content: center; 
     align-items: flex-start;
-    justify-content: space-evenly
+    justify-content: space-evenly;
 `;
 
 
@@ -24,8 +24,8 @@ const AdminMain = () => {
                 <Route path='/login' element={<AdminLogin />}></Route>
                 <Route path='/adoptList' element={<AdminAdopt/>}></Route>
                 <Route path='/adoptList/adoptDetail' element={<AdminAdoptDetail/>}></Route>
-                <Route path='/visitReservation/detail' element={<AdminVisitReservationListItemDetail/>}></Route>
-                <Route path='/visitReservation' element={<AdminVisitReservation/>}></Route>
+                <Route path='/visitReservation/:pno/detail' element={<AdminVisitReservationListItemDetail/>}></Route>
+                <Route path='/visitReservation/:pno' element={<AdminVisitReservation/>}></Route>
             </Routes>
         </StyledAdminPageMain>
     );

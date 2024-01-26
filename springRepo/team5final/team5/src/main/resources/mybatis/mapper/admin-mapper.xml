@@ -40,7 +40,10 @@
   	JOIN MEMBER M ON M.MEMBER_NO = S.MEMBER_NO
   </select>
 	
+	
+	
 	<!-- 방문예약 목록조회 -->
+	<!-- 
 	<select id="reservationList" resultType="com.kh.app.visit.vo.VisitVo">
 		SELECT *
 		FROM (
@@ -67,12 +70,56 @@
 		)
 		WHERE RNUM BETWEEN #{startRow} AND #{lastRow}
 	</select>
+	 -->
+	<select id="reservationList" resultType="com.kh.app.visit.vo.VisitVo">
+	    SELECT *
+	    FROM (
+	        SELECT ROWNUM RNUM, T.*
+	        FROM (
+	            SELECT
+	                V.VISIT_NO
+	                ,V.MEMBER_NO
+	                ,V.RESERVATION_STATUS_NO
+	                ,V.RESERVATION_DATE
+	                ,V.SUMMIT_DATE
+	                ,V.MODIFY_DATE
+	                ,V.DEL_YN
+	                ,S.RESERVATION_STATUS
+	                ,M.NAME
+	                ,M.PHONE_NUMBER
+	            FROM 
+	                VISIT_RESERVATION V
+	                JOIN RESERVATION_STATUS S ON S.RESERVATION_STATUS_NO = V.RESERVATION_STATUS_NO
+	                JOIN MEMBER M ON M.MEMBER_NO = V.MEMBER_NO
+				<where>
+	                <if test="reservationStatus == null or reservationStatus == ''">
+	                    AND S.RESERVATION_STATUS IN ('예약 중', '상담 완료', '예약 취소')
+	                </if>
+	                <if test="reservationStatus != null and reservationStatus != ''">
+	                    AND S.RESERVATION_STATUS = #{reservationStatus} 
+	                </if>
+	                <if test="orderBy != null">
+	                    ORDER BY
+	                    <choose>
+	                        <when test="orderBy == 'visitNo'">V.VISIT_NO DESC</when>
+	                        <when test="orderBy == 'reservationDate'">V.RESERVATION_DATE ASC</when>
+	                    </choose>
+	                </if>
+				</where>
+	        ) T
+	    )
+	    WHERE RNUM BETWEEN #{startRow} AND #{lastRow}
+	</select>
+	 
 	<select id='listCount' resultType="Integer">
 		SELECT 
 			COUNT(*) as cnt 
 		FROM 
 			VISIT_RESERVATION
 	</select>
+	
+	
+	
 	<!-- 방문예약 상세 조회 -->
 	<select id="reservationDetail" resultType="com.kh.app.visit.vo.VisitVo">
         SELECT
@@ -93,6 +140,7 @@
 		WHERE 
 			V.VISIT_NO = #{visitNo}
 	</select>
+	
 	<!--방문예약 상담취소/삭제 -->
 	<update id="quit">
 		UPDATE 
@@ -115,5 +163,5 @@
 	    WHERE 
 	    	VISIT_NO = #{visitNo}
 	</update>
-	
+
 </mapper>

@@ -4,11 +4,11 @@ import styled from 'styled-components';
 
 const StyeldVisitReservationPageItemDiv = styled.div`
     width: 100%;
-    height: 8%;
+    height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 3% 0 3% 0;
+    margin: 15px 0 15px 0;
 
     .pageNumber {
         padding: 0 5px 0 5px;
@@ -23,14 +23,17 @@ const StyeldVisitReservationPageItemDiv = styled.div`
 `;
 
 const VisitReservationPageItem = ( {pvo} ) => {
-
+    const navigate = useNavigate();
+    // <button onClick={(e)=>{
+    //     updatePage(e.target.value)
+    // }}></button>
 
     return (
         <StyeldVisitReservationPageItemDiv>
 
             {/* 여기는 이전 버튼 !!! */}
             {pvo.startPage !== 1 && (
-                <Link to={`/admin/visitReservation?pno=${pvo.startPage - 1}`}>이전</Link>
+                <Link to={`/admin/visitReservation/${pvo.startPage - 1}`}>이전</Link>
             )}
             
 
@@ -48,7 +51,7 @@ const VisitReservationPageItem = ( {pvo} ) => {
                             ? 
                                 ( <div className='selectPage'>{pageNumber}</div>) 
                             : 
-                                ( <Link className='pageNumber' to={`/admin/visitReservation?pno=${pageNumber}`}>{pageNumber}</Link> )
+                                ( <Link className='pageNumber' to={`/admin/visitReservation/${pageNumber}`}>{pageNumber}</Link> )
                         }
                         
                     </div>
@@ -59,7 +62,7 @@ const VisitReservationPageItem = ( {pvo} ) => {
 
             {/* 여기는 다음 버튼 !!! */}
             {pvo.endPage !== pvo.maxPage && (
-                <Link to={`/admin/visitReservation?pno=${pvo.endPage + 1}`}>다음</Link>
+                <Link to={`/admin/visitReservation/${pvo.endPage + 1}`}>다음</Link>
             )}
 
         </StyeldVisitReservationPageItemDiv>

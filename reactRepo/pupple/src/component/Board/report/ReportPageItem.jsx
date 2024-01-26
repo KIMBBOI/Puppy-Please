@@ -28,7 +28,7 @@ const ReportPageItem = ( {pvo} ) => {
             
                 {/* 여기는 이전 버튼 !!! */}
                 {pvo.startPage !== 1 && (
-                    <Link Link to={`/board/report/list?pno=${pvo.startPage - 1}`}>이전</Link>
+                    <Link to={`/board/report/list?pno=${pvo.startPage - 1}`}>이전</Link>
                 )}
                 
 

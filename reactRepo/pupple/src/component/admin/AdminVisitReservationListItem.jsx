@@ -1,17 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyeldWrapDiv = styled.div`
     width: 100%;
-    height: 80%;
-    
+    height: 50%;
 
     .wrap {
         width: 100%;
         height: 100%;
         display: flex;
-        justify-content: center;
+        flex-direction: column;
+        align-items: center;
     }
 
     td, th, table{
@@ -20,6 +20,7 @@ const StyeldWrapDiv = styled.div`
 
     table {
         width: 80%;
+        height: 1px;
         text-align: center;
     }
 
@@ -32,6 +33,7 @@ const StyeldWrapDiv = styled.div`
         cursor: pointer;
         background-color: #f0e4ff;
     }
+
 `;
 
 const AdminVisitReservationListItem = ( {arr} ) => {
@@ -46,20 +48,21 @@ const AdminVisitReservationListItem = ( {arr} ) => {
 
 
 
+
     return (
         <StyeldWrapDiv>
             <div className='wrap'>
-                {arr && arr.length > 0 && (
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>번호</th>
-                                <th>예약일</th>
-                                <th>상태</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
+                <table>
+                    <thead>
+                        <tr>
+                            <th>번호</th>
+                            <th>예약일</th>
+                            <th>상태</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            arr && arr.length > 0 && (
                                 arr.map( (item) => 
                                     <tr key={item.visitNo} onClick={() => handleDetail(item)}>
                                         <td>{item.visitNo}</td>
@@ -67,10 +70,10 @@ const AdminVisitReservationListItem = ( {arr} ) => {
                                         <td>{item.reservationStatus}</td>
                                     </tr>
                                 )
-                            }
-                        </tbody>
-                    </table>
-                )}
+                            )
+                        }
+                    </tbody>
+                </table>
             </div>
         </StyeldWrapDiv>
     );

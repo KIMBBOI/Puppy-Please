@@ -2,6 +2,7 @@ import React from 'react';
 import AdminPageMainSidebar from './AdminPageMainSidebar';
 import styled from 'styled-components';
 import AdminVisitReservationList from './AdminVisitReservationList';
+import { useParams } from 'react-router-dom';
 
 const StyeledAdminVisitReservation = styled.div`
     width: 100%;
@@ -12,11 +13,14 @@ const StyeledAdminVisitReservation = styled.div`
 `;
 
 const AdminVisitReservation = () => {
+
+    const {pno} = useParams();
+
     return (
         <>
             <AdminPageMainSidebar />
             <StyeledAdminVisitReservation>
-                <AdminVisitReservationList />
+                <AdminVisitReservationList pno={pno} />
             </StyeledAdminVisitReservation>
         </>
     );
