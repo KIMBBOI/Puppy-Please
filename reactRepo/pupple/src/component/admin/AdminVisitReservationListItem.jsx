@@ -19,7 +19,7 @@ const StyeldWrapDiv = styled.div`
     }
 
     table {
-        width: 45%;
+        width: 80%;
         text-align: center;
     }
 

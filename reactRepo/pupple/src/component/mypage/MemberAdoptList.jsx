@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledMemberAdoptList = styled.div`
+  width: 100%;
  h2 {
         font-size: 24px;
         margin-bottom: 20px;
