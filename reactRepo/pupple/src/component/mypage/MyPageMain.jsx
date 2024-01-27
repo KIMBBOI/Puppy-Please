@@ -18,17 +18,26 @@ const StyledMyPageMainDiv = styled.div`
 `;
 
 const MyPageMain = () => {
+
+    const loginMemberVo = sessionStorage.getItem("loginMemberVo");
+
+    
     return (
-        <StyledMyPageMainDiv>
-            <MyPageMainSidebar />
-            <Routes>
-                <Route path='/memberInfoEdit' element = {<MemberInfoEdit />}></Route>
-                <Route path='/memberQuit' element = {<MemberQuit />}></Route>
-                <Route path='/memberAdoptList' element = {<MemberAdoptList />}></Route>
-                <Route path='/memberReservationInfo' element = {<VisitReservationInfo />}></Route>
-                <Route path='/memberAdoptList/adoptDetail' element={<MemberAdoptDetail />} />
-            </Routes>
-        </StyledMyPageMainDiv>
+        loginMemberVo !== null ? ( 
+            <StyledMyPageMainDiv>
+                <MyPageMainSidebar />
+                <Routes>
+                    <Route path='/memberInfoEdit' element = {<MemberInfoEdit />}></Route>
+                    <Route path='/memberQuit' element = {<MemberQuit />}></Route>
+                    <Route path='/memberAdoptList' element = {<MemberAdoptList />}></Route>
+                    <Route path='/memberReservationInfo' element = {<VisitReservationInfo />}></Route>
+                    <Route path='/memberAdoptList/adoptDetail' element={<MemberAdoptDetail />} />
+                </Routes>
+            </StyledMyPageMainDiv>
+            ) : (
+                alert("로그인 정보가 없습니다.")
+            )
+        
     );
 };
 

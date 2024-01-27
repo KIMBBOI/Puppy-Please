@@ -11,7 +11,6 @@ const SurveyMain = () => {
     const rescueDogVo = location.state?.vo;
     const loginMemberVo = JSON.parse(sessionStorage.getItem('loginMemberVo'));
 
-    console.log(rescueDogVo);
     const [vo, setVo] = useState({
        memberNo: loginMemberVo.memberNo, rescueDogNo: rescueDogVo.rescueDogNo, residence: '', maritalStatusYn: '', job: '', housingType: ''
     });

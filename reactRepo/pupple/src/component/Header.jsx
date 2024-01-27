@@ -81,8 +81,6 @@ const Header = () => {
     }, []);
     
 
-    console.log(loginMemberVo);
-    console.log(loginAdminVo);
     const navigate = useNavigate();
     const handleClickJoin = () => {
         navigate("/member/join");
@@ -101,11 +99,10 @@ const Header = () => {
     const AdminPage = () => {
       navigate("/admin/adoptList");
     }
-    
     const handleAdminLogout = () => {
-      sessionStorage.removeItem("loginAdminVo")
+      sessionStorage.removeItem("admin");
       logoutAdmin();
-      navigate("/")
+      navigate("/");
     }
     return (
         

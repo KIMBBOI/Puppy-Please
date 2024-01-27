@@ -53,7 +53,6 @@ const MemberAdoptList = () => {
             .then( data => {
                 setAdoptData(data.adoptList);
                 setSurveyData(data.surveyList);
-                console.log(surveyData);
             })
         }
         fetchApplyAndSurveyData();
