@@ -8,16 +8,16 @@ const StyeldVisitReservationPageItemDiv = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 15px 0 15px 0;
+    margin: 2px 0 15px 0;
 
     .pageNumber {
         padding: 0 5px 0 5px;
         margin: 5px 5px 5px 5px;;
     }
     .selectPage {
-        padding: 0 5px 0 5px;
+        padding: 0 5px 1px 5px;
         margin: 5px 5px 5px 5px;;
-        border: 1px solid #cfcfcf;
+        border: 1px solid #ddd;
         color: #000000;
     }
 `;

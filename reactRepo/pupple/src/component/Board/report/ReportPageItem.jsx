@@ -14,9 +14,9 @@ const StyledReportPageItemDiv = styled.div`
         margin: 5px 5px 5px 5px;;
     }
     .selectPage {
-        padding: 0 5px 0 5px;
+        padding: 0 5px 1px 5px;
         margin: 5px 5px 5px 5px;;
-        border: 1px solid #cfcfcf;
+        border: 1px solid #ddd;
         color: #000000;
     }
 `;
