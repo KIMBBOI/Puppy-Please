@@ -43,8 +43,8 @@ public class AdminDao {
 		return sst.selectList("AdminMapper.reservationList", vo);
 	}
 	// 전체 방문예약 수 조회
-	public int selectVisitReservationCount(SqlSessionTemplate sst) {
-		return sst.selectOne("AdminMapper.listCount");
+	public int selectVisitReservationCount(SqlSessionTemplate sst, String reservationStatus) {
+		return sst.selectOne("AdminMapper.listCount", reservationStatus);
 	}
 	// 방문예약 상세 조회
 	public VisitVo reservationDetail(SqlSessionTemplate sst, VisitVo vo) {

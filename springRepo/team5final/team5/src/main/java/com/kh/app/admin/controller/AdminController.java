@@ -110,7 +110,7 @@ public class AdminController {
 	public Map<String, Object> reservationList(@RequestBody VisitVo vo) {
 		
 		// 전체 게시글 수 조회
-		int listCount = service.selectVisitReservationCount();
+		int listCount = service.selectVisitReservationCount(vo.getReservationStatus());
 		String currentPage_ = vo.getPno(); 
 		if(currentPage_ == null) {
 			currentPage_ = "1";
@@ -135,7 +135,6 @@ public class AdminController {
 		}
 		return map;
 	}
-	
 	// 방문예약 상세 조회
 	@PostMapping
 	public Map<String, Object> reservationDetail(@RequestBody VisitVo vo) {

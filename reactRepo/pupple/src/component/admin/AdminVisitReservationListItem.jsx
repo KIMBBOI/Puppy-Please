@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const StyeldWrapDiv = styled.div`
     width: 100%;
-    height: 50%;
+    height: 300px;
 
     .wrap {
         width: 100%;

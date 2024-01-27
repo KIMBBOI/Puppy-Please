@@ -19,85 +19,77 @@ const StyledAdminVisitReservation = styled.div`
 
 
 
-const AdminVisitReservationList = ({pno}) => {
+const AdminVisitReservationList = () => {
     console.log("컴포넌트 호출됨 ~~~~~~~~~~~~~~~~~~~~~~");
-    console.log(pno);
-    // const navigate = useNavigate();
-    // useLocation();
+    const { pno } = useParams(); 
+    if (pno === null) {
+        pno = 1;
+    }
+    console.log('useParams pno :::', pno);
 
 
-    const [orderBy, setOrderBy] = useState('visitNo');
-    const [reservationStatus, setReservationStatus] = useState('');
 
-
-    let [arr, setArr] = useState([]);
-    let [pvo, setPvo] = useState({});                                    
-    // if (pno === null) {
-    //     pno = 1;
-    // }
-    console.log(pno);
     // const location = useLocation();
     //     console.log('location :::',location);
-    //     console.log('location.search :::',location.search);
-    // const queryParams = new URLSearchParams(location.search);
-    //     console.log('queryParams :::',queryParams);
-    // const pno = queryParams.get('pno') || 1; // Default to page 1 if "pno" is not present
-
-
+    // const pathArray = location.pathname.split('/');
+    //     console.log('pathArray :::',pathArray);   
+    // const pno = pathArray[pathArray.length - 1];
+    //     console.log('pno :::', pno);
     
-    // 초기 상태로 사용할 vo 객체 정의
+    
+    
+    const [orderBy, setOrderBy] = useState();
+    const [reservationStatus, setReservationStatus] = useState();
+    let [arr, setArr] = useState([]);
+    let [pvo, setPvo] = useState({});      
+    
+    
+
     const [vo, setVo] = useState({
         orderBy: 'visitNo',
         reservationStatus: '',
         pno: pno || 1,
     });
-    console.log(pno);
-    console.log('vo.pno :::', vo.pno);
+  
     
-
+    
+    
+    
+    useEffect(() => {
+        setVo(prevVo => ({
+            ...prevVo,
+            pno: pno || 1,
+        }));
+    }, [pno]);
+    
+    
     
     useEffect( () => {
         console.log("useEffect called......@@@@@@@@@@@@@@@@@@@");
+        console.log("useEffect called......@@@@@@@@@@@@@@@@@@@");
+        console.log("useEffect called......@@@@@@@@@@@@@@@@@@@");
         console.log(pno);
         fetch('http://127.0.0.1:8080/app/admin/reservationList' , {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(vo)
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(vo)
         })
         .then( resp => resp.json() )
         .then( data => {
-            console.log(data);
+            console.log('@@@@@@@@@@@@@@data@@@@@@@@@@@@@@ :::',data);
             setArr(data.voList);
             setPvo(data.pvo);
         } )
         ;
         console.log(pno);
-    }, [pno, vo] );
-    console.log(pno);
+        console.log("useEffect called......@@@@@@@@@@@@@@@@@@@");
+        console.log("useEffect called......@@@@@@@@@@@@@@@@@@@");
+        console.log("useEffect called......@@@@@@@@@@@@@@@@@@@");
+    }, [vo] );
 
 
-
-
-
-    const handleCheckOrderBy = (option) => {
-        setOrderBy(option);
-        setVo((prevVo) => ({
-            ...prevVo,
-            orderBy: option,
-        }));
-        console.log('handleCheckOrderBy :::',vo);
-    };
-
-    const handleCheck = (option) => {
-        setReservationStatus(option);
-        setVo((prevVo) => ({
-            ...prevVo,
-            reservationStatus: option,
-        }));
-        console.log('reservationStatus :::',vo);
-    };
 
 
 
@@ -125,6 +117,28 @@ const AdminVisitReservationList = ({pno}) => {
 
 
 
+
+    const handleCheckOrderBy = (option) => {
+        setOrderBy(option);
+        setVo((vo) => ({
+            ...vo,
+            orderBy: option,
+        }));
+        console.log('handleCheckOrderBy :::',vo);
+    };
+    const handleCheckStatus = (option) => {
+        setReservationStatus(option);
+        setVo((vo) => ({
+            ...vo,
+            reservationStatus: option,
+        }));
+        console.log('reservationStatus :::',vo);
+    };
+
+
+
+
+
     return (
         <StyledAdminVisitReservation>
             <div className='filterArea'>
@@ -136,21 +150,21 @@ const AdminVisitReservationList = ({pno}) => {
                     <label for='earlyDate'>예약일</label>
                 </div>
                 <div>
-                    <input type="checkbox" name="reservationStatus" checked={reservationStatus === ''} onChange={() => handleCheck('')} id='all'/>
+                    <input type="checkbox" name="reservationStatus" checked={reservationStatus === ''} onChange={() => handleCheckStatus('')} id='all'/>
                     <label for='all'>전체조회</label>
 
-                    <input type="checkbox" name="reservationStatus" checked={reservationStatus === '예약 중'} onChange={() => handleCheck('예약 중')} id='progress'/>
+                    <input type="checkbox" name="reservationStatus" checked={reservationStatus === '예약 중'} onChange={() => handleCheckStatus('예약 중')} id='progress'/>
                     <label for='progress'>예약 중</label>
 
-                    <input type="checkbox" name="reservationStatus" checked={reservationStatus === '상담 완료'} onChange={() => handleCheck('상담 완료')} id='complete'/>
+                    <input type="checkbox" name="reservationStatus" checked={reservationStatus === '상담 완료'} onChange={() => handleCheckStatus('상담 완료')} id='complete'/>
                     <label for='complete'>상담 완료</label>
 
-                    <input type="checkbox" name="reservationStatus" checked={reservationStatus === '상담 취소'} onChange={() => handleCheck('상담 취소')} id='quit'/>
-                    <label for='quit'>상담 취소</label>
+                    <input type="checkbox" name="reservationStatus" checked={reservationStatus === '예약 취소'} onChange={() => handleCheckStatus('예약 취소')} id='quit'/>
+                    <label for='quit'>예약 취소</label>
                 </div>
             </div>
-            <AdminVisitReservationListItem arr={arr} />
-            <VisitReservationPageItem pvo={pvo} /> 
+            <AdminVisitReservationListItem key="adminListItemKey" arr={arr} />
+            <VisitReservationPageItem key="pageItemKey" pvo={pvo} /> 
         </StyledAdminVisitReservation>
     );
 };

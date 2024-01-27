@@ -93,7 +93,7 @@
 	                JOIN MEMBER M ON M.MEMBER_NO = V.MEMBER_NO
 				<where>
 	                <if test="reservationStatus == null or reservationStatus == ''">
-	                    AND S.RESERVATION_STATUS IN ('예약 중', '상담 완료', '예약 취소')
+	                    S.RESERVATION_STATUS IN ('예약 중', '상담 완료', '예약 취소')
 	                </if>
 	                <if test="reservationStatus != null and reservationStatus != ''">
 	                    AND S.RESERVATION_STATUS = #{reservationStatus} 
@@ -110,15 +110,20 @@
 	    )
 	    WHERE RNUM BETWEEN #{startRow} AND #{lastRow}
 	</select>
-	 
+	
+	<!-- 페이징용 게시글 조회 -->
 	<select id='listCount' resultType="Integer">
-		SELECT 
-			COUNT(*) as cnt 
-		FROM 
-			VISIT_RESERVATION
+	    SELECT 
+	    	COUNT(*) as cnt 
+	    FROM 
+	    	VISIT_RESERVATION VR
+	    JOIN RESERVATION_STATUS RS ON RS.RESERVATION_STATUS_NO = VR.RESERVATION_STATUS_NO
+	    <where>
+	        <if test="reservationStatus != null and reservationStatus != ''">
+	            RS.RESERVATION_STATUS = #{reservationStatus}
+	        </if>
+	    </where>
 	</select>
-	
-	
 	
 	<!-- 방문예약 상세 조회 -->
 	<select id="reservationDetail" resultType="com.kh.app.visit.vo.VisitVo">
@@ -140,6 +145,7 @@
 		WHERE 
 			V.VISIT_NO = #{visitNo}
 	</select>
+	
 	
 	<!--방문예약 상담취소/삭제 -->
 	<update id="quit">

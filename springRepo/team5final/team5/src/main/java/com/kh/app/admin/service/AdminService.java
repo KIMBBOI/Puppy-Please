@@ -55,8 +55,8 @@ public class AdminService {
 		return dao.reservationList(sst, vo); 
 	}
 	// 전체 방문예약 수 조회
-	public int selectVisitReservationCount() {
-		return dao.selectVisitReservationCount(sst);
+	public int selectVisitReservationCount(String reservationStatus) {
+		return dao.selectVisitReservationCount(sst, reservationStatus);
 	}
 	// 방문예약 상세 조회
 	public VisitVo reservationDetail(VisitVo vo) {
