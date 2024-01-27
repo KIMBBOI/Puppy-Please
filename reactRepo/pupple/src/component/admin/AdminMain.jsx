@@ -28,8 +28,8 @@ const AdminMain = () => {
             <Routes>
                 <Route path='/adoptList' element={<AdminAdopt/>}></Route>
                 <Route path='/adoptList/adoptDetail' element={<AdminAdoptDetail/>}></Route>
-                <Route path='/visitReservation/detail' element={<AdminVisitReservationListItemDetail/>}></Route>
-                <Route path='/visitReservation' element={<AdminVisitReservation/>}></Route>
+                <Route path='/visitReservation/:pno/detail' element={<AdminVisitReservationListItemDetail/>}></Route>
+                <Route path='/visitReservation/:pno' element={<AdminVisitReservation/>}></Route>
             </Routes>
             </StyledAdminPageMain>
             ) : (

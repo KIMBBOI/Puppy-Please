@@ -15,6 +15,11 @@ public class VisitVo {
 	private String delYn;
 		private String name;
 		private String phoneNumber;
+		private String orderBy;
+		private String pno;
+		private String startRow;
+		private String LastRow;
+		
 		
 	
 }

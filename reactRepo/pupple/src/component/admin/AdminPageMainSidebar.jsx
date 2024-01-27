@@ -33,6 +33,7 @@ const SidebarItem = styled.div`
     }
 `;
 
+
 const AdminPageMainSidebar = () => {
     return (
         <StyledAdminPageSidebarDiv>
@@ -41,7 +42,7 @@ const AdminPageMainSidebar = () => {
                 <Link to ="/admin/adoptList">입양신청목록</Link>
             </SidebarItem>
             <SidebarItem>
-                <Link to ="/admin/visitReservation">방문예약관리</Link>
+                <Link to ="/admin/visitReservation/1">방문예약관리</Link>
             </SidebarItem>
             
         </StyledAdminPageSidebarDiv>

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.app.admin.service.AdminService;
@@ -73,11 +72,11 @@ public class AdminController {
 		
 	}
 	
-	
+/*
 	// 방문예약 목록조회
 	@GetMapping
 	public Map<String, Object> reservationList(@RequestParam(value="pno", 
-		    required = false, defaultValue="1")String pno) {
+		    required = false, defaultValue="1")String pno, @RequestBody VisitVo vo) {
 		
 		// 전체 게시글 수 조회
 		int listCount = service.selectVisitReservationCount();
@@ -103,7 +102,38 @@ public class AdminController {
 		}
 		return map;
 	}
+*/
 	
+	// 방문예약 목록조회
+	@PostMapping("reservationList")
+	public Map<String, Object> reservationList(@RequestBody VisitVo vo) {
+		
+		// 전체 게시글 수 조회
+		int listCount = service.selectVisitReservationCount(vo.getReservationStatus());
+		String currentPage_ = vo.getPno(); 
+		if(currentPage_ == null) {
+			currentPage_ = "1";
+		}
+		int currentPage = Integer.parseInt(currentPage_);	
+		int pageLimit = 5;									
+		int boatdLimit = 8;									
+		PageVo pvo = new PageVo(listCount, currentPage, pageLimit, boatdLimit);
+		
+		
+		vo.setStartRow(String.valueOf(pvo.getStartRow()));
+		vo.setLastRow(String.valueOf(pvo.getLastRow()));
+		// 목록조회
+		List<VisitVo> voList = service.reservationList(vo);
+		Map<String, Object> map = new HashMap<>();
+		if (currentPage_ == null || voList == null) {
+			map.put("msg", "fail");
+		} else {
+			map.put("msg", "success");
+			map.put("voList", voList);
+			map.put("pvo", pvo);
+		}
+		return map;
+	}
 	// 방문예약 상세 조회
 	@PostMapping
 	public Map<String, Object> reservationDetail(@RequestBody VisitVo vo) {

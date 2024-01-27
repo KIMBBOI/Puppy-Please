@@ -8,15 +8,16 @@ const StyeledAdminVisitReservation = styled.div`
     height: 100%;
     display: flex;
     justify-content: center;
-    background-color: #f7f8f8;
+    background-color: #ffffff;
 `;
 
 const AdminVisitReservation = () => {
+
     return (
         <>
             <AdminPageMainSidebar />
             <StyeledAdminVisitReservation>
-                <AdminVisitReservationList />
+                <AdminVisitReservationList/>
             </StyeledAdminVisitReservation>
         </>
     );
