@@ -8,15 +8,15 @@ const AdminLoginDiv = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: #f4f4f4; /* 배경색 설정 */
-  
+  background: #f4f4f4; 
+
   & form {
     background: white;
     padding: 40px;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 400px; /* 폼의 최대 너비 */
+    max-width: 400px; 
   }
 
   & table {
@@ -24,21 +24,21 @@ const AdminLoginDiv = styled.div`
   }
 
   & td {
-    padding: 10px; /* 셀 패딩 */
+    padding: 10px; 
   }
 
   & input {
     width: 100%;
     padding: 10px;
-    margin-bottom: 20px; /* 입력 필드 하단 여백 */
+    margin-bottom: 20px; 
     border: 1px solid #ccc;
-    border-radius: 4px; /* 입력 필드 둥근 모서리 */
+    border-radius: 4px; 
   }
 
   & button {
     width: 100%;
     padding: 10px 0;
-    background-color: #5C6BC0; /* 버튼 색상 */
+    background-color: #5C6BC0; 
     color: white;
     border: none;
     border-radius: 4px;
@@ -47,7 +47,7 @@ const AdminLoginDiv = styled.div`
   }
 
   & button:hover {
-    background-color: #3F51B5; /* 호버 시 색상 */
+    background-color: #3F51B5; 
   }
 `;
 
@@ -61,7 +61,6 @@ const AdminLogin = () => {
     const [vo, setVo] = useState();
 
     useEffect(() => {
-        console.log("로그인상태 업테이드 : ", loginAdminVo);    
     }, [loginAdminVo]);
 
     const handleInputChange = (event) => {
@@ -92,8 +91,6 @@ const AdminLogin = () => {
                 );
                 setLoginAdminVo(data.loginAdminVo);
                 loginAdmin(data.loginAdminVo);
-                console.log(data.loginAdminVo);
-                console.log(loginAdminVo);
             }else{
                 alert("로그인 실패");
             }
@@ -101,16 +98,15 @@ const AdminLogin = () => {
         .catch((e) => {
             console.log(e);
         })
-        .finally(() => {
-            console.log("loginAdmin fetch end~");
-        })
-        console.log("로그인 시도 : ", loginAdminVo);
         navigate("/");
     };
 
 
 
     return (
+        loginAdminVo ? (
+             alert("이미 로그인했습니다.")
+        ):(
         <AdminLoginDiv>
             <form onSubmit={handleAdminLogin}>
                 <table>
@@ -132,6 +128,7 @@ const AdminLogin = () => {
                 </table>
             </form>
         </AdminLoginDiv>
+        )
     );
 };
 

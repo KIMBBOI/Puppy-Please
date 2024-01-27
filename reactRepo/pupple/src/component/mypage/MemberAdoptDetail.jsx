@@ -66,11 +66,8 @@
         const navigate = useNavigate();
         const location = useLocation();
         const memberNo = JSON.parse(sessionStorage.getItem("loginMemberVo")).memberNo;
-        console.log("memberNo :::", memberNo);
         const adoptVo = location.state.selectedAdopt;
         const surveyVo = location.state.selectedSurveyData;
-        console.log(surveyVo);
-        console.log("adoptVo:::", adoptVo);
         const rescueDogNo = adoptVo.rescueDogNo;
 
         const [vo, setVo] = useState({
@@ -88,9 +85,9 @@
         const [vo2, setVo2] = useState({
             memberNo: memberNo,
             rescueDogNo: rescueDogNo,
-            residence: surveyVo.residence, // 이 부분을 수정합니다.
-            job: surveyVo.job, // 이 부분을 수정합니다.
-            housingType: surveyVo.housingType, // 이 부분을 수정합니다.
+            residence: surveyVo.residence, 
+            job: surveyVo.job,
+            housingType: surveyVo.housingType, 
             maritalStatusYn: surveyVo.maritalStatusYn,
         })
         const handleInputChange = (event) => {

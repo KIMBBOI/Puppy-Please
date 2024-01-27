@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import AdminPageMainSidebar from './AdminPageMainSidebar';
 const StyledAdminAdoptList = styled.div`
     display: flex;
-    justify-content: center; /* 가로 가운데 정렬 */
-    align-items: center; /* 세로 가운데 정렬 */
-    justify-content: space-evenly
+    justify-content: center; 
+    align-items: center; 
+    justify-content: space-evenly;
 `;
 
 const TableContainer = styled.div`
@@ -14,7 +14,7 @@ const TableContainer = styled.div`
     padding: 20px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* 컨텐츠 세로 가운데 정렬 */
+    align-items: center; 
 `;
 
 const StyledTable = styled.table`
@@ -54,15 +54,12 @@ const AdminAdoptList = () => {
     const [adoptData, setAdoptData] = useState();
     const [surveyData, setSurveyData] = useState();
     
-    console.log(adoptData);
-    console.log(surveyData);
     
     useEffect(() => {
         const fetchApplyAndSurveyData = () => {
             fetch('http://127.0.0.1:8080/app/admin/adoptList')
             .then(resp => resp.json())
             .then( data => {
-                console.log(data);
                 setAdoptData(data.adoptList);
                 setSurveyData(data.surveyList);
             })

@@ -129,12 +129,8 @@ const MemberLogin = () => {
             "loginMemberVo",
             JSON.stringify(data.loginMemberVo)
           );
-          console.log("getItem 결과:", sessionStorage.getItem("loginMemberVo"));
           setLoginMemberVo(data.loginMemberVo);
           login(data.loginMemberVo);
-          console.log(data.loginMemberVo);
-          console.log(loginMemberVo);
-          console.log("sessionLoginMemberVo : " + loginMemberVo);
         } else {
           alert("로그인 실패!");
         }
@@ -142,11 +138,7 @@ const MemberLogin = () => {
       .catch((e) => {
         console.log(e);
       })
-      .finally(() => {
-        console.log("login fetch end~");
-      });
-
-    console.log("로그인 시도: ", loginMemberVo);
+      
     navigate("/");
   };
 
@@ -161,7 +153,12 @@ const MemberLogin = () => {
     navigate("/admin/login");
   }
   return (
-    <StyledMemberLoginDiv>
+    loginMemberVo ?(
+      alert("이미 로그인 했습니다.")
+    ):(
+
+
+      <StyledMemberLoginDiv>
       <form onSubmit={handleLoginClick}>
         <table>
           <tbody>
@@ -180,7 +177,7 @@ const MemberLogin = () => {
                   name="id"
                   onChange={handleInputChange}
                   placeholder="아이디"
-                />
+                  />
               </td>
             </tr>
             <tr>
@@ -208,6 +205,8 @@ const MemberLogin = () => {
       <hr />
       <KakaoLogin />
     </StyledMemberLoginDiv>
+    )
+
   );
 };
 

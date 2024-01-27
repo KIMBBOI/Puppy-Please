@@ -10,6 +10,7 @@ import LawMain from './board/law/LawMain';
 import AdoptionOkMain from './board/adoptionOk/AdoptionOkMain';
 import MyPageMain from './mypage/MyPageMain';
 import AdminMain from './admin/AdminMain';
+import AdminLogin from './admin/AdminLogin';
 const StyledMainDiv = styled.div`
     width: 100%;
     height: 100%;
@@ -25,6 +26,7 @@ const Main = () => {
             <div></div>
             <Routes>
                 <Route path='/admin/*' element={<AdminMain />}></Route>
+                <Route path='/admin/login' element={<AdminLogin />}></Route>
                 <Route path='/member/*' element={ <MemberMain />}></Route>
                 <Route path='/mypage/*' element={<MyPageMain />}></Route>
                 <Route path='/board/adoptionNews/*' element={ <AdoptionNewsMain />} ></Route>

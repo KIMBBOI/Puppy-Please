@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import AdminLogin from './AdminLogin';
 import styled from 'styled-components';
 import AdminAdopt from './AdminAdopt';
 import AdminAdoptDetail from './AdminAdoptDetail';
@@ -13,21 +12,30 @@ const StyledAdminPageMain = styled.div`
     display: flex;
     justify-content: center; 
     align-items: flex-start;
-    justify-content: space-evenly
+    justify-content: space-evenly;
 `;
 
 
 const AdminMain = () => {
+
+    const loginAdminVo = sessionStorage.getItem("loginAdminVo");
+
+
     return (
-        <StyledAdminPageMain>
+        <>
+        {loginAdminVo ? (
+            <StyledAdminPageMain>
             <Routes>
-                <Route path='/login' element={<AdminLogin />}></Route>
                 <Route path='/adoptList' element={<AdminAdopt/>}></Route>
                 <Route path='/adoptList/adoptDetail' element={<AdminAdoptDetail/>}></Route>
                 <Route path='/visitReservation/detail' element={<AdminVisitReservationListItemDetail/>}></Route>
                 <Route path='/visitReservation' element={<AdminVisitReservation/>}></Route>
             </Routes>
-        </StyledAdminPageMain>
+            </StyledAdminPageMain>
+            ) : (
+                alert("관리자만 접근할 수 있습니다.")
+            )}
+        </>
     );
 };
 

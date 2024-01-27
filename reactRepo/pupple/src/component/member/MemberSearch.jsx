@@ -26,7 +26,7 @@ const Form = styled.form`
 `;
 
 const Input = styled.input`
-  width: 300px; /* 너비를 300px로 조정 */
+  width: 300px; 
   padding: 12px;
   margin-bottom: 10px;
   border: 1px solid #ccc;

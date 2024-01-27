@@ -19,7 +19,7 @@ const StyledQuizDiv = styled.div`
         padding: 20px;
         border-radius: 10px;
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        text-align: left; /* 왼쪽 정렬로 변경 */
+        text-align: left; 
     }
 
     & table {
@@ -116,11 +116,11 @@ const QuizMain = () => {
         event.preventDefault();
     
         const formData = new FormData(event.target);
-        const selectedAnswer = formData.get("answer"); // 사용자가 선택한 답변을 가져옵니다.
+        const selectedAnswer = formData.get("answer"); // 사용자가 선택한 답변을 가져옴
         
-        let updatedUserAnswers = [...userAnswers]; // 기존의 userAnswers 배열을 복사합니다.
-        updatedUserAnswers[currentQuestionIndex] = selectedAnswer; // 현재 질문의 인덱스에 사용자가 선택한 답변을 업데이트합니다.
-        setUserAnswers(updatedUserAnswers); // 업데이트된 배열로 userAnswers 상태를 업데이트합니다.
+        let updatedUserAnswers = [...userAnswers]; // 기존의 userAnswers 배열을 복사
+        updatedUserAnswers[currentQuestionIndex] = selectedAnswer; // 현재 질문의 인덱스에 사용자가 선택한 답변을 업데이트
+        setUserAnswers(updatedUserAnswers); // 업데이트된 배열로 userAnswers 상태를 업데이트
         moveToNextQuestion();
     };
 

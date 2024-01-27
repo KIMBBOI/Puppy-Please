@@ -20,12 +20,12 @@ const Table = styled.table`
 const InputRow = styled.tr`
   & > td {
     padding: 10px;
-    text-align: center; /* 가운데 정렬을 위한 스타일 */
+    text-align: center;
   }
 `;
 
 const Input = styled.input`
-  width: 300px; /* 너비를 300px로 조정 */
+  width: 300px; 
   padding: 12px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
@@ -49,7 +49,7 @@ const SubmitButton = styled.input`
 `;
 const ErrorMsg = styled.span`
   color: red;
-  font-size: 12px; /* 폰트 크기를 원하는 크기로 조정하세요 */
+  font-size: 12px; 
   font-weight: bold;
   margin-top: 5px;
   display: block;

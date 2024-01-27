@@ -15,7 +15,7 @@ const StyledAdminPageSidebarDiv = styled.div`
 `;
 
 const SidebarItem = styled.div`
-     margin-bottom: 10px;
+    margin-bottom: 10px;
     font-size: 16px;
     font-weight: bold;
         a {
