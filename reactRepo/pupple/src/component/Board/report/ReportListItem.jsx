@@ -9,6 +9,9 @@ const StyledWrapDiv = styled.div`
     flex-direction: column;
     cursor: pointer;
     text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
 
     img {
         width: 100%;
@@ -28,6 +31,9 @@ const StyledWrapDiv = styled.div`
     span {
         width: 100%;
         height: 15%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 `;
 
@@ -57,7 +63,7 @@ const ReportListItem = ( {a, b, c, vo} ) => {
                       ㄴ패치함수는 비동기적으로 작동하기 때문에.. => useState();
                      => 7. ReportList.jsx
                 */}
-            <span>{a}</span>
+            <span><div>{a}</div></span>
         </StyledWrapDiv>
     );
 };

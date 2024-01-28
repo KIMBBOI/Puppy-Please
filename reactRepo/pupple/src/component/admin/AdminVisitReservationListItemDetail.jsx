@@ -1,57 +1,192 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import AdminPageMainSidebar from './AdminPageMainSidebar';
 
 const StyeldAdminVisitReservationListItemDetailDiv = styled.div`
     width: 100%;
-    height: 100%;
-    background-color: #fcfcfc;
-    
+    height: 100%;    
+
+    td, th {
+        padding: 20px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    td {
+        padding-left: 40px;
+    }
+
+    th {
+        background-color: #fcf9ff;
+        padding-right: 30px;
+        padding-left: 30px;
+    }
+
+    span {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    h2 {
+        width: 650px;
+    }
+
+    button {
+        border-radius: 5px;
+        background-color: #C8ADFF;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        border: none;
+
+        &:hover {
+            background-color: #A080FF;
+        }
+    }
+
     .wrap {
         width: 100%;
         height: 100%;
-        background-color: #f5f5f5;
+        display: flex;
+        flex-direction: column;
+        
 
-        table {
-            width: 100%;
-            height: 80%;
-            background-color: #f5f5f5;
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            
-            & > thead > tr {
-                display: flex;
-                flex-direction: column;
-                background-color: #ffffff;
-            }
-            & > tbody > tr {
-                padding-left: 30px;
-                display: flex;
-                flex-direction: column;
-                background-color: #fafafa;
-            }
-        }
-        .btnArea {
-            width: 100%;
-            height: 20%;
+        & > div:nth-of-type(1) {
             display: flex;
             justify-content: center;
-            align-items: center;
-            background-color: #dddddd;
+            width: 100%;
+            height: 52%;
 
-            button {
-                width: 15%;
-                height: 40%;
+            & > div:nth-of-type(1) > {
+                width: 100%;
+                height: 100%;
+
+                table {
+                    /* padding-top: 40px; */
+                    width: 400px;
+                    height: 100%;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: right;
+
+                    & > thead {
+                        height: 100%;
+
+                        & > tr {
+                            display: flex;
+                            flex-direction: column;
+                            border-top: 1px solid #ddd;
+                        }
+                    }
+
+                    & > tbody{
+                        display: flex;
+
+                        & > tr {
+                            /* padding-left: 50px; */
+                            display: flex;
+                            flex-direction: column;
+                            border-top: 1px solid #ddd;
+                        }
+                    }
+                }    
+            }
+
+
+            &  div:nth-of-type(2) {
+
+                table {
+                    /* padding-top: 40px; */
+                    width: 400px;
+                    height: 100%;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: left;
+
+                    & > thead {
+                        display: flex;
+
+                        & > tr {
+                        display: flex;
+                        flex-direction: column;
+                        border-top: 1px solid #ddd;
+                        }
+                    } 
+                    & > tbody{
+                        display: flex;
+
+                        & > tr {
+                            /* padding-left: 50px; */
+                            display: flex;
+                            flex-direction: column;
+                            /* background-color: #fafafa; */
+                            border-top: 1px solid #ddd;
+                        }
+                    }
+                }    
+            } 
+        }
+        
+
+        & > div:nth-of-type(2) {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            height: 10%;
+            /* margin-top: 20px; */
+
+            & > div:nth-of-type(1) {
+                /* border-top: 1px solid #ddd; */
+                width: 350px;
+                height: 100%;
+                display: flex;
+                justify-content: left;
+
+                & > button:nth-of-type(1) {
+                    width: 35%;
+                    height: 35px;
+                    margin: 30px 10px 0 30px;
+                }
+                & > button:nth-of-type(2) {
+                    width: 35%;
+                    height: 35px;
+                    margin: 30px 10px 0 0;
+                }
+            }
+
+            & > div:nth-of-type(2) {
+                /* border-top: 1px solid #ddd; */
+                width: 350px;
+                height: 100%;
+                display: flex;
+                justify-content: right;
+
+                & > button {
+                    width: 30%;
+                    height: 35px;
+                    margin: 30px 15px 0 10px;
+                }
             }
         }
+    }
+
+    .listBtnAreaA {
+        position: relative;
+        right: -350px;
+        width: 600px;
+        /* background-color: gray; */
+        display: flex;
+        justify-content: center;
     }
 `;
 
 
+
+
 const AdminVisitReservationListItemDetail = () => {
+    const navigate = useNavigate();
     const location = useLocation();
     const vo = location.state.item;
     const [isOk, setIsOk] = useState(false);
@@ -73,11 +208,11 @@ const AdminVisitReservationListItemDetail = () => {
         .then( resp => resp.json() )
         .then( data => {
             if (data.msg === 'success') {
-                alert('성공 !');
+                alert('상담 완료 !');
                 setIsOk(true);
                 setDbVo(data.dbVo);
             } else {
-                alert('실패 ...');
+                alert('완료 실패 ...');
             }
         } )
     }
@@ -98,11 +233,11 @@ const AdminVisitReservationListItemDetail = () => {
         .then( resp => resp.json() )
         .then( data => {
             if (data.msg === 'success') {
-                alert('성공 !');
+                alert('취소 완료 !');
                 setIsOk(true);
                 setDbVo(data.dbVo);
             } else {
-                alert('실패 ...');
+                alert('취소 실패 ...');
             }
         } )
     }
@@ -115,75 +250,128 @@ const AdminVisitReservationListItemDetail = () => {
             <AdminPageMainSidebar />
             <StyeldAdminVisitReservationListItemDetailDiv>
                 <div className='wrap'>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>글번호</th>
-                                <th>예약일시</th>
-                                <th>예약상태</th>
-                                <th>이름</th>
-                                <th>휴대폰</th>
-                                <th>신청일</th>
-                                <th>수정일</th>
-                                <th>삭제여부</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                isOk 
-                                ? 
-                                    (
-                                        <>
-                                            <tr>
-                                                <td>{dbVo.visitNo}</td>
-                                                <td>{dbVo.reservationDate}</td>
-                                                <td>{dbVo.reservationStatus}</td>
-                                                <td>{dbVo.name}</td>
-                                                <td>{dbVo.phoneNumber}</td>
-                                                <td>{dbVo.summitDate}</td>
-                                                    {
-                                                        dbVo.modifyDate === undefined 
-                                                        ?
-                                                            <td>-</td>
-                                                        : 
-                                                            <td>{dbVo.modifyDate}</td>
-                                                    }
-                                                <td>{dbVo.delYn}</td>
-                                            </tr>
-                                        </>
-                                    ) 
-                                : 
-                                    (
-                                        <>
-                                            <tr>
-                                                <td>{vo.visitNo}</td>
-                                                <td>{vo.reservationDate}</td>
-                                                <td>{vo.reservationStatus}</td>
-                                                <td>{vo.name}</td>
-                                                <td>{vo.phoneNumber}</td>
-                                                <td>{vo.summitDate}</td>
-                                                {
-                                                    vo.modifyDate === undefined 
-                                                    ?
-                                                        <td>-</td>
-                                                    : 
-                                                        <td>{vo.modifyDate}</td>
-                                                }
-                                                <td>{vo.delYn}</td>
-                                            </tr>
-                                        </>
-                                    )
-                            }
-                        </tbody>
-                    </table>
-                    {
-                        vo.delYn === 'N' && (
-                            <div className='btnArea'>
-                                <button onClick={ ()=>{handleComplete(vo)} }>상담 완료</button>
-                                <button onClick={ ()=>{handleQuit(vo)} }>상담 취소</button>
+                    <span><h2>게시물관리</h2></span>
+                    <div>
+                        <div> 
+                            <table> 
+                                <thead>
+                                    <tr>
+                                        <th>글번호</th>
+                                        <th>예약일시</th>
+                                        <th>예약상태</th>
+                                        <th>이름</th>
+                                        <th>휴대폰</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        isOk 
+                                        ? 
+                                            (
+                                                <>
+                                                    <tr>
+                                                        <td>{dbVo.visitNo}</td>
+                                                        <td>{dbVo.reservationDate}</td>
+                                                        <td>{dbVo.reservationStatus}</td>
+                                                        <td>{dbVo.name}</td>
+                                                        <td>{dbVo.phoneNumber}</td>
+                                                    </tr>
+                                                </>
+                                            ) 
+                                        : 
+                                            (
+                                                <>
+                                                    <tr>
+                                                        <td>{vo.visitNo}</td>
+                                                        <td>{vo.reservationDate}</td>
+                                                        <td>{vo.reservationStatus}</td>
+                                                        <td>{vo.name}</td>
+                                                        <td>{vo.phoneNumber}</td>
+                                                    </tr>
+                                                </>
+                                            )
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>신청일</th>
+                                        <th>수정일</th>
+                                        <th>삭제여부</th>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        isOk 
+                                        ? 
+                                            (
+                                                <>
+                                                    <tr>
+                                                        <td>{dbVo.summitDate}</td>
+                                                            {
+                                                                dbVo.modifyDate === undefined 
+                                                                ?
+                                                                    <td>-</td>
+                                                                : 
+                                                                    <td>{dbVo.modifyDate}</td>
+                                                            }
+                                                        <td>{dbVo.delYn}</td>
+                                                        <td>&nbsp;</td>
+                                                        <td>&nbsp;</td>
+                                                    </tr>
+                                                </>
+                                            ) 
+                                        : 
+                                            (
+                                                <>
+                                                    <tr>
+                                                        <td>{vo.summitDate}</td>
+                                                        {
+                                                            vo.modifyDate === undefined 
+                                                            ?
+                                                                <td>-</td>
+                                                            : 
+                                                                <td>{vo.modifyDate}</td>
+                                                        }
+                                                        <td>{vo.delYn}</td>
+                                                        <td>&nbsp;</td>
+                                                        <td>&nbsp;</td>
+                                                    </tr>
+                                                </>
+                                            )
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div>
+                        {
+                            vo.delYn === 'N' 
+                            ? 
+                            (
+                                <>
+                                    <div className='updateBtnArea'>
+                                        <button onClick={ ()=>{handleComplete(vo)} }>상담 완료</button>
+                                        <button onClick={ ()=>{handleQuit(vo)} }>상담 취소</button>
+                                    </div>
+                                    <div className='listBtnArea'>
+                                        <button onClick={ ()=>{navigate(-1)} }>목록</button>
+                                    </div>
+                                </>
+                            )
+                            :
+                            <div className='listBtnAreaA'>
+                                <button onClick={ ()=>{navigate(-1)} }>목록</button>
                             </div>
-                        )
-                    }
+                        }
+                    </div>
                 </div>
             </StyeldAdminVisitReservationListItemDetailDiv>
         </>
