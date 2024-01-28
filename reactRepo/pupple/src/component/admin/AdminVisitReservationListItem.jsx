@@ -12,13 +12,11 @@ const StyeldWrapDiv = styled.div`
         display: flex;
         flex-direction: column;
         align-items: center;
-    }
-
-    td, th, table{
-        /* border: 1px solid black; */
+        
     }
 
     table {
+        border-collapse: separate;
         border-top: 1px solid #ddd;
         border-bottom: 1px solid #ddd;
         width: 500px;
@@ -30,10 +28,15 @@ const StyeldWrapDiv = styled.div`
 
     thead {
         border: 1px solid #ddd;
-    }
-    thead > tr {
-        height: 30px;
-        border-bottom: 1px solid #ddd;
+        
+        & > tr {
+            height: 30px;
+            
+            & > th:nth-of-type(2) {
+                border-left: 1px solid #ddd;
+                border-right: 1px solid #ddd;
+            }
+        }
     }
 
     tbody > tr {
@@ -53,7 +56,6 @@ const StyeldWrapDiv = styled.div`
     }
     tbody > tr:hover {
         cursor: pointer;
-        /* font-weight: bold; */
         background-color: #f8f2ff;
     }
 `;

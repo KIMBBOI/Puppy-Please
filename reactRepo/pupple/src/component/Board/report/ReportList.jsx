@@ -10,9 +10,21 @@ const StyledReportListDiv = styled.div`
     position: relative;
 
     button {
-        width: 80px;
-        height: 30px;
+        width: 130px;
+        height: 40px;
+        border-radius: 5px;
+        background-color: #C8ADFF;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        border: none;
+
+        &:hover {
+            background-color: #A080FF;
+        }
     }
+    
     input[type=search] {
         width: 200px;
         height: 30px;
@@ -27,7 +39,7 @@ const StyledReportListDiv = styled.div`
 
     .wrap {
         width: 100%;
-        height: 90%;
+        height: 85%;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-evenly;
@@ -42,7 +54,7 @@ const StyledReportListDiv = styled.div`
     }
     .footer {
         width: 100%;
-        height: 5%;
+        height: 10%;
     }
 `;
 
@@ -122,7 +134,7 @@ const ReportList = () => {
             </div>
             <div className='body'>
                 <button onClick={ 
-                    str === null ? () => {alert('로그인이 필요한 서비스입니다.')} : () => {navigate("/board/report/write");} }>작성하기</button>
+                    str === null ? () => {alert('로그인이 필요한 서비스입니다.')} : () => {navigate("/board/report/write");} }>게시글 작성</button>
             </div>
             <div className='footer'>
                 <ReportPageItem pvo={pvo} />

@@ -9,7 +9,46 @@ const StyeldDitailDiv = styled.div`
     flex-direction: column;
     place-items: center center;
     text-align: center;
+
+    & > div:nth-of-type(2) {
+        width: 600px;
+        display: flex;
+        justify-content: right;
+        margin-top: 20px;
+        
+        & > button {
+            margin-left: 10px;
+            width: 100px;
+            height: 40px;
+            border-radius: 5px;
+            background-color: #C8ADFF;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border: none;
+
+            &:hover {
+                background-color: #A080FF;
+            }
+        }
+    }
     
+    
+    .boardArea {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 600px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
+
+        & > div:nth-of-type(2) {
+            width: 50%;
+            padding: 20px 0 30px 0;
+        }
+    }
 
     & > div {
         width: 100%;
@@ -17,22 +56,38 @@ const StyeldDitailDiv = styled.div`
     }
 
     img {
-        width: 100%;
+        width: 80%;
         height: auto;
         margin: 0 auto;
     }
 
     .controllArea {
+        width: 600px;
         display: flex;
-        justify-content: right;
-        margin: 10px 0 10px 0 ;
+        margin: 20px 0 10px 0 ;
+        
+        & > button {
+            margin-left: 10px;
+            width: 100px;
+            height: 40px;
+            border-radius: 5px;
+            background-color: #C8ADFF;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border: none;
+
+            &:hover {
+                background-color: #A080FF;
+            }
+        }
+
+        & > button:nth-of-type(3) {
+            margin-left: 280px;
+        }
     }
 
-    button {
-        width: 10%;
-        height: 100%;
-        margin-left: 10px;
-    }
 
 `;
 
@@ -40,6 +95,7 @@ const StyeldDitailDiv = styled.div`
 
 const ReportDetailItem = ( {vo} ) => {
     let currentUser = false
+    const navigate = useNavigate();
 
 
 
@@ -53,7 +109,6 @@ const ReportDetailItem = ( {vo} ) => {
 
 
 
-    const navigate = useNavigate();
     const handleEdit = (vo) => {
         console.log('vo :::',vo);
         navigate("/board/report/write", {state: {vo}} );
@@ -75,7 +130,6 @@ const ReportDetailItem = ( {vo} ) => {
                 alert('게시글 삭제 실패 ...');
                 navigate(-1)
             }
-            
         } )
     }
 
@@ -85,19 +139,29 @@ const ReportDetailItem = ( {vo} ) => {
     return (
         <StyeldDitailDiv>
             <div className='boardArea'>
-                <div><h1>{vo.title}</h1></div>
+                <div>
+                    <h2>{vo.title}</h2>
+                </div>
                 <img 
                     src={vo.imagePath}
                     alt={'imageNo' + vo.imageNo}
                 />
-                <div><h3>{vo.content}</h3></div>
-            </div>
-            {currentUser && (
-                <div className='controllArea'>
-                    <button onClick={ () => handleEdit(vo) }>수정</button>
-                    <button onClick={ () => handleDelete(vo) }>삭제</button>
+                <div>
+                    {vo.content}
                 </div>
-            )}
+            </div>
+            {currentUser 
+                ?
+                    (
+                    <div className='controllArea'>
+                        <button onClick={ () => handleEdit(vo) }>수정</button>
+                        <button onClick={ () => handleDelete(vo) }>삭제</button>
+                        <button onClick={ () => navigate(-1) }>목록</button>
+                    </div>
+                    )
+                :
+                    <div><button onClick={ () => navigate(-1) }>목록</button></div>
+            }
         </StyeldDitailDiv>
     );
 };
