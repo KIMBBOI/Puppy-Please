@@ -3,30 +3,38 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledAdoptionNewsWriteDiv = styled.div`
-  width: 100%;
-  height: 100%;
-  
-  h3 {
-    text-align: center;
-  }
-  
-  form {
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    font-size: 12px;
-  }
+    padding: 30px 0 30px 15px;
+    background-color: #e5d8fd44;
+  
+    h3 {
+      text-align: center;
+    }
+    
+    form {
+      display: flex;
+      flex-direction: column;
+      font-size: 12px;
+    }
+    
+    div {
+        margin-bottom: 30px;
+    }
 
-  .title {
-    padding: 3px 8px;
-  }
+    .title {
+      padding: 3px 8px;
+    }
 
-  .content {
-    padding: 4px 8px;
-  }
+    .content {
+      padding: 4px 8px;
+    }
 
-  .submit {
-    display: flex;
-  }
+    .submit {
+      display: flex;
+    }
 
 `;
 
@@ -50,7 +58,7 @@ const AdoptionNewsWrite = ( ) => {
         setTitle(existing.title);
         setContent(existing.content);
     }
-    }, [location.state]  );
+    }, [location.state] );
 
   const handleChangeTitle = (e) => {
     setTitle(e.target.value);
@@ -62,13 +70,13 @@ const AdoptionNewsWrite = ( ) => {
     setFileObj(e.target.files[0]);
   };
 
-  const str = sessionStorage.getItem("loginMemberVo");
-  const vo = JSON.parse(str);
-  const memberNo = vo.memberNo;
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const str = sessionStorage.getItem("loginMemberVo");
+    const vo = JSON.parse(str);
+    const memberNo = vo.memberNo;
 
 
     // < isFetching >
@@ -149,9 +157,9 @@ const AdoptionNewsWrite = ( ) => {
     <StyledAdoptionNewsWriteDiv>
       <div><h3>{location.state ? '게시글 수정' : '게시글 작성'}</h3></div>
       <form onSubmit={handleSubmit}>
-        <input type="text" className="title" placeholder="제목을 작성하세요" onChange={handleChangeTitle} />
+        <input type="text" className="title" value={title} placeholder="제목을 작성하세요" onChange={handleChangeTitle} />
         <br />
-        <textarea className="content" cols="30" rows="10" placeholder="내용을 입력하세요" onChange={handleChangeContent} />
+        <textarea className="content" cols="30" rows="10" value={content} placeholder="내용을 입력하세요" onChange={handleChangeContent} />
         <br />
         <input type="file" className="file" onChange={handleChangeFile} />
         <br />

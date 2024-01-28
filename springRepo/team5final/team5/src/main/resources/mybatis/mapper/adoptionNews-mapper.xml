@@ -57,8 +57,8 @@
 				    , N.IMAGE_NO
 				    , N.TITLE
 				    , N.CONTENT
-				    , N.ENROLL_DATE
-				    , N.MODIFY_DATE
+				    , TO_CHAR(N.ENROLL_DATE, 'YYYY-MM-DD HH24:MI') AS ENROLL_DATE
+		    		, TO_CHAR(N.MODIFY_DATE, 'YYYY-MM-DD HH24:MI') AS MODIFY_DATE
 				    , N.DEL_YN
 				    , I.IMAGE_PATH
 				    , M.NICK AS WRITER_NICK 
@@ -72,8 +72,10 @@
 					NEWS_AFTER_ADOPTION_NO DESC	
 			) T
 		)
+		WHERE RNUM BETWEEN #{startRow} AND #{lastRow}
 	</select>
 	
+	<!-- 전체 게시글 갯수 조회 -->
 	<select id='listCount' resultType="Integer">
 		SELECT 
 			COUNT(*) as cnt 
@@ -109,7 +111,7 @@
 	</select>
 	
 	<!-- 게시글 수정 -->
-	<update id="editBard">
+	<update id="editBoard">
 		UPDATE 
 			NEWS_AFTER_ADOPTION
 	    SET 

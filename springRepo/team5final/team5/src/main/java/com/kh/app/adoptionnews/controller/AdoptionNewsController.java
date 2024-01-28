@@ -28,16 +28,17 @@ public class AdoptionNewsController {
 		
 		//전체 게시글 갯수 조회
 		int listCount = service.selectBoardCount();
-		
-		System.out.println(pno);
+		System.out.println("listCount : " + listCount);
 		
 		String currentPage_ = pno;							//pno 받아오기. "1" 안됨 변수로!
+		if(currentPage_ == null) {
+			currentPage_ = "1";
+		}
 		int currentPage = Integer.parseInt(currentPage_);	//현재 페이지 (화면에서 전달받기)
 		int pageLimit = 5;									// 페이징 영역 페이지 갯수 (페이지를 몇개씩 띄울껀지)
-		int boatdLimit = 8;									// 한 페이지에 보여줄 게시글 갯수
-		PageVo pvo = new PageVo(listCount, currentPage, pageLimit, boatdLimit);
-		System.out.println("전체 게시글 갯수 조회 pvo : " + pvo);
-		
+		int boardLimit = 9;									// 한 페이지에 보여줄 게시글 갯수
+		PageVo pvo = new PageVo(listCount, currentPage, pageLimit, boardLimit);
+		System.out.println("pvo : " + pvo);
 		
 		//목록조회
 		List<AdoptionNewsVo> voList = service.list(pvo);
@@ -96,8 +97,6 @@ public class AdoptionNewsController {
 	//수정
 	@PostMapping("edit")
 	public Map<String, String> edit(AdoptionNewsVo vo , MultipartFile file) throws Exception {
-		
-		System.out.println(" 수정 vo : " + vo);
 		
 		//이미지 업데이트
 		String imagePath = saveFile(file);

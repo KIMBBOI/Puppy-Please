@@ -7,8 +7,6 @@ const StyledAdoptionWriteDiv = styled.div`
     height: auto;
     display: flex;
     flex-direction: column;
-    /* place-items: center center; */
-    /* margin-right: 15px; */
     padding: 30px 0 30px 15px;
     background-color: #e5d8fd44;
     
@@ -159,16 +157,13 @@ const AdoptionWrite = ( ) => {
                         if (data.boardMsg === 'board write good') {
                             alert('게시글 등록 완료하였습니다.');
                             navigate('/board/adoption/list');
-                            console.log("이미지오류로 작성싫=패 : " , data.imgMsg );
                         } else {
                             alert('게시글 등록 실패하였습니다.');
                             navigate("/board/adoption/write");
-                            console.log("유기견오류로 작성싫=패 : " , data.dogMsg );
                         }
                     } else {
                         alert('게시글 등록 실패하였습니다.');
                         navigate("/board/adoption/write");
-                        console.log("게시글오류로 작성싫=패 : " , data.boardMsg );
                     }
                 } else {
                     alert("이미지 업로드 실패");

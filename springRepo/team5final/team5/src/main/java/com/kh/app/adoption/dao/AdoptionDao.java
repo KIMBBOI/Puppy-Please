@@ -6,14 +6,15 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.app.adoption.vo.AdoptionVo;
+import com.kh.app.page.vo.PageVo;
 
 @Repository
 public class AdoptionDao {
 	
 	// 입양 게시글 목록
-	public List<AdoptionVo> list(SqlSessionTemplate sst) {
+	public List<AdoptionVo> list(SqlSessionTemplate sst, PageVo pvo) {
 		System.out.println("에러확인 dao : " + sst.selectList("AdoptionMapper.list"));
-		return sst.selectList("AdoptionMapper.list");
+		return sst.selectList("AdoptionMapper.list", pvo);
 	}
 	
 	// 전체 게시글 갯수 조회

@@ -20,7 +20,7 @@ public class AdoptionService {
 	
 	// 입양 게시글 목록
 	public List<AdoptionVo> list(PageVo pvo) {
-		return dao.list(sst);
+		return dao.list(sst, pvo);
 	}
 
 	// 전체 게시글 갯수 조회

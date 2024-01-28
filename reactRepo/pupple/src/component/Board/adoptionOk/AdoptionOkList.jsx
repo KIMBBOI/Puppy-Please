@@ -18,7 +18,7 @@ const AdoptionOkListDiv = styled.div`
         gap: 80px 50px; /* 열과 행 사이의 간격 조절 */
         padding: 30px 0;
         /* grid-template-rows: 1.5fr;  */
-        grid-template-columns: 6fr 7fr 6fr;
+        grid-template-columns: 1fr 1fr 1fr;
         // grid-template-columns: repeat(3, 1fr); 3개의 열로 구성
         
         place-items: center center;
