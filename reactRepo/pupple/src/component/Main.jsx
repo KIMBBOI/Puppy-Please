@@ -11,6 +11,7 @@ import AdoptionOkMain from './board/adoptionOk/AdoptionOkMain';
 import MyPageMain from './mypage/MyPageMain';
 import AdminMain from './admin/AdminMain';
 import AdminLogin from './admin/AdminLogin';
+import Home from './Home';
 const StyledMainDiv = styled.div`
     width: 100%;
     height: 100%;
@@ -35,6 +36,7 @@ const Main = () => {
                 <Route path='/board/adoptionOk/*' element={ <AdoptionOkMain />}></Route>
                 <Route path='/board/report/*' element={ <ReportMain />}></Route>
                 <Route path='/board/visit/*' element={ <VisitMain />}></Route>
+                <Route path='/' element={<Home />}></Route>
             </Routes>
             <div></div>
         </StyledMainDiv>

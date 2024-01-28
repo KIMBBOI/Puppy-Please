@@ -9,9 +9,11 @@ const StyledMemberAdoptList = styled.div`
  h2 {
         font-size: 24px;
         margin-bottom: 20px;
-    }
-
-    table {
+        margin-left: 20px;
+      }
+      
+      table {
+        margin-left: 20px;
         width: 100%;
         border-collapse: collapse;
     }
