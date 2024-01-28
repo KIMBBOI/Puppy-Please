@@ -203,7 +203,7 @@ const MemberLogin = () => {
         </CenteredButtonContainer>
       </form>
       <hr />
-      <KakaoLogin />
+      {/* <KakaoLogin /> */}
     </StyledMemberLoginDiv>
     )
 
