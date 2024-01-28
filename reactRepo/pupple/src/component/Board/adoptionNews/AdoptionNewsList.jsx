@@ -36,7 +36,7 @@ const StyledAdoptionNewsListDiv = styled.div`
         // grid-template-columns: repeat(3, 1fr); 3개의 열로 구성
         gap: 50px; /* 열과 행 사이의 간격 조절 */
         padding: 30px 0;
-        grid-template-columns: 6fr 7fr 6fr;
+        grid-template-columns: 1fr 1fr 1fr;
         grid-template-rows: 1fr; 
         place-items: center center;
         
@@ -62,13 +62,25 @@ const StyledAdoptionNewsListDiv = styled.div`
 
 const AdoptionNewsList = () => {
     
-    const loginInfo = sessionStorage.getItem("loginMemberVo");
     const navigate = useNavigate();
+    
+    const loginMemberVo = JSON.parse(sessionStorage.getItem("loginMemberVo"));
+    
+    // loginMemberVo에서 memberNo와 loginAdminVo를 확인
+    const memberNo = loginMemberVo ? loginMemberVo.memberNo : null;
+    const loginAdminVo = loginMemberVo ? loginMemberVo.loginAdminVo : null;
+
+    // '작성하기' 버튼을 표시할 조건: loginMemberVo가 존재하고 loginAdminVo가 1이 아닌 경우
+    const showWriteButton = !!loginMemberVo && loginAdminVo !== 1;
+
+
     
     // 현재 페이지의 URL을 가져옴
     const currentUrl = window.location.href;
+        console.log('currentUrl :::',currentUrl);
     // URL 객체 생성 ( 현재 URL 파싱 )
     const url = new URL(currentUrl);
+        console.log('url :::',url);
     // URLSearchParams 객체 생성 ( URL의 쿼리 문자열 추출 )
     const queryParams = new URLSearchParams(url.search);
     // 특정 쿼리스트링 파라미터 값 가져오기
@@ -93,6 +105,7 @@ const AdoptionNewsList = () => {
         .then( (data) => {
             // < AdoptionNewsListItem 컴포넌트로 값을 넘겨주기 >
             // arr = data.voList;
+            console.log("List Data:", data); // 데이터 콘솔 출력
             setArr(data.voList);
             setPvo(data.pvo);
         } )
@@ -105,11 +118,9 @@ const AdoptionNewsList = () => {
             <StyledAdoptionNewsListDiv>
                 <div className='mark'>입양 후 소식</div>
                 <div className='writeBtn'>
-                    { loginInfo ? (
-                        <button onClick={ () => navigate("/board/adoptionNews/write") }>작성하기</button>
-                    ) : (
-                        <button onClick={ () => alert("로그인 후 이용바랍니다.") }>작성하기</button>
-                    ) }
+                { showWriteButton && (
+                    <button onClick={ () => navigate("/board/adoptionNews/write") }>작성하기</button>
+                )}
                 </div>
                 <div className='wrap'>
                     {

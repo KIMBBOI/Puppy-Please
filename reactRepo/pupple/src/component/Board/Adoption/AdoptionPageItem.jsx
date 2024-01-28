@@ -30,7 +30,7 @@ const AdoptionPageItem = ( {pvo} ) => {
 
                         {pageNumber === pvo.currentPage ? 
                         ( <div>{pageNumber}</div>) : 
-                        ( <Link to={`/board/aoption/list?pno=${pageNumber}`}>{pageNumber}</Link> )
+                        ( <Link to={`/board/adoption/list?pno=${pageNumber}`}>{pageNumber}</Link> )
                             // 11. 백틱 사용해야 올바름 템플릿 리터럴임. 참고할 것 ************************************************
                         }
 
@@ -42,7 +42,7 @@ const AdoptionPageItem = ( {pvo} ) => {
 
             {/* 여기는 다음 버튼 !!! */}
             {pvo.endPage !== pvo.maxPage && (
-                <Link to={`/board/aoption/list?pno=${pvo.endPage + 1}`}>다음</Link>
+                <Link to={`/board/adoption/list?pno=${pvo.endPage + 1}`}>다음</Link>
             )}
 
         </StyledPageItemDiv>

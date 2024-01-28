@@ -5,37 +5,45 @@
 <mapper namespace="AdoptionMapper">
 
     <!-- 입양 신청 리스트 조회 -->
-    <select id="list" resultType="com.kh.app.adoption.vo.AdoptionVo">
-	    SELECT 
-	        A.ADOPTION_BOARD_NO,
-	        A.ADMIN_NO,
-	        A.RESCUE_DOG_NO,
-	        A.DEL_YN,
-	        RD.RESCUE_DOG_NO,
-	        RD.IMAGE_NO,
-	        RD.DOG_NAME,
-	        RD.BREED,
-	        CASE WHEN RD.GENDER_MF = 'M' THEN '남아' 
-	             WHEN RD.GENDER_MF = 'F' THEN '여아'
-	             ELSE RD.GENDER_MF END AS GENDER_MF,
-	        RD.NEUTERING_OX,
-	        RD.AGE,
-	        RD.WEIGHT,
-	        RD.ADOPTION_COMPLETE_YN,
-	        I.IMAGE_PATH
-	    FROM 
-	        ADOPTION_BOARD A
-	    JOIN 
-	        RESCUE_DOG RD ON A.RESCUE_DOG_NO = RD.RESCUE_DOG_NO
-	    JOIN 
-	        IMAGE I ON I.IMAGE_NO = RD.IMAGE_NO
-	    WHERE 
-	        A.DEL_YN = 'N'
-	    AND 
-	        RD.ADOPTION_COMPLETE_YN = 'N'
-	    ORDER BY 
-	        A.ENROLL_DATE DESC
+	<select id="list" resultType="com.kh.app.adoption.vo.AdoptionVo">
+	    SELECT *
+	    FROM (
+	        SELECT ROWNUM RNUM, T.*
+	        FROM (
+	            SELECT 
+	                A.ADOPTION_BOARD_NO,
+	                A.ADMIN_NO,
+	                A.RESCUE_DOG_NO,
+	                A.DEL_YN,
+	                RD.RESCUE_DOG_NO AS RD_RESCUE_DOG_NO, -- 열 이름 변경
+	                RD.IMAGE_NO AS RD_IMAGE_NO, -- 열 이름 변경
+	                RD.DOG_NAME,
+	                RD.BREED,
+	                CASE WHEN RD.GENDER_MF = 'M' THEN '남아' 
+	                     WHEN RD.GENDER_MF = 'F' THEN '여아'
+	                     ELSE RD.GENDER_MF END AS GENDER_MF,
+	                RD.NEUTERING_OX,
+	                RD.AGE,
+	                RD.WEIGHT,
+	                RD.ADOPTION_COMPLETE_YN,
+	                I.IMAGE_PATH
+	            FROM 
+	                ADOPTION_BOARD A
+	            JOIN 
+	                RESCUE_DOG RD ON A.RESCUE_DOG_NO = RD.RESCUE_DOG_NO
+	            JOIN 
+	                IMAGE I ON I.IMAGE_NO = RD.IMAGE_NO
+	            WHERE 
+	                A.DEL_YN = 'N'
+	            AND 
+	                RD.ADOPTION_COMPLETE_YN = 'N'
+	            ORDER BY 
+	                A.ENROLL_DATE DESC
+	        ) T
+	    )
+	    WHERE RNUM BETWEEN #{startRow} AND #{lastRow}
 	</select>
+
     
     <select id='listCount' resultType="Integer">
 		SELECT 
@@ -154,7 +162,7 @@
 			DUAL
 	</select>
 
-    <!-- 입양 신청 수정 -->
+    <!-- 입양 신청 게시글 수정 -->
 	<update id="editBoard">
 	    UPDATE 
 	    	RESCUE_DOG

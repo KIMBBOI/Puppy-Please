@@ -85,6 +85,14 @@ const AoptionNewsDetailItem = ( {vo} ) => {
 
     return (
         <StyledNewsDetatilDiv>
+            <div>
+                {currentUser && (
+                    <div className='controlArea'>
+                        <button className='editBtn' onClick={ () => handleEdit(vo) }>수정</button>
+                        <button className='deleteBtn' onClick={ () => handleDelete(vo) } >삭제</button>
+                    </div>
+                )}
+            </div>
             <div className='detailArea'>
                 <div className='tit'><h2>{vo.title}</h2></div>
                 <div className='date'>{vo.enrollDate}</div>
@@ -93,14 +101,6 @@ const AoptionNewsDetailItem = ( {vo} ) => {
                     src={vo.imagePath} 
                     alt={'imageNo' + vo.imageNo} />
                 <div className='con'><p>{vo.content}</p></div>
-            </div>
-            <div>
-                {currentUser && (
-                    <div className='controlArea'>
-                        <button className='editBtn' onClick={ () => handleEdit(vo) }>수정</button>
-                        <button className='deleteBtn' onClick={ () => handleDelete(vo) } >삭제</button>
-                    </div>
-                )}
             </div>
         </StyledNewsDetatilDiv>
     );

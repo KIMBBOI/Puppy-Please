@@ -28,12 +28,13 @@ const AdoptionNewsPageItem = ( {pvo} ) => {
 
                         <div key={pageNumber}>
 
-                            {pageNumber === pvo.currentPage ? 
-                            ( <div>{pageNumber}</div>) : 
-                            ( <Link to={`/board/aoptionNews/list?pno=${pageNumber}`}>{pageNumber}</Link> )
+                            {
+                                pageNumber === pvo.currentPage ? ( 
+                                    <div>{pageNumber}</div>
+                                ) : ( 
+                                    <Link to={`/board/adoptionNews/list?pno=${pageNumber}`}>{pageNumber}</Link> 
                                 // 11. 백틱 사용해야 올바름 템플릿 리터럴임. 참고할 것 ************************************************
-                            }
-
+                                ) }
                         </div>
 
                     );
@@ -42,7 +43,7 @@ const AdoptionNewsPageItem = ( {pvo} ) => {
 
                 {/* 여기는 다음 버튼 !!! */}
                 {pvo.endPage !== pvo.maxPage && (
-                    <Link to={`/board/aoptionNews/list?pno=${pvo.endPage + 1}`}>다음</Link>
+                    <Link to={`/board/adoptionNews/list?pno=${pvo.endPage + 1}`}>다음</Link>
                 )}
 
         </StyledPageItemDiv>

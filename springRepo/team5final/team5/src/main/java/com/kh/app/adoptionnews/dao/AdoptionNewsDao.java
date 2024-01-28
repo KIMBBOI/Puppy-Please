@@ -26,7 +26,6 @@ public class AdoptionNewsDao {
 
 	// 입양 후 소식 목록
 	public List<AdoptionNewsVo> list(SqlSessionTemplate sst, PageVo pvo) {
-		System.out.println("에러확인 dao : " + sst.selectList("AdoptionNewsMapper.list"));
 		return sst.selectList("AdoptionNewsMapper.list", pvo);
 	}
 	
