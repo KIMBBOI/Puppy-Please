@@ -93,14 +93,15 @@ public class AdoptionController {
 	// 입양신청 작성
 	@PostMapping("write")
 	public Map<String, String> write(AdoptionVo vo, MultipartFile file) throws Exception {
+		
 		System.out.println("vo : " + vo);
+		
 		//이미지 업로드 (1)
 		String imagePath = saveFile(file);
 		AdoptionVo imgVo = new AdoptionVo();
 		imgVo.setImagePath(imagePath);
 		int resultImg = service.insert(imgVo);
 		
-		System.out.println(resultImg);
 		//이미지 시퀀스넘버 조회 (2)
 		vo.setImageNo(service.selectImageSeqNo());
 		
@@ -108,13 +109,10 @@ public class AdoptionController {
 		Map<String, String> map = new HashMap<String, String>();
 		
 		//vo를 통해서 RESCUE_DOG 추가
-		
 		int insertRescueDogResult = service.insertRescueDog(vo);
 		if(insertRescueDogResult != 1){
 			throw new Exception();
 		}
-		
-		
 		
 		// 견종을 기반으로 RESCUE_DOG_NO 조회 (3)
 		String dogNo = service.findDogNoBtBreed(vo.getBreed());
