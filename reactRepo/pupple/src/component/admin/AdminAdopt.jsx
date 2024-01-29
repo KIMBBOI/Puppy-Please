@@ -65,7 +65,6 @@ const AdminAdoptList = () => {
             })
         }
         fetchApplyAndSurveyData();
-        
     }, [])
     const handleDetailAdopt = (selectedAdopt, selectedSurveyData) => {
         navigate("adoptDetail", {state: {selectedAdopt, selectedSurveyData}})
@@ -92,7 +91,11 @@ const AdminAdoptList = () => {
                                     <TableCell>{item.enrollDate}</TableCell>
                                     <TableCell>{item.dogName}</TableCell>
                                     <TableCell>입양신청서</TableCell>
-                                    <TableCell>{item.dogNo}</TableCell>
+                                    <TableCell>
+                                        {item.approveYn === "Y" ? "승인" :
+                                        item.approveYn === "W" ? "대기중" :
+                                        item.approveYn === "N" ? "반려" : ""}                                        
+                                    </TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
