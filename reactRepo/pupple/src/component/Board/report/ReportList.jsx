@@ -36,13 +36,12 @@ const StyledReportListDiv = styled.div`
         padding: 0;
     }
 
-
     .wrap {
         width: 100%;
         height: 85%;
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-evenly;
+        justify-content: left;
         padding-top: 50px;
     }
     .body {
