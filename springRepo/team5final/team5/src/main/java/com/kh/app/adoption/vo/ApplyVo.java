@@ -15,4 +15,5 @@ public class ApplyVo {
 	private String landlordPermissionYn;
 	private String conflictResolution;
 	private String enrollDate;
+	private String approveYn;
 }
