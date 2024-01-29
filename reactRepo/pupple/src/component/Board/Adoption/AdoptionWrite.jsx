@@ -9,6 +9,7 @@ const StyledAdoptionWriteDiv = styled.div`
     flex-direction: column;
     padding: 30px 0 30px 15px;
     background-color: #e5d8fd44;
+    text-align: center;'sogaspdkgsdofginj'
     
     form {
         align-items: center;
