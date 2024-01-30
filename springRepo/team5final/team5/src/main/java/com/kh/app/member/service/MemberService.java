@@ -65,8 +65,8 @@ public class MemberService {
 		    throw new Exception("닉네임에 admin을 포함할 수 없어요.");
 		}
 		// 닉네임의 길이 검사
-		if(nick.length() < 4 || nick.length() > 12) {
-		    throw new Exception("닉네임은 4자 이상 12자 이하이어야 해요.");
+		if(nick.length() < 2 || nick.length() > 12) {
+		    throw new Exception("닉네임은 2자 이상 12자 이하이어야 해요.");
 		}
 		// 핸드폰 번호 검사
 		Pattern phonePattern = Pattern.compile("^01[016789]-\\d{3,4}-\\d{4}$");
