@@ -21,7 +21,7 @@ public class AdoptionOkService {
 	
 	// 게시글 목록 조회
 	public List<AdoptionVo> list(PageVo pvo) {
-		return dao.list(sst); 
+		return dao.list(sst, pvo); 
 	}
 
 

@@ -25,13 +25,13 @@ const StyledMenuItem = styled.div`
         color: #DBE76D;
     }
     & > div:nth-child(2){
-        font-size: 13px;
+        font-size: 14px;
         text-align: center;
+        padding: 15px 8px;
     }
     & > div:nth-child(2) :hover {
         color: #292929;
         border-bottom: 1px solid #292929;
-        
     }
 `;
 

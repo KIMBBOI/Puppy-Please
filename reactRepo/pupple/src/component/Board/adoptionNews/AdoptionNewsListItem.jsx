@@ -4,25 +4,20 @@ import styled from 'styled-components';
 
 const StyledItemDiv = styled.div`
     width: 100%;
-    height: 100%;
+    height: 350px;
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
     cursor: pointer;
 
-    .content {
-        padding: 7px 20px 5px 20px;
-    }
-
     img {
-        width: 100%;
-        height: 100%;
+        width: 400px;
+        height: 350px;
     }
 
     .imgDiv {
-        width: 300px;
-        height: 200px;
+        width: 350px;
+        height: 380px;
         background-image: url(${props =>  props.img.replaceAll("\\" , "/")});
             // 이미지 태그에서는 되는데 여기서는 안됨 => 역슬래시 때문에 안됨 **************
         background-size: cover;
@@ -33,9 +28,12 @@ const StyledItemDiv = styled.div`
     span {
         width: 100%;
         height: auto;
-        font-size: 12px;
         text-align: center;
     }
+
+    h5{ margin: 0; }
+    .tit { font-size: 16.5px; }
+    .content { font-size: 13.5px; padding: 7px 20px 5px 20px; }
 `;
 
 const AdoptionNewsListItem = ( {a, b, c, d, e, vo} ) => {
@@ -57,7 +55,7 @@ const AdoptionNewsListItem = ( {a, b, c, d, e, vo} ) => {
             {
                 
             }
-            <span className='tit'>{b}</span> 
+            <span className='tit'><h5>{b}</h5></span> 
             <span className='content'>{c}</span>
             {/* <div className='date'>{d}</div> */}
         </StyledItemDiv>

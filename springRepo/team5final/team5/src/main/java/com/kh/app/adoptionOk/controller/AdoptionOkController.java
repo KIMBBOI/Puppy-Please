@@ -47,8 +47,8 @@ public class AdoptionOkController {
 		}
 	    int currentPage = Integer.parseInt(currentPage_); 	// 현재 페이지 (화면에서 전달받기)
 	    int pageLimit = 5; 									// 페이징 영역 페이지 갯수 (페이지를 몇개씩 띄울껀지)
-	    int boatdLimit = 6; 								// 한 페이지에 보여줄 게시글 갯수
-	    PageVo pvo = new PageVo(listCount, currentPage, pageLimit, boatdLimit);
+	    int boardLimit = 9; 								// 한 페이지에 보여줄 게시글 갯수
+	    PageVo pvo = new PageVo(listCount, currentPage, pageLimit, boardLimit);
 	    System.out.println("전체 게시글 갯수 조회 pvo : " + pvo);
 
 	    // 목록조회
