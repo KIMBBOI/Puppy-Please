@@ -9,10 +9,10 @@ import AdminVisitReservationListItemDetail from './AdminVisitReservationListItem
 const StyledAdminPageMain = styled.div`
     width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: center; 
-    align-items: flex-start;
-    justify-content: space-evenly;
+    display: grid;
+    grid-template-columns: 1.5fr 4fr 1.5fr;
+    place-items: center center;
+    align-items: baseline;
 `;
 
 

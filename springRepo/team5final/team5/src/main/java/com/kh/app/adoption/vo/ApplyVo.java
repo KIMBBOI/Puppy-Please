@@ -6,6 +6,7 @@ import lombok.Data;
 public class ApplyVo {
 	private String ApplyNo;
 	private String memberNo;
+	private String name;
 	private String rescueDogNo;
 	private String dogName;
 	private String decisionTime;
