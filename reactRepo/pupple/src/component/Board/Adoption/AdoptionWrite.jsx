@@ -3,25 +3,22 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledAdoptionWriteDiv = styled.div`
-    width: 80%;
-    height: auto;
+    width: 70%;
+    height: 90%;
     display: flex;
     flex-direction: column;
-    padding: 30px 0 30px 15px;
+    padding: 30px 0;
+    text-align: center;
     background-color: #e5d8fd44;
-    text-align: center;'sogaspdkgsdofginj'
+    margin: 100px;
     
-    form {
-        align-items: center;
-    }
-
-    div {
-        margin-bottom: 30px;
-    }
-
-    label {
-        margin-right: 100px;
-    }
+    
+    form { align-items: center; font-size: 18.5px; }
+    div { margin-bottom: 30px; }
+    label { margin-right: 100px; }
+    input { width: 35%; height: 30px; font-size: 17.3px; }
+    .submit { width: 45%; }
+    select { width: 22%; height: 30px; font-size: 17.3px; }
 `;
 
 const AdoptionWrite = ( ) => {
@@ -194,6 +191,7 @@ const AdoptionWrite = ( ) => {
                         <select value={breed} onChange={handleChangeBreed}>
                             <option value="0">견종</option>
                             <option value="믹스견">믹스견</option>
+                            <option value="스피츠">스피츠</option>
                             <option value="불독">불독</option>
                             <option value="비숑">비숑</option>
                             <option value="골든리트리버">골든리트리버</option>
@@ -202,10 +200,11 @@ const AdoptionWrite = ( ) => {
                             <option value="프렌치 불독">프렌치 불독</option>
                             <option value="푸들">푸들</option>
                             <option value="말티즈">말티즈</option>
-                            <option value="비글">비글</option>
+                            <option value="비글">시추</option>
                             <option value="포메라니안">포메라니안</option>
                             <option value="요크셔테리어">요크셔테리어</option>
                             <option value="치와와">치와와</option>
+                            <option value="시바견">시바견</option>
                             <option value="진돗개">진돗개</option>
                         </select>
                     </div>
