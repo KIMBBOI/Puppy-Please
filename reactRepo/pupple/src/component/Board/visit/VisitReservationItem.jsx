@@ -61,6 +61,7 @@ const StyeldVisitReservationItemDiv = styled.div`
         font-weight: 600;
         color: #ffffff;
         cursor: pointer;
+        transition: background-color 0.3s;
     }
     .notReadyVo {
         /* width: 100%;
@@ -72,6 +73,9 @@ const StyeldVisitReservationItemDiv = styled.div`
         font-weight: 600;
         color: #ffffff; */
         cursor: default;
+    }
+    .onhover:hover {
+        background-color: #926dff;
     }
 `;
 
@@ -200,14 +204,20 @@ const VisitReservationItem = ({db_DateStrArr}) => {
         <StyeldVisitReservationItemDiv>
             {timeSlots.map((time, index) => (
                 <div 
-                    className={`reservDiv 
-                        ${selectedTime === time         ? 'selected'  : ''} 
-                        ${extractedTimes.includes(time) ? 'extracted' : ''}
-                    `} 
                     key={index}
-                    onClick={
-                        !extractedTimes.includes(time) ? ()=>{handleReservDivClick(time)} : ()=>{}
-                    }
+                    className=
+                        {`reservDiv 
+                            ${selectedTime === time         ? 'selected'  : ''} 
+                            ${extractedTimes.includes(time) ? 'extracted' : ''}
+                        `} 
+                    onClick=
+                        {
+                            !extractedTimes.includes(time) 
+                            ? 
+                                ()=>{handleReservDivClick(time)} 
+                            : 
+                                ()=>{}
+                        }
                 >
                     {time}
                 </div>
@@ -215,7 +225,7 @@ const VisitReservationItem = ({db_DateStrArr}) => {
             <div className='section_button'>
                 <div className='button_inner'>
                     <button 
-                        className={`btn ${selectedDate === null ? 'notReadyVo' : ''}`}
+                        className={`btn ${selectedDate === null ? 'notReadyVo' : 'onhover'}`}
                         onClick={ () => {
                             selectedDate !== null && navigate("/board/visit/reservationInfo", {state:{vo}});
                         }}

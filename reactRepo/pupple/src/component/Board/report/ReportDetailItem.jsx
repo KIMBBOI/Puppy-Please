@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-const StyeldDitailDiv = styled.div`
+const StyeldDetailDiv = styled.div`
     width: 100%;
     height: 100%;
     display: flex;
@@ -87,8 +87,6 @@ const StyeldDitailDiv = styled.div`
             margin-left: 280px;
         }
     }
-
-
 `;
 
 
@@ -110,7 +108,6 @@ const ReportDetailItem = ( {vo} ) => {
 
 
     const handleEdit = (vo) => {
-        console.log('vo :::',vo);
         navigate("/board/report/write", {state: {vo}} );
     }
     const handleDelete = (vo) => {
@@ -137,12 +134,12 @@ const ReportDetailItem = ( {vo} ) => {
 
 
     return (
-        <StyeldDitailDiv>
+        <StyeldDetailDiv>
             <div className='boardArea'>
                 <div>
                     <h2>{vo.title}</h2>
                 </div>
-                <img 
+                <img
                     src={vo.imagePath}
                     alt={'imageNo' + vo.imageNo}
                 />
@@ -162,7 +159,7 @@ const ReportDetailItem = ( {vo} ) => {
                 :
                     <div><button onClick={ () => navigate(-1) }>목록</button></div>
             }
-        </StyeldDitailDiv>
+        </StyeldDetailDiv>
     );
 };
 

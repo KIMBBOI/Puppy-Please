@@ -17,6 +17,7 @@ const StyledDetailDiv = styled.div`
 const ReportDetail = () => {
 
 
+
     const location = useLocation();
     let vo = location.state.vo;
 

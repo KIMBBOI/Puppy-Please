@@ -17,6 +17,15 @@ const StyledVisitReservationDiv = styled.div`
     background-color: #ffffff;
     padding: 20px 0 20px 0;
 
+    span {
+        width: 100%;
+        height: 10%;
+        display: flex;
+        justify-content: center;
+    }
+    h2 {
+        color: #1f1f1f;
+    }
     
     .react-datepicker__day:hover {
         background-color: #ece2ff; 
@@ -154,6 +163,7 @@ const VisitReservation = () => {
 
     return (
         <StyledVisitReservationDiv>
+            <span><h2>예약하기</h2></span>
             <DatePicker
                 inline
                 locale={ko}

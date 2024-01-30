@@ -115,7 +115,7 @@
 	        ,MODIFY_DATE = SYSDATE
             ,DEL_YN = 'Y'
 	    WHERE
-            VISIT_NO = #{memberNo}
+            MEMBER_NO = #{memberNo}
 	</update>
 
 	<!--방문예약 완료/삭제 -->
