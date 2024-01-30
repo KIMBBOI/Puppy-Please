@@ -12,8 +12,8 @@ const AdoptionOkListItemDiv = styled.div`
     cursor: pointer;
 
     img {
-        width: 300px;
-        height: 200px;
+        width: 400px;
+        height: 300px;
     }
 
     .name {

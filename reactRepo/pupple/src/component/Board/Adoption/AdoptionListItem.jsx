@@ -12,8 +12,8 @@ const StyledItemDiv = styled.div`
     cursor: pointer;
 
     img {
-        width: 300px;
-        height: 200px;
+        width: 330px;
+        height: 300px;
         margin-bottom: 5px;
     }
 

@@ -3,38 +3,159 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledAdoptionNewsWriteDiv = styled.div`
-    width: 100%;
+    width: 95%;
     height: 100%;
-    display: flex;
-    flex-direction: column;
-    padding: 30px 0 30px 15px;
+    display: grid;
+    justify-content: center;
+    text-align: center;
     background-color: #e5d8fd44;
+    padding: 30px 50px;
+    margin: 30px 0 60px 0;
+
+    /* text-align: center;
+    text-align: center; */
+
+    & > div {
+        width: 700px;
+        height: 100%;
+        & > h2 {
+            width: 100%;
+            height: 100%;
+            /* margin: 10px 0 0 0; */
+        }
+    }
+
+    & > form {
+        width: 100%;
+        height: 500px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        /* * {
+            border: 1px solid black;
+        } */
+        & > tr:nth-of-type(1) {
+            width: 80%;
+            height: 10%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            & > td:nth-of-type(1) {
+                width: 20%;
+            }
+            & > td:nth-of-type(2) {
+                width: 80%;
+                height: 100%;
+                display: flex;
+                & > input {
+                    width: 90%;
+                    height: 100%;
+                }
+            }
+        }
+        & > tr:nth-of-type(2) {
+            width: 80%;
+            height: 60%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            & > td:nth-of-type(1) {
+                width: 20%;
+            }
+            & > td:nth-of-type(2) {
+                width: 80%;
+                height: 100%;
+                display: flex;
+                & > textarea {
+                    width: 90%;
+                    height: 100%;
+                }
+            }
+        }
+        & > tr:nth-of-type(3) {
+            width: 80%;
+            height: 10%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            & > td:nth-of-type(1) {
+                width: 20%;
+            }
+            & > td:nth-of-type(2) {
+                width: 80%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+
+                & > input {
+                    width: 90%;
+                    height: auto;
+                }
+            }
+        }
+        & > tr:nth-of-type(4) {
+            width: 80%;
+            height: 10%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            & > td:nth-of-type(1) {
+                width: 50%;
+                height: 100%;
+                display: flex;
+                justify-content: right;
+                & > button {
+                    width: 50%;
+                    height: 100%;
+                    border-radius: 5px;
+                    background-color: #C8ADFF;
+                    color: white;
+                    font-weight: bold;
+                    cursor: pointer;
+                    transition: background-color 0.3s;
+                    border: none;
+
+                    &:hover {
+                        background-color: #A080FF;
+                    }
+                }
+            }
+            & > td:nth-of-type(2) {
+                width: 50%;
+                height: 100%;
+                display: flex;
+                & > input {
+                    width: 50%;
+                    height: 100%;
+                    border-radius: 5px;
+                    background-color: #C8ADFF;
+                    color: white;
+                    font-weight: bold;
+                    cursor: pointer;
+                    transition: background-color 0.3s;
+                    border: none;
+                    margin-left: 20px;
+                    &:hover {
+                        background-color: #A080FF;
+                    }
+                }
+            }
+          }
+    }
   
-    h3 {
-      text-align: center;
-    }
     
-    form {
-      display: flex;
-      flex-direction: column;
-      font-size: 12px;
-    }
-    
-    div {
-        margin-bottom: 30px;
-    }
-
-    .title {
-      padding: 3px 8px;
-    }
-
-    .content {
-      padding: 4px 8px;
-    }
-
-    .submit {
-      display: flex;
-    }
 
 `;
 
@@ -157,15 +278,22 @@ const AdoptionNewsWrite = ( ) => {
     <StyledAdoptionNewsWriteDiv>
       <div><h3>{location.state ? '게시글 수정' : '게시글 작성'}</h3></div>
       <form onSubmit={handleSubmit}>
-        <input type="text" className="title" value={title} placeholder="제목을 작성하세요" onChange={handleChangeTitle} />
-        <br />
-        <textarea className="content" cols="30" rows="10" value={content} placeholder="내용을 입력하세요" onChange={handleChangeContent} />
-        <br />
-        <input type="file" className="file" onChange={handleChangeFile} />
-        <br />
-        <div className='submit'>
-        <input type="submit" value={location.state ? '수정하기' : '작성하기'} />
-        </div>
+        <tr>
+          <td>제목</td>
+          <td><input type="text" className="title" value={title} placeholder="제목을 작성하세요" onChange={handleChangeTitle} /></td>
+        </tr>
+        <tr>
+          <td>내용</td>
+          <td><textarea className="content" cols="30" rows="10" value={content} placeholder="내용을 입력하세요" onChange={handleChangeContent} /></td>
+        </tr>
+        <tr>
+          <td>파일첨부</td>
+          <td><input type="file" className="file" onChange={handleChangeFile} /></td>
+        </tr>
+        <tr>
+          <td><button onClick={ () => {navigate("/board/adoptionNews/list")} }>이전</button></td>
+          <td><input type="submit" value={location.state ? '수정하기' : '작성하기'} /></td>
+        </tr>
       </form>
     </StyledAdoptionNewsWriteDiv>
   );

@@ -38,8 +38,9 @@ const StyledAdoptionListDiv = styled.div`
     }
 
     .wrap > div {
-        border: 1px solid #e6e6e6;
+        border: 1px solid #dddddd;
         border-radius: 4px;
+        box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.2); /* 그림자 스타일 조정 */
     }
 `;
 

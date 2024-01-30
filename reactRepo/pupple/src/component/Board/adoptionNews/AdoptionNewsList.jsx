@@ -9,14 +9,15 @@ const StyledAdoptionNewsListDiv = styled.div`
     width: 100%;
     height: 100%;
     padding: 40px 0 40px 0;
+    table-layout: fixed;
 
     .mark {
         margin: 0 0 30px 20px;
     }
 
     button {
-        width: 110px;
-        height: 36px;
+        width: 550px;
+        height: 400px;
         font-size: 14px;
         font-weight: 500;
         border: 1.5px solid #d1b8ffe9;
@@ -39,11 +40,17 @@ const StyledAdoptionNewsListDiv = styled.div`
         grid-template-columns: 1fr 1fr 1fr;
         grid-template-rows: 1fr; 
         place-items: center center;
-        
+        transition: all 1s ease-in;
+        cursor: pointer;
+    }
+
+    .wrap:hover{
+        box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
+        filter: brightness(80%); /* 흐린 효과 */
     }
 
     .wrap > div {
-        border: 1px solid #e6e6e6;
+        border: 1px solid #dddddd;
         border-radius: 4px;
         box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1); /* 그림자 스타일 조정 */
     }
@@ -57,7 +64,10 @@ const StyledAdoptionNewsListDiv = styled.div`
         margin-bottom: 13px;
     }
 
-    
+    .btn{
+        width: 105px;
+        height: 35px;
+    }
 `;
 
 const AdoptionNewsList = () => {
@@ -119,7 +129,7 @@ const AdoptionNewsList = () => {
                 <div className='mark'>입양 후 소식</div>
                 <div className='writeBtn'>
                 { showWriteButton && (
-                    <button onClick={ () => navigate("/board/adoptionNews/write") }>작성하기</button>
+                    <button className='btn' onClick={ () => navigate("/board/adoptionNews/write") }>작성하기</button>
                 )}
                 </div>
                 <div className='wrap'>

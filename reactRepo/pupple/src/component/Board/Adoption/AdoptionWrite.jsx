@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const StyledAdoptionWriteDiv = styled.div`
     width: 70%;
-    height: 90%;
+    height: 80%;
     display: flex;
     flex-direction: column;
     padding: 30px 0;
@@ -12,15 +12,33 @@ const StyledAdoptionWriteDiv = styled.div`
     background-color: #e5d8fd44;
     text-align: center;
     margin: 100px;
-
+    padding: 50px;
     
     
-    form { align-items: center; font-size: 18.5px; }
+    
+    form { align-items: center; font-size: 15.5px; }
     div { margin-bottom: 30px; }
     label { margin-right: 100px; }
-    input { width: 35%; height: 30px; font-size: 17.3px; }
-    .submit { width: 45%; }
-    select { width: 22%; height: 30px; font-size: 17.3px; }
+
+    input { 
+        width: 35%; 
+        height: 27px; 
+        font-size: 15px; 
+        border: 0.7px solid #232323dd;
+        border-radius: 3px; 
+    }
+
+    .submit {
+        width: 105px;
+        height: 30px;
+        font-size: 16px;
+        border: none;
+        background-color: #d1b8ffe9;
+        color: #ffff;
+        margin-top: 60px;
+    }
+
+    select { width: 22%; height: 27px; font-size: 15px; }
 `;
 
 const AdoptionWrite = ( ) => {
@@ -186,7 +204,7 @@ const AdoptionWrite = ( ) => {
                     <br />
                     <div>
                         <label>이름</label>
-                        <input type="text" className="dogName" value={dogName} onChange={handleChangeDogName} />
+                        <input type="text" className="dogName" value={dogName} placeholder=' 이름' onChange={handleChangeDogName} />
                     </div>
                     <div className='breed'>
                         <label>견종선택</label>
@@ -212,26 +230,26 @@ const AdoptionWrite = ( ) => {
                     </div>
                     <div className="genderMf">
                         <label>성별 (M / F)</label>
-                        <input type="text" value={genderMf} onChange={handleChangeGender} />
+                        <input type="text" value={genderMf} placeholder=' 남(Male) / 여(Female)' onChange={handleChangeGender} />
                     </div>
                     <div className="neuteringOx">
                         <label>중성화   (O / X)</label>
-                        <input type="text" value={neuteringOx} onChange={handleChangeNeutering} />
+                        <input type="text" value={neuteringOx} placeholder=' 중성화 여부' onChange={handleChangeNeutering} />
                     </div>
                     <div className="age">
                         <label>나이</label>
-                        <input type="number" value={age} onChange={handleChangeAge} />
+                        <input type="number" value={age} placeholder=' 나이' onChange={handleChangeAge} />
                     </div>
                     <div className="weight">
                         <label>몸무게</label>
-                        <input type="number" value={weight} onChange={handleChangeWeight} />
+                        <input type="number" value={weight} placeholder=' 몸무게' onChange={handleChangeWeight} />
                     </div>
                     <div className="file">
                         <label>사진선택</label>
                         <input type="file" multiple name='file' onChange={handleChangeFile} />
                     </div>
-                    <div className='submit'>
-                        <input type="submit" value={location.state ? '수정' : '등록'} />
+                    <div>
+                        <input type="submit" className='submit' value={location.state ? '수정' : '등록'} />
                     </div>
                 </form>
             </div>
