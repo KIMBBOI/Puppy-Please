@@ -9,35 +9,146 @@ const StyeldReportWriteDiv = styled.div`
     justify-content: center;
     text-align: center;
 
-    div {
-        width: 600px;
-        height: 10%;
-        background-color: rgb(223, 255, 223);
-    }
-        h1 {
+    & > div {
+        width: 700px;
+        height: 100%;
+        & > h2 {
             width: 100%;
             height: 100%;
-            margin: 0;
+            /* margin: 10px 0 0 0; */
         }
+    }
 
-    form {
-        width: 600px;
-        height: 400px;
+    & > form {
+        width: 100%;
+        height: 500px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        background-color: #ffecec;
-
-    }
-        input {
-            width: 70%;
+        /* * {
+            border: 1px solid black;
+        } */
+        & > tr:nth-of-type(1) {
+            width: 80%;
             height: 10%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            & > td:nth-of-type(1) {
+                width: 20%;
+            }
+            & > td:nth-of-type(2) {
+                width: 80%;
+                height: 100%;
+                display: flex;
+                & > input {
+                    width: 90%;
+                    height: 100%;
+                }
+            }
         }
-        textarea {
-            width: 70%;
+        & > tr:nth-of-type(2) {
+            width: 80%;
             height: 60%;
-        } 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            & > td:nth-of-type(1) {
+                width: 20%;
+            }
+            & > td:nth-of-type(2) {
+                width: 80%;
+                height: 100%;
+                display: flex;
+                & > textarea {
+                    width: 90%;
+                    height: 100%;
+                }
+            }
+        }
+        & > tr:nth-of-type(3) {
+            width: 80%;
+            height: 10%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            & > td:nth-of-type(1) {
+                width: 20%;
+            }
+            & > td:nth-of-type(2) {
+                width: 80%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+
+                & > input {
+                    width: 90%;
+                    height: auto;
+                }
+            }
+        }
+        & > tr:nth-of-type(4) {
+            width: 80%;
+            height: 10%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            & > td:nth-of-type(1) {
+                width: 50%;
+                height: 100%;
+                display: flex;
+                justify-content: right;
+                & > button {
+                    width: 50%;
+                    height: 100%;
+                    border-radius: 5px;
+                    background-color: #C8ADFF;
+                    color: white;
+                    font-weight: bold;
+                    cursor: pointer;
+                    transition: background-color 0.3s;
+                    border: none;
+
+                    &:hover {
+                        background-color: #A080FF;
+                    }
+                }
+            }
+            & > td:nth-of-type(2) {
+                width: 50%;
+                height: 100%;
+                display: flex;
+                & > input {
+                    width: 50%;
+                    height: 100%;
+                    border-radius: 5px;
+                    background-color: #C8ADFF;
+                    color: white;
+                    font-weight: bold;
+                    cursor: pointer;
+                    transition: background-color 0.3s;
+                    border: none;
+                    margin-left: 20px;
+                    &:hover {
+                        background-color: #A080FF;
+                    }
+                }
+            }
+        }
+    }
+
 
 `;
 
@@ -227,12 +338,24 @@ const ReportWrite = () => {
     
     return (
         <StyeldReportWriteDiv>
-            <div><h1>{location.state ? '게시글 수정' : '게시글 작성'}</h1></div>
+            <div><h2>{location.state ? '게시글 수정' : '게시글 작성'}</h2></div>
             <form onSubmit={handleSubmit}>
-                <input type="text" name='title' placeholder='제목을 작성하세요' value={title} onChange={handleChangeTitle}/>
-                <textarea name="content" id="" cols="30" rows="10" placeholder='내용을 작성하세요' value={content} onChange={handleChangeContent}/>
-                <input type="file" multiple name='f' onChange={handleChangeFile}/>
-                <input type="submit" value={location.state ? '수정하기' : '작성하기'} />
+                <tr>
+                    <td>제목</td>
+                    <td><input type="text" name='title' placeholder='제목을 작성하세요' value={title} onChange={handleChangeTitle}/></td>
+                </tr>
+                <tr>
+                    <td>내용</td>
+                    <td><textarea name="content" id="" cols="30" rows="10" placeholder='내용을 작성하세요' value={content} onChange={handleChangeContent}/></td>
+                </tr>
+                <tr>
+                    <td>파일첨부</td>
+                    <td><input type="file" multiple name='f' onChange={handleChangeFile}/></td>
+                </tr>
+                <tr>
+                    <td><button onClick={ () => {navigate("/board/report/list");} }>이전</button></td>
+                    <td><input type="submit" value={location.state ? '수정' : '등록'} /></td>
+                </tr>
             </form>
         </StyeldReportWriteDiv>
     );
