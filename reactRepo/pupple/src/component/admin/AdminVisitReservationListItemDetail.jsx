@@ -200,7 +200,6 @@ const AdminVisitReservationListItemDetail = () => {
 
 
     function handleComplete(vo) {
-        alert('완료 클릭ㅋㅋ');
         console.log(vo);
 
         fetch("http://127.0.0.1:8080/app/admin" , {
@@ -225,7 +224,6 @@ const AdminVisitReservationListItemDetail = () => {
 
 
     function handleQuit(vo) {
-        alert('취소 클릭ㅋㅋ');
         console.log(vo);
         
         fetch("http://127.0.0.1:8080/app/admin" , {
@@ -238,7 +236,7 @@ const AdminVisitReservationListItemDetail = () => {
         .then( resp => resp.json() )
         .then( data => {
             if (data.msg === 'success') {
-                alert('취소 완료 !');
+                alert('취소 처리 완료 !');
                 setIsOk(true);
                 setDbVo(data.dbVo);
             } else {

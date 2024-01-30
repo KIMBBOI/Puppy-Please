@@ -124,8 +124,9 @@ const VisitReservation = () => {
 
 
     const [selectedDate, setSelectedDate] = useState(moment()._d);
+    console.log('selectedDate ::: ',selectedDate);
     const [db_DateStrArr,setDbDateStrArr] = useState();
-    
+    console.log('db_DateStrArr :::', db_DateStrArr);
     
 
     const currentDate = moment()._d;
@@ -177,7 +178,7 @@ const VisitReservation = () => {
                 }}
             />
             <div className='line'></div>
-            <VisitReservationItem db_DateStrArr={db_DateStrArr}/>
+            <VisitReservationItem db_DateStrArr={db_DateStrArr} selectedDatePicker={selectedDate}/>
                 {/* *컴포턴트로 전달 가능* */}
         </StyledVisitReservationDiv>
     );

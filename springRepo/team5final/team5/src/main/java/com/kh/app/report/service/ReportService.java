@@ -66,9 +66,18 @@ public class ReportService {
 	}
 	// 이미지 수정
 	public int editImage(ReportVo imgVo) {
-		String str = imgVo.getImagePath().replace("C:\\dev\\team5Repo\\springRepo\\team5final\\team5\\src\\main\\webapp", "http://127.0.0.1:8080/app");
-		imgVo.setImagePath(str);
-		return dao.editImage(sst, imgVo);
+        String originalString = imgVo.getImagePath();
+        int index = originalString.indexOf("\\resources\\upload"); // 기준 문자열의 인덱스를 찾음
+        
+        if (index != -1) {
+            String leftSubstring = originalString.substring(0, index);
+            // "C:\\dev\\team5Repo\\springRepo\\team5final\\team5\\src\\main\\webapp"
+            String str = imgVo.getImagePath().replace(leftSubstring
+            		, "http://127.0.0.1:8080/app");
+            
+            imgVo.setImagePath(str);
+        }
+        return dao.editImage(sst, imgVo);
 	}
 	// 게시글 삭제
 	public int delete(ReportVo vo) {
