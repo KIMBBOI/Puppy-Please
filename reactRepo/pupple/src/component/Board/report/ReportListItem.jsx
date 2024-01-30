@@ -13,7 +13,7 @@ const StyledWrapDiv = styled.div`
     border-radius: 4px;
     box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
     margin: 0 0.45% 0 0.45%;
-
+    overflow: hidden;
     .imgDivWrap {
         width: 100%;
         height: 100%; /* 부모 div에도 크기 지정 */
@@ -30,7 +30,7 @@ const StyledWrapDiv = styled.div`
         transition: transform .5s; /* 시간 설정 */
     }
     .imgDiv:hover {  
-        transform: scale(1.03);   /* 이미지 확대 */
+        transform: scale(1.05);   /* 이미지 확대 */
         transition: transform .5s;  /* 시간 설정 */
     }
 
@@ -40,6 +40,23 @@ const StyledWrapDiv = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+
+    thead {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        & > div:nth-of-type(1) {
+            font-size: 15px;
+            height: 100%;
+            padding: 10px 0 5px 7px;
+        }
+        & > div:nth-of-type(2) {
+            font-size: 10px;
+            height: 100%;
+            line-height: 29px;
+            padding: 5px 7px 5px 0;
+        }
     }
 `;
 
@@ -72,6 +89,10 @@ const ReportListItem = ( {a, b, c, vo} ) => {
                 */}
             </div>
             <span><div>{a}</div></span>
+            <thead>
+                <div>{vo.writerNick}</div>
+                <div>{vo.enrollDate}</div>
+            </thead>
         </StyledWrapDiv>
     );
 };

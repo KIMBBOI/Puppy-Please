@@ -178,10 +178,10 @@ const StyeldAdminVisitReservationListItemDetailDiv = styled.div`
     }
 
     .listBtnAreaA {
-        /* position: relative;
-        right: -350px; */
-        width: 600px;
-        /* background-color: gray; */
+        position: relative;
+        right: -370px;
+        width:100%;
+        height: 100%;
         display: flex;
         justify-content: center;
     }

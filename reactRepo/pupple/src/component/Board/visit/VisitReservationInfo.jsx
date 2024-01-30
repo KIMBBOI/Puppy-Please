@@ -29,6 +29,22 @@ const VisitReservationInfoDiv = styled.div`
                 width: 100%;
                 height: 100%;
                 display: flex;
+                & > div:nth-of-type(1) {
+                    width: 100%;
+                    height: 30%;
+                    border-bottom: 2px solid black;
+                    /* margin: 10px 0 10px 0; */
+                    padding-bottom: 10px;
+                    display: flex;
+
+                    & > div:nth-of-type(1) {
+                        width: 30%;
+                    }
+                    & > div:nth-of-type(2) {
+                        width: 70%;
+                        text-align: right;
+                    }
+                }
                 & > table {
                     border-bottom: 2px solid black;
                     /* margin-bottom: 10px; */
@@ -307,8 +323,10 @@ const VisitReservationInfo = () => {
                             vo === undefined
                             ? 
                                 <>
-                                    <div>나의예약일</div>
-                                    <div>{beforeVo.reservationDate}</div>
+                                    <div>
+                                        <div>예약일</div>
+                                        <div>{beforeVo.reservationDate}</div>
+                                    </div>
                                 </>
                             : 
                                 beforeVo
@@ -326,9 +344,11 @@ const VisitReservationInfo = () => {
                                         </table>
                                     </>
                                 :
-                                    <>
-                                        <div>vo일정</div>
-                                        <div>{vo.reservationDate}</div>
+                                    <>  
+                                        <div>
+                                            <div>예약일</div>
+                                            <div>{vo.reservationDate}</div>
+                                        </div>
                                     </>
                         }
                     </div>

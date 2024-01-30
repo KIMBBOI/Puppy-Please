@@ -7,6 +7,17 @@ const StyledHomeDiv = styled.div`
     flex-direction: column;
     align-items: center; 
     padding: 20px; 
+
+    .imgAni {
+        width: 100%;
+        height: 200px;
+        overflow: hidden;
+    }
+    .imgAni_Bottom {
+        width: 100%;
+        height: 200px;
+        overflow: hidden;
+    }
 `;
 
 const StyledSection = styled.div`
@@ -28,6 +39,13 @@ const StyledMore = styled.span`
     cursor: pointer;
     margin-top: 10px;
     font-size: 16px;
+    transform: scale(1.0); /* 이미지 확대 */
+    transition: transform .5s; /* 시간 설정 */
+    &:hover {
+        font-weight: bold;
+        transform: scale(1.05);   /* 이미지 확대 */
+        transition: transform .5s;  /* 시간 설정 */
+    }
 `;
 
 const StyledList = styled.div`
@@ -42,12 +60,42 @@ const StyledListItem = styled.div`
     flex: 0 0 calc(33.333% - 20px); 
     margin-bottom: 20px;
     list-style: none;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    /* box-shadow: ; */
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    ul {
+        margin: 0;
+        padding: 0;
+    }
+    li {
+        padding: 3px 7px 7px 7px;
+    }
 `;
 
 const StyledImage = styled.img`
+    width: 300px;
+    max-height: 200px; 
+    object-fit: cover;
+    transform: scale(1.0); /* 이미지 확대 */
+    transition: transform .5s; /* 시간 설정 */
+    &:hover {  
+        transform: scale(1.07);   /* 이미지 확대 */
+        transition: transform .5s;  /* 시간 설정 */
+    }
+`;
+const StyledImageBottom = styled.img`
     width: 100%;
     max-height: 200px; 
-    object-fit: cover; 
+    object-fit: cover;
+    transform: scale(1.0); /* 이미지 확대 */
+    transition: transform .5s; /* 시간 설정 */
+    &:hover {  
+        transform: scale(1.07);   /* 이미지 확대 */
+        transition: transform .5s;  /* 시간 설정 */
+    }
 `;
 
 
@@ -158,11 +206,13 @@ const Home = () => {
                    {voList.slice(0,3).map((dog, index) => (
                          <StyledListItem key={index}>
                             <ul onClick={ () => handleClickDogList() }>        
-                                <StyledImage
-                                src={dog.imagePath}
-                                alt='사진'
-                                width='300px'
-                                height='200px' />
+                                <div className='imgAni'>
+                                    <StyledImage
+                                    src={dog.imagePath}
+                                    alt='사진'
+                                    width='300px'
+                                    height='200px' />
+                                </div>
                                 <li  style={{ listStyleType: 'none' }}>{dog.dogName}</li>
                                 <li  style={{ listStyleType: 'none' }}>{dog.breed}</li>
                                 <li  style={{ listStyleType: 'none' }}>{dog.genderMf}</li>
@@ -180,12 +230,14 @@ const Home = () => {
                 <StyledList>
                     {adoptedList.slice(0,3).map((dog, index) => (
                         <StyledListItem key={index}>
-                            <ul onClick={ () => handleClickAdoptedList() }>        
-                                <StyledImage
-                                src={dog.imagePath}
-                                alt='사진'
-                                width='300px'
-                                height='200px' />
+                            <ul onClick={ () => handleClickAdoptedList() }>   
+                                <div className='imgAni'>
+                                    <StyledImage
+                                    src={dog.imagePath}
+                                    alt='사진'
+                                    width='300px'
+                                    height='200px' />
+                                </div>     
                                 <li style={{ listStyleType: 'none' }}>{dog.dogName}</li>
                                 <li  style={{ listStyleType: 'none' }}>{dog.breed}</li>
                                 <li  style={{ listStyleType: 'none' }}>{dog.genderMf}</li>
@@ -196,7 +248,7 @@ const Home = () => {
                 </StyledList>
                 <StyledMore onClick={ () => handleMoreAdoptedList()}>더보기</StyledMore>
             </StyledSection>
-
+            <hr width='100%'/>
             {/* 입양 후 소식목록 */}
             <StyledSection>
                 <StyledTitle>입양 후 소식</StyledTitle>
@@ -204,11 +256,13 @@ const Home = () => {
                     {newsList.slice(0,3).map((dog, index) => (
                         <StyledListItem key={index}>
                             <ul onClick={ () => handleClickNewsList() }>        
-                                <StyledImage
-                                    src={dog.imagePath}
-                                    alt='사진'
-                                    width='300px'
-                                    height='200px' />
+                                <div className='imgAni'>
+                                    <StyledImageBottom
+                                        src={dog.imagePath}
+                                        alt='사진'
+                                        width='300px'
+                                        height='200px' />
+                                </div>
                                 <li  style={{ listStyleType: 'none' }}>제목 : {dog.title}</li>
                                 <li  style={{ listStyleType: 'none' }}>내용 : {dog.content}</li>
                                 <li  style={{ listStyleType: 'none' }}>작성자 : {dog.writerNick}</li>
@@ -226,11 +280,13 @@ const Home = () => {
                     {reportList.slice(0,3).map((dog, index) => (
                         <StyledListItem key={index}>
                             <ul onClick={() => handleClickReportList()}> 
-                                <StyledImage
-                                    src={dog.imagePath}
-                                    alt='사진'
-                                    width='300px'
-                                    height='200px' />
+                                <div className='imgAni_Bottom'>
+                                    <StyledImageBottom
+                                        src={dog.imagePath}
+                                        alt='사진'
+                                        width='300px'
+                                        height='200px' />
+                                </div>
                                 <li  style={{ listStyleType: 'none' }}>제목 : {dog.title}</li>
                                 <li  style={{ listStyleType: 'none' }}>내용 : {dog.content}</li>
                                 <li  style={{ listStyleType: 'none' }}>작성자 : {dog.writerNick}</li>

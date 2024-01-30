@@ -12,7 +12,7 @@ const StyledMyPageMainDiv = styled.div`
     width: 100%;
     height: 100%;
     display: grid;
-    grid-template-columns: 1.5fr 4fr 1.5fr;
+    grid-template-columns: 1.5fr 5.5fr;
     place-items: center center;
     align-items: baseline;
 `;
