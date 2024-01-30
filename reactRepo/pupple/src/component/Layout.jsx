@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 const StyledLayoutDiv = styled.div`
     width: 100vw;
-    height: 100vh;
+    height: 1200px;
     display: grid;
     grid-template-rows: 3fr 1.5fr 10fr 2fr;
     grid-template-columns: 1fr;

@@ -4,7 +4,7 @@ import { useAuth } from '../PuppleContext';
 import styled from 'styled-components';
 
 const StyledMemberInfoEditDiv = styled.div`
-
+  margin-bottom: 100px;
 `;
 
 const Form = styled.form`

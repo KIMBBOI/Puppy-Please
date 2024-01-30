@@ -4,7 +4,6 @@
 
     const StyledMemberAdoptDetail = styled.div`
     padding: 20px;
-    background-color: #f0f0f0;
     `;
 
     const Form = styled.form`

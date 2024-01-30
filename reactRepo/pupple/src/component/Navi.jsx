@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const StyledNaviDiv = styled.div`
     width: 100%;
-    height: 40%;
+    height: 60px;
     background-color: #C8ADFF;
     color: black;
     display: grid;
@@ -14,8 +14,8 @@ const StyledNaviDiv = styled.div`
     grid-auto-columns: 1fr;
     grid-auto-flow: column;
     place-items: center center;
-    font-size: 21px;
-    margin: 50px 0 50px 0;
+    font-size: 25px;
+    margin: 20px;
 `;
 
 const StyledMenuItem = styled.div`

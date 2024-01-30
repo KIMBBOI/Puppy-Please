@@ -21,7 +21,7 @@ const StyledHeaderDiv = styled.div`
     & > .logo{
         background-image: url(${projectlogo});
         background-repeat: no-repeat;
-        background-size: 25%;
+        background-size: 40%;
         background-position-x: right;
         background-position-y: center;
         cursor: pointer;
