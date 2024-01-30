@@ -29,7 +29,6 @@
     `;
 
     const Input = styled.input`
-    width: 80%;
     padding: 12px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
@@ -61,7 +60,16 @@
     resize: vertical;
     `;
 
+    const RadioLabel = styled.label`
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    cursor: pointer;
 
+    input[type='radio'] {
+        margin-right: 5px;
+    }
+    `;
     const MemberAdoptDetail = () => {
         const navigate = useNavigate();
         const location = useLocation();
@@ -191,7 +199,8 @@
                                 <td>임대한 주택의 경우 집주인의 동의를 얻으셨나요?</td>
                                 </InputRow>
                             <InputRow>
-                                <td><label>
+                            <td>
+                                <RadioLabel>
                                 <Input
                                     type='radio'
                                     name='landlordPermissionYn'
@@ -199,19 +208,19 @@
                                     onChange={handleInputChange}
                                     checked={vo.landlordPermissionYn === 'Y'} 
                                 />
-                                    예
-                                </label>
-                                <label>
-                                    
+                                예
+                                </RadioLabel>
+                                <RadioLabel>
                                 <Input
                                     type='radio'
                                     name='landlordPermissionYn'
                                     value='N'
                                     onChange={handleInputChange}
                                     checked={vo.landlordPermissionYn === 'N'} 
-                                />아니오
-                                </label>
-                                </td>
+                                />
+                                아니오
+                                </RadioLabel>
+                            </td>
                             </InputRow>
                             <InputRow>
                                 <td>소음이나 위생 등으로 인한 이웃과의 마찰로 입양동물의 양육이 불가능해질 경우 어떻게 하실건가요?</td>

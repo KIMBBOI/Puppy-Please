@@ -8,8 +8,13 @@ const AdminLoginDiv = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: #f4f4f4; 
+    width: 50%;
 
+  & h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
   & form {
     background: white;
     padding: 40px;
@@ -18,9 +23,11 @@ const AdminLoginDiv = styled.div`
     width: 100%;
     max-width: 400px; 
   }
+  
 
   & table {
     width: 100%;
+    border-collapse: collapse;
   }
 
   & td {
@@ -28,11 +35,39 @@ const AdminLoginDiv = styled.div`
   }
 
   & input {
-    width: 100%;
-    padding: 10px;
+    padding: 12px;
     margin-bottom: 20px; 
     border: 1px solid #ccc;
     border-radius: 4px; 
+    text-align: center;
+  }
+  & input[type="text"],
+  & input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+  }
+  & input[type="button"] {
+    background-color: #5C6BC0; 
+    color: white; 
+    padding: 12px 20px; 
+    margin: 5px 0; 
+    border: none;
+    border-radius: 5px; 
+    font-size: 16px; 
+    font-weight: bold;
+    cursor: pointer; 
+    transition: background-color 0.3s, box-shadow 0.3s; 
+    float: right;
+    clear: both;
+    display: block;
+  }
+  & input[type="button"]:hover {
+    background-color: #3F51B5; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
   }
 
   & button {
@@ -45,7 +80,6 @@ const AdminLoginDiv = styled.div`
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
   }
-
   & button:hover {
     background-color: #3F51B5; 
   }
@@ -100,7 +134,9 @@ const AdminLogin = () => {
         })
         navigate("/");
     };
-
+    const handleMemberLogin = () => {
+        navigate("/member/login");
+    }
 
 
     return (
@@ -111,12 +147,20 @@ const AdminLogin = () => {
             <form onSubmit={handleAdminLogin}>
                 <table>
                     <tbody>
+                    <tr>
+                        <td>
+                            <h1>관리자 로그인</h1>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> 
+                            <input type="button" onClick={handleMemberLogin} value={'회원'} />
+                        </td>
+                    </tr>
                         <tr>
-                            <td>아이디</td>
                             <td><input type="text" name="id" onChange={handleInputChange} placeholder='아이디' /></td>
                         </tr>
                         <tr>
-                            <td>비밀번호</td>
                             <td><input type="password" name="pwd" onChange={handleInputChange} placeholder='비밀번호' /></td>
                         </tr>
                         <tr>

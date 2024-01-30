@@ -160,6 +160,7 @@ const QuizMain = () => {
         <StyledQuizDiv>
         {quizData.length > 0 && (
             <form onSubmit={handleAnswerSubmit}>
+                <h2>퀴즈 {quizData[currentQuestionIndex].id}/10</h2>
             <table>
                 <tbody>
                 <tr>

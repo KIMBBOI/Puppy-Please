@@ -9,6 +9,7 @@ const StyledMemberAdoptList = styled.div`
     justify-content: center; 
     align-items: center; 
     justify-content: space-evenly;
+    width: 100%;
 `;
 const StyledTable = styled.table`
     width: 100%;
@@ -40,7 +41,7 @@ const TableRow = styled.tr`
 
 const TableCell = styled.td`
     padding: 10px;
-    text-align: left;
+    text-align: center;
 `;
 
 const NoDataMessage = styled.p`

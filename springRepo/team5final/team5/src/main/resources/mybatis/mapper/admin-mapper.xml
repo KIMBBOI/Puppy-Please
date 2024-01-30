@@ -23,8 +23,10 @@
     		, A.CONFLICTRESOLUTION
     		, A.ENROLL_DATE
     		, A.APPROVE_YN
+    		, M.NAME
     	FROM APPLY A
     	JOIN RESCUE_DOG RD ON RD.RESCUE_DOG_NO = A.RESCUE_DOG_NO
+    	JOIN MEMBER M ON M.MEMBER_NO = A.MEMBER_NO
     		
     </select>
     

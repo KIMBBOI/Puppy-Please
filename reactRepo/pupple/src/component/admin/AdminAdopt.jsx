@@ -7,6 +7,7 @@ const StyledAdminAdoptList = styled.div`
     justify-content: center; 
     align-items: center; 
     justify-content: space-evenly;
+    width: 100%;
 `;
 
 const TableContainer = styled.div`
@@ -40,8 +41,9 @@ const TableRow = styled.tr`
 `;
 
 const TableCell = styled.td`
+    margin: 20px;
     padding: 10px;
-    text-align: left;
+    text-align: center;
 `;
 
 const NoDataMessage = styled.p`
@@ -80,6 +82,7 @@ const AdminAdoptList = () => {
                         <TableHeader>
                             <tr>
                                 <th>날짜</th>
+                                <th>신청자 이름</th>
                                 <th>강아지 이름</th>
                                 <th>신청서</th>
                                 <th>승인여부</th>
@@ -89,6 +92,7 @@ const AdminAdoptList = () => {
                             {adoptData.map((item, index) => (
                                 <TableRow key={index} onClick={() => handleDetailAdopt(item, surveyData[index])}>
                                     <TableCell>{item.enrollDate}</TableCell>
+                                    <TableCell>{item.name}</TableCell>
                                     <TableCell>{item.dogName}</TableCell>
                                     <TableCell>입양신청서</TableCell>
                                     <TableCell>

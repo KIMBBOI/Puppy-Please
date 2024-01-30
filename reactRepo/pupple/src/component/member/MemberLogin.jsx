@@ -15,7 +15,7 @@ const StyledMemberLoginDiv = styled.div`
   & h1 {
     font-size: 24px;
     margin-bottom: 20px;
-    text-align: center; /* 가운데 정렬 추가 */
+    text-align: center; 
   }
 
   & form {

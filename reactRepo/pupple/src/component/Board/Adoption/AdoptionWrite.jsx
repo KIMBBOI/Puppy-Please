@@ -10,7 +10,9 @@ const StyledAdoptionWriteDiv = styled.div`
     padding: 30px 0;
     text-align: center;
     background-color: #e5d8fd44;
+    text-align: center;
     margin: 100px;
+
     
     
     form { align-items: center; font-size: 18.5px; }
