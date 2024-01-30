@@ -44,6 +44,30 @@ const StyeldDetailDiv = styled.div`
         border-radius: 4px;
         box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
 
+        & > div:nth-of-type(1) {
+            display: flex;
+            width: 100%;
+            padding: 20px 0 0 67px;
+        }
+        & > thead:nth-of-type(1) {
+            display: flex;
+            justify-content: left;
+            width: 475px;
+            & > div:nth-of-type(1) {
+                width: 15%;
+                padding: 0 5px 5px 0;
+                margin: 0 0 10px 0;
+                font-size: 15px;
+                border-bottom: 1px solid #ddd;
+            }
+            & > div:nth-of-type(2) {
+                width: 85%;
+                padding: 0 230px 5px 5px;
+                margin: 0 0 10px 0;
+                font-size: 15px;
+                border-bottom: 1px solid #ddd;
+            }
+        }
         & > div:nth-of-type(2) {
             width: 50%;
             padding: 20px 0 30px 0;
@@ -137,8 +161,12 @@ const ReportDetailItem = ( {vo} ) => {
         <StyeldDetailDiv>
             <div className='boardArea'>
                 <div>
-                    <h2>{vo.title}</h2>
+                    <h3>{vo.title}</h3>
                 </div>
+                <thead>
+                    <div>{vo.writerNick}</div>
+                    <div>{vo.enrollDate}</div>
+                </thead>
                 <img
                     src={vo.imagePath}
                     alt={'imageNo' + vo.imageNo}
