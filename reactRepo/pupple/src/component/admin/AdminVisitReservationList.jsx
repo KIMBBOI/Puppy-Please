@@ -6,7 +6,7 @@ import AdminVisitReservationListItem from './AdminVisitReservationListItem';
 
 const StyledAdminVisitReservation = styled.div`
     width: 100%;
-    height: 620px;
+    height: 100%;
 
     span {
         width: 100%;
@@ -252,8 +252,8 @@ const AdminVisitReservationList = () => {
                     <div>
                         <input 
                             type="checkbox" 
-                            name="reservationStatus"        // undefined : 초기값 없어도 체크
-                            checked={reservationStatus === '' || reservationStatus === undefined} 
+                            name="reservationStatus"        
+                            checked={reservationStatus === '' || reservationStatus === undefined} // undefined : 초기값 없어도 체크
                             onChange={() => handleStatus('')} 
                             id='all'/>
                         <label for='all'>전체조회</label>

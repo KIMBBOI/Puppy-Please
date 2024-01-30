@@ -6,8 +6,17 @@ import ReportPageItem from './ReportPageItem';
 
 const StyledReportListDiv = styled.div`
     width: 100%;
-    height: 1000px;
+    height: 1100px;
     position: relative;
+
+    span {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    h2 {
+        color: #1f1f1f;
+    }
 
     button {
         width: 130px;
@@ -36,14 +45,13 @@ const StyledReportListDiv = styled.div`
         padding: 0;
     }
 
-
     .wrap {
         width: 100%;
-        height: 85%;
+        height: 82%;
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-evenly;
-        padding-top: 50px;
+        justify-content: left;
+        padding-top: 25px;
     }
     .body {
         width: 100%;
@@ -54,7 +62,7 @@ const StyledReportListDiv = styled.div`
     }
     .footer {
         width: 100%;
-        height: 10%;
+        height: 5%;
     }
 `;
 
@@ -116,6 +124,7 @@ const ReportList = () => {
 
     return (
         <StyledReportListDiv>
+            <span><h2>제보게시판</h2></span>
             <div className='wrap'>
                 {
                     arr.map( (vo) => {

@@ -23,6 +23,7 @@ const StyeldAdminVisitReservationListItemDetailDiv = styled.div`
     }
 
     span {
+        padding-top: 40px;
         width: 100%;
         display: flex;
         justify-content: center;
@@ -30,6 +31,7 @@ const StyeldAdminVisitReservationListItemDetailDiv = styled.div`
 
     h2 {
         width: 650px;
+        margin-left: 10px;
     }
 
     button {
@@ -48,7 +50,7 @@ const StyeldAdminVisitReservationListItemDetailDiv = styled.div`
 
     .wrap {
         width: 100%;
-        height: 100%;
+        height: 600px;
         display: flex;
         flex-direction: column;
         
@@ -57,14 +59,17 @@ const StyeldAdminVisitReservationListItemDetailDiv = styled.div`
             display: flex;
             justify-content: center;
             width: 100%;
-            height: 52%;
+            height: 65%;
+            /* background-color: black; */
+            
 
             & > div:nth-of-type(1) > {
                 width: 100%;
                 height: 100%;
+                background-color: black;
 
                 table {
-                    /* padding-top: 40px; */
+                    padding-top: 30px;
                     width: 400px;
                     height: 100%;
                     display: flex;
@@ -98,7 +103,7 @@ const StyeldAdminVisitReservationListItemDetailDiv = styled.div`
             &  div:nth-of-type(2) {
 
                 table {
-                    /* padding-top: 40px; */
+                    padding-top: 30px;
                     width: 400px;
                     height: 100%;
                     display: flex;
@@ -147,12 +152,12 @@ const StyeldAdminVisitReservationListItemDetailDiv = styled.div`
                 & > button:nth-of-type(1) {
                     width: 35%;
                     height: 35px;
-                    margin: 30px 10px 0 30px;
+                    margin: 0px 20px 0 15px;
                 }
                 & > button:nth-of-type(2) {
                     width: 35%;
                     height: 35px;
-                    margin: 30px 10px 0 0;
+                    /* margin: 30px 10px 0 0; */
                 }
             }
 
@@ -166,15 +171,15 @@ const StyeldAdminVisitReservationListItemDetailDiv = styled.div`
                 & > button {
                     width: 30%;
                     height: 35px;
-                    margin: 30px 15px 0 10px;
+                    margin: 0px 15px 0 10px;
                 }
             }
         }
     }
 
     .listBtnAreaA {
-        position: relative;
-        right: -350px;
+        /* position: relative;
+        right: -350px; */
         width: 600px;
         /* background-color: gray; */
         display: flex;
@@ -253,7 +258,7 @@ const AdminVisitReservationListItemDetail = () => {
                     <span><h2>게시물관리</h2></span>
                     <div>
                         <div> 
-                            <table> 
+                            <table className='leftTable'> 
                                 <thead>
                                     <tr>
                                         <th>글번호</th>
@@ -296,7 +301,7 @@ const AdminVisitReservationListItemDetail = () => {
                         </div>
                         
                         <div>
-                            <table>
+                            <table className='rightTable'>
                                 <thead>
                                     <tr>
                                         <th>신청일</th>
