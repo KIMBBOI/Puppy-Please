@@ -216,8 +216,6 @@ const VisitReservationInfo = () => {
         .then( data => {
             if(data.msg === "success"){
                 setBeforeVo(data.dbVo);
-            } else {
-                alert('예약 내역 없음');
             }
         } )
         ;
@@ -257,7 +255,7 @@ const VisitReservationInfo = () => {
     {/* 취소 UPDATE */}
     function handleQuit() {
         let editVo = { 'memberNo': beforeVo.memberNo};
-        fetch("http://127.0.0.1:8080/app/visit/quit" , {
+        fetch("http://127.0.0.1:8080/app/visit" , {
             method: "delete" ,
             headers: {
                 'Content-Type': 'application/json',

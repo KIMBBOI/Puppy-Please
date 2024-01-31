@@ -15,13 +15,14 @@ const StyledVisitReservationDiv = styled.div`
     flex-direction: column;
     align-items: center;
     background-color: #ffffff;
-    padding: 20px 0 20px 0;
+    padding: 0 0 20px 0;
 
     span {
         width: 100%;
-        height: 10%;
+        height: 6.5%;
         display: flex;
         justify-content: center;
+        margin-bottom: 20px;
     }
     h2 {
         color: #1f1f1f;
@@ -149,8 +150,6 @@ const VisitReservation = () => {
             if(data.msg === "success"){
                 setDbDateStrArr(data.reservationDateArr);
                     // *컴포턴트로 전달 가능*
-            }else{
-                alert('예약현황 조회 실패 ...')
             }
         } )
         ;
