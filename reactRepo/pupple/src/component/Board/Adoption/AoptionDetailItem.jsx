@@ -3,34 +3,108 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledAdoptionDetailItem = styled.div`
-    width: 80%;
-    height: 90%;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    place-items: center center;
+    align-items: center;
     background-color: #e5d8fd44;
     text-align: center;
+    padding-bottom: 20px;
+
+    div {
+        padding: 7px;
+    }
 
     img {
-        width: 550px;
-        height: 500px;
+        width: 450px;
+        height: 550px;
         padding: 30px;
     }
 
-    .date {
-        margin-right: 250px; /* 원하는 간격 조절 */
-        font-size: 13px;
-        margin-bottom: 9px;
-        display: inline-block;
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
     }
 
-    .name {
-        font-size: 15px;
-        font-weight: bold; /* 폰트 굵기 추가 */
+    th,
+    td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+
+    .controlArea {
+        /* margin-top: 20px; */
+        display: flex;
+        /* justify-content: space-between; */
+        align-items: center;
+    }
+    .editBtn {
+        padding: 10px 20px;
+        font-size: 14px;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: #cfb7fd;
+        color: #fff;
+    }
+
+    .okBtn {
+        padding: 10px 20px;
+        font-size: 14px;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: #cfb7fd;
+        color: #fff;
+    }
+    
+
+    form {
+        width: 100%;
+        padding: 20px;
+        background-color: #fff;
+        border: 1px solid #e5d8fd;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+    }
+
+    form tr {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+
+    form td {
+        flex: 1;
+        padding: 10px;
+        border-bottom: 1px solid #e5d8fd;
+        text-align: left;
+        word-break: break-word;
+    }
+
+    form th {
+        flex-basis: 30%;
+        font-weight: bold;
+        color: #cfb7fd;
+        text-align: left;
     }
 `;
 
+
 const AdoptionDetailItem = ( {vo, onAdoptionComplete} ) => {
+
+    
     console.log("입양신청 상세페이지 vo :::" , vo);
 
     let currentAdmin = false;
@@ -66,7 +140,7 @@ const AdoptionDetailItem = ( {vo, onAdoptionComplete} ) => {
         // 이후 입양완료 게시판으로 이동
         // 아래는 예시 코드
         console.log("complete vo 확인 : ", vo);
-        const adoptionCompleteYn = 'Y';
+        // const adoptionCompleteYn = 'Y';
         fetch('http://127.0.0.1:8080/app/adoption/complete', {
             method: 'POST',
             headers: {
@@ -95,26 +169,51 @@ const AdoptionDetailItem = ( {vo, onAdoptionComplete} ) => {
                 <div className='detailArea'>
                     <div>
                         {currentAdmin && (
-                            <div className='controlArea'>
-                                <button onClick={() => handleEdit(vo)}>수정</button>
-                                {/* <button onClick={() => handleDelete(vo)}>삭제</button> */}
-                            </div>
+                            // <div className='controlArea'>
+                                <button className='eidtBtn' onClick={() => handleEdit(vo)}>수정</button>
+                            // </div>
                         )}
                         {showWriteButton && (
-                            <button onClick={handleAdoptionOk}>입양완료</button>
+                            <button className='okBtn' onClick={handleAdoptionOk}>입양완료</button>
                         )}
+                        <img
+                            src={vo.imagePath}
+                            alt={'imageNo' + vo.imageNo}
+                        />
+                         <form>
+                            <tr>
+                                <td>입소일</td>
+                                <td>{vo.admissionDate}</td>
+                            </tr>
+                            <tr>
+                                <td>{vo.dogName}</td>
+                            </tr>
+                            <tr>
+                                <td>견종</td>
+                                <td>{vo.breed}</td>
+                            </tr>
+                            <tr>
+                                <td>성별</td>
+                                <td>{vo.genderMf}</td>
+                            </tr>
+                            <tr>
+                                <td>중성화</td>
+                                <td>{vo.neuteringOx}</td>
+                            </tr>
+                            <tr>
+                                <td>접종</td>
+                                <td>{vo.inoculationOx}</td>
+                            </tr>
+                            <tr>
+                                <td>나이</td>
+                                <td>{vo.age}</td>
+                            </tr>
+                            <tr>
+                                <td>몸무게</td>
+                                <td>{vo.weight}</td>
+                            </tr>
+                         </form>
                     </div>
-                    <div className='date'>등록일 : {vo.enrollDate}</div>
-                    <img
-                        src={vo.imagePath}
-                        alt={'imageNo' + vo.imageNo}
-                    />
-                    <div className='name'><h4>이름 : {vo.dogName}</h4></div>
-                    <div className='breed'><h5>종 : {vo.breed}</h5></div>
-                    <div className='gender'><h5>성별 : {vo.genderMf}</h5></div>
-                    <div className='neutering'><h5>중성화 : {vo.neuteringOx}</h5></div>
-                    <div className='age'><h5>나이 : {vo.age}</h5></div>
-                    <div className='weight'><h5>몸무게 : {vo.weight}</h5></div>
                 </div>
                 
             </StyledAdoptionDetailItem>
