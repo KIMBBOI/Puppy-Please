@@ -6,11 +6,13 @@ import AdoptionPageItem from './AdoptionPageItem';
 
 const StyledAdoptionListDiv = styled.div`
     width: 100%;
-    height: 100%;
-    padding: 40px 0 40px 0;
+    padding: 40px 0;
+    /* background-color: #f2f2f2; */
 
     .tit {
-        margin: 0 0 30px 20px;
+        margin: 0 0 20px 20px;
+        font-size: 24px;
+        color: #333;
     }
 
     button {
@@ -22,25 +24,27 @@ const StyledAdoptionListDiv = styled.div`
         border-radius: 20px;
         color: #ffff;
         background-color: #d1b8ffe9;
+        cursor: pointer;
     }
 
     .writeBtn {
         display: flex;
-        justify-content: end;
+        justify-content: flex-end;
+        margin-right: 20px;
     }
 
     .wrap {
         display: grid;
-        gap: 80px 50px;
-        padding: 30px 0;
-        grid-template-columns: 1fr 1fr 1fr;
-        place-items: center center;
+        gap: 50px;
+        padding: 20px;
+        grid-template-columns: repeat(3, 1fr);
+
     }
 
     .wrap > div {
         border: 1px solid #dddddd;
         border-radius: 4px;
-        box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.2); /* 그림자 스타일 조정 */
+        box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.2);
     }
 `;
 

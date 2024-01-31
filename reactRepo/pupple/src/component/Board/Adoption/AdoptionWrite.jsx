@@ -9,8 +9,11 @@ const StyledAdoptionWriteDiv = styled.div`
     flex-direction: column;
     padding: 30px 0;
     text-align: center;
-    background-color: #e5d8fd44;
+    /* border: 2px solid #d1b8ffe9; */
+    border-radius: 100px;
+    box-shadow:  0 0 40px rgba(228, 181, 255, 0.563);
     text-align: center;
+    align-items: center;
     margin: 100px;
     padding: 50px;
     
@@ -18,27 +21,36 @@ const StyledAdoptionWriteDiv = styled.div`
     
     form { align-items: center; font-size: 15.5px; }
     div { margin-bottom: 30px; }
+    div:last-child{margin: 0;}
     label { margin-right: 100px; }
+
+    h2 {
+        font-size: 23px;
+        margin-bottom: 40px;
+    }
 
     input { 
         width: 35%; 
         height: 27px; 
         font-size: 15px; 
         border: 0.7px solid #232323dd;
+        box-shadow:  3px 3px 5px rgba(255, 230, 190, 0.671);
         border-radius: 3px; 
     }
 
     .submit {
-        width: 105px;
-        height: 30px;
+        width: 20%;
+        height: 33px;
         font-size: 16px;
         border: none;
+        border-radius: 30px;
         background-color: #d1b8ffe9;
         color: #ffff;
-        margin-top: 60px;
+        margin-top: 40px;
     }
 
     select { width: 22%; height: 27px; font-size: 15px; }
+
 `;
 
 const AdoptionWrite = ( ) => {
@@ -69,6 +81,7 @@ const AdoptionWrite = ( ) => {
                 setBreed(existing.breed);
                 setGenderMf(existing.genderMf);
                 setNeuteringOx(existing.neuteringOx);
+                setInoculationOx(existing.inoculationOx);
                 setAge(existing.age);
                 setWeight(existing.weight);
             }
@@ -207,7 +220,7 @@ const AdoptionWrite = ( ) => {
     return (
         <StyledAdoptionWriteDiv>
             <div className="adoption-write">
-                <div><h2>{location.state ? '게시글 수정' : '게시글 작성'}</h2></div>
+                <div><h2>{location.state ? '입양신청 게시글 수정' : '유기견 입양글 작성'}</h2></div>
                 <form onSubmit={handleSubmit}>
                     <br />
                     <div>
@@ -258,7 +271,7 @@ const AdoptionWrite = ( ) => {
                     </div>
                     <div className="file">
                         <label>사진선택</label>
-                        <input type="file" multiple name='file' onChange={handleChangeFile} />
+                        <input className='file' type="file" multiple name='file' onChange={handleChangeFile} />
                     </div>
                     <div>
                         <input type="submit" className='submit' value={location.state ? '수정' : '등록'} />

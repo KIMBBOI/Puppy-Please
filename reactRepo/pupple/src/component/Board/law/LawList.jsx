@@ -30,12 +30,12 @@ const LawList = () => {
         <StyleLawListDiv>
             <h2>동물보호법</h2>
             <h2>야생동물보호 및 관리에 관한 법률</h2>
-            <div><Link to="http://www.law.go.kr/법령/동물보호법">동물보호법<span>자세히 보기</span></Link></div>
-            <div><Link to="http://www.law.go.kr/법령/동물보호법시행령">동물보호법 시행령<span>자세히 보기</span></Link></div>
-            <div><Link to="http://www.law.go.kr/법령/동물보호법시행규칙">동물보호법 시행규칙<span>자세히 보기</span></Link></div>
-            <div><Link to="http://www.law.go.kr/법령/야생생물보호및관리에관한법률">야생동물보호 및 관리에 관한 법률<span>자세히 보기</span></Link></div>
-            <div><Link to="http://www.law.go.kr/법령/야생생물보호및관리에관한법률시행령">야생동물보호 및 관리에 관한 법률 시행령<span>자세히 보기</span></Link></div>
-            <div><Link to="http://www.law.go.kr/법령/야생생물보호및관리에관한법률시행규칙">야생동물보호 및 관리에 관한 법률 시행규칙<span>자세히 보기</span></Link></div>
+            <div><Link to="http://www.law.go.kr/법령/동물보호법">동물보호법</Link></div>
+            <div><Link to="http://www.law.go.kr/법령/동물보호법시행령">동물보호법 시행령</Link></div>
+            <div><Link to="http://www.law.go.kr/법령/동물보호법시행규칙">동물보호법 시행규칙</Link></div>
+            <div><Link to="http://www.law.go.kr/법령/야생생물보호및관리에관한법률">야생동물보호 및 관리에 관한 법률</Link></div>
+            <div><Link to="http://www.law.go.kr/법령/야생생물보호및관리에관한법률시행령">야생동물보호 및 관리에 관한 법률 시행령</Link></div>
+            <div><Link to="http://www.law.go.kr/법령/야생생물보호및관리에관한법률시행규칙">야생동물보호 및 관리에 관한 법률 시행규칙</Link></div>
         </StyleLawListDiv>
     );
 };

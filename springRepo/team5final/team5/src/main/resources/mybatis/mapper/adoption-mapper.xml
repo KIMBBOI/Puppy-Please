@@ -228,6 +228,7 @@
 			, #{imageNo}
 			, #{breed}
 			, SYSDATE
+			, #{inoculationOx}
 			, #{dogName}
 			, #{age}
 			, #{genderMf}
