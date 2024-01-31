@@ -103,7 +103,6 @@ const StyledVisitReservationDiv = styled.div`
                     margin-bottom: 3px;
 
                     & > div {
-                        /* line-height: 350%; */
                         width: 13.6%;
                         height: 100%;
                         margin: 0;
@@ -124,9 +123,8 @@ const VisitReservation = () => {
 
 
     const [selectedDate, setSelectedDate] = useState(moment()._d);
-    console.log('selectedDate ::: ',selectedDate);
     const [db_DateStrArr,setDbDateStrArr] = useState();
-    console.log('db_DateStrArr :::', db_DateStrArr);
+
     
 
     const currentDate = moment()._d;
