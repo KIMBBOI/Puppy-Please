@@ -18,9 +18,10 @@ public class AdoptionVo {
     private String breed;		// 견종
     private String genderMf; 	// 성별
     private String neuteringOx; // 중성화 여부
+    private String inoculationOx;
     private String age; 		// 나이
     private String weight; 		// 몸무게
     private String adoptionCompleteYn;
     private String quitDate;
-
+    private String admissionDate;
 }

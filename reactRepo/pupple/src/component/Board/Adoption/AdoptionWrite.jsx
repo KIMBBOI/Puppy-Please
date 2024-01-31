@@ -56,6 +56,7 @@ const AdoptionWrite = ( ) => {
     const [breed , setBreed] = useState();
     const [genderMf , setGenderMf] = useState();
     const [neuteringOx , setNeuteringOx] = useState();
+    const [inoculationOx , setInoculationOx] = useState();
     const [age , setAge] = useState();
     const [weight , setWeight] = useState();
         // 1. 수정인지 작성인지 판단해서 수정이면 기존의 데이터로 값을 채워줌
@@ -89,22 +90,27 @@ const AdoptionWrite = ( ) => {
     const handleChangeNeutering = (e) => {
         setNeuteringOx(e.target.value);
     };
+    const handleChangeInoculation = (e) => {
+        setInoculationOx(e.target.value);
+    };
     const handleChangeAge = (e) => {
         setAge(e.target.value);
     };
     const handleChangeWeight = (e) => {
         setWeight(e.target.value);
     };
+    const str = sessionStorage.getItem("loginAdminVo");
+    const sessionVo = JSON.parse(str);
+    const adminNo = sessionVo.adminNo;
 
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const adminNoStr = sessionStorage.getItem("loginAdminVo");
-        const adminNo = JSON.parse(adminNoStr);
+        // const adminNoStr = sessionStorage.getItem("loginAdminVo");
+        // const adminNo = JSON.parse(adminNoStr);
    
-        console.log(adminNoStr);
     
         // < isFetching >
         // 게시글 작성이 겹치면 이미지 시퀀스를 호출하는 과정에서 
@@ -123,9 +129,10 @@ const AdoptionWrite = ( ) => {
         formData.append('breed', breed);
         formData.append('genderMf', genderMf);
         formData.append('neuteringOx', neuteringOx);
+        formData.append('inoculationOx', inoculationOx);
         formData.append('age', age);
         formData.append('weight', weight);
-        formData.append('adminNo', adminNo.adminNo);
+        formData.append('adminNo', adminNo);
         formData.append('ADOPTION_COMPLETE_YN', 'N');
         // formData.append('rescueDogNo', rescueDogNo);
 
@@ -140,6 +147,7 @@ const AdoptionWrite = ( ) => {
             // 수정 시 WHERE 에 필요한 데이터 준비
             formData.append("adoptionBoardNo", existing.adoptionBoardNo);
             formData.append("imageNo", existing.imageNo);
+            formData.append("adminNo", existing.adminNo);
 
             // 수정하기
             fetch('http://127.0.0.1:8080/app/adoption/edit', {
@@ -235,6 +243,10 @@ const AdoptionWrite = ( ) => {
                     <div className="neuteringOx">
                         <label>중성화   (O / X)</label>
                         <input type="text" value={neuteringOx} placeholder=' 중성화 여부' onChange={handleChangeNeutering} />
+                    </div>
+                    <div>
+                        <label>접종   (O / X)</label>
+                        <input type="text" value={inoculationOx} placeholder=' 접종 여부' onChange={handleChangeInoculation} />
                     </div>
                     <div className="age">
                         <label>나이</label>

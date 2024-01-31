@@ -190,14 +190,13 @@ const AdoptionNewsWrite = ( ) => {
   const handleChangeFile = (e) => {
     setFileObj(e.target.files[0]);
   };
+  const str = sessionStorage.getItem("loginMemberVo");
+    const sessionVo = JSON.parse(str);
+    const memberNo = sessionVo.memberNo;
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const str = sessionStorage.getItem("loginMemberVo");
-    const vo = JSON.parse(str);
-    const memberNo = vo.memberNo;
 
 
     // < isFetching >

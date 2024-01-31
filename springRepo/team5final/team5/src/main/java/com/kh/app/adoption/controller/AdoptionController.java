@@ -157,38 +157,38 @@ public class AdoptionController {
 		return map;
 	}
 
-	// 입양신청 수정
-	@PostMapping("edit")
-	public Map<String, String> edit(AdoptionVo vo, MultipartFile file) throws Exception {
-		
-		// 이미지 업데이트
-		String imagePath = saveFile(file);
-		AdoptionVo imgVo = new AdoptionVo();
-		imgVo.setImagePath(imagePath);
-		imgVo.setImageNo(vo.getImageNo());
-		int resultImg = service.editImage(imgVo);
-		
-		// 게시글 업데이트
-		Map<String, String> map = new HashMap<String, String>();
-		int resultBoard = service.editBoard(vo);
-		
-		if (resultImg == 1) {
-			map.put("imgMsg", "img update good");
-			System.out.println("이미지 수정 성공 !");
-			if (resultBoard == 1) {
-				map.put("boardMsg", "board update good");
-				System.out.println("게시글 수정 성공 !");
-			} else {
-				map.put("boardMsg", "board update bad");
-				System.out.println("게시글 수정 실패");
-			}
-		} else {
-			map.put("imgMsg", "img update bad");
-			System.out.println("게시글 수정 실패");
-		}
-		
-		return map;
-	}
+	  // 입양신청 수정
+	   @PostMapping("edit")
+	   public Map<String, String> edit(AdoptionVo vo, MultipartFile file) throws Exception {
+	      
+	      // 이미지 업데이트
+	      String imagePath = saveFile(file);
+	      AdoptionVo imgVo = new AdoptionVo();
+	      imgVo.setImagePath(imagePath);
+	      imgVo.setImageNo(vo.getImageNo());
+	      int resultImg = service.editImage(imgVo);
+	      
+	      // 게시글 업데이트
+	      Map<String, String> map = new HashMap<String, String>();
+	      int resultBoard = service.editBoard(vo);
+	      
+	      if (resultImg == 1) {
+	         map.put("imgMsg", "img update good");
+	         System.out.println("이미지 수정 성공 !");
+	         if (resultBoard == 1) {
+	            map.put("boardMsg", "board update good");
+	            System.out.println("게시글 수정 성공 !");
+	         } else {
+	            map.put("boardMsg", "board update bad");
+	            System.out.println("게시글 수정 실패");
+	         }
+	      } else {
+	         map.put("imgMsg", "img update bad");
+	         System.out.println("게시글 수정 실패");
+	      }
+	      
+	      return map;
+	   }
 	
 
 	/**
@@ -198,8 +198,6 @@ public class AdoptionController {
 	 * @return 실제파일저장경로(파일경로 + 파일명)
 	 */
 	private String saveFile(MultipartFile file) throws Exception {
-		
-		System.out.println("file ::: " + file);
 		
 		String myUrl = req.getServletContext().getRealPath("/");
         int lastIndex = myUrl.lastIndexOf("\\");
