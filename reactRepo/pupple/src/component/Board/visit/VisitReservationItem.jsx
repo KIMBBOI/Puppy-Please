@@ -81,9 +81,8 @@ const StyeldVisitReservationItemDiv = styled.div`
 
 
 
-const VisitReservationItem = ({db_DateStrArr}) => {
+const VisitReservationItem = ({db_DateStrArr, selectedDatePicker}) => {
     const navigate = useNavigate();
-
 
 
     useEffect( () => {
@@ -158,7 +157,7 @@ const VisitReservationItem = ({db_DateStrArr}) => {
         // 클릭한 시간을 상태에 저장 또는 다른 동작 수행
         setSelectedTime(time);
         // insert 데이터 준비
-        const insertDate = new Date();
+        const insertDate = new Date(selectedDatePicker);
         const [hours, minutes] = time.split(':');   
         insertDate.setHours(hours, minutes, 0, 0);
         const tltsInsertDate = insertDate.toLocaleTimeString([], { 
@@ -174,7 +173,6 @@ const VisitReservationItem = ({db_DateStrArr}) => {
         const plTltsInsertDate = tltsInsertDate.replace('. ', '-').replace('. ', '-').replace('.','');
         setSelectedDate(plTltsInsertDate);
     };
-
 
 
 
@@ -195,7 +193,6 @@ const VisitReservationItem = ({db_DateStrArr}) => {
         }
     } else {
     }
-
     
     
 

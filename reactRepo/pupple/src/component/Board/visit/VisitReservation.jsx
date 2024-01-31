@@ -103,7 +103,6 @@ const StyledVisitReservationDiv = styled.div`
                     margin-bottom: 3px;
 
                     & > div {
-                        /* line-height: 350%; */
                         width: 13.6%;
                         height: 100%;
                         margin: 0;
@@ -125,7 +124,7 @@ const VisitReservation = () => {
 
     const [selectedDate, setSelectedDate] = useState(moment()._d);
     const [db_DateStrArr,setDbDateStrArr] = useState();
-    
+
     
 
     const currentDate = moment()._d;
@@ -177,7 +176,7 @@ const VisitReservation = () => {
                 }}
             />
             <div className='line'></div>
-            <VisitReservationItem db_DateStrArr={db_DateStrArr}/>
+            <VisitReservationItem db_DateStrArr={db_DateStrArr} selectedDatePicker={selectedDate}/>
                 {/* *컴포턴트로 전달 가능* */}
         </StyledVisitReservationDiv>
     );

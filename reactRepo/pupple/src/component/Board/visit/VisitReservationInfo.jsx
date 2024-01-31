@@ -217,7 +217,7 @@ const VisitReservationInfo = () => {
             if(data.msg === "success"){
                 setBeforeVo(data.dbVo);
             } else {
-                console.log('예약 내역 없음');
+                alert('예약 내역 없음');
             }
         } )
         ;
@@ -238,7 +238,6 @@ const VisitReservationInfo = () => {
         })
         .then( resp => resp.json() )
         .then( data => {
-            console.log(data);
             if(data.msg === "success"){
                 alert("예약 완료 !");
                 navigate("/");
@@ -267,7 +266,6 @@ const VisitReservationInfo = () => {
         })
         .then( resp => resp.json() )
         .then( data => {
-            console.log(data);
             if(data.msg === "success"){
                 alert("취소 완료 !");
                 navigate("/");
