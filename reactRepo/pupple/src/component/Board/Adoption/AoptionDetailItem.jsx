@@ -10,6 +10,7 @@ const StyledAdoptionDetailItem = styled.div`
     align-items: center;
     background-color: #e5d8fd44;
     text-align: center;
+    align-items: center;
     padding-bottom: 20px;
 
     div {
@@ -17,16 +18,16 @@ const StyledAdoptionDetailItem = styled.div`
     }
 
     img {
-        width: 450px;
+        width: 500px;
         height: 550px;
-        padding: 30px;
+        margin-bottom: 20px;
     }
 
-    table {
+    /* table {
         width: 100%;
         border-collapse: collapse;
         margin-top: 20px;
-    }
+    } */
 
     th,
     td {
@@ -40,34 +41,27 @@ const StyledAdoptionDetailItem = styled.div`
         font-weight: bold;
     }
 
-    .controlArea {
-        /* margin-top: 20px; */
-        display: flex;
-        /* justify-content: space-between; */
-        align-items: center;
-    }
-    .editBtn {
-        padding: 10px 20px;
-        font-size: 14px;
-        font-weight: bold;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        background-color: #cfb7fd;
-        color: #fff;
-    }
-
-    .okBtn {
-        padding: 10px 20px;
-        font-size: 14px;
-        font-weight: bold;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        background-color: #cfb7fd;
-        color: #fff;
+    h3 {
+        padding: 0;
+        margin: 0 0 2px 0;
+        font-size: 25px;
     }
     
+    button {
+        width: 97px;
+        height: 30px;
+        font-size: 14px;
+        font-weight: 500;
+        border: 1.5px solid #d1b8ffe9;
+        border-radius: 20px;
+        color: #ffff;
+        cursor: pointer;
+        margin-bottom: 30px;
+    }
+   
+    button:first-child {
+        margin-right: 255px;
+    }
 
     form {
         width: 100%;
@@ -105,8 +99,6 @@ const StyledAdoptionDetailItem = styled.div`
 const AdoptionDetailItem = ( {vo, onAdoptionComplete} ) => {
 
     
-    console.log("입양신청 상세페이지 vo :::" , vo);
-
     let currentAdmin = false;
 
     // 게시글 작성자 판단 (수정/입양완료)
@@ -139,7 +131,6 @@ const AdoptionDetailItem = ( {vo, onAdoptionComplete} ) => {
         // 서버에 해당 게시글을 입양완료 상태로 업데이트하는 요청을 보낼 수 있습니다.
         // 이후 입양완료 게시판으로 이동
         // 아래는 예시 코드
-        console.log("complete vo 확인 : ", vo);
         // const adoptionCompleteYn = 'Y';
         fetch('http://127.0.0.1:8080/app/adoption/complete', {
             method: 'POST',
@@ -161,6 +152,33 @@ const AdoptionDetailItem = ( {vo, onAdoptionComplete} ) => {
             });
     };
 
+    {/* 
+        < 예약내역 배열을 새로운 배열("HH:mm")로 만들기>
+            1. 배열 생성
+            2. 배열에서 문자열 추출
+            3. Date 객체로 파싱
+            4. "HH:mm" 부분만 추출
+            5. 배열에 추가
+                * .toLocaleTimeString([],{hour: '2-digit', minute: '2-digit', hour12: false})
+                    - Date 객체에 사용 가능
+                    - 반환값은 문자열
+                    - 빈 배열은 현지 설정을 사용하겠다는 의미
+                    - 시간을 2자리 숫자로, 분을 2자리 숫자로, 24시간 형식으로 표시
+                        // ex.) 16시 00분 50초 -> 16:00
+                * 날짜를 클릭하지 않았고 
+    */}
+    const admissionDate = [];
+    if (vo) {
+        for (let i = 0; i < vo.length; i++) {
+          const formattedDate = new Date(vo[i]).toLocaleTimeString([], { 
+                                                                                    year: '2-digit', 
+                                                                                    month: '2-digit', 
+                                                                                    hour12: false 
+                                                                                 });
+          admissionDate.push(formattedDate);
+        }
+    }
+
     
 
     return (
@@ -168,54 +186,55 @@ const AdoptionDetailItem = ( {vo, onAdoptionComplete} ) => {
             <StyledAdoptionDetailItem>
                 <div className='detailArea'>
                     <div>
-                        {currentAdmin && (
-                            // <div className='controlArea'>
-                                <button className='eidtBtn' onClick={() => handleEdit(vo)}>수정</button>
-                            // </div>
-                        )}
-                        {showWriteButton && (
-                            <button className='okBtn' onClick={handleAdoptionOk}>입양완료</button>
-                        )}
+                        <div className='btnArea'>
+                            {currentAdmin && (
+                                // <div className='controlArea'>
+                                    <button className='eidtBtn' onClick={() => handleEdit(vo)}>수정</button>
+                                // </div>
+                            )}
+                            {showWriteButton && (
+                                <button className='okBtn' onClick={handleAdoptionOk}>입양완료</button>
+                            )}
+                        </div>
                         <img
                             src={vo.imagePath}
                             alt={'imageNo' + vo.imageNo}
                         />
-                         <form>
-                            <tr>
-                                <td>입소일</td>
-                                <td>{vo.admissionDate}</td>
-                            </tr>
-                            <tr>
-                                <td>{vo.dogName}</td>
-                            </tr>
-                            <tr>
-                                <td>견종</td>
-                                <td>{vo.breed}</td>
-                            </tr>
-                            <tr>
-                                <td>성별</td>
-                                <td>{vo.genderMf}</td>
-                            </tr>
-                            <tr>
-                                <td>중성화</td>
-                                <td>{vo.neuteringOx}</td>
-                            </tr>
-                            <tr>
-                                <td>접종</td>
-                                <td>{vo.inoculationOx}</td>
-                            </tr>
-                            <tr>
-                                <td>나이</td>
-                                <td>{vo.age}</td>
-                            </tr>
-                            <tr>
-                                <td>몸무게</td>
-                                <td>{vo.weight}</td>
-                            </tr>
-                         </form>
                     </div>
+                    <form>
+                        <tr>
+                            <td>입소일</td>
+                            <td>{vo.admissionDate.split(' ')[0]}</td>
+                        </tr>
+                        <tr>
+                            <td><h3>{vo.dogName}</h3></td>
+                        </tr>
+                        <tr>
+                            <td>견종</td>
+                            <td>{vo.breed}</td>
+                        </tr>
+                        <tr>
+                            <td>성별</td>
+                            <td>{vo.genderMf}</td>
+                        </tr>
+                        <tr>
+                            <td>중성화</td>
+                            <td>{vo.neuteringOx}</td>
+                        </tr>
+                        <tr>
+                            <td>접종</td>
+                            <td>{vo.inoculationOx}</td>
+                        </tr>
+                        <tr>
+                            <td>나이</td>
+                            <td>{vo.age}살 추정</td>
+                        </tr>
+                        <tr>
+                            <td>몸무게</td>
+                            <td>{vo.weight}kg</td>
+                        </tr>
+                    </form>
                 </div>
-                
             </StyledAdoptionDetailItem>
         </>
     );

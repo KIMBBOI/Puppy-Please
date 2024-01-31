@@ -119,7 +119,7 @@ const StyledAdoptionNewsWriteDiv = styled.div`
                 & > button {
                     width: 50%;
                     height: 100%;
-                    border-radius: 5px;
+                    border-radius: 30px;
                     background-color: #C8ADFF;
                     color: white;
                     font-weight: bold;
@@ -139,7 +139,7 @@ const StyledAdoptionNewsWriteDiv = styled.div`
                 & > input {
                     width: 50%;
                     height: 100%;
-                    border-radius: 5px;
+                    border-radius: 30px;
                     background-color: #C8ADFF;
                     color: white;
                     font-weight: bold;

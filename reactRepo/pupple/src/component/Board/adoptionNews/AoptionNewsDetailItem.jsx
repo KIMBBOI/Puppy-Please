@@ -10,6 +10,7 @@ const StyledNewsDetatilDiv = styled.div`
     place-items: center center;
     background-color: #e5d8fd44;
     text-align: center;
+    padding: 10px;
 
     img {
         width: 550px;
@@ -30,7 +31,7 @@ const StyledNewsDetatilDiv = styled.div`
     }
 
     .date {
-        margin-right: 300px; /* 원하는 간격 조절 */
+        margin-right: 280px; /* 원하는 간격 조절 */
     }
 
     .date, .writer {
@@ -39,6 +40,13 @@ const StyledNewsDetatilDiv = styled.div`
         display: inline-block;
     }
 
+    button {
+        margin: 50px 0 45px 0;
+    }
+
+    .editBtn{
+        margin-right: 40px;
+    }
 
 `;
 

@@ -32,8 +32,17 @@ const AdoptionOkListDiv = styled.div`
         padding: 6px;
         font-size: 14px;
     }
+
+    .listItem{
+        display: flex;
+        justify-content: space-around;
+        /* 오른쪽 정렬 스타일 */
+    }
     
 `;
+
+
+
 
 
 const AdoptionOkList = () => {
@@ -80,7 +89,7 @@ const AdoptionOkList = () => {
                 {
                     arr.map((vo) => {
                         return (
-                            <AdoptionOkListItem 
+                            <AdoptionOkListItem className='listItem'
                                 key={vo.adoptionBoardNo} 
                                 a={vo.imagePath} 
                                 b={vo.dogName} 

@@ -10,9 +10,12 @@ const StyledAdoptionNewsListDiv = styled.div`
     height: 100%;
     padding: 40px 0 40px 0;
     table-layout: fixed;
+    
 
     .mark {
-        margin: 0 0 30px 20px;
+        margin: 0 0 0 20px;
+        font-size: 24px;
+        color: #333;
     }
 
     button {
@@ -34,19 +37,12 @@ const StyledAdoptionNewsListDiv = styled.div`
     
     .wrap {
         display: grid;
-        // grid-template-columns: repeat(3, 1fr); 3개의 열로 구성
         gap: 50px; /* 열과 행 사이의 간격 조절 */
         padding: 30px 0;
         grid-template-columns: 1fr 1fr 1fr;
         grid-template-rows: 1fr; 
         place-items: center center;
-        transition: all 1s ease-in;
         cursor: pointer;
-    }
-
-    .wrap:hover{
-        box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
-        filter: brightness(80%); /* 흐린 효과 */
     }
 
     .wrap > div {
@@ -68,6 +64,7 @@ const StyledAdoptionNewsListDiv = styled.div`
         width: 105px;
         height: 35px;
     }
+
 `;
 
 const AdoptionNewsList = () => {
@@ -141,8 +138,9 @@ const AdoptionNewsList = () => {
                                     a={vo.imagePath}  
                                     b={vo.title}
                                     c={vo.content}
-                                    // d={vo.enrollDate}
-                                    e={vo.newsAfterAdoptionNo} 
+                                    d={vo.writerNick}
+                                    e={vo.enrollDate}
+                                    f={vo.newsAfterAdoptionNo} 
                                     vo={vo} 
                                 />
                             )

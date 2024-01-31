@@ -22,7 +22,6 @@ const StyledAdoptionDetailDiv = styled.div`
         color: #ffffff;
         background-color: #c8adffdd;
         cursor: pointer;
-
     }
 `;
 
