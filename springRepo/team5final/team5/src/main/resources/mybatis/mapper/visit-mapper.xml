@@ -116,6 +116,7 @@
             ,DEL_YN = 'Y'
 	    WHERE
             MEMBER_NO = #{memberNo}
+	    	AND DEL_YN = 'N'
 	</update>
 
 	<!--방문예약 완료/삭제 -->

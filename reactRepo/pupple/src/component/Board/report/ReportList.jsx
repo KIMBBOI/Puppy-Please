@@ -11,6 +11,7 @@ const StyledReportListDiv = styled.div`
 
     span {
         width: 100%;
+        height: 6.5%;
         display: flex;
         justify-content: center;
     }

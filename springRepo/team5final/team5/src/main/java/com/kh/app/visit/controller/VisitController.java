@@ -120,7 +120,7 @@ public class VisitController {
 	
 	
 	// 예약 취소->삭제
-	@DeleteMapping("quit")
+	@DeleteMapping
 	public Map<String, String> quit(@RequestBody VisitVo vo) {
 		
 		Map<String, String> map = new HashMap<String, String>();
@@ -135,21 +135,21 @@ public class VisitController {
 		return map;
 	}
 	
-	// 상담 완료->삭제
-	@DeleteMapping
-	public Map<String, String> complete(@RequestBody VisitVo vo) {
-		
-		Map<String, String> map = new HashMap<String, String>();
-		int result = service.complete(vo);
-		
-		if (result == 1) {
-			map.put("msg", "success");
-		} else {
-			map.put("msg", "fail");
-		}
-		
-		return map;
-	}
+//	// 상담 완료->삭제
+//	@DeleteMapping
+//	public Map<String, String> complete(@RequestBody VisitVo vo) {
+//		
+//		Map<String, String> map = new HashMap<String, String>();
+//		int result = service.complete(vo);
+//		
+//		if (result == 1) {
+//			map.put("msg", "success");
+//		} else {
+//			map.put("msg", "fail");
+//		}
+//		
+//		return map;
+//	}
 	
 	
 } // class

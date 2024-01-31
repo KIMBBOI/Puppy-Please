@@ -161,30 +161,30 @@ const AdminVisitReservationList = () => {
     const [reservationStatus, setReservationStatus] = useState();
     
     // 필터 함수 호출 (OrderBy)
-    const handleOrderBy = (option) => {
+    const handleOrderBy = (selectOrderBy) => {
         // state 할당
-        setOrderBy(option);
+        setOrderBy(selectOrderBy);
         setVo((vo) => ({
             ...vo,
-            orderBy: option,
+            orderBy: selectOrderBy,
         }));
-        if (option === 'visitNo') {
+        if (selectOrderBy === 'visitNo') {
             // className 부여
             setClickOrderBy(true);
             setClickReservDate(false);
-        } else if (option === 'reservationDate') {
+        } else if (selectOrderBy === 'reservationDate') {
             // className 부여
             setClickOrderBy(false);
             setClickReservDate(true);
         }
     };
-    // 필터 함수 호출 (옵션)
-    const handleStatus = (option) => {
+    // 필터 함수 호출 (option)
+    const handleStatus = (selectOption) => {
         // state 할당
-        setReservationStatus(option);
+        setReservationStatus(selectOption);
         setVo((vo) => ({
             ...vo,
-            reservationStatus: option,
+            reservationStatus: selectOption,
             pno: 1, // 조회옵션 변경시 1페이지 부터
         }));
     };
@@ -222,7 +222,8 @@ const AdminVisitReservationList = () => {
 
 
 
-
+    console.log('orderBy :::', orderBy);
+    console.log('reservationStatus :::', reservationStatus);
     return (
         <StyledAdminVisitReservation>
             <span><h2>방문예약관리</h2></span>
@@ -232,7 +233,7 @@ const AdminVisitReservationList = () => {
                         <input 
                             type="checkbox" 
                             name="orderBy" 
-                            checked={orderBy === 'visitNo'} 
+                            checked={orderBy === 'visitNo'} // 정렬 옵션이 넘버면 활성화
                             onChange={() => handleOrderBy('visitNo')} 
                             id='latest' />
                         <label for='latest' className={`clickable-text ${clickOrderBy ? 'clicked' : ''}`}>최신순</label>
