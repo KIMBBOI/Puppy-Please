@@ -65,6 +65,12 @@ const StyledAdoptionNewsListDiv = styled.div`
         height: 35px;
     }
 
+    .footer {
+        width: 100%;
+        height: 5%;
+        margin-right: 10px;
+    }
+
 `;
 
 const AdoptionNewsList = () => {

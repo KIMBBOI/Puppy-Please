@@ -275,7 +275,7 @@ const AdoptionNewsWrite = ( ) => {
 
   return (
     <StyledAdoptionNewsWriteDiv>
-      <div><h3>{location.state ? '게시글 수정' : '게시글 작성'}</h3></div>
+      <div><h3>{location.state ? '입양후 소식 수정' : '입양후 소식 작성'}</h3></div>
       <form onSubmit={handleSubmit}>
         <tr>
           <td>제목</td>

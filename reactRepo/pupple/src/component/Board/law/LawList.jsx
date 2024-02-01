@@ -8,19 +8,32 @@ const StyleLawListDiv = styled.div`
     grid-template-columns: 1fr 1fr;
     grid-template-rows: repeat(6, 1fr);
     place-items: left;
-    & > h2 {
+    
+
+
+    h2 {
         color: #292929;
     }
-    & > div {
-        border: 1px solid #ccc;
+    
+    div {
+        border: 1.5px solid #949494;
+        border-radius: 4px;
         margin-top: 30px;
         line-height: 43px;
         padding: 0 20px;
         margin-right: 60px;
         font-size: 16px;
         text-align: left;
+        cursor: pointer;
+        &:hover{
+            background-color: #cacacaaa;
+            a:hover {
+                color: #292929;
+            }
+        }
     }
-    & > span {
+
+    span {
         margin-left: 50px;
     }
 `;

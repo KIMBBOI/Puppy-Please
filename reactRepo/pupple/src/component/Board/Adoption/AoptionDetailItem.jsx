@@ -13,6 +13,13 @@ const StyledAdoptionDetailItem = styled.div`
     align-items: center;
     padding-bottom: 20px;
 
+    div:nth-child(1){
+        font-size: 24px;
+        text-align: start;
+        color: #333;
+        margin: 10px 10px;
+    }
+
     div {
         padding: 7px;
     }
@@ -22,12 +29,6 @@ const StyledAdoptionDetailItem = styled.div`
         height: 550px;
         margin-bottom: 20px;
     }
-
-    /* table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-    } */
 
     th,
     td {
@@ -56,9 +57,11 @@ const StyledAdoptionDetailItem = styled.div`
         border-radius: 20px;
         color: #ffff;
         cursor: pointer;
-        margin-bottom: 30px;
+        margin: 0 30px 0 0;
     }
-   
+
+    .btnArea { margin: 0; }
+
     button:first-child {
         margin-right: 255px;
     }
@@ -184,13 +187,12 @@ const AdoptionDetailItem = ( {vo, onAdoptionComplete} ) => {
     return (
         <>
             <StyledAdoptionDetailItem>
+                <div>입양신청 게시글</div>
                 <div className='detailArea'>
                     <div>
                         <div className='btnArea'>
                             {currentAdmin && (
-                                // <div className='controlArea'>
                                     <button className='eidtBtn' onClick={() => handleEdit(vo)}>수정</button>
-                                // </div>
                             )}
                             {showWriteButton && (
                                 <button className='okBtn' onClick={handleAdoptionOk}>입양완료</button>
