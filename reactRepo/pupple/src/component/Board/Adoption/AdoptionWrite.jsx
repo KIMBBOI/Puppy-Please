@@ -51,6 +51,27 @@ const StyledAdoptionWriteDiv = styled.div`
 
     select { width: 22%; height: 27px; font-size: 15px; }
 
+    form > div {
+        display: flex;
+        justify-content: space-between;
+        & > label {
+            width: 100px;
+        }
+        & > input {
+            width: 170px;
+        }
+        & > select {
+            width: 170px;
+        }
+        & > input[type=submit] {
+            cursor: pointer;
+            width: 120px;
+        }
+    }
+    form > div:nth-of-type(9) {
+        display: flex;
+        justify-content: center;
+    }
 `;
 
 const AdoptionWrite = ( ) => {
@@ -251,7 +272,7 @@ const AdoptionWrite = ( ) => {
                     </div>
                     <div className="genderMf">
                         <label>성별 (M / F)</label>
-                        <input type="text" value={genderMf} placeholder=' 남(Male) / 여(Female)' onChange={handleChangeGender} />
+                        <input type="text" value={genderMf === '남아' ? 'M' : genderMf === '여아' ? 'F' : undefined } placeholder=' 남(Male) / 여(Female)' onChange={handleChangeGender} />
                     </div>
                     <div className="neuteringOx">
                         <label>중성화   (O / X)</label>
