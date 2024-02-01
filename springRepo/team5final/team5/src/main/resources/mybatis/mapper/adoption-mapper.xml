@@ -71,7 +71,7 @@
 			, QUIT_DATE = SYSDATE
 		WHERE 
 			RESCUE_DOG_NO = #{rescueDogNo}
-		<!-- AND 
+		<!-- AND  
 			NOT EXISTS (
 			    SELECT 1
 			    FROM ADOPTION_BOARD AB

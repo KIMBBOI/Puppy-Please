@@ -215,6 +215,7 @@ const AdminVisitReservationListItemDetail = () => {
                 alert('상담 완료 !');
                 setIsOk(true);
                 setDbVo(data.dbVo);
+                navigate(-1);
             } else {
                 alert('완료 실패 ...');
             }
@@ -239,6 +240,7 @@ const AdminVisitReservationListItemDetail = () => {
                 alert('취소 처리 완료 !');
                 setIsOk(true);
                 setDbVo(data.dbVo);
+                navigate(-1);
             } else {
                 alert('취소 실패 ...');
             }
@@ -253,7 +255,7 @@ const AdminVisitReservationListItemDetail = () => {
             <AdminPageMainSidebar />
             <StyeldAdminVisitReservationListItemDetailDiv>
                 <div className='wrap'>
-                    <span><h2>게시물관리</h2></span>
+                    <span><h2>방문예약관리</h2></span>
                     <div>
                         <div> 
                             <table className='leftTable'> 
