@@ -11,6 +11,14 @@ const StyledNewsDetailDiv = styled.div`
     place-items: center center;
     padding: 30px 0 30px 0;
 
+    
+    div:nth-child(1) {
+        margin: 12px 150px 20px ;
+        font-size: 24px;
+        text-align: start;
+        color: #333;
+    }
+
     button{
         width: 89px;
         height: 34px;
@@ -41,6 +49,7 @@ const AoptionNewsDetail = () => {
     return (
         <StyledNewsDetailDiv>
             <>
+                <div>입양후 소식</div>
                 {vo ? (
                     <AoptionNewsDetailItem key={vo.newsAfterAdoptionNo} vo={vo} />
                 ) : (

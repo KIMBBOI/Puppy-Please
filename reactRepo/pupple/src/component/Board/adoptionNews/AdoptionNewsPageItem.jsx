@@ -8,6 +8,17 @@ const StyledPageItemDiv = styled.div`
     display: flex;
     justify-content: center;
     place-items: center;
+    
+    .pageNumber {
+        padding: 0 5px 0 5px;
+        margin: 5px 5px 5px 5px;;
+    }
+    .selectPage {
+        padding: 0 5px 1px 5px;
+        margin: 5px 5px 5px 5px;;
+        border: 1px solid #ddd;
+        color: #000000;
+    }
 `;
 
 const AdoptionNewsPageItem = ( {pvo} ) => {

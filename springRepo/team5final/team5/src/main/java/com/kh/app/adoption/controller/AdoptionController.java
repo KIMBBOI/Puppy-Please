@@ -226,15 +226,10 @@ public class AdoptionController {
 	// 입양완료 처리
     @PostMapping("complete")
     public Map<String, String> completeAdoption(@RequestBody AdoptionVo vo) throws Exception {
-    	
-    	
     	Map<String, String> map = new HashMap<>();
         int result = service.complete(vo.getAdoptionBoardNo());
-        System.out.println("complete vo ::: " + vo);
-        System.out.println("vo ::: " + vo.getAdoptionBoardNo());
         if (result == 1) {
         	map.put("msg", "good");
-        	System.out.println("입양신청 result ::: " + result);
         } else {
         	map.put("msg", "bad");
         }

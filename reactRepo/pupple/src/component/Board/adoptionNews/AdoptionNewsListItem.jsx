@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const StyledItemDiv = styled.div`
     width: 100%;
-    height: 350px;
+    height: 400px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -40,13 +40,32 @@ const StyledItemDiv = styled.div`
 
     form {
         width: 100%;
-        height: auto;
+        height: 160px;
         text-align: center;
-        align-items: center;
+        align-items: center; /* 세로 중앙 정렬을 위한 추가 */
+        display: flex; /* 요소를 가로로 배열하기 위한 추가 */
+        flex-direction: column; /* 세로 방향으로 배치하기 위한 추가 */
+        justify-content: center; /* 가로 중앙 정렬을 위한 추가 */
     }
 
-    form tr td:nth-child() {
+    form tr {
+    display: flex; /* 요소를 가로로 배열하기 위한 추가 */
+    align-items: center; /* 세로 중앙 정렬을 위한 추가 */
+    justify-content: center; /* 가로 중앙 정렬을 위한 추가 */
+    }
 
+    .con {
+        padding: 10px 0 30px 0;
+        font-size: 14px;
+    }
+
+    tr:nth-child(2){
+        font-size: 12.8px;
+        margin-bottom: 15px;
+    }
+
+    td:nth-child(2) {
+        margin-left: 120px;
     }
 
     h5{ margin: 0; }
@@ -76,17 +95,14 @@ const AdoptionNewsListItem = ( {a, b, c, d, e, f, vo} ) => {
                 } */}
             </div>
             <form>
-                <tr>
+                <tr className='con'>
                     <td>{c}</td>
                 </tr>
-                <tr>
+                <tr className='info'>
                     <td>{d}</td>
-                </tr>
-                <tr>
                     <td>{e}</td>
                 </tr>
             </form>
-            {/* <div className='date'>{d}</div> */}
         </StyledItemDiv>
     );
 };

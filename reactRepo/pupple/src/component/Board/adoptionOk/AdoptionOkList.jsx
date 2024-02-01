@@ -9,7 +9,10 @@ const AdoptionOkListDiv = styled.div`
     padding: 40px 0 40px 0;
 
     .tit {
-      margin: 0 0 30px 20px;
+        font-size: 24px;
+        text-align: start;
+        color: #333;
+        margin: 10px 10px;
     }
 
     .wrap {

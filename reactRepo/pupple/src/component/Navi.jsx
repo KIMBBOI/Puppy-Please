@@ -21,13 +21,16 @@ const StyledNaviDiv = styled.div`
 const StyledMenuItem = styled.div`
     position: relative;
     cursor: pointer;
+    
+    
     &:hover {
         color: #DBE76D;
     }
+     
     & > div:nth-child(2){
-        font-size: 14px;
+        font-size: 15px;
         text-align: center;
-        padding: 15px 8px;
+        padding-top: 15px;
     }
     & > div:nth-child(2) :hover {
         color: #292929;

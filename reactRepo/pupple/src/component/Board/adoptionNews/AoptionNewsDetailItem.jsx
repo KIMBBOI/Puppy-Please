@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledNewsDetatilDiv = styled.div`
-    width: 80%;
+    width: 90%;
     height: 90%;
     display: flex;
     flex-direction: column;
@@ -12,6 +12,7 @@ const StyledNewsDetatilDiv = styled.div`
     text-align: center;
     padding: 10px;
 
+
     img {
         width: 550px;
         height: 500px;
@@ -19,10 +20,9 @@ const StyledNewsDetatilDiv = styled.div`
     }
 
     .tit {
-        font-size: 17px;
+        font-size: 18px;
         font-weight: 550;
-        text-align: start;
-        padding-left: 75px;
+        text-align: centers;
     }
 
     .con {
@@ -92,25 +92,27 @@ const AoptionNewsDetailItem = ( {vo} ) => {
     };
 
     return (
-        <StyledNewsDetatilDiv>
-            <div className='detailArea'>
-                <div className='tit'><h2>{vo.title}</h2></div>
-                <div className='date'>{vo.enrollDate}</div>
-                <div className='writer'>작성자 　{vo.writerNick}</div>
-                <img 
-                    src={vo.imagePath} 
-                    alt={'imageNo' + vo.imageNo} />
-                <div className='con'><p>{vo.content}</p></div>
-            </div>
-            <div>
-                {currentUser && (
-                    <div className='controlArea'>
-                        <button className='editBtn' onClick={ () => handleEdit(vo) }>수정</button>
-                        <button className='deleteBtn' onClick={ () => handleDelete(vo) } >삭제</button>
-                    </div>
-                )}
-            </div>
-        </StyledNewsDetatilDiv>
+        <>
+            <StyledNewsDetatilDiv>
+                <div className='detailArea'>
+                    <div className='tit'><h4>{vo.title}</h4></div>
+                    <div className='date'>{vo.enrollDate}</div>
+                    <div className='writer'>작성자 　{vo.writerNick}</div>
+                    <img 
+                        src={vo.imagePath} 
+                        alt={'imageNo' + vo.imageNo} />
+                    <div className='con'><p>{vo.content}</p></div>
+                </div>
+                <div>
+                    {currentUser && (
+                        <div className='controlArea'>
+                            <button className='editBtn' onClick={ () => handleEdit(vo) }>수정</button>
+                            <button className='deleteBtn' onClick={ () => handleDelete(vo) } >삭제</button>
+                        </div>
+                    )}
+                </div>
+            </StyledNewsDetatilDiv>
+        </>
     );
 };
 
