@@ -80,18 +80,14 @@ public class MyPageController {
 	// 입양신청목록
 	@GetMapping("memberAdoptList")
 	public Map<String, Object> adoptList(@ModelAttribute MemberVo vo){
-		System.out.println(vo);
-		
 		List<ApplyVo> adoptList = service.getAdoptList(vo);
 		List<SurveyVo> surveyList = service.getSurveyList(vo);
-		System.out.println(adoptList);
-		System.out.println("surveyVo : " + surveyList);
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("msg", "good");
+		map.put("msg", "list success");
 		map.put("adoptList", adoptList);
 		map.put("surveyList", surveyList);
 		if(adoptList == null || surveyList == null) {
-			map.put("msg", "bad");
+			map.put("msg", "list fail");
 		}
 		return map;
 		
