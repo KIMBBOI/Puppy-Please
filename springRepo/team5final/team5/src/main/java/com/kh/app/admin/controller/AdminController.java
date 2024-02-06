@@ -33,11 +33,11 @@ public class AdminController {
 		List<ApplyVo> adoptList = service.getAdoptList();
 		List<SurveyVo> surveyList = service.getSurveyList();
 		
-		map.put("msg", "good");
+		map.put("msg", "list success");
 		map.put("adoptList", adoptList);
 		map.put("surveyList", surveyList);
 		if(adoptList == null || surveyList == null) {
-			map.put("msg", "bad");
+			map.put("msg", "list fail");
 		}
 		return map;
 		

@@ -62,8 +62,12 @@ const AdminAdoptList = () => {
             fetch('http://127.0.0.1:8080/app/admin/adoptList')
             .then(resp => resp.json())
             .then( data => {
-                setAdoptData(data.adoptList);
-                setSurveyData(data.surveyList);
+                if(data.msg === "list success"){
+                    setAdoptData(data.adoptList);
+                    setSurveyData(data.surveyList);
+                }else{
+                    alert("입양신청목록 불러오기를 실패했습니다.");
+                }
             })
         }
         fetchApplyAndSurveyData();
