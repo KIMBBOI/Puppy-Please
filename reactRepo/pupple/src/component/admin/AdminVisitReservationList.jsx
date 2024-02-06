@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import VisitReservationPageItem from './VisitReservationPageItem';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import AdminVisitReservationListItem from './AdminVisitReservationListItem';
 
 const StyledAdminVisitReservation = styled.div`
@@ -127,22 +127,18 @@ const StyledAdminVisitReservation = styled.div`
 
 
 const AdminVisitReservationList = () => {
-    // const location = useLocation();
-    //     console.log('location :::',location);
-    // const pathArray = location.pathname.split('/');
-    //     console.log('pathArray :::',pathArray);   
-    // const pno = pathArray[pathArray.length - 1];
-    //     console.log('pno :::', pno);
+
     
-    
-    
+
     const { pno } = useParams(); 
-    if (!pno) { pno = 1; }
+    if (!pno) { 
+        pno = 1; 
+    }
     
+
     
-    
-    let [arr, setArr] = useState([]);
-    let [pvo, setPvo] = useState({});  
+    const [arr, setArr] = useState([]);
+    const [pvo, setPvo] = useState({});  
     // vo 초기값 ( 최신순 , 전체조회 )   
     const [vo, setVo] = useState({
         orderBy: 'visitNo',
@@ -153,14 +149,15 @@ const AdminVisitReservationList = () => {
     
     
     // className 부여
-    const [clickOrderBy, setClickOrderBy] = useState(false);
-    const [clickReservDate, setClickReservDate] = useState(false);
-    
+    const [clickOrderBy, setClickOrderBy] = useState('');
+    const [clickReservDate, setClickReservDate] = useState('');
     // 필터 변수
     const [orderBy, setOrderBy] = useState();
     const [reservationStatus, setReservationStatus] = useState();
     
-    // 필터 함수 호출 (OrderBy)
+
+
+    // 정렬 함수 호출 (OrderBy)
     const handleOrderBy = (selectOrderBy) => {
         // state 할당
         setOrderBy(selectOrderBy);
@@ -170,14 +167,17 @@ const AdminVisitReservationList = () => {
         }));
         if (selectOrderBy === 'visitNo') {
             // className 부여
-            setClickOrderBy(true);
-            setClickReservDate(false);
+            setClickOrderBy('visitNo');
+            setClickReservDate('');
         } else if (selectOrderBy === 'reservationDate') {
             // className 부여
-            setClickOrderBy(false);
-            setClickReservDate(true);
+            setClickOrderBy('');
+            setClickReservDate('reservationDate');
         }
     };
+
+
+
     // 필터 함수 호출 (option)
     const handleStatus = (selectOption) => {
         // state 할당
@@ -192,15 +192,25 @@ const AdminVisitReservationList = () => {
 
 
 
+
     // 초기실행, pno변경 시 실행 ( 기본 필터 = 최신순 , 전체 )
     useEffect(() => {
         setVo(vo => ({
             ...vo,
             pno: pno || 1,
-            reservationStatus: '',
+            // reservationStatus: '',
         }));
-        setClickOrderBy(true); // className 부여
+        setClickOrderBy('visitNo'); // className 부여
+        if (clickReservDate === 'reservationDate') {
+            setClickOrderBy('');
+            setClickReservDate('reservationDate');
+        }
+        // console.log('clickOrderBy :::',clickOrderBy);
+        // console.log('clickReservDate :::',clickReservDate);
+        // console.log('@@@@@@@@@@정렬기준@@@@@@@@@@');
     }, [pno]);
+
+
 
     // 초기실행, vo업데이트 시 실행
     useEffect( () => {
@@ -220,10 +230,8 @@ const AdminVisitReservationList = () => {
     }, [vo] );
 
 
-
-
-    console.log('orderBy :::', orderBy);
-    console.log('reservationStatus :::', reservationStatus);
+// console.log('vo :::',vo);
+// console.log('11111111111111111111111111111111111111111111111');
     return (
         <StyledAdminVisitReservation>
             <span><h2>방문예약관리</h2></span>
@@ -236,7 +244,7 @@ const AdminVisitReservationList = () => {
                             checked={orderBy === 'visitNo'} // 정렬 옵션이 넘버면 활성화
                             onChange={() => handleOrderBy('visitNo')} 
                             id='latest' />
-                        <label for='latest' className={`clickable-text ${clickOrderBy ? 'clicked' : ''}`}>최신순</label>
+                        <label for='latest' className={`clickable-text ${clickOrderBy === 'visitNo' ? 'clicked' : ''}`}>최신순</label>
                     </div>
                     <div>
                         <input 
@@ -245,7 +253,7 @@ const AdminVisitReservationList = () => {
                             checked={orderBy === 'reservationDate'} 
                             onChange={() => handleOrderBy('reservationDate')} 
                             id='earlyDate' />
-                        <label for='earlyDate' className={`clickable-text ${clickReservDate ? 'clicked' : ''}`}>예약순</label>
+                        <label for='earlyDate' className={`clickable-text ${clickReservDate === 'reservationDate' ? 'clicked' : ''}`}>예약순</label>
                     </div>
                 </div>
 
@@ -290,7 +298,7 @@ const AdminVisitReservationList = () => {
             </div>
             
             <AdminVisitReservationListItem key="adminListItemKey" arr={arr} />
-            <VisitReservationPageItem key="pageItemKey" pvo={pvo} /> 
+            <VisitReservationPageItem key="pageItemKey" pvo={pvo} reservationStatus={reservationStatus} /> 
         </StyledAdminVisitReservation>
     );
 };
