@@ -127,7 +127,7 @@ const StyledAdminVisitReservation = styled.div`
 
 
 const AdminVisitReservationList = () => {
-
+    // 테스트 중.. 메인브랜치 복구
     
 
     const { pno } = useParams(); 
