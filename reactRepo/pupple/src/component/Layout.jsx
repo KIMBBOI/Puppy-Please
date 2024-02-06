@@ -12,7 +12,7 @@ const StyledLayoutDiv = styled.div`
     grid-template-rows: 3fr 1.5fr 10fr 2fr;
     grid-template-columns: 1fr;
     place-items: center center;
-    overflow: auto;
+    /* overflow: auto; */
 `;
 
 const Layout = () => {

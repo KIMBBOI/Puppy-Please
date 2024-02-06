@@ -22,8 +22,9 @@ const StyeldVisitReservationPageItemDiv = styled.div`
     }
 `;
 
-const VisitReservationPageItem = ( {pvo} ) => {
+const VisitReservationPageItem = ( {pvo, reservationStatus} ) => {
     const navigate = useNavigate();
+
     // <button onClick={(e)=>{
     //     updatePage(e.target.value)
     // }}></button>
@@ -39,23 +40,29 @@ const VisitReservationPageItem = ( {pvo} ) => {
 
             {/* 여기는 페이징~~ */}
             {Array.from({ length: pvo.endPage - pvo.startPage + 1 }, (_, index) => {
-
                 const pageNumber = pvo.startPage + index;
-
                 return (
-
                     <div key={pageNumber}>
-
                         {
                             pageNumber === pvo.currentPage 
                             ? 
                                 ( <div className='selectPage'>{pageNumber}</div>) 
                             : 
                                 ( <Link className='pageNumber' to={`/admin/visitReservation/${pageNumber}`}>{pageNumber}</Link> )
+                                // (
+                                //     <div
+                                //         className='pageNumber'
+                                //         onClick={() =>
+                                //             navigate(`/admin/visitReservation/${pageNumber}`, {
+                                //                 state: { reservationStatus },
+                                //             })
+                                //         }
+                                //     >
+                                //         {pageNumber}
+                                //     </div>
+                                // )
                         }
-                        
                     </div>
-
                 );
             })}
 
