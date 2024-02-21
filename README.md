@@ -54,7 +54,7 @@
 
 ## 프로그램 소개
 
-<h1 style="text-align:center;">'WHAT IS A 강아지를 부탁해?'</h1>
+<h1 style="text-align:center;">WHAT IS A '강아지를 부탁해'?</h1>
 <br>
 
 <p>
