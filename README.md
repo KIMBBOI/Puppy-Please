@@ -43,20 +43,7 @@
                 <span>1:1문의 관련 기능</span><br>
                 <span>상영정보 요청 관련 기능</span><br>
             </td>
-            <td style="text-align: center">
-                <span>영화 예매 관련 기능</span><br>
-                <span>결제 관련 기능</span><br>
-            </td>
-            <td style="text-align: center">
-                <span>스토어 관련 기능</span><br>
-                <span>메인 페이지 관련 기능</span><br>
-            </td>
-            <td style="text-align: center">
-                <span>영화 관련 기능</span><br>
-                <span>리뷰 관련 기능</span><br> 
-                <span>상영정보 관련 기능</span><br>
-            </td>
-        </tr>`
+        </tr>
     </tbody>
 </table>
 
