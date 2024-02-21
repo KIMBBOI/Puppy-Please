@@ -30,8 +30,8 @@
         <tr>
             <td style="text-align: center"><span>Contributions</span></td>
             <td style="text-align: center">
-                <span>공지사항 관련 기능</span><br>
                 <span>입양게시판 관련 기능</span><br>
+                <span>공지사항 관련 기능</span><br>
             </td>
             <td style="text-align: center">
                 <span></span><br>
