@@ -70,7 +70,7 @@
 
 ## ERD
 
-<h1>![image](https://github.com/KIMBBOI/TEAM5/assets/142900456/394755ef-c6e2-4b6e-b69b-f5b84d6f8b59) </h1> 
+![image](https://github.com/KIMBBOI/TEAM5/assets/142900456/394755ef-c6e2-4b6e-b69b-f5b84d6f8b59)
 <br>
 
 <br>
