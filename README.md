@@ -68,9 +68,10 @@
 이번 프로젝트의 목적이다.
 </p>
 
-##ERD
-![image](https://github.com/KIMBBOI/TEAM5/assets/142900456/394755ef-c6e2-4b6e-b69b-f5b84d6f8b59)
+## ERD
 
+<h1>![image](https://github.com/KIMBBOI/TEAM5/assets/142900456/394755ef-c6e2-4b6e-b69b-f5b84d6f8b59) </h1> 
+<br>
 
 <br>
 <br>
