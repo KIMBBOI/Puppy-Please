@@ -30,18 +30,18 @@
         <tr>
             <td style="text-align: center"><span>Contributions</span></td>
             <td style="text-align: center">
-                <span>입양게시판 관련 기능</span><br>
                 <span>공지사항 관련 기능</span><br>
+                <span>입양게시판 관련 기능</span><br>
             </td>
             <td style="text-align: center">
-                <span></span><br>
-                <span></span><br>
+                <span>제보 게시판 기능</span><br>
+                <span>방문 상담 예약 기능</span><br>
+                <span>마이페이지 입양신청/예약신청 내역 관리 기능</span><br>
             </td>
             <td style="text-align: center">
-                <span></span><br>
-                <span></span><br>
-                <span></span><br>
-                <span></span><br>
+                <span>로그인 및 로그아웃 / 회원가입 및</span><br>
+                <span>회원 관련 기능</span><br>
+                <span>입양 신청 시 설문조사, 입양퀴즈 기능</span><br>
             </td>
         </tr>
     </tbody>
@@ -68,6 +68,8 @@
 이번 프로젝트의 목적이다.
 </p>
 
+##ERD
+![image](https://github.com/KIMBBOI/TEAM5/assets/142900456/394755ef-c6e2-4b6e-b69b-f5b84d6f8b59)
 
 
 <br>
