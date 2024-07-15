@@ -4,7 +4,6 @@
 
 
 ### 팀원 소개
-#### 팀
 
 <table style="width: 100%;">
     <thead>
